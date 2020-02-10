@@ -1,0 +1,24 @@
+{
+  "name": "sampi",
+  "version": "1.0.0",
+  "repository": "git@gitlab.com:tomas050302/sampi.git",
+  "author": "Tomás Lopes <tomas050302@gmail.com>",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "devDependencies": {
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "3.0.2",
+    "husky": "^4.0.7"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "private": true
+}
