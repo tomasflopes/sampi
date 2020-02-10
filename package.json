@@ -4,6 +4,7 @@
   "repository": "git@gitlab.com:tomas050302/sampi.git",
   "author": "Tomás Lopes <tomas050302@gmail.com>",
   "license": "MIT",
+  "private": true,
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
@@ -11,14 +12,15 @@
     }
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "commitizen": "^4.0.3",
-    "cz-conventional-changelog": "3.0.2",
-    "husky": "^4.0.7"
+    "cz-conventional-changelog": "3.1.0",
+    "husky": "^4.2.1"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "private": true
+  }
 }
