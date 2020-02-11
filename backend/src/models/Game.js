@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const GameSchema = new mongoose.Schema({
-  players: Int32Array,
+  players: [String],
   date: Date,
   location: String,
   result: String,
