@@ -6,7 +6,7 @@ const PlayerSchema = new mongoose.Schema({
   sex: String,
   birth: Date,
   email: String,
-  phone: BigInt,
+  phone: Number,
   position: String,
 });
 

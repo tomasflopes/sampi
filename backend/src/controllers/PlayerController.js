@@ -8,17 +8,19 @@ module.exports = {
   },
 
   async store(request, response) {
-    const { name } = request.body;
+    const { name, avatar_url, sex, birth, email, phone, position } = request.body;
 
-    let player = await Player.findOne({ name }); // Check 
+    player = await Player.create({
+      name,
+      avatar_url,
+      sex,
+      birth,
+      email,
+      phone,
+      position
+    });
 
-    if (!existsUserWithThisName({ name })) {
-      //TODO Get twitter info
-
-      player = await Dev.create({
-        name
-      });
-    }
+    return response.json(`${name} was registred!`);
   },
 
   async update(request, response) {
@@ -30,6 +32,6 @@ module.exports = {
   },
 };
 
-function existsUserWithThisName(name) {
+/* function existsUserWithThisName(name) {
   return await Player.findOne({ name });
-}
+} */
