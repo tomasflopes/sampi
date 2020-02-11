@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const GameSchema = new mongoose.Schema({
-  players: Int32Array,
+  players: [String],
   date: Date,
   location: String,
   result: String,
-  mvp: BigInt,
+  mvp: String,
 });
 
 module.exports = mongoose.model('Game', GameSchema);
