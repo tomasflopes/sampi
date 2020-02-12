@@ -10,10 +10,8 @@ module.exports = {
   async store(request, response) {
     const { playersArray, date, location } = request.body;
 
-    const playersIds = playersArray.map(player => Player.findOne(player.name)._id);
-
     const game = await Game.create({
-      players: playersIds,
+      players: playersArray,
       date,
       location
     });
