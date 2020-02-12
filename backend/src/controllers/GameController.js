@@ -8,23 +8,29 @@ module.exports = {
   },
 
   async store(request, response) {
-    const { } = request.body;
+    const { playersArray, date, location } = request.body;
 
-    game = await Game.create({
+    const playersIds = playersArray.map(player => Player.findOne(player.name)._id);
 
+    const game = await Game.create({
+      players: playersIds,
+      date,
+      location
     });
 
     return response.json(game);
   },
 
   async update(request, response) {
-    const { } = request.query;
+    const { _id } = request.query;
+    const { mvp, result } = request.body;
 
     const updateInfo = await Game.update(
-      { name },
+      { _id },
       {
         $set: {
-          //TODO Loop trough the request.body object and update every field
+          mvp,
+          result
         }
       },
     );
@@ -33,10 +39,10 @@ module.exports = {
   },
 
   async destroy(request, response) {
-    const { } = request.query;
+    const { _id } = request.query;
 
     const deleteInfo = await Game.deleteOne({
-
+      _id
     });
 
     return response.json(deleteInfo);

@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
-const mongooseUrl = require('./config/mongooseSettings');
+const { production: mongooseUrl } = require('./config/mongooseSettings');
 
 const app = express();
 
