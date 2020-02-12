@@ -45,10 +45,10 @@ module.exports = {
   async destroy(request, response) {
     const { name } = request.query;
 
-    const deletedPlayer = await Player.deleteOne({
+    const deleteInfo = await Player.deleteOne({
       name,
     });
 
-    return response.json(deletedPlayer);
+    return response.json(deleteInfo);
   }
 }
