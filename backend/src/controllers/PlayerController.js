@@ -10,7 +10,9 @@ module.exports = {
   async store(request, response) {
     const { name, avatar_url, sex, birth, email, phone, position } = request.body;
 
-    let player = await Player.findOne({ name });
+    let player = await Player.findOne({
+      name
+    });
 
     if (!player) {
       player = await Player.create({
@@ -29,15 +31,23 @@ module.exports = {
 
   async update(request, response) {
     const { identifier } = request.query;
-    const body = request.body;
+    const { name, avatar_url, sex, birth, email, phone, position } = request.body;
 
-    const updateInfo = await Player.updateOne(
-      { name: identifier },
-      {
-        $set: {
-        }
-      },
-    );
+    const oldPlayer = await Player.findOne({ name: identifier });
+
+    const updateInfo = await Player.updateOne({
+      name: identifier
+    }, {
+      $set: {
+        name: name || oldPlayer.name,
+        avatar_url: avatar_url || oldPlayer.avatar_url,
+        sex: sex || oldPlayer.sex,
+        birth: birth || oldPlayer.birth,
+        email: email || oldPlayer.email,
+        phone: phone || oldPlayer.phone,
+        position: position || oldPlayer.position
+      }
+    });
 
     return response.json(updateInfo);
   },
