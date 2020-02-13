@@ -28,13 +28,13 @@ module.exports = {
   },
 
   async update(request, response) {
-    const { name } = request.query;
+    const { identifier } = request.query;
+    const body = request.body;
 
-    const updateInfo = await Player.update(
-      { name },
+    const updateInfo = await Player.updateOne(
+      { name: identifier },
       {
         $set: {
-          //TODO Loop trough the request.body object and update every field
         }
       },
     );
