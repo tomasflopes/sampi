@@ -1983,28 +1983,36 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.5.tgz#25421be6cd943a4b1660b62cfbcd45be8891462c"
   integrity sha512-Lj1DzfCmW0f4HnmHtEuX8Yy2f7cnUA8r5KGGUuDDGtQt1so6QJkKeUmsnLo2zYDtsF8due6hvIL06Vdo5xxuLQ==
 
-"@react-navigation/core@^5.0.0-alpha.43":
-  version "5.0.0-alpha.43"
-  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.0.0-alpha.43.tgz#f6e928ca845bf4faa03adc5c462b183cae3d5d4a"
-  integrity sha512-2CO5dFJW7CQFXX2y1Y1HVOGPQi4/8+5sPJWOZPCkhIVgjseeEqWJC+nJ6bbRVEE+Jxkc1ya6A8p+oBZ/GxF34g==
+"@react-navigation/core@^5.1.3":
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.1.3.tgz#f8593058b414e4acc3051526f79e6a8a30c63354"
+  integrity sha512-SyVWVJ0lYFSxlKUID0OfUygWNlncOSQTAKMQJxjEvQ2mmS/xsAPzqau30OpslLa6U2Uyl+hq5rAej7b72rU42A==
   dependencies:
+    "@react-navigation/routers" "^5.0.1"
     escape-string-regexp "^2.0.0"
-    query-string "^6.9.0"
+    query-string "^6.10.1"
     react-is "^16.12.0"
     shortid "^2.2.15"
     use-subscription "^1.3.0"
 
-"@react-navigation/native@^5.0.0-alpha.35":
-  version "5.0.0-alpha.35"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.0-alpha.35.tgz#02582e538b16d78a045076bbef3e7070702f6883"
-  integrity sha512-pMLINvj9L9CT2pb/RKnvdVi9QGl5jktgoG1ZSTAzF2SK/MFW3nGZigKyFPS2NafVYXTegdu2HTVmBk8gqtFXfg==
+"@react-navigation/native@^5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.4.tgz#003612c708f502ba4ac62d700cbc85b636fce29e"
+  integrity sha512-qmv3soJr03kCTuiUtl5oxT6gWm9o6VnCYiq6tg1Df6+qpMoo+A3MMCtXBs3kKwuNMxAQ5IQ0y11wRPxnnnnKYA==
   dependencies:
-    "@react-navigation/core" "^5.0.0-alpha.43"
+    "@react-navigation/core" "^5.1.3"
 
-"@react-navigation/stack@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.3.tgz#e3d0f27b83a6da50da98846de4cd180647597546"
-  integrity sha512-CAFfURsfY6/zmIQsUunDoiuCrvZLNqUwN5D1usN8I8VFkJg1kKCZbIxaVftAbZiPcfwORarsuWMxqkCVmVvEuA==
+"@react-navigation/routers@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.0.1.tgz#211969a60ec8ea84b308713a3d3f341ef5d82547"
+  integrity sha512-uMwjDCoCaPLegEcEOs34ocmJOIy1JMkKv9nWShMdBokk3cISv9oJYhv2Yr2YmhLaMQ3ZMzFjMQJh0DsvZ/7UOQ==
+  dependencies:
+    shortid "^2.2.15"
+
+"@react-navigation/stack@^5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.0.4.tgz#19f0373b2fc9a5e315870820362001c17fa31a4a"
+  integrity sha512-B2CWlRjCbw7XuDUp1aBKSIf89xUEfcOs8YK57tCF0S12rZG59919dORf2m7zPOq3VBJ84TR08psnDzU4pVUJ0g==
   dependencies:
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
@@ -5323,7 +5331,7 @@ expo-asset@~8.0.0:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
-expo-cli@^3.12.1:
+expo-cli@^3.13.1:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.13.1.tgz#72d6fc8613ac3789b9a598d0cd36fdfca61a502a"
   integrity sha512-eP8BsyFJAFK0+tM7tOcLgwxj/Zeu8m2Vfq7+gNktQ5BPI4WTs3YSxPSUpXD68Po0roiU1epCXGP7eN4XXzhf8w==
@@ -6368,9 +6376,9 @@ gzip-size@5.1.1, gzip-size@^5.0.0:
     duplexer "^0.1.1"
     pify "^4.0.1"
 
-"hammerjs@git+https://github.com/naver/hammer.js.git":
+"hammerjs@https://github.com/naver/hammer.js.git":
   version "2.0.17-snapshot"
-  resolved "git+https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
+  resolved "https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
@@ -10323,7 +10331,7 @@ qs@^6.5.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.1.tgz#20082c65cb78223635ab1a9eaca8875a29bf8ec9"
   integrity sha512-Cxm7/SS/y/Z3MHWSxXb8lIFqgqBowP5JMlTUFyJN88y0SGQhVmZnqFK/PeuMX9LzUyWsqqhNxIyg0jlzq946yA==
 
-query-string@^6.9.0:
+query-string@^6.10.1:
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.11.0.tgz#dc27a05733d1be66f16d0f83dfa957270f45f66d"
   integrity sha512-jS+me8X3OEGFTsF6kF+vUUMFG/d3WUCvD7bHhfZP5784nOq1pjj8yau/u86nfOncmcN6ZkSWKWkKAvv/MGxzLA==

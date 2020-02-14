@@ -1,13 +1,13 @@
 import * as React from 'react'
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native'
 
-export default function Home({ navigation }) {
+export default function Profile({ navigation }) {
   return (
     <View style={styles.ViewStyle}>
       <Text>Home</Text>
       <Button
-        title="Go to LeaderBoard"
-        onPress={() => navigation.navigate('LeaderBoard')}
+        title="Go to Profile"
+        onPress={() => navigation.navigate('Profile')}
       />
     </View>
   )
@@ -20,4 +20,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   }
 });
-
