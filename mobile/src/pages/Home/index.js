@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   cards: {
     flex: 1,
     textAlign: 'center',
-    fontSize: 32,
+    fontSize: 25,
   },
 
   buttonsContainer: {
@@ -73,8 +73,12 @@ const styles = StyleSheet.create({
 
   buttonText: {
     flex: 1,
+    alignItems: 'center',
+    lineHeight: 29,
+    fontWeight: "normal",
     textAlign: 'center',
-    fontSize: 32,
+    fontSize: 25,
+    color: '#1e2a40',
   },
 
   bottomNavbar: {
