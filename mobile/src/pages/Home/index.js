@@ -5,10 +5,14 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Logo</Text>
-      <View style={styles.divider} />
-      <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>Invite Friends</Text></TouchableOpacity>
-      <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>Create Game</Text></TouchableOpacity>
-      <View style={styles.divider} />
+      <View style={styles.divider}>
+        <Text style={styles.cards}>cards</Text>
+      </View >
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity style={styles.buttonInvite}><Text style={styles.buttonText}>Invite Friends</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.buttonCreate}><Text style={styles.buttonText}>Create Game</Text></TouchableOpacity>
+      </View>
+      <View style={styles.bottomNavbar}></View>
     </View>
   )
 }
@@ -20,28 +24,62 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    flex: .5,
     fontSize: 32,
-    color: '#00f',
+    color: '#2f364c',
     textAlign: 'center',
     marginTop: 50,
   },
 
   divider: {
-    marginTop: 100,
-    height: 1,
-    backgroundColor: '#000000',
+    marginTop: 30,
+    marginLeft: 20,
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
+    borderBottomColor: '#23354c',
+    borderTopColor: '#23354c',
+    flex: 2,
+    width: 320,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 
-  button: {
-    backgroundColor: '#2e00ff',
-    flex: .2,
-    marginTop: 10,
+  cards: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: 32,
+  },
+
+  buttonsContainer: {
+    flex: 3,
+  },
+
+  buttonInvite: {
+    flex: 1,
+    marginTop: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(145, 184, 255, .2)',
+  },
+
+  buttonCreate: {
+    flex: 1,
+    marginTop: 24,
+    marginBottom: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(145, 184, 255, .2)',
   },
 
   buttonText: {
     flex: 1,
     textAlign: 'center',
     fontSize: 32,
+  },
+
+  bottomNavbar: {
+    flex: 1,
+    backgroundColor: 'rgba(145, 184, 255, .2)',
   },
 });
 

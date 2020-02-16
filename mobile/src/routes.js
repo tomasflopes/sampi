@@ -17,10 +17,7 @@ export default function Routes() {
           headerShown: false
         }}
       >
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-        />
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="LeaderBoard" component={LeaderBoardScreen} />
       </Stack.Navigator>
