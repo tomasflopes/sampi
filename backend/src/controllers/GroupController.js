@@ -25,8 +25,12 @@ module.exports = {
 
     const existingPlayer = playersArray.filter(player => player === name);
 
-    if (!existingPlayer) {
-      const updateInfo = await Group.updateOne({
+    console.log(existingPlayer);
+
+    let updateInfo;
+
+    if (existingPlayer.length === 0) {
+      updateInfo = await Group.updateOne({
         _id: identifier
       }, {
         $push: {
@@ -34,17 +38,17 @@ module.exports = {
         }
       });
     } else {
-      const updateInfo = 
+      updateInfo = { error: 'Player already exists!' }
     }
 
     return response.json(updateInfo);
   },
 
   async destroy(request, response) {
-    const { name } = request.query;
+    const { _id } = request.query;
 
-    const deleteInfo = await Player.deleteOne({
-      name,
+    const deleteInfo = await Group.deleteOne({
+      _id
     });
 
     return response.json(deleteInfo);
