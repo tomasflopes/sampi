@@ -1,6 +1,8 @@
 const { Router } = require('express');
+
 const PlayerController = require('./controllers/PlayerController');
 const GameController = require('./controllers/GameController');
+const GroupController = require('./controllers/GroupController');
 
 const routes = Router();
 
@@ -13,5 +15,10 @@ routes.get('/game', GameController.index);
 routes.post('/game', GameController.store);
 routes.put('/game', GameController.update);
 routes.delete('/game', GameController.destroy);
+
+routes.get('/group', GroupController.index);
+routes.post('/group', GroupController.store);
+routes.put('/group', GroupController.update);
+routes.delete('/group', GroupController.destroy);
 
 module.exports = routes;
