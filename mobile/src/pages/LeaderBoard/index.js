@@ -1,5 +1,6 @@
-import * as React from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
+import * as React from 'react';
+import { View, Text, Button } from 'react-native';
+import styles from './styles';
 
 export default function LeaderBoard({ navigation }) {
   return (
