@@ -13,11 +13,3 @@ export default function Profile({ navigation }) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  ViewStyle: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
