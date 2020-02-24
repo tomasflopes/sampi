@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Invite({ navigation }) {
   return (
@@ -13,13 +14,15 @@ export default function Invite({ navigation }) {
         <Text style={styles.headerUrl}>Share this link with your friends!</Text>
         <View style={styles.urlHolder}>
           <Text style={styles.url}>http://sampi.invite/h53j8kj</Text>
-          <Text>Clip</Text>
+          <Icon style={styles.clipboardIcon} name="clipboard"></Icon>
         </View>
         <View style={styles.socialsHolder}>
           <View style={styles.socials}>
-            <Text style={styles.socialMediaLogo}>Twitter</Text>
-            <Text style={styles.socialMediaLogo}>FaceBook</Text>
-            <Text style={styles.socialMediaLogo}>Instagram</Text>
+            <Icon style={styles.socialMediaLogo} name="twitter"></Icon>
+            <View style={styles.socialsSpacer}></View>
+            <Icon style={styles.socialMediaLogo} name="facebook"></Icon>
+            <View style={styles.socialsSpacer}></View>
+            <Icon style={styles.socialMediaLogo} name="instagram"></Icon>
           </View>
           <Text style={styles.shareText}>Share it on your socials!</Text>
         </View>

@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { StyleSheet } from 'react-native'
+import * as React from 'react';
+import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
   main: {
@@ -46,12 +46,13 @@ export default styles = StyleSheet.create({
     flexGrow: 1,
     borderWidth: 2,
     borderColor: '#23354c',
-    borderRadius: 5,
+    borderRadius: 10,
     width: 300,
     height: 50,
     alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row',
+    borderStyle: 'dashed',
   },
 
   url: {
@@ -60,6 +61,12 @@ export default styles = StyleSheet.create({
     color: '#23354c',
     alignItems: "center",
     left: 10,
+  },
+
+  clipboardIcon: {
+    right: 5,
+    color: '#2d3751',
+    fontSize: 29,
   },
 
   socialsHolder: {
@@ -71,14 +78,21 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     width: 320,
+    justifyContent: 'space-around',
   },
 
   socialMediaLogo: {
-    fontSize: 15,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    fontSize: 45,
+    flex: 1.2,
     textAlign: 'center',
+    borderRadius: 50,
+    backgroundColor: '#23354c',
+    color: '#ccc',
+    padding: 22.5,
+  },
+
+  socialsSpacer: {
+    flex: .5,
   },
 
   shareText: {
