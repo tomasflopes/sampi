@@ -3,9 +3,10 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from './pages/Home'
-import ProfileScreen from './pages/Profile'
-import LeaderBoardScreen from './pages/LeaderBoard'
+import HomeScreen from './pages/Home';
+import ProfileScreen from './pages/Profile';
+import LeaderBoardScreen from './pages/LeaderBoard';
+import InviteScreen from './pages/Invite'
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ export default function Routes() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="LeaderBoard" component={LeaderBoardScreen} />
+        <Stack.Screen name="Invite" component={InviteScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

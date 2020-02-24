@@ -40,7 +40,7 @@ export default styles = StyleSheet.create({
 
   buttonInvite: {
     flex: 1,
-    marginTop: 24,
+    marginTop: 25,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgba(145, 184, 255, .2)',
@@ -48,7 +48,7 @@ export default styles = StyleSheet.create({
 
   buttonCreate: {
     flex: 1,
-    marginTop: 24,
+    marginTop: 25,
     marginBottom: 50,
     flexDirection: 'row',
     alignItems: 'center',
@@ -68,5 +68,9 @@ export default styles = StyleSheet.create({
   bottomNavbar: {
     flex: 1,
     backgroundColor: 'rgba(145, 184, 255, .2)',
+  },
+
+  spacer: {
+    flex: .2
   },
 });

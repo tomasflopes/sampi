@@ -1,6 +1,6 @@
-import * as React from 'react'
+import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import styles from './styles'
+import styles from './styles';
 
 export default function Home({ navigation }) {
   return (
@@ -9,10 +9,24 @@ export default function Home({ navigation }) {
       <View style={styles.divider}>
         <Text style={styles.cards}>cards</Text>
       </View >
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.buttonInvite}><Text style={styles.buttonText}>Invite Friends</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.buttonCreate}><Text style={styles.buttonText}>Create Game</Text></TouchableOpacity>
+      <View
+        style={styles.buttonsContainer}>
+        <TouchableOpacity
+          style={styles.buttonInvite}
+          onPress={() => navigation.navigate('Invite')}
+        >
+          <Text style={styles.buttonText}>
+            Invite Friends
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonCreate}>
+          <Text style={styles.buttonText}>
+            Create Game
+            </Text>
+        </TouchableOpacity>
       </View>
+      <View style={styles.spacer} />
       <View style={styles.bottomNavbar}></View>
     </View>
   )
