@@ -3,10 +3,14 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import BackArrow from '../../components/backArrow'
+
 export default function Invite({ navigation }) {
   return (
     <View style={styles.main}>
-      <View style={styles.topBar} />
+      <View style={styles.topBar} >
+        <BackArrow style={styles.backArrow} navigation={navigation} navigateTo={'Home'} />
+      </View>
       <View style={styles.textHolder}>
         <Text style={styles.headerText}>Invite new people to your group!</Text>
       </View>

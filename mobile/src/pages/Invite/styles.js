@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
@@ -7,9 +6,19 @@ export default styles = StyleSheet.create({
   },
 
   topBar: {
-    flex: 1,
+    flex: 1.2,
     backgroundColor: '#78a7ff',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
+
+  backArrow: {
+    flex: 1,
+    left: 10,
+    top: 5,
+  },
+
+
 
   textHolder: {
     flex: 2,
@@ -70,25 +79,26 @@ export default styles = StyleSheet.create({
   },
 
   socialsHolder: {
-    flex: 4,
+    flex: 3,
     justifyContent: 'space-evenly',
   },
 
   socials: {
+    flex: .5,
     flexDirection: 'row',
     alignItems: 'flex-start',
-    width: 320,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    width: 280,
   },
 
   socialMediaLogo: {
     fontSize: 45,
-    flex: 1.2,
+    flex: .8,
     textAlign: 'center',
     borderRadius: 50,
     backgroundColor: '#23354c',
     color: '#ccc',
-    padding: 22.5,
+    padding: 15,
   },
 
   socialsSpacer: {
