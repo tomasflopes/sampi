@@ -6,7 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './pages/Home';
 import ProfileScreen from './pages/Profile';
 import LeaderBoardScreen from './pages/LeaderBoard';
-import InviteScreen from './pages/Invite'
+import InviteScreen from './pages/Invite';
+import CreateGameScreen from './pages/CreateGame';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ export default function Routes() {
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="LeaderBoard" component={LeaderBoardScreen} />
         <Stack.Screen name="Invite" component={InviteScreen} />
+        <Stack.Screen name="CreateGame" component={CreateGameScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

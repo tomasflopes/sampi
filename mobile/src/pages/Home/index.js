@@ -20,7 +20,9 @@ export default function Home({ navigation }) {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.buttonCreate}>
+          style={styles.buttonCreate}
+          onPress={() => { navigation.navigate('CreateGame') }}
+        >
           <Text style={styles.buttonText}>
             Create Game
             </Text>
