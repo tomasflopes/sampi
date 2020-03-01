@@ -4,7 +4,7 @@ import styles from './styles';
 
 export default function Home({ navigation }) {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>CreateGame</Text>
     </View>
   );

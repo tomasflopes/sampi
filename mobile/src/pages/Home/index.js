@@ -2,6 +2,8 @@ import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
+import BottomNavbar from '../../components/BottomNavbar'
+
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
@@ -29,7 +31,9 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={styles.spacer} />
-      <View style={styles.bottomNavbar}></View>
+      <View style={styles.bottomNavbar}>
+        <BottomNavbar navigation={navigation} active={'Home'} />
+      </View>
     </View>
   )
 }

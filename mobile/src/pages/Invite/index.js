@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import BackArrow from '../../components/backArrow'
+import BackArrow from '../../components/BackArrow'
 
 export default function Invite({ navigation }) {
   return (
