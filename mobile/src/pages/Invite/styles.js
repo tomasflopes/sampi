@@ -12,13 +12,10 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  backArrow: {
-    flex: 1,
-    left: 10,
+  backArrowHolder: {
     top: 5,
+    left: 8,
   },
-
-
 
   textHolder: {
     flex: 2,

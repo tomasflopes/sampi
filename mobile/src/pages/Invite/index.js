@@ -9,7 +9,9 @@ export default function Invite({ navigation }) {
   return (
     <View style={styles.main}>
       <View style={styles.topBar} >
-        <BackArrow style={styles.backArrow} navigation={navigation} navigateTo={'Home'} />
+        <View style={styles.backArrowHolder}>
+          <BackArrow navigation={navigation} navigateTo={'Home'} />
+        </View>
       </View>
       <View style={styles.textHolder}>
         <Text style={styles.headerText}>Invite new people to your group!</Text>
