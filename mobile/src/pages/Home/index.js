@@ -11,6 +11,7 @@ export default function Home({ navigation }) {
       <View style={styles.divider}>
         <Text style={styles.cards}>cards</Text>
       </View >
+      <View style={styles.spacer} />
       <View
         style={styles.buttonsContainer}>
         <TouchableOpacity
