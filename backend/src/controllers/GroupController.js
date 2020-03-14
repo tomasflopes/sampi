@@ -18,20 +18,18 @@ module.exports = {
   },
 
   async update(request, response) {
-    const { identifier } = request.query;
+    const { id } = request.params;
     const { name } = request.body;
 
-    const playersArray = (await Group.findById(identifier)).players;
+    const playersArray = (await Group.findById(id)).players;
 
     const existingPlayer = playersArray.filter(player => player === name);
-
-    console.log(existingPlayer);
 
     let updateInfo;
 
     if (existingPlayer.length === 0) {
       updateInfo = await Group.updateOne({
-        _id: identifier
+        _id: id
       }, {
         $push: {
           players: name,
@@ -45,10 +43,10 @@ module.exports = {
   },
 
   async destroy(request, response) {
-    const { _id } = request.query;
+    const { id } = request.params;
 
     const deleteInfo = await Group.deleteOne({
-      _id
+      _id: id
     });
 
     return response.json(deleteInfo);

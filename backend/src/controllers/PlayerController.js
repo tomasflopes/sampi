@@ -30,13 +30,13 @@ module.exports = {
   },
 
   async update(request, response) {
-    const { identifier } = request.query;
+    const { id } = request.params;
     const { name, avatar_url, sex, birth, email, phone, position } = request.body;
 
-    const oldPlayer = await Player.findOne({ name: identifier });
+    const oldPlayer = await Player.findById(id);
 
-    const updateInfo = await Player.updateOne({
-      name: identifier
+    await Player.findByIdAndUpdate({
+      _id: id
     }, {
       $set: {
         name: name || oldPlayer.name,
@@ -49,14 +49,16 @@ module.exports = {
       }
     });
 
-    return response.json(updateInfo);
+    const newPlayer = await Player.findById(id);
+
+    return response.json(newPlayer);
   },
 
   async destroy(request, response) {
-    const { name } = request.query;
+    const { id } = request.params;
 
     const deleteInfo = await Player.deleteOne({
-      name,
+      _id: id,
     });
 
     return response.json(deleteInfo);

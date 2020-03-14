@@ -20,27 +20,27 @@ module.exports = {
   },
 
   async update(request, response) {
-    const { _id } = request.query;
+    const { id } = request.params;
     const { mvp, result } = request.body;
 
-    const updateInfo = await Game.update(
-      { _id },
-      {
-        $set: {
-          mvp: mvp || "Not specified",
-          result
-        }
-      },
+    const updateInfo = await Game.update({
+      _id: id
+    }, {
+      $set: {
+        mvp: mvp || "Not specified",
+        result
+      }
+    },
     );
 
     return response.json(updateInfo);
   },
 
   async destroy(request, response) {
-    const { _id } = request.query;
+    const { id } = request.params;
 
     const deleteInfo = await Game.deleteOne({
-      _id
+      _id: id
     });
 
     return response.json(deleteInfo);

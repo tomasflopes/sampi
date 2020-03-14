@@ -9,18 +9,18 @@ const routes = Router();
 
 routes.get('/player', PlayerController.index);
 routes.post('/player', PlayerController.store);
-routes.put('/player', PlayerController.update);
-routes.delete('/player', PlayerController.destroy);
+routes.put('/player/:id', PlayerController.update);
+routes.delete('/player/:id', PlayerController.destroy);
 
 routes.get('/game', GameController.index);
 routes.post('/game', GameController.store);
-routes.put('/game', GameController.update);
-routes.delete('/game', GameController.destroy);
+routes.put('/game/:id', GameController.update);
+routes.delete('/game/:id', GameController.destroy);
 
 routes.get('/group', GroupController.index);
 routes.post('/group', GroupController.store);
-routes.put('/group', GroupController.update);
-routes.delete('/group', GroupController.destroy);
+routes.put('/group/:id', GroupController.update);
+routes.delete('/group/:id', GroupController.destroy);
 
 routes.get('/card', CardController.index);
 
