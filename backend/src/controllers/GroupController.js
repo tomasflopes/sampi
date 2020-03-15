@@ -4,7 +4,7 @@ module.exports = {
   async index(request, response) {
     const groups = await Group.find();
 
-    return response.json(groups);
+    return response.status(200).json(groups);
   },
 
   async store(request, response) {
@@ -14,7 +14,7 @@ module.exports = {
       players
     });
 
-    return response.json(group);
+    return response.status(201).json(group);
   },
 
   async update(request, response) {
@@ -35,11 +35,11 @@ module.exports = {
           players: name,
         }
       });
-    } else {
-      updateInfo = { error: 'Player already exists!' }
+
+      return response.status(200).json(updateInfo);
     }
 
-    return response.json(updateInfo);
+    return response.status(400).json({ Error: 'Duplicate Player' });
   },
 
   async destroy(request, response) {
@@ -49,6 +49,6 @@ module.exports = {
       _id: id
     });
 
-    return response.json(deleteInfo);
+    return response.status(202).json(deleteInfo);
   }
 }

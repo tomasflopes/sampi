@@ -18,7 +18,7 @@ beforeAll(async () => {
 
 describe('CRUD Player', () => {
   it('expect to return all players', (done) => {
-    const response = request(server)
+    request(server)
       .get('/player')
       .expect(200, done);
   });
