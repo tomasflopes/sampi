@@ -1,14 +1,8 @@
 module.exports = async (Model) => {
-  let lastElement;
-
-  await Model
+  const result = await Model
     .find()
-    .sort('_id')
-    .find((error, post) => {
-      if (!error) {
-        lastElement = post[post.length - 1];
-      }
-    });
+    .sort({ _id: 1 })
+    .limit(1);
 
-  return lastElement;
+  return result[0];
 }
