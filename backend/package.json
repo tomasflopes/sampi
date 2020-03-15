@@ -8,6 +8,7 @@
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --detectOpenHandles --runInBand"
   },
   "devDependencies": {
+    "@types/jest": "^25.1.4",
     "cross-env": "^7.0.2",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2",
