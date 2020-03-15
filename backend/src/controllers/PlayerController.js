@@ -24,9 +24,11 @@ module.exports = {
         phone,
         position
       });
+
+      return response.status(201).json(player);
     }
 
-    return response.json(player);
+    return response.status(400).json('User already exists');
   },
 
   async update(request, response) {
@@ -51,7 +53,7 @@ module.exports = {
 
     const newPlayer = await Player.findById(id);
 
-    return response.json(newPlayer);
+    return response.status(204).json(newPlayer);
   },
 
   async destroy(request, response) {
@@ -61,6 +63,6 @@ module.exports = {
       _id: id,
     });
 
-    return response.json(deleteInfo);
+    return response.status(202).json(deleteInfo);
   }
 }
