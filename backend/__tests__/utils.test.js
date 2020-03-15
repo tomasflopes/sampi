@@ -26,9 +26,6 @@ describe('Utils Unit Testing', () => {
 
     const mockPlayer = await getLastElement(Player);
 
-    console.log(createdPlayer);
-    console.log(mockPlayer);
-
     expect(createdPlayer.name).toBe(mockPlayer.name);
   })
 });
