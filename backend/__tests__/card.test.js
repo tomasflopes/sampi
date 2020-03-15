@@ -14,6 +14,12 @@ beforeAll(async () => {
   });
 });
 
+afterAll(() => {
+  const mongoose = require('mongoose');
+
+  mongoose.disconnect();
+});
+
 describe('Card Testing', () => {
   it('expect to return last game', (done) => {
     request(server)

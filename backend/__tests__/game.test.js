@@ -18,6 +18,12 @@ beforeAll(async () => {
   });
 });
 
+afterAll(() => {
+  const mongoose = require('mongoose');
+
+  mongoose.disconnect();
+});
+
 describe('CRUD Game', () => {
   it('expect to return all games', (done) => {
     request(server)

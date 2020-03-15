@@ -16,6 +16,12 @@ beforeAll(async () => {
   });
 });
 
+afterAll(() => {
+  const mongoose = require('mongoose');
+
+  mongoose.disconnect();
+});
+
 describe('CRUD Player', () => {
   it('expect to return all players', (done) => {
     request(server)

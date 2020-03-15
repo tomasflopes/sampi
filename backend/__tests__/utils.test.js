@@ -16,6 +16,9 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await Player.deleteOne({ name: 'Manel' });
+
+  const mongoose = require('mongoose');
+  mongoose.disconnect();
 });
 
 describe('Utils Unit Testing', () => {

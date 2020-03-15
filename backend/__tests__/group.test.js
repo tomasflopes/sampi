@@ -17,6 +17,12 @@ beforeAll(async () => {
   });
 });
 
+afterAll(() => {
+  const mongoose = require('mongoose');
+
+  mongoose.disconnect();
+});
+
 describe('CRUD Group', () => {
   it('expect to return all groups', (done) => {
     request(server)
