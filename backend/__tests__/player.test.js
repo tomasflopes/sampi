@@ -11,7 +11,8 @@ beforeAll(async () => {
 
   mongoose.connect(mongooseUrl, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
   });
 });
 
@@ -64,7 +65,7 @@ describe('CRUD Player', () => {
       });
   });
 
-  it('expect change player names', async (done) => {
+  it('expect change player name', async (done) => {
     const { _id } = await Player.findOne({ name: "Kronk" });
 
     request(server)
@@ -73,7 +74,7 @@ describe('CRUD Player', () => {
         name: "Lodo",
         position: "Forward"
       })
-      .expect(204)
+      .expect(200)
       .end((error) => {
         if (error) {
           return done(error);
@@ -82,7 +83,7 @@ describe('CRUD Player', () => {
       });
   });
 
-  it('delete user', async (done) => {
+  it('expect to delete player', async (done) => {
     const { _id } = await Player.findOne({ name: "Lodo" });
 
     request(server)

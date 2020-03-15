@@ -53,7 +53,7 @@ module.exports = {
 
     const newPlayer = await Player.findById(id);
 
-    return response.status(204).json(newPlayer);
+    return response.status(200).json(newPlayer);
   },
 
   async destroy(request, response) {

@@ -4,7 +4,7 @@ module.exports = {
   async index(request, response) {
     const games = await Game.find();
 
-    return response.json(games);
+    return response.status(200).json(games);
   },
 
   async store(request, response) {
@@ -16,14 +16,14 @@ module.exports = {
       location: location || "Not specified"
     });
 
-    return response.json(game);
+    return response.status(201).json(game);
   },
 
   async update(request, response) {
     const { id } = request.params;
     const { mvp, result } = request.body;
 
-    const updateInfo = await Game.update({
+    const updateInfo = await Game.updateOne({
       _id: id
     }, {
       $set: {
@@ -43,6 +43,6 @@ module.exports = {
       _id: id
     });
 
-    return response.json(deleteInfo);
+    return response.status(202).json(deleteInfo);
   }
 }
