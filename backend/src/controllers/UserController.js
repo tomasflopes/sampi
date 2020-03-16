@@ -2,9 +2,13 @@ const User = require('../models/User');
 
 const { registerValidation } = require('../utils/validation');
 
+const bckrypt = require('bcryptjs');
+
 module.exports = {
   async index(request, response) {
+    const userArray = await User.find();
 
+    return response.status(200).send(userArray);
   },
 
   async store(request, response) {
@@ -12,19 +16,17 @@ module.exports = {
 
     const { error } = registerValidation(request.body);
 
-    if (!error) {
-      const emailExists = User.findOne({ email });
-      if (emailExists) return response.status(400).send({ Message: 'Email already exists' });
+    if (error) return response.status(400).json(error);
 
-      //TODO: Encrypt password
+    const emailExists = User.findOne({ email });
+    if (emailExists) return response.status(400).send({ Message: 'Email already exists' });
 
-      const createdUser = await User.create({
-        email,
-        password_hash
-      });
-    } else {
-      return response.status(400).json(error);
-    }
+    const password_hash = bckrypt.hashSync(password, 8);
+
+    const createdUser = await User.create({
+      email,
+      password_hash
+    });
 
     return response.status(201).json(createdUser);
   },
