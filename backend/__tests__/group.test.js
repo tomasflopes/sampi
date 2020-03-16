@@ -10,7 +10,6 @@ const getLastElement = require('../src/utils/getLastElement');
 
 beforeAll(async () => {
   const mongoose = require('mongoose');
-  const { test: mongooseUrl } = require('../src/config/mongooseSettings');
 
   mongoose.connect(process.env.DB_CONNECT_TEST, {
     useNewUrlParser: true,

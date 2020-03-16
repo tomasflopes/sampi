@@ -54,6 +54,28 @@ describe('CRUD Game', () => {
       });
   });
 
+  it('expect to store new game without date and location', (done) => {
+    const response = request(server)
+      .post('/game')
+      .send({
+        playersArray: [
+          "Kronk",
+          "Amigo",
+          "Tropa",
+          "Yoyo",
+          "Esse"
+        ],
+      })
+      .expect(201)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+
+  });
+
   it('expect to update game info with mvp', async (done) => {
     const lastElement = await getLastElement(Game);
 
@@ -62,6 +84,23 @@ describe('CRUD Game', () => {
       .send({
         result: "08-05",
         mvp: "Amigo"
+      })
+      .expect(200)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to update game info without mvp', async (done) => {
+    const lastElement = await getLastElement(Game);
+
+    request(server)
+      .put('/game/' + lastElement._id.toString())
+      .send({
+        result: "08-05",
       })
       .expect(200)
       .end((error) => {

@@ -12,7 +12,7 @@ module.exports = {
 
     const game = await Game.create({
       players: playersArray,
-      date: date || "Not specified",
+      date: date || "",
       location: location || "Not specified"
     });
 
