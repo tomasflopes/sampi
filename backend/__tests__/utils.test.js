@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const Player = require('../src/models/Player');
 
 const getLastElement = require('../src/utils/getLastElement');
@@ -5,9 +7,7 @@ const getLastElement = require('../src/utils/getLastElement');
 beforeAll(async () => {
   const mongoose = require('mongoose');
 
-  const { test: mongooseUrl } = require('../src/config/mongooseSettings');
-
-  mongoose.connect(mongooseUrl, {
+  mongoose.connect(process.env.DB_CONNECT_TEST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false

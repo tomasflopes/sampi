@@ -1,12 +1,12 @@
 const app = require('./server');
 const mongoose = require('mongoose');
 
-const { production: mongooseUrl } = require('./config/mongooseSettings');
+require('dotenv').config();
 
-mongoose.connect(mongooseUrl, {
+mongoose.connect(process.env.DB_CONNECT, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
 });
 
-app.listen(3333);
+app.listen(process.env.PORT || 3333);

@@ -1,5 +1,7 @@
 const request = require('supertest');
 
+require('dotenv').config();
+
 const server = require('../src/server');
 
 const Group = require('../src/models/Group');
@@ -10,7 +12,7 @@ beforeAll(async () => {
   const mongoose = require('mongoose');
   const { test: mongooseUrl } = require('../src/config/mongooseSettings');
 
-  mongoose.connect(mongooseUrl, {
+  mongoose.connect(process.env.DB_CONNECT_TEST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
