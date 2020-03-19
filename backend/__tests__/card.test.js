@@ -14,16 +14,22 @@ beforeAll(async () => {
   });
 });
 
-afterAll(() => {
+afterAll(async () => {
   const mongoose = require('mongoose');
 
-  mongoose.disconnect();
+  await mongoose.disconnect();
 });
 
 describe('Card Testing', () => {
   it('expect to return last game', (done) => {
     request(server)
       .get('/card')
-      .expect(200, done);
+      .expect(200)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
   });
 });

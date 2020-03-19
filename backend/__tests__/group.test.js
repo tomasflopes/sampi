@@ -1,9 +1,12 @@
 const request = require('supertest');
 
+const { createUser } = require('../src/utils/createUser');
+
 require('dotenv').config();
 
 const server = require('../src/server');
 
+const User = require('../src/models/User');
 const Group = require('../src/models/Group');
 
 const getLastElement = require('../src/utils/getLastElement');
@@ -16,12 +19,15 @@ beforeAll(async () => {
     useUnifiedTopology: true,
     useFindAndModify: false
   });
+
+  createUser();
+  createUser();
 });
 
-afterAll(() => {
+afterAll(async () => {
   const mongoose = require('mongoose');
 
-  mongoose.disconnect();
+  await mongoose.disconnect();
 });
 
 describe('CRUD Group', () => {
@@ -31,13 +37,17 @@ describe('CRUD Group', () => {
       .expect(200, done);
   });
 
-  it('expect to store new group', (done) => {
+  it('expect to store new group', async (done) => {
+    const users = await User.find();
+
+    const usersIds = users.map(user => user._id);
+
     request(server)
       .post('/group')
       .send({
         players: [
-          "Kronk",
-          "Loko"
+          usersIds[0],
+          usersIds[1]
         ]
       })
       .expect(201)
@@ -49,14 +59,17 @@ describe('CRUD Group', () => {
       });
   });
 
-
   it('expect to add player to group', async (done) => {
+    createUser();
     const lastElement = await getLastElement(Group);
+    const lastUser = await getLastElement(User);
+
+    const _id = lastUser._id;
 
     request(server)
       .put('/group/' + lastElement._id.toString())
       .send({
-        name: "BodyBuilder"
+        _id
       })
       .expect(200)
       .end((error) => {
@@ -67,13 +80,15 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to throw error', async (done) => {
+  it('expect to throw error when inserting existing player', async (done) => {
     const lastElement = await getLastElement(Group);
+
+    const existingPlayer = lastElement.players[0];
 
     request(server)
       .put('/group/' + lastElement._id.toString())
       .send({
-        name: "BodyBuilder"
+        _id: existingPlayer._id
       })
       .expect(400)
       .end((error) => {
@@ -98,3 +113,5 @@ describe('CRUD Group', () => {
       });
   });
 });
+
+

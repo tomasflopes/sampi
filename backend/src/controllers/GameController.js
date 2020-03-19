@@ -12,7 +12,7 @@ module.exports = {
 
     const game = await Game.create({
       players: playersArray,
-      date: date || "",
+      date: date,
       location: location || "Not specified"
     });
 
@@ -27,7 +27,7 @@ module.exports = {
       _id: id
     }, {
       $set: {
-        mvp: mvp || "Not specified",
+        mvp,
         result
       }
     },

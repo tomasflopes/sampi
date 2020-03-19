@@ -1,8 +1,13 @@
 const request = require('supertest');
+const faker = require('faker');
 
 require('dotenv').config();
 
 const server = require('../src/server');
+
+const User = require('../src/models/User');
+
+const { createUser } = require('../src/utils/createUser');
 
 const Game = require('../src/models/Game');
 
@@ -16,12 +21,18 @@ beforeAll(async () => {
     useUnifiedTopology: true,
     useFindAndModify: false
   });
+
+  createUser();
+  createUser();
+  createUser();
 });
 
-afterAll(() => {
+afterAll(async () => {
   const mongoose = require('mongoose');
 
-  mongoose.disconnect();
+  await User.deleteMany({ sex: 'Male' });
+
+  await mongoose.disconnect();
 });
 
 describe('CRUD Game', () => {
@@ -31,19 +42,21 @@ describe('CRUD Game', () => {
       .expect(200, done);
   });
 
-  it('expect to store new game', (done) => {
+  it('expect to store new game', async (done) => {
+    const users = await User.find();
+
+    const usersIds = users.map(user => user._id);
+
     request(server)
       .post('/game')
       .send({
         playersArray: [
-          "Kronk",
-          "Amigo",
-          "Tropa",
-          "Yoyo",
-          "Esse"
+          usersIds[0],
+          usersIds[1],
+          usersIds[2]
         ],
-        date: "2020-02-13",
-        location: "Espinho"
+        date: faker.date.future(),
+        location: faker.address.city()
       })
       .expect(201)
       .end((error) => {
@@ -54,17 +67,20 @@ describe('CRUD Game', () => {
       });
   });
 
-  it('expect to store new game without date and location', (done) => {
-    const response = request(server)
+  it('expect to store new game without location', async (done) => {
+    const users = await User.find();
+
+    const usersIds = users.map(user => user._id);
+
+    request(server)
       .post('/game')
       .send({
         playersArray: [
-          "Kronk",
-          "Amigo",
-          "Tropa",
-          "Yoyo",
-          "Esse"
+          usersIds[0],
+          usersIds[1],
+          usersIds[2]
         ],
+        date: faker.date.future()
       })
       .expect(201)
       .end((error) => {
@@ -73,17 +89,18 @@ describe('CRUD Game', () => {
         }
         done();
       });
-
   });
 
   it('expect to update game info with mvp', async (done) => {
     const lastElement = await getLastElement(Game);
 
+    const mvp = await getLastElement(User);
+
     request(server)
       .put('/game/' + lastElement._id.toString())
       .send({
         result: "08-05",
-        mvp: "Amigo"
+        mvp: mvp._id.toString()
       })
       .expect(200)
       .end((error) => {

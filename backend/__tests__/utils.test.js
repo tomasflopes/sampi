@@ -1,6 +1,10 @@
 require('dotenv').config();
 
-const Player = require('../src/models/Player');
+const faker = require('faker');
+
+const User = require('../src/models/User');
+
+const { createUser } = require('../src/utils/createUser');
 
 const getLastElement = require('../src/utils/getLastElement');
 
@@ -15,20 +19,27 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await Player.deleteOne({ name: 'Manel' });
+  await User.deleteMany({ sex: 'Male' }); //? Fixed field in creation
 
   const mongoose = require('mongoose');
-  mongoose.disconnect();
+
+  await mongoose.disconnect();
 });
 
 describe('Utils Unit Testing', () => {
   it('Should return last element of collection to a given Model', async () => {
-    const createdPlayer = await Player.create({
-      name: 'Manel'
+    createUser(); //? Mock User just to assure that it is the last element
+
+    const lastUser = await User.create({
+      name: 'Kronk',
+      email: faker.internet.email(),
+      password_hash: faker.random.alphaNumeric(),
+      birth: faker.date.past(),
+      sex: 'Male',
     });
 
-    const mockPlayer = await getLastElement(Player);
+    const mockUser = await getLastElement(User);
 
-    expect(createdPlayer.name).toBe(mockPlayer.name);
+    expect(lastUser.name).toBe(mockUser.name);
   })
 });

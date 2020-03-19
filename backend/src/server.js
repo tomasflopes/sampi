@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(privateRoutes);
 
 const authRoutes = require('./routes/auth.routes');
+
 app.use('/api/user', authRoutes);
 
 module.exports = app;

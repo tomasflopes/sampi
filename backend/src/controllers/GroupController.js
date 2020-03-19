@@ -10,7 +10,7 @@ module.exports = {
   async store(request, response) {
     const { players } = request.body;
 
-    group = await Group.create({
+    const group = await Group.create({
       players
     });
 
@@ -19,27 +19,23 @@ module.exports = {
 
   async update(request, response) {
     const { id } = request.params;
-    const { name } = request.body;
+    const { _id } = request.body;
 
     const playersArray = (await Group.findById(id)).players;
 
-    const existingPlayer = playersArray.filter(player => player === name);
+    const existsPlayer = playersArray.filter(player => player == _id);
 
-    let updateInfo;
+    if (existsPlayer[0]) return response.status(400).json({ Error: 'Duplicate Player' });
 
-    if (existingPlayer.length === 0) {
-      updateInfo = await Group.updateOne({
-        _id: id
-      }, {
-        $push: {
-          players: name,
-        }
-      });
+    const updateInfo = await Group.updateOne({
+      _id: id
+    }, {
+      $push: {
+        players: _id,
+      }
+    });
 
-      return response.status(200).json(updateInfo);
-    }
-
-    return response.status(400).json({ Error: 'Duplicate Player' });
+    return response.status(200).json(updateInfo);
   },
 
   async destroy(request, response) {

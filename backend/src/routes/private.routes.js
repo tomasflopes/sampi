@@ -1,16 +1,10 @@
 const { Router } = require('express');
 
-const PlayerController = require('../controllers/PlayerController');
 const GameController = require('../controllers/GameController');
 const GroupController = require('../controllers/GroupController');
 const CardController = require('../controllers/CardController');
 
 const routes = Router();
-
-routes.get('/player', PlayerController.index);
-routes.post('/player', PlayerController.store);
-routes.put('/player/:id', PlayerController.update);
-routes.delete('/player/:id', PlayerController.destroy);
 
 routes.get('/game', GameController.index);
 routes.post('/game', GameController.store);

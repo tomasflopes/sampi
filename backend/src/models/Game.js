@@ -1,11 +1,25 @@
 const mongoose = require('mongoose');
 
 const GameSchema = new mongoose.Schema({
-  players: [String],
-  date: Date,
-  location: String,
-  result: String,
-  mvp: String,
+  players: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  }],
+  date: {
+    type: Date,
+    required: true,
+  },
+  location: {
+    type: String,
+  },
+  result: {
+    type: String,
+  },
+  mvp: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
 });
 
 module.exports = mongoose.model('Game', GameSchema);
