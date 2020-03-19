@@ -10,11 +10,12 @@ module.exports = {
   async store(request, response) {
     const { players } = request.body;
 
-    const group = await Group.create({
-      players
-    });
-
-    return response.status(201).json(group);
+    await Group
+      .create({
+        players
+      })
+      .then(group => response.status(201).json(group))
+      .catch(error => response.status(400).json(error));
   },
 
   async update(request, response) {

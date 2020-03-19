@@ -40,12 +40,12 @@ describe('CRUD User', () => {
   });
 
   it('should create new user', (done) => {
-    request(server)
+    const response = request(server)
       .post('/api/user/register')
       .send({
         name: faker.name.findName(),
         email: faker.internet.email(),
-        password: faker.hacker.adjective(),
+        password: faker.internet.password(),
         avatar_url: faker.internet.avatar(),
         sex: "Male",
         birth: faker.date.past(),

@@ -67,6 +67,32 @@ describe('CRUD Game', () => {
       });
   });
 
+  it('expect to not store new game when provided with invalid id', async (done) => {
+    const users = await User.find();
+
+    const usersIds = users.map(user => user._id);
+
+    request(server)
+      .post('/game')
+      .send({
+        playersArray: [
+          usersIds[0],
+          usersIds[1],
+          usersIds[2],
+          faker.internet.password
+        ],
+        date: faker.date.future(),
+        location: faker.address.city()
+      })
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
   it('expect to store new game without location', async (done) => {
     const users = await User.find();
 

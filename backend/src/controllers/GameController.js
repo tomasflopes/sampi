@@ -10,13 +10,14 @@ module.exports = {
   async store(request, response) {
     const { playersArray, date, location } = request.body;
 
-    const game = await Game.create({
-      players: playersArray,
-      date: date,
-      location: location || "Not specified"
-    });
-
-    return response.status(201).json(game);
+    await Game
+      .create({
+        players: playersArray,
+        date: date,
+        location: location || "Not specified"
+      })
+      .then(game => response.status(201).json(game))
+      .catch(error => response.status(400).json(error));
   },
 
   async update(request, response) {

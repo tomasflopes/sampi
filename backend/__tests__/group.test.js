@@ -2,6 +2,8 @@ const request = require('supertest');
 
 const { createUser } = require('../src/utils/createUser');
 
+const faker = require('faker');
+
 require('dotenv').config();
 
 const server = require('../src/server');
@@ -51,6 +53,29 @@ describe('CRUD Group', () => {
         ]
       })
       .expect(201)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to not store a new group when provided with invalid id', async (done) => {
+    const users = await User.find();
+
+    const usersIds = users.map(user => user._id);
+
+    request(server)
+      .post('/group')
+      .send({
+        players: [
+          usersIds[0],
+          usersIds[1],
+          faker.internet.password()
+        ]
+      })
+      .expect(400)
       .end((error) => {
         if (error) {
           return done(error);
