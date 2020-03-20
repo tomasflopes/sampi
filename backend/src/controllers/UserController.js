@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-const { registerValidation } = require('../utils/validation');
+const { registerValidation, loginValidation } = require('../utils/validation');
 
 const bckrypt = require('bcryptjs');
 
@@ -18,7 +18,8 @@ module.exports = {
 
     if (error) return response.status(400).json(error);
 
-    const password_hash = bckrypt.hashSync(password, 8);
+    const salt = await bckrypt.genSaltSync(10);
+    const password_hash = await bckrypt.hashSync(password, salt);
 
     const createdUser = await User.create({
       name,
@@ -62,8 +63,20 @@ module.exports = {
     response.status(202).json(deleteInfo);
   },
 
-  async login(request, response) { //TODO: Ver como isto se faz
+  async login(request, response) {
+    const { email, password } = request.body;
 
+    const { error } = loginValidation(request.body);
+
+    if (error) return response.status(400).json(error);
+
+    const user = await User.findOne({ email });
+    if (!user) return response.status(400).json({ message: 'Email is wrong' });
+
+    const validPassword = await bckrypt.compareSync(password, user.password_hash);
+    if (!validPassword) return response.status(400).json({ message: 'Password is wrong' });
+
+    return response.status(200).json({ message: 'Logged In' });
   }
 }
 
@@ -75,8 +88,8 @@ const userVerification = async (body) => {
   if (error) return error;
 
   const emailExists = await User.findOne({ email });
-  if (emailExists) return { Message: 'Email already exists' };
+  if (emailExists) return { message: 'Email already exists' };
 
   const nameExists = await User.findOne({ name });
-  if (nameExists) return { Message: 'Name already exists' };
+  if (nameExists) return { message: 'Name already exists' };
 }

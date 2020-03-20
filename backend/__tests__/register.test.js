@@ -26,7 +26,7 @@ afterAll(async () => {
   await mongoose.disconnect();
 });
 
-describe('CRUD User', () => {
+describe('User Registration Test', () => {
   it('should list all users', (done) => {
     request(server)
       .get('/api/user')
@@ -40,7 +40,7 @@ describe('CRUD User', () => {
   });
 
   it('should create new user', (done) => {
-    const response = request(server)
+    request(server)
       .post('/api/user/register')
       .send({
         name: faker.name.findName(),
