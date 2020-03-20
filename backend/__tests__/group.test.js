@@ -1,5 +1,3 @@
-const request = require('supertest');
-
 const { createUser } = require('../src/utils/createUser');
 
 const faker = require('faker');

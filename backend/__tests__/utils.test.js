@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const faker = require('faker');
 
 const User = require('../src/models/User');

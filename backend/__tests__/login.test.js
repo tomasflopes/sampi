@@ -1,7 +1,3 @@
-require('dotenv').config();
-
-const request = require('supertest');
-
 const getLastElement = require('../src/utils/getLastElement');
 
 const faker = require('faker');

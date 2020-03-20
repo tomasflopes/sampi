@@ -1,7 +1,6 @@
 const request = require('supertest');
-const faker = require('faker');
 
-require('dotenv').config();
+const faker = require('faker');
 
 const server = require('../src/server');
 

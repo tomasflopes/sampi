@@ -1,8 +1,10 @@
 const User = require('../models/User');
 
-const { registerValidation, loginValidation } = require('../utils/validation');
+const { registerValidation, loginValidation } = require('../middlewares/validation');
 
 const bckrypt = require('bcryptjs');
+
+const jwt = require('jsonwebtoken');
 
 module.exports = {
   async index(request, response) {
@@ -76,7 +78,9 @@ module.exports = {
     const validPassword = await bckrypt.compareSync(password, user.password_hash);
     if (!validPassword) return response.status(400).json({ message: 'Password is wrong' });
 
-    return response.status(200).json({ message: 'Logged In' });
+    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+
+    response.header('auth-token', token).send();
   }
 }
 
