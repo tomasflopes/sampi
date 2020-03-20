@@ -1,6 +1,6 @@
 const faker = require('faker');
 
-const User = require('../models/User');
+const User = require('../../src/models/User');
 
 const bckrypt = require('bcryptjs');
 

@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-const { registerValidation, loginValidation } = require('../middlewares/UserDataValidation');
+const { registerValidation, loginValidation } = require('../middleWares/UserDataValidation');
 
 const bckrypt = require('bcryptjs');
 

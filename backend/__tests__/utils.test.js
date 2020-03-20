@@ -2,9 +2,9 @@ const faker = require('faker');
 
 const User = require('../src/models/User');
 
-const { createUser } = require('../src/utils/createUser');
+const { createUser } = require('./utils/createUser');
 
-const getLastElement = require('../src/utils/getLastElement');
+const getLastElement = require('./utils/getLastElement');
 
 beforeAll(async () => {
   const mongoose = require('mongoose');

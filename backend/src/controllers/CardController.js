@@ -1,5 +1,5 @@
 const Game = require('../models/Game');
-const getLastElement = require('../utils/getLastElement');
+const getLastElement = require('../../__tests__/utils/getLastElement');
 
 module.exports = {
   async index(request, response) {

@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-const getLastElement = require('../src/utils/getLastElement');
+const getLastElement = require('./utils/getLastElement');
 
 const faker = require('faker');
 

@@ -6,11 +6,11 @@ const server = require('../src/server');
 
 const User = require('../src/models/User');
 
-const { createUser } = require('../src/utils/createUser');
+const { createUser } = require('./utils/createUser');
+const getLastElement = require('./utils/getLastElement');
 
 const Game = require('../src/models/Game');
 
-const getLastElement = require('../src/utils/getLastElement');
 
 beforeAll(async () => {
   const mongoose = require('mongoose');
@@ -21,9 +21,9 @@ beforeAll(async () => {
     useFindAndModify: false
   });
 
-  createUser();
-  createUser();
-  createUser();
+  await createUser();
+  await createUser();
+  await createUser();
 });
 
 afterAll(async () => {
