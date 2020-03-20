@@ -10,9 +10,9 @@ const User = require('../src/models/User');
 
 require('dotenv').config();
 
-beforeAll(async () => {
-  const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
+beforeAll(async () => {
   await mongoose.connect(process.env.DB_CONNECT_TEST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -21,8 +21,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  const mongoose = require('mongoose');
-
   await mongoose.disconnect();
 });
 
@@ -83,7 +81,7 @@ describe('User Registration Test', () => {
       });
   });
 
-  it('should not create new user because the email already exists', async () => {
+  it('should not create new user because the email already exists', async (done) => {
     const mockUser = await getLastElement(User);
 
     request(server)
@@ -98,6 +96,12 @@ describe('User Registration Test', () => {
         phone: faker.phone.phoneNumber(),
       })
       .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
   });
 
   it('should not create new user because the name is not allowed', (done) => {
@@ -121,7 +125,28 @@ describe('User Registration Test', () => {
       });
   });
 
-  it('should edit all user information', async () => {
+  it('should not create new user because the password is not allowed', (done) => {
+    request(server)
+      .post('/api/user/register')
+      .send({
+        name: faker.name.findName(),
+        email: faker.internet.email(),
+        password: '123',
+        avatar_url: faker.internet.avatar(),
+        sex: "Male",
+        birth: faker.date.past(),
+        phone: faker.phone.phoneNumber(),
+      })
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('should edit all user information', async (done) => {
     const lastUser = await getLastElement(User);
 
     request(server)
@@ -131,10 +156,16 @@ describe('User Registration Test', () => {
         avatar_url: faker.internet.avatar(),
         phone: faker.phone.phoneNumber(),
       })
-      .expect(200);
+      .expect(200)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
   });
 
-  it('should edit only user name', async () => {
+  it('should edit only user name', async (done) => {
     const lastUser = await getLastElement(User);
 
     request(server)
@@ -142,10 +173,16 @@ describe('User Registration Test', () => {
       .send({
         name: faker.name.findName(),
       })
-      .expect(200);
+      .expect(200)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
   });
 
-  it('should not edit user information when provided not valid data', async () => {
+  it('should not edit user information when provided with not valid data', async (done) => {
     const lastUser = await getLastElement(User);
 
     request(server)
@@ -153,14 +190,26 @@ describe('User Registration Test', () => {
       .send({
         name: 'A',
       })
-      .expect(400);
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
   });
 
-  it('should delete user', async () => {
+  it('should delete user', async (done) => {
     const lastUser = await getLastElement(User);
 
     request(server)
       .delete('/api/user/' + lastUser._id.toString())
-      .expect(202);
+      .expect(202)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
   });
 });

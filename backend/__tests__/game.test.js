@@ -10,7 +10,7 @@ const server = require('../src/server');
 
 const User = require('../src/models/User');
 
-const { createUser } = require('./utils/createUser');
+const createUser = require('./utils/createUser');
 const getLastElement = require('./utils/getLastElement');
 const purgeMockUsers = require('./utils/purgeMockUsers');
 const generateToken = require('./utils/generateToken');
@@ -43,20 +43,38 @@ describe('CRUD Game', () => {
     request(server)
       .get('/game')
       .set('Authorization', `Bearer: ${token}`)
-      .expect(200, done);
+      .expect(200)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
   });
 
   it('expect to not return all games when not provided token', (done) => {
     request(server)
       .get('/game')
-      .expect(401, done);
+      .expect(401)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
   });
 
   it('expect to not return all games when provided invalid token', (done) => {
     request(server)
       .get('/game')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
-      .expect(400, done);
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
   });
 
   it('expect to store new game', async (done) => {
@@ -277,23 +295,6 @@ describe('CRUD Game', () => {
       });
   });
 
-  it('expect to delete game', async (done) => {
-    const token = await generateToken();
-
-    const lastElement = await getLastElement(Game);
-
-    request(server)
-      .delete('/game/' + lastElement._id.toString())
-      .set('Authorization', `Bearer: ${token}`)
-      .expect(202)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
   it('expect to not delete game when token is not provided', async (done) => {
     const lastElement = await getLastElement(Game);
 
@@ -315,6 +316,23 @@ describe('CRUD Game', () => {
       .delete('/game/' + lastElement._id.toString())
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
       .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to delete game', async (done) => {
+    const token = await generateToken();
+
+    const lastElement = await getLastElement(Game);
+
+    request(server)
+      .delete('/game/' + lastElement._id.toString())
+      .set('Authorization', `Bearer: ${token}`)
+      .expect(202)
       .end((error) => {
         if (error) {
           return done(error);

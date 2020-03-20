@@ -22,5 +22,15 @@ module.exports = {
     });
 
     return schema.validate(data);
+  },
+
+  editValidation(data) {
+    const schema = Joi.object({
+      name: Joi.string().min(2),
+      avatar_url: Joi.string(),
+      phone: Joi.string(),
+    });
+
+    return schema.validate(data);
   }
 }

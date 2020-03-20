@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-const { registerValidation, loginValidation } = require('../middleWares/UserDataValidation');
+const { registerValidation, loginValidation, editValidation } = require('../middleWares/UserDataValidation');
 
 const bckrypt = require('bcryptjs');
 
@@ -37,17 +37,17 @@ module.exports = {
   },
 
   async update(request, response) {
-    const { _id } = request.params;
+    const { id } = request.params;
     const { name, avatar_url, phone } = request.body;
 
-    const oldUser = User.findById({ _id });
+    const oldUser = User.findById({ _id: id });
 
-    const error = userVerification(request.body);
+    const { error } = editValidation(request.body);
 
     if (error) return response.status(400).json(error);
 
     const newUser = await User.findByIdAndUpdate({
-      _id
+      _id: id
     }, {
       name: name || oldUser.name,
       avatar_url: avatar_url || oldUser.avatar_url,
@@ -58,9 +58,9 @@ module.exports = {
   },
 
   async delete(request, response) {
-    const { _id } = request.body;
+    const { id } = request.params;
 
-    const deleteInfo = await User.findByIdAndDelete({ _id });
+    const deleteInfo = await User.findByIdAndDelete({ _id: id });
 
     response.status(202).json(deleteInfo);
   },

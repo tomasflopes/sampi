@@ -1,4 +1,7 @@
 const getLastElement = require('./utils/getLastElement');
+const createUser = require('./utils/createUser');
+
+const request = require('supertest');
 
 const faker = require('faker');
 
@@ -8,11 +11,9 @@ const server = require('../src/server');
 
 const User = require('../src/models/User');
 
-const { createUser } = require('./utils/createUser');
+const mongoose = require('mongoose');
 
 beforeAll(async () => {
-  const mongoose = require('mongoose');
-
   await mongoose.connect(process.env.DB_CONNECT_TEST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -23,8 +24,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  const mongoose = require('mongoose');
-
   await mongoose.disconnect();
 });
 

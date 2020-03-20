@@ -3,6 +3,8 @@ const getLastElement = require('../../__tests__/utils/getLastElement');
 
 module.exports = {
   async index(request, response) {
-    return response.json(await getLastElement(Game));
+    const lastGame = await getLastElement(Game);
+
+    return response.status(200).json(lastGame);
   }
 }
