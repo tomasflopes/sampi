@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-const { registerValidation, loginValidation } = require('../middlewares/validation');
+const { registerValidation, loginValidation } = require('../middlewares/UserDataValidation');
 
 const bckrypt = require('bcryptjs');
 
@@ -80,7 +80,10 @@ module.exports = {
 
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 
-    response.header('auth-token', token).send();
+    response.status(200).json({
+      user,
+      token
+    });
   }
 }
 
