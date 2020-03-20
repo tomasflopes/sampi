@@ -8,6 +8,8 @@ const server = require('../src/server');
 
 const User = require('../src/models/User');
 
+require('dotenv').config();
+
 beforeAll(async () => {
   const mongoose = require('mongoose');
 

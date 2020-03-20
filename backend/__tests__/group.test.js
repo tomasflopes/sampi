@@ -1,5 +1,7 @@
 const { createUser } = require('./utils/createUser');
 
+require('dotenv').config();
+
 const request = require('supertest');
 
 const faker = require('faker');

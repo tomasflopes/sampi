@@ -1,5 +1,7 @@
 const faker = require('faker');
 
+require('dotenv').config();
+
 const User = require('../src/models/User');
 
 const { createUser } = require('./utils/createUser');

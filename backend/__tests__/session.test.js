@@ -3,6 +3,8 @@ const server = require('../src/server');
 const getLastElement = require('./utils/getLastElement')
 const { createUser } = require('./utils/createUser');
 
+require('dotenv').config();
+
 const User = require('../src/models/User');
 
 beforeAll(async () => {
@@ -26,7 +28,7 @@ afterAll(async () => {
 describe('Sessions Privilegies', () => {
   it('should be able to access private routes with valid token', () => {
     const user = getLastElement(User);
-    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+
 
     request(server)
       .get('/group')

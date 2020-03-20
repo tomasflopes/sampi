@@ -2,6 +2,8 @@ const getLastElement = require('./utils/getLastElement');
 
 const faker = require('faker');
 
+require('dotenv').config();
+
 const server = require('../src/server');
 
 const User = require('../src/models/User');
