@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -7,7 +7,7 @@ import BottomNavbar from '../../components/BottomNavbar'
 
 export default function Profile({ navigation }) {
   return (
-    <View style={styles.ViewStyle}>
+    <View style={styles.container}>
       <View style={styles.firstRow}>
         <View style={styles.logoutContainer}>
           <Icon style={styles.logoutIcon} name="sign-out"></Icon>
@@ -18,13 +18,16 @@ export default function Profile({ navigation }) {
 
       <View style={styles.basicInformationRow}>
         <Text style={styles.basicInformation}>ACTIVE |</Text>
-        <Text style={styles.basicInformation}>MALE |</Text>
-        <Text style={styles.basicInformation}>BORN 3.5.2002</Text>
+        <Text style={styles.basicInformation}> MALE |</Text>
+        <Text style={styles.basicInformation}> BORN 3.5.2002</Text>
       </View>
 
       <View style={styles.playerPhotoName}>
-        <Text style={styles.playerPhoto}>Photo</Text>
-        <Text style={styles.playerName}>Player 1</Text>
+        <Image
+          source={{
+            uri: 'https://pbs.twimg.com/profile_images/1236082038014447618/peWO3tpF_400x400.jpg'
+          }} style={styles.playerPhoto} />
+        < Text style={styles.playerName} > Player 1</Text>
       </View>
 
       <View style={styles.mainInfoContainer}>
@@ -43,17 +46,19 @@ export default function Profile({ navigation }) {
           <Text>POSITION: FORWARD</Text>
         </View>
 
-        <View style={styles.mainInfo}>
+        <View style={[styles.mainInfo, styles.mainInfoLast]} >
           <Icon name=""></Icon>
           <Text>AGE: 18 YEARS</Text>
         </View>
       </View>
 
       <View style={styles.spacer} />
-      <TouchableOpacity onPress={() => navigation.navigate('EditInfo')}><Text>Edit Info</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.editInfo} onPress={() => navigation.navigate('EditInfo')}><Text style={styles.editInfoText}>Edit Info</Text></TouchableOpacity>
+      <View style={styles.spacer} />
 
-      <BottomNavbar navigation={navigation} active={'Profile'} />
-
-    </View>
+      <View style={styles.bottomNavbar}>
+        <BottomNavbar navigation={navigation} active={'Profile'} />
+      </View>
+    </View >
   )
 }
