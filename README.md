@@ -12,13 +12,38 @@ A aplicação tem a tarefa de gerar novas equipas cada vez que os jogadores marc
 
 Desta forma, será possível com o passar dos eventos determinar quem é o jogador que se destaca mais independentemente da equipa em que joga.
 
-## Tecnologia utilizada
+### Stack
+
+O projeto é baseado numa _stack_, ou seja, um conjunto de tecnologias, muito popular entre as empresas de tecnologia hoje em dia, **MERN**.
+
+**M**ongoDB
+**E**xpress
+**R**eact
+**N**odeJS
+
+#### MongoDB
+
+Em termos de base de dados decidi utilizar a plataforma [MongoDB](https://www.mongodb.com/), uma base de dados _noSQL_ orientada a documento que tem muitas vantagens em relação a bases de dados relacionais a nível de performance.
+
+#### Express
+
+Para _web framework_ decidi usar o **Express**, uma framework que dá uma base muito robusta para operações com operações com o protocolo **http**.
+
+#### React-Native
 
 Para realizar este projeto decidi utilizar a framework [React Native](https://facebook.github.io/react-native/), que é a mesma framework utilizada pelo Facebook em todas as suas apps, visto que é uma framework que utiliza **_JavaScript_** que é, de momento, a linguagem com mais procura no mercado de trabalho.
 
-Em termos de base de dados decidi utilizar a plataforma [Firebase](https://console.firebase.google.com/u/1/project/sampi-42f48/overview?pli=1) da Google.
+#### NodeJS
 
-Para o planeamento de todas as atividades estou a usar o [Trello](https://trello.com/b/NzGBlb8O/sampi) e para o controlo de versões o [GitLab](https://gitlab.com/tomas050302/sampi).
+E por fim o **NodeJS** que é o _runtime_ Javascript que torna possível executar código Javascript fora do browser.
+
+Todas estas tecnologias previligiam uma *API* **RESTFULL**. Que é uma aplicação que obedece aos padrões **REST**, **RE**presentational **S**tate **T**ransfer, padrões que podem ser encontrados [aqui](https://restfulapi.net/).
+
+## Tecnologia utilizada
+
+### Planeamento e _versioning_
+
+Além de muito papel e quadros cheios de ideias e tarefas foi também utilizada a ferramenta online [Trello](https://trello.com/b/NzGBlb8O/sampi) e para o controlo de versões o [GitLab](https://gitlab.com/tomas050302/sampi).
 
 ### _For developers_
 
@@ -34,11 +59,11 @@ Uma ferramenta importante para trabalhar neste projeto é o _package manager_ [y
 
 ### Node
 
-Também importante obviamente é o [Node JS](https://nodejs.org/en/) que é o que torna possível executar código _JavaScript_ fora do navegador de maneira a ser possível interpretar _React Native_, para o instalar só é necessário rodar o comando
+Para instalar o [Node JS](https://nodejs.org/en/) na máquina só é necessário correr o comando:
 
 #### `pkg install node`
 
-Para ter a certeza que a versão instalada é pelo menos a exigída pelas dependências (neste projeto está a ser usada a versão estável a 13/01/2020 (_*12.14.1*_)) utilizamos os seguintes comandos
+Para ter a certeza que a versão instalada é pelo menos a exigída pelas dependências (neste projeto está a ser usada a versão estável a 13/01/2020 (_*12.14.1*_) utilizamos os seguintes comandos
 
 #### `sudo npm install -g n`
 
@@ -58,6 +83,12 @@ Para correr o programa no emulador ou num dispositivo físico previamente config
 
 ### Dependências do projeto
 
-#### _Commitizen_
+#### [_Commitizen_](https://github.com/commitizen/cz-cli)
 
-Esta dependência serve para uniformizar todos os commits realizados para o GitLab de maneira a ser mais simples de saber o que cada alteração fez no código e seguir o progresso do projeto.
+Esta dependência serve para dar uma interface gráfica ao programador na altura de formar a sua mensagem de _commit_.
+Em conjunto com o [**CommitLint**](https://github.com/conventional-changelog/commitlint) que serve para uniformizar todas as mensagens de commits realizadas para o repositório __Git__, de maneira a ser mais simples de saber o que cada alteração fez no código e seguir a evolução do projeto ao longo do tempo.
+
+#### [_Jest_](https://jestjs.io/)
+
+Esta library de _JavaScrip_ serve para ser possível criar testes automatizados de todos os módulos implementados no código. Desta forma podemos assegurar que nada do que já está implementado se danifica com a implementação de uma nova _feature_.
+Com o Jest é também usada a library [**Supertest**](https://github.com/visionmedia/supertest) que serve para simular requests http nos testes do Jest. Também optei por incluir a dependência [**Faker**](https://github.com/marak/Faker.js/) que serve para gerar dados falsos para propósito de teste.
