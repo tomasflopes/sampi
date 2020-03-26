@@ -81,6 +81,10 @@ Para correr o programa no emulador ou num dispositivo físico previamente config
 
 #### `yarn start`
 
+### .Env
+
+Este ficheiro tem de ser ignorado nos commits devido a conter nele informação sensível que poderia ser explorada por pessoas mal intencionadas, com isto em mente, é ignorada em todos os commits. Tomei, no entanto, a liberdade de deixar um .env_temp para servir de template a quem quiser testar a aplicação no seu próprio ambiente de desenvolvimento com todas as indicações necessárias a seguir para ser possível preencher com os dados pessoais.
+
 ### Dependências do projeto
 
 #### [_Commitizen_](https://github.com/commitizen/cz-cli)
@@ -92,3 +96,4 @@ Em conjunto com o [**CommitLint**](https://github.com/conventional-changelog/com
 
 Esta library de _JavaScrip_ serve para ser possível criar testes automatizados de todos os módulos implementados no código. Desta forma podemos assegurar que nada do que já está implementado se danifica com a implementação de uma nova _feature_.
 Com o Jest é também usada a library [**Supertest**](https://github.com/visionmedia/supertest) que serve para simular requests http nos testes do Jest. Também optei por incluir a dependência [**Faker**](https://github.com/marak/Faker.js/) que serve para gerar dados falsos para propósito de teste.
+
