@@ -27,7 +27,7 @@ Em termos de base de dados decidi utilizar a plataforma [MongoDB](https://www.mo
 
 #### Express
 
-Para _web framework_ decidi usar o **Express**, uma framework que dá uma base muito robusta para operações com operações com o protocolo **http**.
+Para _web framework_ decidi usar o **Express**, uma framework que dá uma base muito robusta para operações com o protocolo **http**.
 
 #### React-Native
 
