@@ -14,31 +14,33 @@ module.exports = {
   },
 
   async store(request, response) {
-    const { name, email, password, avatar_url, sex, birth, phone, } = request.body;
+    const { name, email, password, sex, birth, phone, } = request.body;
 
-    const error = await userVerification(request.body);
+    console.log(request.file);
 
-    if (error) return response.status(400).json(error);
-
-    const salt = await bckrypt.genSaltSync(10);
-    const password_hash = await bckrypt.hashSync(password, salt);
-
-    const createdUser = await User.create({
-      name,
-      email,
-      password_hash,
-      avatar_url,
-      sex,
-      birth,
-      phone
-    });
-
-    return response.status(201).json(createdUser);
+    /*  const error = await userVerification(request.body);
+ 
+     if (error) return response.status(400).json(error);
+ 
+     const salt = await bckrypt.genSaltSync(10);
+     const password_hash = await bckrypt.hashSync(password, salt);
+ 
+     const createdUser = await User.create({
+       name,
+       email,
+       password_hash,
+       avatar_url,
+       sex,
+       birth,
+       phone
+     });
+ 
+     return response.status(201).json(createdUser); */
   },
 
   async update(request, response) {
     const { id } = request.params;
-    const { name, avatar_url, phone } = request.body;
+    const { name, avatar_file, phone } = request.body;
 
     const oldUser = User.findById({ _id: id });
 

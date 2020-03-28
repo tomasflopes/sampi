@@ -6,7 +6,6 @@ module.exports = {
       name: Joi.string().min(2).required(),
       email: Joi.string().min(6).required().email(),
       password: Joi.string().min(6).required(),
-      avatar_url: Joi.string(),
       sex: Joi.string(),
       birth: Joi.date().required(),
       phone: Joi.string(),
@@ -27,7 +26,6 @@ module.exports = {
   editValidation(data) {
     const schema = Joi.object({
       name: Joi.string().min(2),
-      avatar_url: Joi.string(),
       phone: Joi.string(),
     });
 
