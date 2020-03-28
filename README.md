@@ -10,7 +10,11 @@ A ideia do projeto é ter uma plataforma móvel capaz de gerir uma competição 
 
 A aplicação tem a tarefa de gerar novas equipas cada vez que os jogadores marcarem um novo evento de maneira a todos os jogadores terem várias equipas ao longo do tempo.
 
-Desta forma, será possível com o passar dos eventos determinar quem é o jogador que se destaca mais independentemente da equipa em que joga.
+Desta forma, será possível, com o passar dos eventos, determinar quem é o jogador que se destaca mais, independentemente da equipa em que joga.
+
+### Design
+
+Todo o design foi concebido por mim e foi utilizada a ferramenta [**Figma**](https://www.figma.com), e está acessível [neste link](https://www.figma.com/file/L4uZDocj3GfuzbzvTzwuuW/Sampi?node-id=0%3A1).
 
 ### Stack
 
