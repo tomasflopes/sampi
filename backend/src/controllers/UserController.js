@@ -16,26 +16,26 @@ module.exports = {
   async store(request, response) {
     const { name, email, password, sex, birth, phone, } = request.body;
 
-    console.log(request.file);
+    const { location: avatar_url } = request.file;
 
-    /*  const error = await userVerification(request.body);
- 
-     if (error) return response.status(400).json(error);
- 
-     const salt = await bckrypt.genSaltSync(10);
-     const password_hash = await bckrypt.hashSync(password, salt);
- 
-     const createdUser = await User.create({
-       name,
-       email,
-       password_hash,
-       avatar_url,
-       sex,
-       birth,
-       phone
-     });
- 
-     return response.status(201).json(createdUser); */
+    const error = await userVerification(request.body);
+
+    if (error) return response.status(400).json(error);
+
+    const salt = await bckrypt.genSaltSync(10);
+    const password_hash = await bckrypt.hashSync(password, salt);
+
+    const createdUser = await User.create({
+      name,
+      email,
+      password_hash,
+      avatar_url,
+      sex,
+      birth,
+      phone
+    });
+
+    return response.status(201).json(createdUser);
   },
 
   async update(request, response) {
