@@ -7,8 +7,11 @@ const bckrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const aws = require('aws-sdk');
-
 const s3 = new aws.S3();
+
+const fs = require('fs');
+const path = require('path');
+const { promisify } = require('util');
 
 module.exports = {
   async index(request, response) {
@@ -72,15 +75,18 @@ module.exports = {
 
     const { avatar_url } = deleteInfo;
 
-    const [, , , key] = avatar_url.split('/')
 
     if (process.env.STORAGE_TYPE === 's3') {
+      const [, , , key] = avatar_url.split('/');
+
       await s3.deleteObject({
         Bucket: 'upload-sampi',
         Key: key,
       }).promise().finally();
     } else {
+      const [, , , , key] = avatar_url.split('/');
 
+      promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key))
     }
 
     response.status(202).json(deleteInfo);
