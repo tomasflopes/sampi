@@ -6,6 +6,10 @@ const bckrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 
+const aws = require('aws-sdk');
+
+const s3 = new aws.S3();
+
 module.exports = {
   async index(request, response) {
     const userArray = await User.find();
@@ -16,7 +20,13 @@ module.exports = {
   async store(request, response) {
     const { name, email, password, sex, birth, phone, } = request.body;
 
-    const { location: avatar_url } = request.file;
+    const { location, filename } = request.file;
+
+    const avatar_url = location || `${process.env.APP_URL}/files/${filename}`;
+
+    const error = await userVerification(request.body);
+
+    if (error) return response.status(400).json(error);
 
     const salt = await bckrypt.genSaltSync(10);
     const password_hash = await bckrypt.hashSync(password, salt);
@@ -59,6 +69,19 @@ module.exports = {
     const { id } = request.params;
 
     const deleteInfo = await User.findByIdAndDelete({ _id: id });
+
+    const { avatar_url } = deleteInfo;
+
+    const [, , , key] = avatar_url.split('/')
+
+    if (process.env.STORAGE_TYPE === 's3') {
+      await s3.deleteObject({
+        Bucket: 'upload-sampi',
+        Key: key,
+      }).promise().finally();
+    } else {
+
+    }
 
     response.status(202).json(deleteInfo);
   },

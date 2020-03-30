@@ -1,3 +1,4 @@
 node_modules
 src/config/mongooseSettings.js
 .env
+temp/uploads

@@ -8,7 +8,7 @@ require('dotenv').config();
 const storeTypes = {
   local: multer.diskStorage({
     destination: (request, file, callback) => {
-      callback(null, path.resolve(__dirname, '..', '..', 'tmp', 'uploads'));
+      callback(null, path.resolve(__dirname, '..', '..', 'temp', 'uploads'));
     },
 
     filename: (request, file, callback) => {
@@ -17,9 +17,9 @@ const storeTypes = {
 
         const date = new Date().toJSON().slice(0, 10);
 
-        file.key = `${date}-${hash.toString('hex')}-${file.originalname}`;
+        const fileName = `${date}-${hash.toString('hex')}-${file.originalname}`;
 
-        callback(null, file.key);
+        callback(null, fileName);
       });
     }
   }),
@@ -44,8 +44,8 @@ const storeTypes = {
 }
 
 module.exports = {
-  dest: path.resolve(__dirname, '..', '..', 'tmp', 'uploads'),
-  storage: storeTypes['s3'],
+  dest: path.resolve(__dirname, '..', '..', 'temp', 'uploads'),
+  storage: storeTypes[process.env.STORAGE_TYPE],
   limits: {
     fileSize: 2 * 1024 * 1024
   },
