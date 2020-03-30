@@ -18,10 +18,6 @@ module.exports = {
 
     const { location: avatar_url } = request.file;
 
-    const error = await userVerification(request.body);
-
-    if (error) return response.status(400).json(error);
-
     const salt = await bckrypt.genSaltSync(10);
     const password_hash = await bckrypt.hashSync(password, salt);
 
