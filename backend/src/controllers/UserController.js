@@ -21,7 +21,7 @@ module.exports = {
   },
 
   async store(request, response) {
-    const { name, email, password, sex, birth, phone, } = request.body;
+    const { name, email, password, sex, birth, phone } = request.body;
 
     const { location, filename } = request.file;
 
@@ -54,36 +54,49 @@ module.exports = {
     const { id } = request.params;
     const { name, phone } = request.body;
 
-    if (request.file != undefined) {
-      const { location, filename } = request.file;
+    const { location, filename } = request.file || { location: undefined, filename: undefined };
+
+    if (!(location == undefined && filename == undefined)) {
       const avatar_url = location || `${process.env.APP_URL}/files/${filename}`;
+
+      const oldUser = await User.findById({ _id: id });
+
+      const { error } = await editValidation(request.body);
+
+      if (error) {
+        await deleteUserPhoto(avatar_url);
+        return response.status(400).json(error);
+      }
+
+      if (avatar_url) {
+        await deleteUserPhoto(oldUser.avatar_url);
+      }
+
+      const updatedUser = await User.findByIdAndUpdate({
+        _id: id
+      }, {
+        name: name || oldUser.name,
+        avatar_url: avatar_url || oldUser.avatar_url,
+        phone: phone || oldUser.phone,
+      });
+
+      return response.status(200).json(updatedUser);
     } else {
+      const oldUser = await User.findById({ _id: id });
 
+      const { error } = await editValidation(request.body);
+
+      if (error) return response.status(400).json(error);
+
+      const updatedUser = await User.findByIdAndUpdate({
+        _id: id
+      }, {
+        name: name || oldUser.name,
+        avatar_url: oldUser.avatar_url,
+        phone: phone || oldUser.phone,
+      });
+      return response.status(200).json(updatedUser);
     }
-
-
-    const oldUser = await User.findById({ _id: id });
-
-    const { error } = await editValidation(request.body);
-
-    if (error) {
-      await deleteUserPhoto(avatar_url);
-      return response.status(400).json(error);
-    }
-
-    if (avatar_url) {
-      await deleteUserPhoto(oldUser.avatar_url);
-    }
-
-    const updatedUser = await User.findByIdAndUpdate({
-      _id: id
-    }, {
-      name: name || oldUser.name,
-      avatar_url: avatar_url || oldUser.avatar_url,
-      phone: phone || oldUser.phone,
-    });
-
-    return response.status(200).json(updatedUser);
   },
 
   async delete(request, response) {
