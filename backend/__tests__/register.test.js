@@ -8,6 +8,8 @@ const server = require('../src/server');
 
 const User = require('../src/models/User');
 
+const path = require('path');
+
 require('dotenv').config();
 
 const mongoose = require('mongoose');
@@ -37,25 +39,17 @@ describe('User Registration Test', () => {
       });
   });
 
-  it('should create new user', (done) => {
-    request(server)
+  it('should create new user', async () => {
+    await request(server)
       .post('/api/user/register')
-      .send({
-        name: faker.name.findName(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-        avatar_url: faker.internet.avatar(),
-        sex: "Male",
-        birth: faker.date.past(),
-        phone: faker.phone.phoneNumber(),
-      })
-      .expect(201)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
+      .field('name', faker.name.findName())
+      .field('email', faker.internet.email())
+      .field('password', faker.internet.password())
+      .field('sex', "Male")
+      .field('birth', faker.date.past().toString())
+      .field('phone', faker.phone.phoneNumber())
+      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_1.jpeg'))
+      .expect(201);
   });
 
   it('should not create new user because the name already exists', async (done) => {
@@ -63,15 +57,13 @@ describe('User Registration Test', () => {
 
     request(server)
       .post('/api/user/register')
-      .send({
-        name: mockUser.name,
-        email: faker.internet.email(),
-        password: faker.hacker.adjective(),
-        avatar_url: faker.internet.avatar(),
-        sex: "Male",
-        birth: faker.date.past(),
-        phone: faker.phone.phoneNumber(),
-      })
+      .field('name', mockUser.name)
+      .field('email', faker.internet.email())
+      .field('password', faker.internet.password())
+      .field('sex', "Male")
+      .field('birth', faker.date.past().toString())
+      .field('phone', faker.phone.phoneNumber())
+      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_1.jpeg'))
       .expect(400)
       .end((error) => {
         if (error) {
@@ -86,15 +78,13 @@ describe('User Registration Test', () => {
 
     request(server)
       .post('/api/user/register')
-      .send({
-        name: faker.name.findName(),
-        email: mockUser.email,
-        password: faker.hacker.adjective(),
-        avatar_url: faker.internet.avatar(),
-        sex: "Male",
-        birth: faker.date.past(),
-        phone: faker.phone.phoneNumber(),
-      })
+      .field('name', faker.name.findName())
+      .field('email', mockUser.email)
+      .field('password', faker.internet.password())
+      .field('sex', "Male")
+      .field('birth', faker.date.past().toString())
+      .field('phone', faker.phone.phoneNumber())
+      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_1.jpeg'))
       .expect(400)
       .end((error) => {
         if (error) {
@@ -107,15 +97,13 @@ describe('User Registration Test', () => {
   it('should not create new user because the name is not allowed', (done) => {
     request(server)
       .post('/api/user/register')
-      .send({
-        name: 'A',
-        email: faker.internet.email(),
-        password: faker.hacker.adjective(),
-        avatar_url: faker.internet.avatar(),
-        sex: "Male",
-        birth: faker.date.past(),
-        phone: faker.phone.phoneNumber(),
-      })
+      .field('name', "A")
+      .field('email', faker.internet.email())
+      .field('password', faker.internet.password())
+      .field('sex', "Male")
+      .field('birth', faker.date.past().toString())
+      .field('phone', faker.phone.phoneNumber())
+      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_1.jpeg'))
       .expect(400)
       .end((error) => {
         if (error) {
@@ -128,15 +116,13 @@ describe('User Registration Test', () => {
   it('should not create new user because the password is not allowed', (done) => {
     request(server)
       .post('/api/user/register')
-      .send({
-        name: faker.name.findName(),
-        email: faker.internet.email(),
-        password: '123',
-        avatar_url: faker.internet.avatar(),
-        sex: "Male",
-        birth: faker.date.past(),
-        phone: faker.phone.phoneNumber(),
-      })
+      .field('name', faker.name.findName())
+      .field('email', faker.internet.email())
+      .field('password', "123")
+      .field('sex', "Male")
+      .field('birth', faker.date.past().toString())
+      .field('phone', faker.phone.phoneNumber())
+      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_1.jpeg'))
       .expect(400)
       .end((error) => {
         if (error) {
@@ -151,11 +137,9 @@ describe('User Registration Test', () => {
 
     request(server)
       .put('/api/user/' + lastUser._id.toString())
-      .send({
-        name: faker.name.findName(),
-        avatar_url: faker.internet.avatar(),
-        phone: faker.phone.phoneNumber(),
-      })
+      .field('name', faker.name.findName())
+      .field('phone', faker.phone.phoneNumber())
+      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_.jpeg'))
       .expect(200)
       .end((error) => {
         if (error) {
@@ -170,9 +154,7 @@ describe('User Registration Test', () => {
 
     request(server)
       .put('/api/user/' + lastUser._id.toString())
-      .send({
-        name: faker.name.findName(),
-      })
+      .field('name', faker.name.findName())
       .expect(200)
       .end((error) => {
         if (error) {

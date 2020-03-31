@@ -54,9 +54,13 @@ module.exports = {
     const { id } = request.params;
     const { name, phone } = request.body;
 
-    const { location, filename } = request.file;
+    if (request.file != undefined) {
+      const { location, filename } = request.file;
+      const avatar_url = location || `${process.env.APP_URL}/files/${filename}`;
+    } else {
 
-    const avatar_url = location || `${process.env.APP_URL}/files/${filename}` || null;
+    }
+
 
     const oldUser = await User.findById({ _id: id });
 
@@ -131,16 +135,18 @@ const userVerification = async (body) => {
 }
 
 async function deleteUserPhoto(avatar_url) {
-  if (process.env.STORAGE_TYPE === 's3') {
-    const [, , , key] = avatar_url.split('/');
+  if (avatar_url) {
+    if (process.env.STORAGE_TYPE === 's3') {
+      const [, , , key] = avatar_url.split('/');
 
-    await s3.deleteObject({
-      Bucket: 'upload-sampi',
-      Key: key,
-    }).promise().finally();
-  } else {
-    const [, , , , key] = avatar_url.split('/');
+      await s3.deleteObject({
+        Bucket: 'upload-sampi',
+        Key: key,
+      }).promise().finally();
+    } else {
+      const [, , , , key] = avatar_url.split('/');
 
-    promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key))
+      promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key))
+    }
   }
 }
