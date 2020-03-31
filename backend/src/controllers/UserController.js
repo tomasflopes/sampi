@@ -30,7 +30,7 @@ module.exports = {
     const error = await userVerification(request.body);
 
     if (error) {
-      deleteUserPhoto(avatar_url);
+      await deleteUserPhoto(avatar_url);
       return response.status(400).json(error);
     }
 
@@ -52,15 +52,26 @@ module.exports = {
 
   async update(request, response) {
     const { id } = request.params;
-    const { name, avatar_file, phone } = request.body;
+    const { name, phone } = request.body;
 
-    const oldUser = User.findById({ _id: id });
+    const { location, filename } = request.file;
 
-    const { error } = editValidation(request.body);
+    const avatar_url = location || `${process.env.APP_URL}/files/${filename}` || null;
 
-    if (error) return response.status(400).json(error);
+    const oldUser = await User.findById({ _id: id });
 
-    const newUser = await User.findByIdAndUpdate({
+    const { error } = await editValidation(request.body);
+
+    if (error) {
+      await deleteUserPhoto(avatar_url);
+      return response.status(400).json(error);
+    }
+
+    if (avatar_url) {
+      await deleteUserPhoto(oldUser.avatar_url);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate({
       _id: id
     }, {
       name: name || oldUser.name,
@@ -68,7 +79,7 @@ module.exports = {
       phone: phone || oldUser.phone,
     });
 
-    return response.status(200).json(newUser);
+    return response.status(200).json(updatedUser);
   },
 
   async delete(request, response) {
@@ -86,7 +97,7 @@ module.exports = {
   async login(request, response) {
     const { email, password } = request.body;
 
-    const { error } = loginValidation(request.body);
+    const { error } = await loginValidation(request.body);
 
     if (error) return response.status(400).json(error);
 
