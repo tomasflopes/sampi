@@ -29,7 +29,10 @@ module.exports = {
 
     const error = await userVerification(request.body);
 
-    if (error) return response.status(400).json(error);
+    if (error) {
+      deleteUserPhoto(avatar_url);
+      return response.status(400).json(error);
+    }
 
     const salt = await bckrypt.genSaltSync(10);
     const password_hash = await bckrypt.hashSync(password, salt);
@@ -75,19 +78,7 @@ module.exports = {
 
     const { avatar_url } = deleteInfo;
 
-
-    if (process.env.STORAGE_TYPE === 's3') {
-      const [, , , key] = avatar_url.split('/');
-
-      await s3.deleteObject({
-        Bucket: 'upload-sampi',
-        Key: key,
-      }).promise().finally();
-    } else {
-      const [, , , , key] = avatar_url.split('/');
-
-      promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key))
-    }
+    deleteUserPhoto(avatar_url);
 
     response.status(202).json(deleteInfo);
   },
@@ -126,4 +117,19 @@ const userVerification = async (body) => {
 
   const nameExists = await User.findOne({ name });
   if (nameExists) return { message: 'Name already exists' };
+}
+
+async function deleteUserPhoto(avatar_url) {
+  if (process.env.STORAGE_TYPE === 's3') {
+    const [, , , key] = avatar_url.split('/');
+
+    await s3.deleteObject({
+      Bucket: 'upload-sampi',
+      Key: key,
+    }).promise().finally();
+  } else {
+    const [, , , , key] = avatar_url.split('/');
+
+    promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key))
+  }
 }
