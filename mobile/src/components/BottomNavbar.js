@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function BottomNavbar({ active, navigation }) {
+export default function BottomNavbar({ navigation }) {
+  const [active, setActive] = useState(1);
+  const screenArray = ['Profile', 'Home', 'LeaderBoard'];
+
+  function handleClick(navigateTo) {
+    setActive(navigateTo);
+    navigation.navigate(screenArray[navigateTo]);
+  }
+
   return (
-    <View style={styles.holder}>
-      <TouchableOpacity style={active === 'Profile' ? styles.logoClickableActive : styles.logoClickable} onPress={() => navigation.navigate('Profile')}>
-        <Icon style={active === 'Profile' ? styles.logoActive : styles.logo} name="user"></Icon>
+    < View style={styles.holder} >
+      <TouchableOpacity style={active === 0 ? styles.logoClickableActive : styles.logoClickable} onPress={() => handleClick(0)}>
+        <Icon style={active === 0 ? styles.logoActive : styles.logo} name="user"></Icon>
       </TouchableOpacity>
 
       <View style={styles.spacer} />
 
-      <TouchableOpacity style={active === 'Home' ? styles.logoClickableActive : styles.logoClickable} onPress={() => navigation.navigate('Home')}>
-        <Icon style={active === 'Home' ? styles.logoActive : styles.logo} name="home"></Icon>
+      <TouchableOpacity style={active === 1 ? styles.logoClickableActive : styles.logoClickable} onPress={() => handleClick(1)}>
+        <Icon style={active === 1 ? styles.logoActive : styles.logo} name="home"></Icon>
       </TouchableOpacity>
 
       <View style={styles.spacer} />
 
-      <TouchableOpacity style={active === 'LeaderBoard' ? styles.logoClickableActive : styles.logoClickable} onPress={() => navigation.navigate('LeaderBoard')}>
-        <Icon style={active === 'LeaderBoard' ? styles.logoActive : styles.logo} name="list-ol"></Icon>
+      <TouchableOpacity style={active === 2 ? styles.logoClickableActive : styles.logoClickable} onPress={() => handleClick(2)}>
+        <Icon style={active === 2 ? styles.logoActive : styles.logo} name="list-ol"></Icon>
       </TouchableOpacity>
-    </View>
-  )
+    </View >
+  );
 }
 
 const styles = StyleSheet.create({
