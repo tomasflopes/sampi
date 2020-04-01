@@ -139,7 +139,7 @@ describe('User Registration Test', () => {
       .put('/api/user/' + lastUser._id.toString())
       .field('name', faker.name.findName())
       .field('phone', faker.phone.phoneNumber())
-      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_.jpeg'))
+      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg'))
       .expect(200)
       .end((error) => {
         if (error) {
