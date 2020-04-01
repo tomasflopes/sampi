@@ -32,6 +32,9 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+  const { _id } = getLastElement(Game);
+  await Game.deleteOne(_id);
+
   await purgeMockUsers();
   await mongoose.disconnect();
 });

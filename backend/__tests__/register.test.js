@@ -132,7 +132,7 @@ describe('User Registration Test', () => {
       });
   });
 
-  it('should edit all user information', async (done) => {
+  it('should edit all editable user information', async (done) => {
     const lastUser = await getLastElement(User);
 
     request(server)
@@ -149,7 +149,7 @@ describe('User Registration Test', () => {
       });
   });
 
-  it('should edit only user name', async (done) => {
+  it('should edit only user name (without file)', async (done) => {
     const lastUser = await getLastElement(User);
 
     request(server)

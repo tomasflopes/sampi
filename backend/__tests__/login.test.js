@@ -1,5 +1,6 @@
 const getLastElement = require('./utils/getLastElement');
 const createUser = require('./utils/createUser');
+const purgeMockUsers = require('./utils/purgeMockUsers');
 
 const request = require('supertest');
 
@@ -24,6 +25,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+  await purgeMockUsers();
   await mongoose.disconnect();
 });
 
