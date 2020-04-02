@@ -2,9 +2,7 @@ import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-
-const Tab = createMaterialBottomTabNavigator();
+import BottomNavbar from '../../components/BottomNavbar';
 
 export default function Home({ navigation }) {
   return (
@@ -12,7 +10,7 @@ export default function Home({ navigation }) {
       <Text style={styles.title}>Logo</Text>
       <View style={styles.divider}>
         <Text style={styles.cards}>cards</Text>
-      </View >
+      </View>
       <View style={styles.spacer} />
       <View
         style={styles.buttonsContainer}>
@@ -35,10 +33,7 @@ export default function Home({ navigation }) {
       </View>
       <View style={styles.spacer} />
       <View style={styles.bottomNavbar}>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
-        </Tab.Navigator>
+        <BottomNavbar />
       </View>
     </View>
   )
