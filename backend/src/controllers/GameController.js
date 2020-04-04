@@ -13,6 +13,7 @@ module.exports = {
     await Game
       .create({
         players: playersArray,
+        idGroup,
         date: date,
         location: location || "Not specified"
       })

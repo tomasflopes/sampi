@@ -20,6 +20,11 @@ const GameSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  idGroup: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Group',
+    required: true,
+  }
 });
 
 module.exports = mongoose.model('Game', GameSchema);
