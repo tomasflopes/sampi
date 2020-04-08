@@ -1,4 +1,5 @@
 const Group = require('../models/Group');
+const User = require('../models/User');
 
 module.exports = {
   async index(request, response) {
@@ -8,10 +9,11 @@ module.exports = {
   },
 
   async store(request, response) {
-    const { players } = request.body;
+    const { name, players } = request.body;
 
     await Group
       .create({
+        name,
         players
       })
       .then(group => response.status(201).json(group))
@@ -20,17 +22,38 @@ module.exports = {
 
   async update(request, response) {
     const { id } = request.params;
-    const { _id } = request.body;
+    const { name = null, newPlayer: _id } = request.body;
 
-    const playersArray = (await Group.findById(id)).players;
+    try {
+      await User.countDocuments({ _id });
+    }
+    catch (error) {
+      return response.status(400).json(error)
+    }
 
-    const existsPlayer = playersArray.filter(player => player == _id);
+    const oldGroup = await Group.findById(id);
+
+    const oldName = oldGroup.name;
+    const playersArray = oldGroup.players;
+
+    const existsPlayer = playersArray.filter(player => player == _id); //? Cannot be strict operator because it's Mongoose I
 
     if (existsPlayer[0]) return response.status(400).json({ Error: 'Duplicate Player' });
+
+    if (!_id) {
+      const updateInfo = await Group.updateOne({
+        _id: id
+      }, {
+        name: name || oldName,
+      });
+
+      return response.status(200).json(updateInfo);
+    }
 
     const updateInfo = await Group.updateOne({
       _id: id
     }, {
+      name: name || oldName,
       $push: {
         players: _id,
       }

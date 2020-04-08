@@ -85,6 +85,7 @@ describe('CRUD Group', () => {
     request(server)
       .post('/group')
       .send({
+        name: faker.hacker.adjective(),
         players: [
           usersIds[0],
           usersIds[1]
