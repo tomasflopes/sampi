@@ -101,6 +101,31 @@ describe('CRUD Group', () => {
       });
   });
 
+  it('expect to not store new group when not providing name', async (done) => {
+    const token = await generateToken();
+
+    const users = await User.find();
+
+    const usersIds = users.map(user => user._id);
+
+    request(server)
+      .post('/group')
+      .send({
+        players: [
+          usersIds[0],
+          usersIds[1]
+        ]
+      })
+      .set('Authorization', `Bearer: ${token}`)
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
   it('expect to not store new group when not provided token', async (done) => {
     const users = await User.find();
 
@@ -183,7 +208,7 @@ describe('CRUD Group', () => {
     request(server)
       .put('/group/' + lastElement._id.toString())
       .send({
-        _id
+        newPLayer: _id
       })
       .set('Authorization', `Bearer: ${token}`)
       .expect(200)
@@ -248,7 +273,7 @@ describe('CRUD Group', () => {
     request(server)
       .put('/group/' + lastElement._id.toString())
       .send({
-        _id: existingPlayer._id
+        newPlayer: existingPlayer._id
       })
       .set('Authorization', `Bearer: ${token}`)
       .expect(400)

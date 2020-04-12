@@ -9,8 +9,10 @@ const jwt = require('jsonwebtoken');
 const server = require('../src/server');
 
 const User = require('../src/models/User');
+const Group = require('../src/models/Group');
 
 const createUser = require('./utils/createUser');
+const createGroup = require('./utils/createGroup');
 const getLastElement = require('./utils/getLastElement');
 const purgeMockUsers = require('./utils/purgeMockUsers');
 const generateToken = require('./utils/generateToken');
@@ -26,14 +28,19 @@ beforeAll(async () => {
     useFindAndModify: false
   });
 
-  await createUser();
-  await createUser();
-  await createUser();
+  const { _id: id1 } = await createUser();
+  const { _id: id2 } = await createUser();
+  const { _id: id3 } = await createUser();
+
+  await createGroup({ players: [id1, id2, id3] })
 });
 
 afterAll(async () => {
   const { _id } = getLastElement(Game);
   await Game.deleteOne(_id);
+
+  const { _id: groupId } = getLastElement(Group);
+  await Group.deleteOne(groupId);
 
   await purgeMockUsers();
   await mongoose.disconnect();
