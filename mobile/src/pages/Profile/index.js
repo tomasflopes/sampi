@@ -57,7 +57,6 @@ export default function Profile({ navigation }) {
       <View style={styles.spacer} />
 
       <View style={styles.bottomNavbar}>
-        <BottomNavbar navigation={navigation} active={'Profile'} />
       </View>
     </View >
   )

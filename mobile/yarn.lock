@@ -1156,10 +1156,10 @@
     xcode "^2.1.0"
     xml2js "^0.4.23"
 
-"@expo/dev-tools@0.10.34":
-  version "0.10.34"
-  resolved "https://registry.yarnpkg.com/@expo/dev-tools/-/dev-tools-0.10.34.tgz#1c409bd36f6a87865944bd3ddd9ec89f8ea1f943"
-  integrity sha512-C/yoSsur598Dp5iCaxBn1ozJfjcrSeFL5AWYYd1U9AKyPCphQBoMPRmh5q2VdegFXOKSelzIM4P2v/dR3zo/pQ==
+"@expo/dev-tools@0.10.35":
+  version "0.10.35"
+  resolved "https://registry.yarnpkg.com/@expo/dev-tools/-/dev-tools-0.10.35.tgz#2fe7dece72c5791de2d6d47554e578738104a3f0"
+  integrity sha512-vZtMTHs3tJVDLc3ztL2rF6rdC47Zc7UwwAWeP8hk8Ft3vsskbeHI5o7Z3qI7PYWWcxV+1PTT78abOPAMGhCy7w==
   dependencies:
     "@expo/config" "3.0.8"
     base64url "3.0.1"
@@ -1413,10 +1413,10 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
-"@expo/xdl@57.8.20":
-  version "57.8.20"
-  resolved "https://registry.yarnpkg.com/@expo/xdl/-/xdl-57.8.20.tgz#4b6f3f8a25c51d80a0e5af1cadf17a26a4e69265"
-  integrity sha512-wuIdFwshbxIrpwvP8ayfuY1G41wqA2IKx4aQ1nHtc4EKQjpGU1t6dAVweykIA5PA2/fYzffeFXMAxzYqg/pXcA==
+"@expo/xdl@57.8.21":
+  version "57.8.21"
+  resolved "https://registry.yarnpkg.com/@expo/xdl/-/xdl-57.8.21.tgz#4b9d68621fe53c260f4a7488a20b754b8d081b02"
+  integrity sha512-9FQd7yzewYbyN+NxHBQD4wxn16c2672JnHDAQ0Gi/kl2yhuhuwHKJya3uOygF7R5Sl4U+BqE4TFK9knFB10xdA==
   dependencies:
     "@expo/bunyan" "3.0.2"
     "@expo/config" "3.0.8"
@@ -2091,11 +2091,6 @@
     react-is "^16.13.0"
     use-subscription "^1.4.0"
 
-"@react-navigation/material-bottom-tabs@^5.1.7":
-  version "5.1.8"
-  resolved "https://registry.yarnpkg.com/@react-navigation/material-bottom-tabs/-/material-bottom-tabs-5.1.8.tgz#1d36bc2087c9686bf283ffa8ebeb8551749cf297"
-  integrity sha512-BWvzLetF03PTGLWaI26D3/Kzoaa+VRGSZL1+KdgaOY2ep6kz1IeB5IvzaEaBPmbGysM3nCjkgsN0ZfEnrs+q3A==
-
 "@react-navigation/native@^5.0.4":
   version "5.1.5"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.1.5.tgz#d07c461c583f98bdc94769f58bdcacfa28e11032"
@@ -2364,9 +2359,9 @@
     source-map "^0.6.1"
 
 "@types/webpack@^4.4.31":
-  version "4.41.10"
-  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.10.tgz#2e1f6b3508a249854efe3dcc7690905ac5ee10be"
-  integrity sha512-vIy0qaq8AjOjZLuFPqpo7nAJzcoVXMdw3mvpNN07Uvdy0p1IpJeLNBe3obdRP7FX2jIusDE7z1pZa0A6qYUgnA==
+  version "4.41.11"
+  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.11.tgz#7b7f725397d3b630bede05415d34e9ff30d9771f"
+  integrity sha512-PtEZISfBMWL05qOpZN19hztZPt0rPuGQh5sbBP3bB4RrJgzdb0SScn47hdcMaoN1IgaU7NZWeDO6reFcKTK2iQ==
   dependencies:
     "@types/anymatch" "*"
     "@types/node" "*"
@@ -5506,21 +5501,21 @@ expo-asset@~8.0.0:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
-expo-cli@^3.17.23:
-  version "3.17.23"
-  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.17.23.tgz#0628e760f4df7d2cacdb51d946e294110176e74f"
-  integrity sha512-ckMAVJxUZGuwLD/mKaa238Cu2/Mgk571sl0GUkYiWtwOMZ32f0xPT1vxGm2KpLAXdfT57wgK5fhe2wK+j9RF3A==
+expo-cli@^3.17.24:
+  version "3.17.24"
+  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.17.24.tgz#56e18ca6553e2414d1658db9995eff8b417d351a"
+  integrity sha512-lfgmU6LeLtHPAJUQ/LGHaZ1HTGYFCRplN39myR6vMNthD73DbEJspshjJXWwzpixHZPMBd+J5X+skI+ci88Zbw==
   dependencies:
     "@expo/build-tools" "0.1.4"
     "@expo/bunyan" "3.0.2"
     "@expo/config" "3.0.8"
-    "@expo/dev-tools" "0.10.34"
+    "@expo/dev-tools" "0.10.35"
     "@expo/json-file" "8.2.8"
     "@expo/package-manager" "0.0.13"
     "@expo/plist" "0.0.2"
     "@expo/simple-spinner" "1.0.2"
     "@expo/spawn-async" "1.5.0"
-    "@expo/xdl" "57.8.20"
+    "@expo/xdl" "57.8.21"
     "@types/cli-table" "^0.3.0"
     "@types/untildify" "^3.0.0"
     ansi-regex "^4.1.0"
@@ -10581,9 +10576,9 @@ qs@^6.5.0:
   integrity sha512-EbZYNarm6138UKKq46tdx08Yo/q9ZhFoAXAI1meAFd2GtbRDhbZY2WQSICskT0c5q99aFzLG1D4nvTk9tqfXIw==
 
 query-string@^6.12.0:
-  version "6.12.0"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.12.0.tgz#fa0fe5b3ddf4d040d1236b80672949ab33d5cf80"
-  integrity sha512-aoiFW9ZU7jP8Itjqfpw80Qe7RoyCIhFrW522sdsp9LG92pat6CCG3d8qNZBaUi71FsEjIfLjx9Ky347FtVoqXA==
+  version "6.12.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.12.1.tgz#2ae4d272db4fba267141665374e49a1de09e8a7c"
+  integrity sha512-OHj+zzfRMyj3rmo/6G8a5Ifvw3AleL/EbcHMD27YA31Q+cO5lfmQxECkImuNVjcskLcvBRVHNAB3w6udMs1eAA==
   dependencies:
     decode-uri-component "^0.2.0"
     split-on-first "^1.0.0"

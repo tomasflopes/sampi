@@ -33,7 +33,6 @@ export default function Home({ navigation }) {
       </View>
       <View style={styles.spacer} />
       <View style={styles.bottomNavbar}>
-        <BottomNavbar />
       </View>
     </View>
   )

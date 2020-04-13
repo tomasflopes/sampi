@@ -9,11 +9,10 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.5",
-    "@react-navigation/material-bottom-tabs": "^5.1.7",
     "@react-navigation/native": "^5.0.4",
     "@react-navigation/stack": "^5.0.4",
     "expo": "~36.0.2",
-    "expo-cli": "^3.17.23",
+    "expo-cli": "^3.17.24",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
