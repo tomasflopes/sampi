@@ -32,8 +32,6 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={styles.spacer} />
-      <View style={styles.bottomNavbar}>
-      </View>
     </View>
   )
 }
