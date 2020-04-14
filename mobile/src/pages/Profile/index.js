@@ -3,8 +3,6 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import BottomNavbar from '../../components/BottomNavbar'
-
 export default function Profile({ navigation }) {
   return (
     <View style={styles.container}>
@@ -55,9 +53,6 @@ export default function Profile({ navigation }) {
       <View style={styles.spacer} />
       <TouchableOpacity style={styles.editInfo} onPress={() => navigation.navigate('EditInfo')}><Text style={styles.editInfoText}>Edit Info</Text></TouchableOpacity>
       <View style={styles.spacer} />
-
-      <View style={styles.bottomNavbar}>
-      </View>
     </View >
   )
 }

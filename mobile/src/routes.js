@@ -14,7 +14,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 export default function Routes() {
   return (
@@ -22,23 +22,56 @@ export default function Routes() {
       <Tab.Navigator
         initialRouteName="Home"
         activeColor="#1E2A40"
-        inactiveColor="rgba(120, 167, 255, 0.2)"
-        barStyle={{ backgroundColor: 'rgba(120, 167, 255, 0.2)' }}
+        barStyle={{
+          backgroundColor: 'rgba(120, 167, 255, .2)',
+          shadowColor: '#ccc',
+          width: '120%',
+          marginLeft: -40,
+          paddingLeft: 20,
+          borderRadius: 50,
+          justifyContent: 'center',
+          alignItems: 'stretch',
+          height: 60,
+        }}
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = focused ? 'home' : 'home-outline';
+            } else if (route.name === 'Profile') {
+              iconName = focused ? 'account' : 'account-outline';
+            } else if (route.name === 'LeaderBoard') {
+              iconName = focused ? 'format-list-bulleted' : 'format-list-checkbox'
+            }
+
+            return <Icon style={{ width: 50, height: 50 }} name={iconName} size={40} color={color} />;
+          },
+        })}
       >
         <Tab.Screen
           name="Profile"
           component={ProfileScreen}
           options={{
-            tabBarLabel: 'Profile',
-            tabBarIcon: ({ color }) => (
-              <Icon name="home" color={color} size={26} />
-            ),
+            tabBarLabel: '',
           }}
         />
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="LeaderBoard" component={LeaderBoardScreen} />
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: '',
+          }}
+        />
+        <Tab.Screen
+          name="LeaderBoard"
+          component={LeaderBoardScreen}
+          options={{
+            tabBarLabel: '',
+          }}
+        />
       </Tab.Navigator>
-    </NavigationContainer>
+    </NavigationContainer >
   );
 }
 

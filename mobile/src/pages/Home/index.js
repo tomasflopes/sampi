@@ -2,8 +2,6 @@ import * as React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
-import BottomNavbar from '../../components/BottomNavbar';
-
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
