@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 export default function BackArrow({ navigateTo, navigation }) {
   return (
     <TouchableOpacity onPress={() => {
-      navigation.navigate(navigateTo)
+      navigation.goBack();
     }}>
       <Icon style={styles.backArrowIcon} name="arrow-left"></Icon>
     </TouchableOpacity>

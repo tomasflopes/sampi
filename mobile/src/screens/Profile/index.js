@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import styles from './styles';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 export default function Profile({ navigation }) {
   return (

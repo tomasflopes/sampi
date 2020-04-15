@@ -5,6 +5,7 @@ import styles from './styles';
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
+
       <Text style={styles.title}>Logo</Text>
       <View style={styles.divider}>
         <Text style={styles.cards}>cards</Text>
