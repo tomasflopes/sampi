@@ -59,18 +59,19 @@ export default styles = StyleSheet.create({
   },
 
   playerPhoto: {
-    width: 120,
-    height: 120,
-    borderRadius: 60
+    flex: 1,
+    width: 110,
+    resizeMode: 'contain',
+    borderRadius: 100,
   },
 
   playerName: {
-    marginTop: 2,
     fontSize: 18,
   },
 
   mainInfoContainer: {
     flex: 3,
+    marginTop: 15,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -89,7 +90,7 @@ export default styles = StyleSheet.create({
   },
 
   spacer: {
-    flex: .2,
+    flex: .3,
   },
 
   editInfo: {
