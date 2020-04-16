@@ -12,7 +12,11 @@ export default function Profile({ navigation }) {
           <Icon style={styles.logoutIcon} name="sign-out"></Icon>
           <Text style={styles.logoutText}>Logout</Text>
         </View>
-        <Text style={styles.logo}>Sampi</Text>
+        <Image
+          style={styles.logo}
+          source={require('../../../assets/logoEscuro.png')}
+        />
+        <View style={styles.firstRowSpacer} />
       </View>
 
       <View style={styles.basicInformationRow}>

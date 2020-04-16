@@ -10,13 +10,14 @@ export default styles = StyleSheet.create({
     flex: .8,
     flexDirection: 'row',
     marginTop: 25,
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   logoutContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    marginLeft: 15,
     alignItems: 'center',
   },
 
@@ -26,14 +27,18 @@ export default styles = StyleSheet.create({
   },
 
   logoutText: {
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center',
     color: '#470000',
   },
 
   logo: {
-    flex: 2,
-    fontSize: 35
+    flex: 1,
+    marginRight: 15,
+  },
+
+  firstRowSpacer: {
+    flex: 1,
   },
 
   basicInformationRow: {

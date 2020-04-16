@@ -15,7 +15,8 @@ export default styles = StyleSheet.create({
 
   logo: {
     paddingTop: 80,
-    height: '100%',
+    height: 125,
+    width: 125,
   },
 
   divider: {

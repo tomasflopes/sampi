@@ -10,7 +10,6 @@ export default function Home({ navigation }) {
           style={styles.logo}
           source={require('../../../assets/logoEscuro.png')}
         />
-
       </View>
       <View style={styles.divider}>
         <Text style={styles.cards}>cards</Text>
