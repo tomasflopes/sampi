@@ -35,7 +35,7 @@ export default function BottomNavbar() {
               iconName = focused ? 'format-list-bulleted' : 'format-list-checkbox'
             }
 
-            return <Icon style={{ width: 60, height: 60 }} name={iconName} size={50} color={color} />;
+            return <Icon style={{ fontSize: 45, height: 50, width: 50 }} name={iconName} color={color} />;
           },
         })}
       >
