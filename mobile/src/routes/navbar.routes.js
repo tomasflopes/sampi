@@ -2,35 +2,18 @@ import * as React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 
-import HomeScreen from '../screens/Home';
+import HomeStack from './home.routes'
+
 import ProfileScreen from '../screens/Profile';
 import LeaderBoardScreen from '../screens/LeaderBoard';
-import CreateGameScreen from '../screens/CreateGame';
-import EditInfoScreen from '../screens/EditInfo';
+
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 
 const Tab = createMaterialBottomTabNavigator();
-const Stack = createStackNavigator();
 
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 export default function BottomNavbar() {
-  createHomeStack = () =>
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CreateGame"
-        component={CreateGameScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen name="EditInfo" component={EditInfoScreen} />
-    </Stack.Navigator>
-
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -65,7 +48,7 @@ export default function BottomNavbar() {
         />
         <Tab.Screen
           name="Home"
-          children={createHomeStack}
+          children={HomeStack}
           options={{
             tabBarLabel: '',
           }}
