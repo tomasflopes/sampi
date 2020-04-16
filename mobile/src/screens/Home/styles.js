@@ -6,12 +6,16 @@ export default styles = StyleSheet.create({
     backgroundColor: '#eeeeee',
   },
 
-  title: {
+  logoContainer: {
     flex: .5,
-    fontSize: 32,
-    color: '#2f364c',
-    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 50,
+  },
+
+  logo: {
+    paddingTop: 80,
+    height: '100%',
   },
 
   divider: {
