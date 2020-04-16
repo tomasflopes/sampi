@@ -85,6 +85,14 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  mainInfoText: {
+    marginLeft: 6,
+  },
+
+  mainInfoIcon: {
+    fontSize: 18,
+  },
+
   mainInfoLast: {
     borderBottomWidth: 1,
   },

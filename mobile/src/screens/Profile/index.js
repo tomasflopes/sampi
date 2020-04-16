@@ -9,7 +9,7 @@ export default function Profile({ navigation }) {
     <View style={styles.container}>
       <View style={styles.firstRow}>
         <View style={styles.logoutContainer}>
-          <Icon style={styles.logoutIcon} name="sign-out"></Icon>
+          <Icon style={styles.logoutIcon} name='logout'></Icon>
           <Text style={styles.logoutText}>Logout</Text>
         </View>
         <Image
@@ -35,23 +35,23 @@ export default function Profile({ navigation }) {
 
       <View style={styles.mainInfoContainer}>
         <View style={styles.mainInfo}>
-          <Icon name=""></Icon>
-          <Text>NAME: PLAYER X DA SILVA</Text>
+          <Icon name="account-card-details" style={styles.mainInfoIcon} />
+          <Text style={styles.mainInfoText}>NAME: PLAYER X DA SILVA</Text>
         </View>
 
         <View style={styles.mainInfo}>
-          <Icon name=""></Icon>
-          <Text>PHONE: 918764567</Text>
+          <Icon name="cellphone-android" style={styles.mainInfoIcon} />
+          <Text style={styles.mainInfoText}>PHONE: 918764567</Text>
         </View>
 
         <View style={styles.mainInfo}>
-          <Icon name=""></Icon>
-          <Text>POSITION: FORWARD</Text>
+          <Icon name="soccer-field" style={styles.mainInfoIcon} />
+          <Text style={styles.mainInfoText}>POSITION: FORWARD</Text>
         </View>
 
         <View style={[styles.mainInfo, styles.mainInfoLast]} >
-          <Icon name=""></Icon>
-          <Text>AGE: 18 YEARS</Text>
+          <Icon name="calendar" style={styles.mainInfoIcon} />
+          <Text style={styles.mainInfoText}>AGE: 18 YEARS</Text>
         </View>
       </View>
 

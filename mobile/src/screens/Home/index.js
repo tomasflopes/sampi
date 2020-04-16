@@ -31,7 +31,7 @@ export default function Home({ navigation }) {
         >
           <Text style={styles.buttonText}>
             Create Game
-            </Text>
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.spacer} />
