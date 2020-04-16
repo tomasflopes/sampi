@@ -18,6 +18,7 @@ export default function BottomNavbar() {
     <NavigationContainer>
       <Tab.Navigator
         activeColor="#1E2A40"
+        initialRouteName="Home"
         barStyle={{
           backgroundColor: '#d6e0f1',
           justifyContent: 'flex-start',

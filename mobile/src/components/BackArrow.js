@@ -8,7 +8,7 @@ export default function BackArrow({ navigation }) {
     <TouchableOpacity onPress={() => {
       navigation.goBack();
     }}>
-      <Icon style={styles.backArrowIcon} name="arrow-back"></Icon>
+      <Icon style={styles.backArrowIcon} name="arrow-left"></Icon>
     </TouchableOpacity>
   );
 }

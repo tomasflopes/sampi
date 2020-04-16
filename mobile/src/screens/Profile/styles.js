@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
   firstRow: {
     flex: .8,
     flexDirection: 'row',
-    marginTop: 25,
+    marginTop: 50,
     alignItems: 'center',
   },
 
@@ -27,7 +27,7 @@ export default styles = StyleSheet.create({
   },
 
   logoutText: {
-    fontSize: 18,
+    fontSize: 17,
     textAlign: 'center',
     color: '#470000',
   },
@@ -86,6 +86,7 @@ export default styles = StyleSheet.create({
   },
 
   mainInfoText: {
+    fontSize: 14,
     marginLeft: 6,
   },
 
