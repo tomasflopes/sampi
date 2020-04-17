@@ -12,7 +12,7 @@ module.exports = createUser = async (specs = {}) => {
     email: specs.email || faker.internet.email(),
     password_hash: password_hash || faker.hacker.adjective(),
     avatar_url: specs.avatar_url || faker.internet.avatar(),
-    sex: "Male",
+    gender: "Male",
     birth: specs.birth || faker.date.past(),
     phone: specs.phone || faker.phone.phoneNumber(),
   });

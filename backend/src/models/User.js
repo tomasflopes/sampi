@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
   avatar_url: {
     type: String,
   },
-  sex: {
+  gender: {
     type: String,
   },
   birth: {

@@ -21,7 +21,7 @@ module.exports = {
   },
 
   async store(request, response) {
-    const { name, email, password, sex, birth, phone } = request.body;
+    const { name, email, password, gender, birth, phone } = request.body;
 
     const { location, filename } = request.file;
 
@@ -42,7 +42,7 @@ module.exports = {
       email,
       password_hash,
       avatar_url,
-      sex,
+      gender,
       birth,
       phone
     });
