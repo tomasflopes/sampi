@@ -15,54 +15,52 @@ import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 export default function BottomNavbar() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        activeColor="#1E2A40"
-        initialRouteName="Home"
-        barStyle={{
-          backgroundColor: '#d6e0f1',
-          justifyContent: 'flex-start',
-          height: 60,
+    <Tab.Navigator
+      activeColor="#1E2A40"
+      initialRouteName="Home"
+      barStyle={{
+        backgroundColor: '#d6e0f1',
+        justifyContent: 'flex-start',
+        height: 60,
+      }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color }) => {
+          let iconName;
+
+          if (route.name === 'Home') {
+            iconName = focused ? 'home' : 'home-outline';
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'account' : 'account-outline';
+          } else if (route.name === 'LeaderBoard') {
+            iconName = focused ? 'format-list-bulleted' : 'format-list-checkbox'
+          }
+
+          return <Icon style={{ fontSize: 45, height: 50, width: 50 }} name={iconName} color={color} />;
+        },
+      })}
+    >
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarLabel: '',
         }}
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color }) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'Profile') {
-              iconName = focused ? 'account' : 'account-outline';
-            } else if (route.name === 'LeaderBoard') {
-              iconName = focused ? 'format-list-bulleted' : 'format-list-checkbox'
-            }
-
-            return <Icon style={{ fontSize: 45, height: 50, width: 50 }} name={iconName} color={color} />;
-          },
-        })}
-      >
-        <Tab.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{
-            tabBarLabel: '',
-          }}
-        />
-        <Tab.Screen
-          name="Home"
-          children={HomeStack}
-          options={{
-            tabBarLabel: '',
-          }}
-        />
-        <Tab.Screen
-          name="LeaderBoard"
-          component={LeaderBoardScreen}
-          options={{
-            tabBarLabel: '',
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+      />
+      <Tab.Screen
+        name="Home"
+        children={HomeStack}
+        options={{
+          tabBarLabel: '',
+        }}
+      />
+      <Tab.Screen
+        name="LeaderBoard"
+        component={LeaderBoardScreen}
+        options={{
+          tabBarLabel: '',
+        }}
+      />
+    </Tab.Navigator>
   );
 }
 
