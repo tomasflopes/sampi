@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
   firstRow: {
     flex: .8,
     flexDirection: 'row',
-    marginTop: 50,
+    marginTop: 20,
     alignItems: 'center',
   },
 
