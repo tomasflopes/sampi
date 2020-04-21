@@ -4,11 +4,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
+import api from '../services/api';
+
 import NavbarRoutes from './navbar.routes';
 import AuthRoutes from './auth.routes';
 
 export default function Routes() {
-  let isLoggedIn = true;
+  let isLoggedIn = false;
 
   return (
     <NavigationContainer>
