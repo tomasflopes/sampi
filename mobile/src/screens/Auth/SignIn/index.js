@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { View, Text, TouchableOpacity, Image, Button } from 'react-native';
 import { Form } from '@unform/mobile';
 
+import api from '../../../services/api';
+
 import Input from '../../../components/Input';
 
 import styles from './styles';
@@ -9,8 +11,18 @@ import styles from './styles';
 export default function SignIn() {
   const formRef = useRef(null);
 
-  function handleSubmit(data) {
-    console.log(data);
+  async function handleSubmit({ email, password }) {
+    const response = await api.post('/api/user/login', {
+      email,
+      password
+    })
+      .catch(() => {
+        console.log('Invalid credentials');
+      });
+
+    if (response) {
+      console.log(response.data.token);
+    }
   }
 
   return (

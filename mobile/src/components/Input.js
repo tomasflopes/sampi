@@ -32,6 +32,8 @@ export default function Input({ name, label, ...rest }) {
       <TextInput
         style={styles.input}
         ref={inputRef}
+        secureTextEntry={fieldName === 'password' ? true : false}
+        passwordRules={fieldName === 'password' ? true : false}
         defaultValue={defaultValue}
         {...rest}
       />
