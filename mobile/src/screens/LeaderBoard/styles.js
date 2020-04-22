@@ -1,6 +1,7 @@
-import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-export default styles = StyleSheet.create({
+import { general } from '../../styles'
 
+export default styles = StyleSheet.create({
+  container: general.container,
 });

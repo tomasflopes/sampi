@@ -8,7 +8,7 @@ import BackArrow from '../../components/BackArrow'
 
 export default function Invite({ navigation }) {
   return (
-    <View style={styles.main}>
+    <View style={styles.container}>
       <View style={styles.topBar} >
         <View style={styles.backArrowHolder}>
           <BackArrow navigation={navigation} navigateTo={'Home'} />

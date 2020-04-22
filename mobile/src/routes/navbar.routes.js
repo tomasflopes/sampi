@@ -13,13 +13,15 @@ const Tab = createMaterialBottomTabNavigator();
 
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
+import { colors } from '../styles';
+
 export default function BottomNavbar() {
   return (
     <Tab.Navigator
-      activeColor="#1E2A40"
+      activeColor={colors.activeDarkBlue}
       initialRouteName="Home"
       barStyle={{
-        backgroundColor: '#d6e0f1',
+        backgroundColor: colors.buttonsLightBlue,
         justifyContent: 'flex-start',
         height: 60,
       }}

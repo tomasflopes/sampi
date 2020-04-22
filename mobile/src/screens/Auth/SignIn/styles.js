@@ -1,11 +1,9 @@
 import { StyleSheet } from 'react-native';
 
+import { general } from '../../../styles'
+
 export default styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#eee',
-  },
+  container: general.container,
 
   logoContainer: {
     flex: 1.2,

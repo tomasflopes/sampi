@@ -11,7 +11,7 @@ import NavbarRoutes from './navbar.routes';
 import AuthRoutes from './auth.routes';
 
 export default function Routes() {
-  const signed = false;
+  const signed = true;
 
   return (
     <NavigationContainer>

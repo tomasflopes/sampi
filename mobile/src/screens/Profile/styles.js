@@ -1,10 +1,9 @@
-import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
+import { general, colors } from '../../styles';
+
 export default styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
+  container: general.container,
 
   firstRow: {
     flex: .8,
@@ -23,13 +22,13 @@ export default styles = StyleSheet.create({
 
   logoutIcon: {
     fontSize: 32,
-    color: '#470000',
+    color: colors.logoutRed,
   },
 
   logoutText: {
     fontSize: 17,
     textAlign: 'center',
-    color: '#470000',
+    color: colors.logoutRed,
   },
 
   logo: {
@@ -106,7 +105,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(145, 184, 255, 0.2)',
+    backgroundColor: colors.buttonsLightBlue,
   },
 
   editInfoText: {
@@ -115,6 +114,6 @@ export default styles = StyleSheet.create({
 
   bottomNavbar: {
     flex: 1,
-    backgroundColor: 'rgba(145, 184, 255, .2)',
+    backgroundColor: colors.buttonsLightBlue,
   },
 });

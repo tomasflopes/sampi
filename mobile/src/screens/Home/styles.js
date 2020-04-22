@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
 
+import { general, colors } from '../../styles'
+
 export default styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eeeeee',
-  },
+  container: general.container,
 
   logoContainer: {
     flex: .5,
@@ -24,8 +23,8 @@ export default styles = StyleSheet.create({
     marginLeft: 20,
     borderBottomWidth: 2,
     borderTopWidth: 2,
-    borderBottomColor: '#23354c',
-    borderTopColor: '#23354c',
+    borderBottomColor: colors.mainBlue,
+    borderTopColor: colors.mainBlue,
     flex: 2,
     width: 320,
     flexDirection: 'row',
@@ -47,7 +46,7 @@ export default styles = StyleSheet.create({
     marginTop: 25,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(145, 184, 255, .2)',
+    backgroundColor: colors.buttonsLightBlue,
   },
 
   buttonCreate: {
@@ -56,7 +55,7 @@ export default styles = StyleSheet.create({
     marginBottom: 50,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(145, 184, 255, .2)',
+    backgroundColor: colors.buttonsLightBlue,
   },
 
   buttonText: {
@@ -66,15 +65,6 @@ export default styles = StyleSheet.create({
     fontWeight: "normal",
     textAlign: 'center',
     fontSize: 25,
-    color: '#1e2a40',
-  },
-
-  bottomNavbar: {
-    flex: 1,
-    backgroundColor: 'rgba(145, 184, 255, .2)',
-  },
-
-  spacer: {
-    flex: .2
+    color: colors.mainBlue,
   },
 });

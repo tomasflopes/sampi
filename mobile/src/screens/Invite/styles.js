@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
 
+import { general, colors } from '../../styles';
+
 export default styles = StyleSheet.create({
-  main: {
-    flex: 1,
-  },
+  container: general.container,
 
   topBar: {
     flex: 1.2,
-    backgroundColor: '#78a7ff',
+    backgroundColor: colors.mainBlue,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -26,7 +26,6 @@ export default styles = StyleSheet.create({
     marginTop: 40,
     width: 320,
     flex: 1,
-    fontFamily: 'Roboto',
     fontSize: 25,
     lineHeight: 29,
     alignItems: 'center',
@@ -51,7 +50,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     flexGrow: 1,
     borderWidth: 2,
-    borderColor: '#23354c',
+    borderColor: colors.mainBlue,
     borderRadius: 10,
     width: 300,
     height: 50,
@@ -64,14 +63,14 @@ export default styles = StyleSheet.create({
   url: {
     fontSize: 14,
     flex: 1,
-    color: '#23354c',
+    color: colors.mainBlue,
     alignItems: "center",
     left: 10,
   },
 
   clipboardIcon: {
     right: 5,
-    color: '#2d3751',
+    color: colors.mainBlue,
     fontSize: 29,
   },
 
@@ -93,8 +92,8 @@ export default styles = StyleSheet.create({
     flex: .8,
     textAlign: 'center',
     borderRadius: 50,
-    backgroundColor: '#23354c',
-    color: '#ccc',
+    backgroundColor: colors.mainBlue,
+    color: colors.background,
     padding: 15,
   },
 
