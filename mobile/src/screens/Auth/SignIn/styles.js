@@ -4,16 +4,13 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    marginTop: 50,
-    padding: 20,
     backgroundColor: '#eee',
   },
 
   logoContainer: {
-    flex: .5,
+    flex: 1.2,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
   },
 
   logo: {
@@ -22,24 +19,23 @@ export default styles = StyleSheet.create({
   },
 
   textContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 50,
-    flex: 2,
+    flex: .5,
   },
 
   text: {
+    textAlign: 'center',
     fontSize: 20,
   },
 
   formContainer: {
-    flex: 4,
+    flex: 1,
+    width: "100%",
+    padding: 20,
   },
 
   buttonSignIn: {
-    flex: 1,
-    marginTop: 25,
-    marginBottom: 50,
+    marginTop: 50,
+    flex: .8,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgba(145, 184, 255, .2)',
@@ -53,5 +49,25 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 25,
     color: '#1e2a40',
+  },
+
+  spacer: {
+    flex: .5,
+  },
+
+  signUpTextContainer: {
+    flex: .8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  simpleSignUpText: {
+    fontSize: 17,
+  },
+
+  clickableSignUpText: {
+    color: '#bfa25b',
+    fontSize: 17,
   },
 });

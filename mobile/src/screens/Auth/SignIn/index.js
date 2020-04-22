@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { View, Text, TouchableOpacity, Image, Button } from 'react-native';
 import { Form } from '@unform/mobile';
+
 import Input from '../../../components/Input';
 
 import styles from './styles';
@@ -26,19 +27,27 @@ export default function SignIn() {
         <Text style={styles.text}>Welcome back!</Text>
       </View>
 
-      <Form ref={formRef} onSubmit={handleSubmit}>
-        <Input name="email" type="email" />
-        <Input name="password" type="password" />
+      <View style={styles.formContainer}>
+        <Form ref={formRef} onSubmit={handleSubmit} >
+          <Input name="email" label="Email" type="email" />
+          <Input name="password" label="Password" type="password" />
 
-        <TouchableOpacity
-          style={styles.buttonSignIn}
-          onPress={() => formRef.current.submitForm()}
-        >
-          <Text style={styles.buttonText}>
-            Create Game
+        </Form>
+      </View>
+
+      <TouchableOpacity
+        style={styles.buttonSignIn}
+        onPress={() => formRef.current.submitForm()}
+      >
+        <Text style={styles.buttonText}>
+          Sign In!
           </Text>
-        </TouchableOpacity>
-      </Form>
+      </TouchableOpacity>
+
+      <View style={styles.signUpTextContainer}>
+        <Text style={styles.simpleSignUpText}>New to Sampi? </Text>
+        <TouchableOpacity style={styles.signUpClickable}><Text style={styles.clickableSignUpText}>Sign up!</Text></TouchableOpacity>
+      </View>
     </View>
   );
 }

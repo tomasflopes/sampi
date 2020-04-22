@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.5",
-    "@react-navigation/drawer": "^5.4.1",
     "@react-navigation/material-bottom-tabs": "^5.1.8",
     "@react-navigation/native": "^5.0.4",
     "@react-navigation/stack": "^5.0.4",
@@ -21,6 +20,7 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "~1.5.0",
     "react-native-paper": "^3.8.0",
     "react-native-reanimated": "~1.4.0",
