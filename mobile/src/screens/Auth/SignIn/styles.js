@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { general } from '../../../styles'
+import { general, colors } from '../../../styles'
 
 export default styles = StyleSheet.create({
   container: general.container,
@@ -36,7 +36,7 @@ export default styles = StyleSheet.create({
     flex: .8,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(145, 184, 255, .2)',
+    backgroundColor: colors.buttonsLightBlue,
   },
 
   buttonText: {
@@ -46,7 +46,7 @@ export default styles = StyleSheet.create({
     fontWeight: "normal",
     textAlign: 'center',
     fontSize: 25,
-    color: '#1e2a40',
+    color: colors.mainBlue,
   },
 
   spacer: {
@@ -65,7 +65,7 @@ export default styles = StyleSheet.create({
   },
 
   clickableSignUpText: {
-    color: '#bfa25b',
+    color: colors.highlightYellow,
     fontSize: 17,
   },
 });

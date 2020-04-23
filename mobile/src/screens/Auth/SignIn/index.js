@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Text, TouchableOpacity, Image, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Form } from '@unform/mobile';
 
 import api from '../../../services/api';
@@ -8,7 +8,7 @@ import Input from '../../../components/Input';
 
 import styles from './styles';
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
   const formRef = useRef(null);
 
   async function handleSubmit({ email, password }) {
@@ -17,11 +17,11 @@ export default function SignIn() {
       password
     })
       .catch(() => {
-        console.log('Invalid credentials');
+        //? Invalid Credentials
       });
 
     if (response) {
-      console.log(response.data.token);
+      //? response.data.token with jwt token for authenticated user
     }
   }
 
@@ -58,7 +58,14 @@ export default function SignIn() {
 
       <View style={styles.signUpTextContainer}>
         <Text style={styles.simpleSignUpText}>New to Sampi? </Text>
-        <TouchableOpacity style={styles.signUpClickable}><Text style={styles.clickableSignUpText}>Sign up!</Text></TouchableOpacity>
+        <TouchableOpacity
+          style={styles.signUpClickable}
+          onPress={() => {
+            navigation.navigate('SignUp');
+          }}
+        >
+          <Text style={styles.clickableSignUpText}>Sign up!</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
