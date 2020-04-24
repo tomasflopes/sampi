@@ -5,4 +5,6 @@ export default colors = {
   activeDarkBlue: '#1E2A40',
   mainBlue: '#23354c',
   highlightYellow: '#bfa25b',
+  lightGray: '#ccc',
+  darkGray: '#444',
 }

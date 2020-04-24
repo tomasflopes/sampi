@@ -8904,6 +8904,11 @@ moment@^2.10.6:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
+month-days@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/month-days/-/month-days-3.0.0.tgz#01d9fcd35180d7b7e33799adec6846abff584fef"
+  integrity sha512-On+kqJu+yWDD1f34OGSIwDRp2EXF81Ju6MxhZlmrfHeyqR0x+6X6eGDUQrf2RH4rc5zuq8b8ujH3CTsUS0qe8g==
+
 morgan@^1.9.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.10.0.tgz#091778abc1fc47cd3509824653dae1faab6b17d7"

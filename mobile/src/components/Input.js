@@ -1,6 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { TextInput, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { TextInput, StyleSheet, Text } from 'react-native';
 import { useField } from '@unform/core';
+
+import { colors } from '../styles'
 
 export default function Input({ name, label, ...rest }) {
   const inputRef = useRef(null);
@@ -43,7 +45,7 @@ export default function Input({ name, label, ...rest }) {
 
 const styles = StyleSheet.create({
   label: {
-    color: '#444',
+    color: colors.darkGray,
   },
 
   input: {
@@ -51,8 +53,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 7,
     borderBottomWidth: 2,
-    borderColor: '#ccc',
+    borderColor: colors.lightGray,
     fontSize: 15,
-    color: '#444',
+    flex: 1,
+    color: colors.darkGray,
   },
 });

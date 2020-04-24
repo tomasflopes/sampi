@@ -2,7 +2,7 @@ import * as React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 
-import HomeStack from './home.routes'
+import HomeStack from '../routes/home.routes'
 
 import ProfileScreen from '../screens/Profile';
 import LeaderBoardScreen from '../screens/LeaderBoard';
