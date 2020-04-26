@@ -9,6 +9,7 @@ module.exports = {
       sex: Joi.string(),
       birth: Joi.date().required(),
       phone: Joi.string(),
+      position: Joi.string(),
     });
 
     return schema.validate(data);

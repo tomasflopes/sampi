@@ -21,11 +21,9 @@ module.exports = {
   },
 
   async store(request, response) {
-    const { name, email, password, gender, birth, phone } = request.body;
+    const { name, email, password, gender, birth, phone, position } = request.body;
 
-    const { location, filename } = request.file;
-
-    const avatar_url = location || `${process.env.APP_URL}/files/${filename}`;
+    const avatar_url = 'https://upload-sampi.s3.amazonaws.com/2020-04-26-5c99-default-user.jpeg'
 
     const error = await userVerification(request.body);
 
@@ -44,7 +42,8 @@ module.exports = {
       avatar_url,
       gender,
       birth,
-      phone
+      phone,
+      position,
     });
 
     return response.status(201).json(createdUser);
