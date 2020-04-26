@@ -1,20 +1,17 @@
 import { StyleSheet } from 'react-native';
 
-import { general } from '../../../styles'
+import { general, colors } from '../../../styles'
 
 export default styles = StyleSheet.create({
   container: general.container,
 
   logoContainer: {
-    flex: .8,
+    flex: 1,
     marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  logo: {
-    height: 125,
-    width: 125,
+    width: null,
+    height: null,
   },
 
   birthdayRow: {
@@ -22,18 +19,20 @@ export default styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
 
-  birthdayDropDown: {
-    padding: 35,
-    color: '#000',
+  dropDown: {
+    marginTop: -18,
+    paddingHorizontal: 32,
+    color: colors.lightGray,
   },
 
   formContainer: {
-    flex: 4,
-    padding: 20,
+    flex: 6,
+    marginTop: -18,
+    paddingHorizontal: 15,
+    height: '90%',
   },
 
   buttonSignIn: {
-    marginTop: 50,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -51,7 +50,7 @@ export default styles = StyleSheet.create({
   },
 
   signUpTextContainer: {
-    flex: .8,
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

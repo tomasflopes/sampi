@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
   container: general.container,
 
   logoContainer: {
-    flex: 1.2,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -17,7 +17,7 @@ export default styles = StyleSheet.create({
   },
 
   textContainer: {
-    flex: .5,
+    flex: 1,
   },
 
   text: {
@@ -26,13 +26,12 @@ export default styles = StyleSheet.create({
   },
 
   formContainer: {
-    flex: 1,
+    flex: 2,
     width: "100%",
     padding: 20,
   },
 
   buttonSignIn: {
-    marginTop: 50,
     flex: .8,
     flexDirection: 'row',
     alignItems: 'center',
@@ -47,10 +46,6 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 25,
     color: colors.mainBlue,
-  },
-
-  spacer: {
-    flex: .5,
   },
 
   signUpTextContainer: {

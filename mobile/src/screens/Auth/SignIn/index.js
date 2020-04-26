@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { Form } from '@unform/mobile';
 
 import api from '../../../services/api';
@@ -40,11 +40,12 @@ export default function SignIn({ navigation }) {
       </View>
 
       <View style={styles.formContainer}>
-        <Form ref={formRef} onSubmit={handleSubmit} >
-          <Input name="email" label="Email" type="email" />
-          <Input name="password" label="Password" type="password" />
-
-        </Form>
+        <ScrollView>
+          <Form ref={formRef} onSubmit={handleSubmit} >
+            <Input name="email" label="Email" type="email" />
+            <Input name="password" label="Password" type="password" />
+          </Form>
+        </ScrollView>
       </View>
 
       <TouchableOpacity

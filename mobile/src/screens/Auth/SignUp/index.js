@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { Form } from '@unform/mobile';
 import { Dropdown } from 'react-native-material-dropdown';
 
-import monthDays from 'month-days'
+import monthDays from 'month-days';
 
 import api from '../../../services/api';
 
@@ -108,59 +108,57 @@ export default function SignUp({ navigation }) {
       </View>
 
       <View style={styles.formContainer}>
-        <Form ref={formRef} onSubmit={handleSubmit} >
-          <Input name="name" label="NAME" type="name" />
-          <Input name="email" label="EMAIL" type="email" />
-          <Dropdown
-            label='GENDER'
-            baseColor={colors.darkGray}
-            textColor={'#000'}
-            data={genders}
-            onChangeText={(value) => {
-              setGender(value);
-            }}
-          />
-          <View style={styles.birthdayRow}>
+        <ScrollView>
+          <Form ref={formRef} onSubmit={handleSubmit} >
+            <Input name="name" label="NAME" type="name" />
+            <Input name="email" label="EMAIL" type="email" />
             <Dropdown
-              label='MONTH'
+              label='GENDER'
+              containerStyle={[styles.dropDown, { paddingHorizontal: 0 }]}
               baseColor={colors.darkGray}
               textColor={'#000'}
-              style={styles.birthdayDropDown}
-              data={months}
+              data={genders}
               onChangeText={(value) => {
-                setBirthdayMonth(value);
+                setGender(value);
               }}
-              value={birthdayMonth}
             />
+            <View style={styles.birthdayRow}>
+              <Dropdown
+                label='MONTH'
+                baseColor={colors.darkGray}
+                style={styles.dropDown}
+                data={months}
+                onChangeText={(value) => {
+                  setBirthdayMonth(value);
+                }}
+              />
 
-            <Dropdown
-              label='DAY'
-              baseColor={colors.darkGray}
-              textColor={'#000'}
-              style={styles.birthdayDropDown}
-              data={daysOfMonth}
-              onChangeText={(value) => {
-                setBirthdayDay(value);
-              }}
-              value={birthdayDay}
-            />
+              <Dropdown
+                label='DAY'
+                baseColor={colors.darkGray}
+                style={styles.dropDown}
+                data={daysOfMonth}
+                onChangeText={(value) => {
+                  setBirthdayDay(value);
+                }}
+              />
 
-            <Dropdown
-              label='YEAR'
-              baseColor={}
-              textColor={'#000'}
-              style={styles.birthdayDropDown}
-              data={years}
-              onChangeText={(value) => {
-                setBirthdayYear(value);
-              }}
-              value={birthdayYear}
-            />
-          </View>
-          <Input name="position" label="PHONE" type="number" />
-          <Input name="position" label="POSITION" type="text" />
-          <Input name="password" label="PASSWORD" type="password" />
-        </Form>
+              <Dropdown
+                label='YEAR'
+                baseColor={colors.darkGray}
+                textColor={'#000'}
+                style={styles.dropDown}
+                data={years}
+                onChangeText={(value) => {
+                  setBirthdayYear(value);
+                }}
+              />
+            </View>
+            <Input name="position" label="PHONE" type="number" />
+            <Input name="position" label="POSITION" type="text" />
+            <Input name="password" label="PASSWORD" type="password" />
+          </Form>
+        </ScrollView>
       </View>
 
       <TouchableOpacity
@@ -177,7 +175,7 @@ export default function SignUp({ navigation }) {
         <TouchableOpacity
           style={styles.signUpClickable}
           onPress={() => {
-            navigation.navigate('SignUp');
+            navigation.navigate('SignIn');
           }}
         >
           <Text style={styles.clickableSignUpText}>Sign In!</Text>
