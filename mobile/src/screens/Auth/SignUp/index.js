@@ -26,9 +26,14 @@ export default function SignUp({ navigation }) {
 
   async function handleSubmit(data) {
     console.log(data);
-    /*const response = await api.post('/api/user/register', {
+    const response = await api.post('/api/user/register', {
+      name,
       email,
       password,
+      birth,
+      sex,
+      phone,
+      position
       //? missing fields
     })
       .catch(() => {
@@ -37,7 +42,7 @@ export default function SignUp({ navigation }) {
 
     if (response) {
       //? Valid data
-    }*/
+    }
   }
 
   function populateYears() {
