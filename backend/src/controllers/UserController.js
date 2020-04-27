@@ -27,10 +27,7 @@ module.exports = {
 
     const error = await userVerification(request.body);
 
-    if (error) {
-      await deleteUserPhoto(avatar_url);
-      return response.status(400).json(error);
-    }
+    if (error) return response.status(400).json(error);
 
     const salt = await bckrypt.genSaltSync(10);
     const password_hash = await bckrypt.hashSync(password, salt);
