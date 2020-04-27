@@ -17,6 +17,7 @@ export default function SignUp({ navigation }) {
   const formRef = useRef(null);
 
   const [gender, setGender] = useState('');
+  const [position, setPosition] = useState('');
 
   const [daysOfMonth, setDaysOfMonth] = useState([]);
 
@@ -24,24 +25,24 @@ export default function SignUp({ navigation }) {
   const [birthdayMonth, setBirthdayMonth] = useState(0);
   const [birthdayYear, setBirthdayYear] = useState(0);
 
-  async function handleSubmit(data) {
-    console.log(data);
+  async function handleSubmit({ email, name, password, phone }) {
+    const birth = `${birthdayMonth}-${birthdayDay}-${birthdayYear}`;
+
     const response = await api.post('/api/user/register', {
       name,
       email,
       password,
       birth,
-      sex,
+      sex: gender,
       phone,
       position
-      //? missing fields
     })
-      .catch(() => {
-        //? Error in validation
+      .catch((error) => {
+        //? Catch error with invalid data
       });
 
     if (response) {
-      //? Valid data
+      //? go to login page with valid credentials
     }
   }
 
@@ -99,6 +100,16 @@ export default function SignUp({ navigation }) {
     value: 11,
   }, {
     value: 12,
+  }];
+
+  const positions = [{
+    value: 'Goalkeeper',
+  }, {
+    value: 'Defender',
+  }, {
+    value: 'Midfielder',
+  }, {
+    value: 'Forward',
   }];
 
   const years = populateYears();
@@ -159,8 +170,17 @@ export default function SignUp({ navigation }) {
                 }}
               />
             </View>
-            <Input name="position" label="PHONE" type="number" />
-            <Input name="position" label="POSITION" type="text" />
+            <Input name="phone" label="PHONE" type="text" />
+            <Dropdown
+              label='POSITION'
+              containerStyle={[styles.dropDown, { paddingHorizontal: 0 }]}
+              baseColor={colors.darkGray}
+              textColor={'#000'}
+              data={positions}
+              onChangeText={(value) => {
+                setPosition(value);
+              }}
+            />
             <Input name="password" label="PASSWORD" type="password" />
           </Form>
         </ScrollView>

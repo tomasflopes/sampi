@@ -21,6 +21,7 @@ export default function SignIn({ navigation }) {
       });
 
     if (response) {
+      console.log("ah deu");
       //? response.data.token with jwt token for authenticated user
     }
   }
