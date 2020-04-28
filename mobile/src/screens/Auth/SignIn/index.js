@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, AsyncStorage } from 'react-native';
 import { Form } from '@unform/mobile';
 
 import api from '../../../services/api';
@@ -21,8 +21,11 @@ export default function SignIn({ navigation }) {
       });
 
     if (response) {
+      const jwt = response.data.token;
+
+      await AsyncStorage.setItem('jwt', jwt);
       console.log("ah deu");
-      //? response.data.token with jwt token for authenticated user
+      navigation.navigate('Root');
     }
   }
 
