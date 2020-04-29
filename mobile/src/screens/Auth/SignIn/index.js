@@ -1,6 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView, AsyncStorage } from 'react-native';
 import { Form } from '@unform/mobile';
+
+import AuthContext from '../../../contexts/auth';
 
 import api from '../../../services/api';
 
@@ -10,6 +12,7 @@ import styles from './styles';
 
 export default function SignIn({ navigation }) {
   const formRef = useRef(null);
+  const { signed, SignIn } = useContext(AuthContext);
 
   async function handleSubmit({ email, password }) {
     const response = await api.post('/api/user/login', {
@@ -21,11 +24,12 @@ export default function SignIn({ navigation }) {
       });
 
     if (response) {
+      console.log("deu");
       const jwt = response.data.token;
 
       await AsyncStorage.setItem('jwt', jwt);
-      console.log("ah deu");
-      navigation.navigate('Root');
+      SignIn();
+      console.log(signed)
     }
   }
 
