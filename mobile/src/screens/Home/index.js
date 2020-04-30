@@ -3,11 +3,6 @@ import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native'
 import styles from './styles';
 
 export default function Home({ navigation }) {
-  async function test() {
-    const token = await AsyncStorage.getItem('jwt');
-
-    console.log(token);
-  }
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
