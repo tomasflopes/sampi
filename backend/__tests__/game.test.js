@@ -4,18 +4,12 @@ const faker = require('faker');
 
 require('dotenv').config();
 
-const jwt = require('jsonwebtoken');
-
 const server = require('../src/server');
 
 const User = require('../src/models/User');
 const Group = require('../src/models/Group');
 
-const createUser = require('./utils/createUser');
-const createGroup = require('./utils/createGroup');
-const getLastElement = require('./utils/getLastElement');
-const purgeMockUsers = require('./utils/purgeMockUsers');
-const generateToken = require('./utils/generateToken');
+const { createUser, createGroup, generateToken, getLastElement, purgeMockUsers } = require('./utils');
 
 const Game = require('../src/models/Game');
 
@@ -32,7 +26,7 @@ beforeAll(async () => {
   const { _id: id2 } = await createUser();
   const { _id: id3 } = await createUser();
 
-  await createGroup({ players: [id1, id2, id3] })
+  const group = await createGroup({ players: [id1, id2, id3] })
 });
 
 afterAll(async () => {

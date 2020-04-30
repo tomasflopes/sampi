@@ -1,6 +1,4 @@
-const getLastElement = require('./utils/getLastElement');
-const createUser = require('./utils/createUser');
-const purgeMockUsers = require('./utils/purgeMockUsers');
+const { getLastElement, createUser, purgeMockUsers } = require('./utils');
 
 const request = require('supertest');
 

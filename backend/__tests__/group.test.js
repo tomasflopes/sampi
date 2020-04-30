@@ -1,7 +1,4 @@
-const createUser = require('./utils/createUser');
-const getLastElement = require('./utils/getLastElement');
-const purgeMockUsers = require('./utils/purgeMockUsers');
-const generateToken = require('./utils/generateToken');
+const { createUser, generateToken, getLastElement, purgeMockUsers } = require('./utils')
 
 require('dotenv').config();
 

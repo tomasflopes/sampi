@@ -23,7 +23,7 @@ module.exports = {
   async store(request, response) {
     const { name, email, password, gender, birth, phone, position } = request.body;
 
-    const avatar_url = 'https://upload-sampi.s3.amazonaws.com/2020-04-26-5c99-default-user.jpeg'
+    const avatar_url = process.env.DEFAULT_AVATAR_IMG_URL;
 
     const error = await userVerification(request.body);
 
@@ -37,7 +37,7 @@ module.exports = {
       email,
       password_hash,
       avatar_url,
-      gender,
+      sex: gender,
       birth,
       phone,
       position,
@@ -50,7 +50,7 @@ module.exports = {
     const { id } = request.params;
     const { name, phone } = request.body;
 
-    const { location, filename } = request.file || { location: undefined, filename: undefined };
+    const { path: location, filename } = request.file || { location: undefined, filename: undefined };
 
     if (!(location == undefined && filename == undefined)) {
       const avatar_url = location || `${process.env.APP_URL}/files/${filename}`;
@@ -64,7 +64,7 @@ module.exports = {
         return response.status(400).json(error);
       }
 
-      if (avatar_url) {
+      if (oldUser.avatar_url !== process.env.DEFAULT_AVATAR_IMG_URL) {
         await deleteUserPhoto(oldUser.avatar_url);
       }
 
@@ -102,7 +102,7 @@ module.exports = {
 
     const { avatar_url } = deleteInfo;
 
-    deleteUserPhoto(avatar_url);
+    await deleteUserPhoto(avatar_url);
 
     response.status(202).json(deleteInfo);
   },
@@ -147,14 +147,12 @@ async function deleteUserPhoto(avatar_url) {
   if (avatar_url) {
     if (process.env.STORAGE_TYPE === 's3') {
       const [, , , key] = avatar_url.split('/');
-
       await s3.deleteObject({
         Bucket: 'upload-sampi',
         Key: key,
       }).promise().finally();
     } else {
-      const [, , , , key] = avatar_url.split('/');
-
+      const [, , , , , , , , key] = avatar_url.split('/');
       promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key))
     }
   }

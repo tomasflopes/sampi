@@ -4,6 +4,8 @@ const User = require('../../src/models/User');
 
 const bckrypt = require('bcryptjs');
 
+//? specs object simulates a factory
+
 module.exports = createUser = async (specs = {}) => {
   const password_hash = generatePassword(specs.password);
 
@@ -15,6 +17,7 @@ module.exports = createUser = async (specs = {}) => {
     gender: "Male",
     birth: specs.birth || faker.date.past(),
     phone: specs.phone || faker.phone.phoneNumber(),
+    position: "Defender"
   });
 }
 

@@ -36,7 +36,7 @@ module.exports = {
     const oldName = oldGroup.name;
     const playersArray = oldGroup.players;
 
-    const existsPlayer = playersArray.filter(player => player == _id); //? Cannot be strict operator because it's Mongoose I
+    const existsPlayer = playersArray.filter(player => player == _id); //? Cannot be strict operator because it's Mongoose Id
 
     if (existsPlayer[0]) return response.status(400).json({ Error: 'Duplicate Player' });
 
