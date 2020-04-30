@@ -27,16 +27,11 @@ afterAll(async () => {
 });
 
 describe('User Registration Test', () => {
-  it('should list all users', (done) => {
-    request(server)
-      .get('/api/user')
+  //TODO Adapt this to use jwt token and exceptions
+  it('should list user info with jwt token', async () => {
+    await request(server)
+      .get('/user')
       .expect(200)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
   });
 
   it('should create new user', async () => {
@@ -146,7 +141,7 @@ describe('User Registration Test', () => {
     const lastUser = await getLastElement(User);
 
     request(server)
-      .put('/api/user/' + lastUser._id.toString())
+      .put('/user/' + lastUser._id.toString())
       .field('name', faker.name.findName())
       .field('phone', faker.phone.phoneNumber())
       .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg'))
@@ -163,7 +158,7 @@ describe('User Registration Test', () => {
     const lastUser = await getLastElement(User);
 
     request(server)
-      .put('/api/user/' + lastUser._id.toString())
+      .put('/user/' + lastUser._id.toString())
       .field('name', faker.name.findName())
       .expect(200)
       .end((error) => {
@@ -195,7 +190,7 @@ describe('User Registration Test', () => {
     const lastUser = await getLastElement(User);
 
     request(server)
-      .delete('/api/user/' + lastUser._id.toString())
+      .delete('/user/' + lastUser._id.toString())
       .expect(202)
       .end((error) => {
         if (error) {

@@ -3,6 +3,10 @@ const { Router } = require('express');
 const GameController = require('../controllers/GameController');
 const GroupController = require('../controllers/GroupController');
 const CardController = require('../controllers/CardController');
+const UserController = require('../controllers/UserController');
+
+const multer = require('multer');
+const multerConfig = require('../config/multer');
 
 const routes = Router();
 
@@ -17,5 +21,9 @@ routes.put('/group/:id', GroupController.update);
 routes.delete('/group/:id', GroupController.destroy);
 
 routes.get('/card', CardController.index);
+
+routes.get('user/:id', UserController.index);
+routes.put('user/:id', multer(multerConfig).single("file"), UserController.update);
+routes.delete('user/:id', UserController.delete);
 
 module.exports = routes;
