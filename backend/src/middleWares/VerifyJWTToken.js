@@ -8,8 +8,7 @@ const authMiddleware = async (request, response, next) => {
   const [, token] = authHeader.split(' ');
 
   try {
-    const decoded = await jwt.verify(token, process.env.TOKEN_SECRET);
-    request.userId = decoded.id;
+    await jwt.verify(token, process.env.TOKEN_SECRET);
     return next();
   } catch (error) {
     return response.status(400).json({ message: 'Token Invalid' });

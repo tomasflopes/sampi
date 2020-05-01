@@ -22,8 +22,8 @@ routes.delete('/group/:id', GroupController.destroy);
 
 routes.get('/card', CardController.index);
 
-routes.get('user/:id', UserController.index);
-routes.put('user/:id', multer(multerConfig).single("file"), UserController.update);
-routes.delete('user/:id', UserController.delete);
+routes.get('/user', UserController.index);
+routes.put('/user', multer(multerConfig).single("file"), UserController.update);
+routes.delete('/user', UserController.delete);
 
 module.exports = routes;

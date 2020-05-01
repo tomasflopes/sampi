@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-const { getLastElement } = require('./utils');
+const { getLastElement, generateToken, createUser } = require('./utils');
 
 const faker = require('faker');
 
@@ -20,22 +20,40 @@ beforeAll(async () => {
     useUnifiedTopology: true,
     useFindAndModify: false
   });
+
+  await createUser();
 });
 
 afterAll(async () => {
   await mongoose.disconnect();
 });
 
-describe('User Registration Test', () => {
-  //TODO Adapt this to use jwt token and exceptions
+describe('User Test', () => {
   it('should list user info with jwt token', async () => {
+    const token = await generateToken();
+
     await request(server)
       .get('/user')
+      .set('Authorization', `Bearer: ${token}`)
       .expect(200)
   });
 
-  it('should create new user', async () => {
+  it('should not list user info without jwt token', async () => {
     await request(server)
+      .get('/user')
+      .expect(401)
+  });
+
+  it('should not list user info with invalid jwt token', async () => {
+    await request(server)
+      .get('/user')
+      .set('Authorization', `Bearer: ${faker.internet.password()}`)
+      .expect(400)
+  });
+
+
+  it('should create new user', (done) => {
+    request(server)
       .post('/api/user/register')
       .send({
         name: faker.name.findName(),
@@ -46,7 +64,10 @@ describe('User Registration Test', () => {
         phone: faker.phone.phoneNumber(),
         position: 'Defender',
       })
-      .expect(201);
+      .expect(201)
+      .end(() => {
+        done();
+      });
   });
 
   it('should not create new user because the name already exists', async (done) => {
@@ -138,13 +159,17 @@ describe('User Registration Test', () => {
   });
 
   it('should edit all editable user information', async (done) => {
-    const lastUser = await getLastElement(User);
+    const mockUser = await getLastElement(User);
+    const token = await generateToken();
+
+    console.log(token);
 
     request(server)
-      .put('/user/' + lastUser._id.toString())
+      .put('/user')
       .field('name', faker.name.findName())
       .field('phone', faker.phone.phoneNumber())
       .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg'))
+      .set('Authorization', `Bearer: ${token}`)
       .expect(200)
       .end((error) => {
         if (error) {
@@ -154,12 +179,44 @@ describe('User Registration Test', () => {
       });
   });
 
+  it('should not edit user information when invalid token is provided', async (done) => {
+    request(server)
+      .put('/user')
+      .field('name', faker.name.findName())
+      .field('phone', faker.phone.phoneNumber())
+      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg'))
+      .set('Authorization', `Bearer: ${faker.internet.password()}`)
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('should not edit user information when token is not provided', async (done) => {
+    request(server)
+      .put('/user')
+      .field('name', faker.name.findName())
+      .field('phone', faker.phone.phoneNumber())
+      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg'))
+      .expect(401)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
   it('should edit only user name (without file)', async (done) => {
-    const lastUser = await getLastElement(User);
+    const token = await generateToken();
 
     request(server)
-      .put('/user/' + lastUser._id.toString())
+      .put('/user')
       .field('name', faker.name.findName())
+      .set('Authorization', `Bearer: ${token}`)
       .expect(200)
       .end((error) => {
         if (error) {
@@ -170,13 +227,14 @@ describe('User Registration Test', () => {
   });
 
   it('should not edit user information when provided with not valid data', async (done) => {
-    const lastUser = await getLastElement(User);
+    const token = await generateToken();
 
     request(server)
-      .put('/api/user/' + lastUser._id.toString())
+      .put('/user')
       .send({
         name: 'A',
       })
+      .set('Authorization', `Bearer: ${token}`)
       .expect(400)
       .end((error) => {
         if (error) {
@@ -187,10 +245,11 @@ describe('User Registration Test', () => {
   });
 
   it('should delete user', async (done) => {
-    const lastUser = await getLastElement(User);
+    const token = await generateToken();
 
     request(server)
-      .delete('/user/' + lastUser._id.toString())
+      .delete('/user')
+      .set('Authorization', `Bearer: ${token}`)
       .expect(202)
       .end((error) => {
         if (error) {

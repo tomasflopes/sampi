@@ -26,7 +26,7 @@ beforeAll(async () => {
   const { _id: id2 } = await createUser();
   const { _id: id3 } = await createUser();
 
-  const group = await createGroup({ players: [id1, id2, id3] })
+  await createGroup({ players: [id1, id2, id3] })
 });
 
 afterAll(async () => {

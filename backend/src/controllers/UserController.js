@@ -2,6 +2,8 @@ const User = require('../models/User');
 
 const { registerValidation, loginValidation, editValidation } = require('../middleWares/UserDataValidation');
 
+const DecodeJWTToken = require('../utils/DecodeJWTToken');
+
 const bckrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
@@ -15,9 +17,10 @@ const { promisify } = require('util');
 
 module.exports = {
   async index(request, response) {
-    const userArray = await User.find();
+    const _id = await DecodeJWTToken(request);
+    const user = await User.findById(_id);
 
-    return response.status(200).send(userArray);
+    return response.status(200).send(user);
   },
 
   async store(request, response) {
@@ -47,7 +50,7 @@ module.exports = {
   },
 
   async update(request, response) {
-    const { id } = request.params;
+    const _id = await DecodeJWTToken(request);
     const { name, phone } = request.body;
 
     const { path: location, filename } = request.file || { location: undefined, filename: undefined };
@@ -55,7 +58,7 @@ module.exports = {
     if (!(location == undefined && filename == undefined)) {
       const avatar_url = location || `${process.env.APP_URL}/files/${filename}`;
 
-      const oldUser = await User.findById({ _id: id });
+      const oldUser = await User.findById(_id);
 
       const { error } = await editValidation(request.body);
 
@@ -69,7 +72,7 @@ module.exports = {
       }
 
       const updatedUser = await User.findByIdAndUpdate({
-        _id: id
+        _id
       }, {
         name: name || oldUser.name,
         avatar_url: avatar_url || oldUser.avatar_url,
@@ -78,14 +81,14 @@ module.exports = {
 
       return response.status(200).json(updatedUser);
     } else {
-      const oldUser = await User.findById({ _id: id });
+      const oldUser = await User.findById(_id);
 
       const { error } = await editValidation(request.body);
 
       if (error) return response.status(400).json(error);
 
       const updatedUser = await User.findByIdAndUpdate({
-        _id: id
+        _id
       }, {
         name: name || oldUser.name,
         avatar_url: oldUser.avatar_url,
@@ -96,13 +99,17 @@ module.exports = {
   },
 
   async delete(request, response) {
-    const { id } = request.params;
+    const _id = await DecodeJWTToken(request);
 
-    const deleteInfo = await User.findByIdAndDelete({ _id: id });
+    const deleteInfo = await User.findByIdAndDelete(_id);
+
+    if (!deleteInfo) return response.status(400).json({ Error: 'No user found' });
 
     const { avatar_url } = deleteInfo;
 
-    await deleteUserPhoto(avatar_url);
+    if (avatar_url !== process.env.DEFAULT_AVATAR_IMG_URL) {
+      await deleteUserPhoto(avatar_url);
+    }
 
     response.status(202).json(deleteInfo);
   },
@@ -144,16 +151,17 @@ const userVerification = async (body) => {
 }
 
 async function deleteUserPhoto(avatar_url) {
-  if (avatar_url) {
-    if (process.env.STORAGE_TYPE === 's3') {
-      const [, , , key] = avatar_url.split('/');
-      await s3.deleteObject({
-        Bucket: 'upload-sampi',
-        Key: key,
-      }).promise().finally();
-    } else {
-      const [, , , , , , , , key] = avatar_url.split('/');
-      promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key))
-    }
+  if (process.env.STORAGE_TYPE === 's3') {
+    const [, , , key] = avatar_url.split('/');
+    await s3.deleteObject({
+      Bucket: 'upload-sampi',
+      Key: key,
+    }).promise().finally();
+  } else if (avatar_url !== process.env.DEFAULT_AVATAR_IMG_URL) {
+    const [, , , , key] = avatar_url.split('/');
+    promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key));
+  } else {
+    const [, , , , , , , key] = avatar_url.split('/');
+    promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key));
   }
 }
