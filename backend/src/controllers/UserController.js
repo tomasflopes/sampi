@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 const { registerValidation, loginValidation, editValidation } = require('../middleWares/UserDataValidation');
 
-const { DecodeJWTToken } = require('../utils');
+const { DecodeJWTToken, GetAge } = require('../utils');
 
 const bckrypt = require('bcryptjs');
 
@@ -20,7 +20,9 @@ module.exports = {
     const _id = await DecodeJWTToken(request);
     const user = await User.findById(_id);
 
-    return response.status(200).send(user);
+    const age = GetAge(user.birth.toString());
+
+    return response.status(200).send({ user, age });
   },
 
   async store(request, response) {
@@ -40,7 +42,7 @@ module.exports = {
       email,
       password_hash,
       avatar_url,
-      sex: gender,
+      gender,
       birth,
       phone,
       position,
