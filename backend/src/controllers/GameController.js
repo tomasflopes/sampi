@@ -1,6 +1,5 @@
 const Game = require('../models/Game');
-const Group = require('../models/Group');
-const _ = require('underscore');
+const { GetUserGroup } = require('../utils');
 
 module.exports = {
   async index(request, response) {
@@ -12,11 +11,7 @@ module.exports = {
   async store(request, response) {
     const { playersArray, date, location } = request.body;
 
-    const groups = await Group.find();
-
-    const group = groups.filter(group => {
-      if (everyElementIsInArray(playersArray, group.players)) return group._id;
-    })[0];
+    const group = await GetUserGroup(playersArray);
 
     if (!group) return response.status(400).json({ Message: 'Not all players are from the same group' });
 
@@ -59,6 +54,4 @@ module.exports = {
   }
 }
 
-function everyElementIsInArray(array1, array2) {
-  return array1.every(element => array2.includes(element))
-}
+

@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 const { registerValidation, loginValidation, editValidation } = require('../middleWares/UserDataValidation');
 
-const DecodeJWTToken = require('../utils/DecodeJWTToken');
+const { DecodeJWTToken } = require('../utils');
 
 const bckrypt = require('bcryptjs');
 

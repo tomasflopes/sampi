@@ -1,11 +1,15 @@
 const Group = require('../models/Group');
 const User = require('../models/User');
 
+const { GetUserGroup, DecodeJWTToken } = require('../utils');
+
 module.exports = {
   async index(request, response) {
-    const groups = await Group.find();
+    const id = DecodeJWTToken(request);
 
-    return response.status(200).json(groups);
+    const group = await GetUserGroup(id);
+
+    return response.status(200).json(group);
   },
 
   async store(request, response) {
