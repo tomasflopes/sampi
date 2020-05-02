@@ -1,10 +1,30 @@
-import * as React from 'react'
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import React, { useEffect } from 'react'
+import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native'
 import styles from './styles';
+
+import axios from 'axios';
 
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 export default function Profile({ navigation }) {
+  async function getData() {
+    const token = await AsyncStorage.getItem('jwt');
+
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+
+    const response = await axios.get('users', headers);
+
+    console.log(response);
+  }
+
+  useEffect(async () => {
+    await getData();
+  }, [])
+
   return (
     <View style={styles.container}>
       <View style={styles.firstRow}>

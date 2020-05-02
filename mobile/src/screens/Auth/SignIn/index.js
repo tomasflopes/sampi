@@ -1,5 +1,5 @@
 import React, { useRef, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, AsyncStorage } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, AsyncStorage, Alert } from 'react-native';
 import { Form } from '@unform/mobile';
 
 import AuthContext from '../../../contexts/auth';
@@ -19,8 +19,8 @@ export default function SignIn({ navigation }) {
       email,
       password
     })
-      .catch(() => {
-        //? Invalid Credentials
+      .catch((error) => {
+        Alert.alert(error.response.data.message);
       });
 
     if (response) {
