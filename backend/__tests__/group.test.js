@@ -283,10 +283,8 @@ describe('CRUD Group', () => {
   });
 
   it('expect to not delete group when not provided token', async (done) => {
-    const lastElement = await getLastElement(Group);
-
     request(server)
-      .delete('/group/' + lastElement._id.toString())
+      .delete('/group')
       .expect(401)
       .end((error) => {
         if (error) {
@@ -297,10 +295,8 @@ describe('CRUD Group', () => {
   });
 
   it('expect to not delete group when provided invalid token', async (done) => {
-    const lastElement = await getLastElement(Group);
-
     request(server)
-      .delete('/group/' + lastElement._id.toString())
+      .delete('/group')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
       .expect(400)
       .end((error) => {
@@ -313,10 +309,9 @@ describe('CRUD Group', () => {
 
   it('expect to delete group', async (done) => {
     const token = await generateToken();
-    const lastElement = await getLastElement(Group);
 
     request(server)
-      .delete('/group/' + lastElement._id.toString())
+      .delete('/group')
       .set('Authorization', `Bearer: ${token}`)
       .expect(202)
       .end((error) => {
