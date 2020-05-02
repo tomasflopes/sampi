@@ -88,6 +88,8 @@ describe('CRUD Game', () => {
 
     const usersIds = users.map(user => user._id);
 
+    console.log(usersIds);
+
     request(server)
       .post('/game')
       .send({

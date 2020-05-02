@@ -2,7 +2,7 @@ const request = require('supertest');
 
 require('dotenv').config();
 
-const { generateToken } = require('./utils');
+const { generateToken, createUser, purgeMockUsers } = require('./utils');
 
 const server = require('../src/server');
 
@@ -15,9 +15,12 @@ beforeAll(async () => {
     useUnifiedTopology: true,
     useFindAndModify: false
   });
+
+  await createUser();
 });
 
 afterAll(async () => {
+  await purgeMockUsers();
   await mongoose.disconnect();
 });
 
