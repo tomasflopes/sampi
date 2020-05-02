@@ -159,10 +159,7 @@ describe('User Test', () => {
   });
 
   it('should edit all editable user information', async (done) => {
-    const mockUser = await getLastElement(User);
     const token = await generateToken();
-
-    console.log(token);
 
     request(server)
       .put('/user')

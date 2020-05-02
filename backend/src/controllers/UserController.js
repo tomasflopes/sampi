@@ -151,17 +151,21 @@ const userVerification = async (body) => {
 }
 
 async function deleteUserPhoto(avatar_url) {
+  if (avatar_url === process.env.DEFAULT_AVATAR_IMG_URL) {
+    const [, , , , key] = avatar_url.split('/');
+    promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key));
+
+    return;
+  }
+
   if (process.env.STORAGE_TYPE === 's3') {
     const [, , , key] = avatar_url.split('/');
     await s3.deleteObject({
       Bucket: 'upload-sampi',
       Key: key,
     }).promise().finally();
-  } else if (avatar_url !== process.env.DEFAULT_AVATAR_IMG_URL) {
-    const [, , , , key] = avatar_url.split('/');
-    promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key));
   } else {
-    const [, , , , , , , key] = avatar_url.split('/');
+    const [, , , , , , , , key] = avatar_url.split('/');
     promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key));
   }
 }
