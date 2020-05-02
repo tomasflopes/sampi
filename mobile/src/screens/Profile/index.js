@@ -1,28 +1,55 @@
-import React, { useEffect } from 'react'
-import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, Image, AsyncStorage, Alert } from 'react-native'
 import styles from './styles';
 
-import axios from 'axios';
+import api from '../../services/api';
 
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 export default function Profile({ navigation }) {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [gender, setGender] = useState('');
+  const [birth, setBirth] = useState('');
+  const [position, setPosition] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('');
+  const [age, setAge] = useState('');
+
   async function getData() {
     const token = await AsyncStorage.getItem('jwt');
 
     const headers = {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer: ${token}`
       }
     }
 
-    const response = await axios.get('users', headers);
+    const response = await api.get('/user', headers)
+      .catch((error) => {
+        Alert.alert("Error", error.response.data.message);
+      })
 
-    console.log(response);
+    const birthdayDate = new Date(response.data.user.birth);
+
+    setBirth(sanitizeDate(birthdayDate));
+    setName(response.data.user.name);
+    setGender(response.data.user.gender);
+    setPosition(response.data.user.position);
+    setPhone(response.data.user.phone);
+    setAvatarUrl(response.data.user.avatar_url);
+    setAge(response.data.age);
   }
 
-  useEffect(async () => {
-    await getData();
+  function sanitizeDate(date) {
+    const month = date.getUTCMonth() + 1;
+    const day = date.getUTCDate();
+    const year = date.getUTCFullYear();
+
+    return day + "-" + month + "-" + year;
+  }
+
+  useEffect(() => {
+    getData();
   }, [])
 
   return (
@@ -41,37 +68,37 @@ export default function Profile({ navigation }) {
 
       <View style={styles.basicInformationRow}>
         <Text style={styles.basicInformation}>ACTIVE |</Text>
-        <Text style={styles.basicInformation}> MALE |</Text>
-        <Text style={styles.basicInformation}> BORN 3.5.2002</Text>
+        <Text style={styles.basicInformation}> {gender} |</Text>
+        <Text style={styles.basicInformation}> BORN {birth}</Text>
       </View>
 
       <View style={styles.playerPhotoName}>
         <Image
           source={{
-            uri: 'https://pbs.twimg.com/profile_images/1236082038014447618/peWO3tpF_400x400.jpg'
+            uri: avatarUrl
           }} style={styles.playerPhoto} />
-        < Text style={styles.playerName} > Player 1</Text>
+        < Text style={styles.playerName} >{name}</Text>
       </View>
 
       <View style={styles.mainInfoContainer}>
         <View style={styles.mainInfo}>
           <Icon name="account-card-details" style={styles.mainInfoIcon} />
-          <Text style={styles.mainInfoText}>NAME: PLAYER X DA SILVA</Text>
+          <Text style={styles.mainInfoText}>NAME: {name}</Text>
         </View>
 
         <View style={styles.mainInfo}>
           <Icon name="cellphone-android" style={styles.mainInfoIcon} />
-          <Text style={styles.mainInfoText}>PHONE: 918764567</Text>
+          <Text style={styles.mainInfoText}>PHONE: {phone}</Text>
         </View>
 
         <View style={styles.mainInfo}>
           <Icon name="soccer-field" style={styles.mainInfoIcon} />
-          <Text style={styles.mainInfoText}>POSITION: FORWARD</Text>
+          <Text style={styles.mainInfoText}>POSITION: {position}</Text>
         </View>
 
         <View style={[styles.mainInfo, styles.mainInfoLast]} >
           <Icon name="calendar" style={styles.mainInfoIcon} />
-          <Text style={styles.mainInfoText}>AGE: 18 YEARS</Text>
+          <Text style={styles.mainInfoText}>AGE: {age} YEARS</Text>
         </View>
       </View>
 

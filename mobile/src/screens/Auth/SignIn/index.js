@@ -20,16 +20,14 @@ export default function SignIn({ navigation }) {
       password
     })
       .catch((error) => {
-        Alert.alert(error.response.data.message);
+        Alert.alert("Error", error.response.data.message);
       });
 
     if (response) {
-      console.log("deu");
       const jwt = response.data.token;
 
       await AsyncStorage.setItem('jwt', jwt);
       SignIn();
-      console.log(signed)
     }
   }
 
