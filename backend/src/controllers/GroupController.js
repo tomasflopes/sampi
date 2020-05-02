@@ -5,7 +5,7 @@ const { GetUserGroup, DecodeJWTToken } = require('../utils');
 
 module.exports = {
   async index(request, response) {
-    const id = DecodeJWTToken(request);
+    const id = await DecodeJWTToken(request);
 
     const group = await GetUserGroup(id);
 
@@ -67,10 +67,12 @@ module.exports = {
   },
 
   async destroy(request, response) {
-    const { id } = request.params;
+    const userId = await DecodeJWTToken(request);
+
+    const groupId = await GetUserGroup(userId);
 
     const deleteInfo = await Group.deleteOne({
-      _id: id
+      _id: groupId
     });
 
     return response.status(202).json(deleteInfo);

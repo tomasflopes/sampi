@@ -12,7 +12,6 @@ module.exports = async (players) => {
 
     return groups.filter(group => {
       if (group.players.includes(player)) {
-        console.log('a');
         return group._id
       }
     });
