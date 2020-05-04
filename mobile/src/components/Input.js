@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TextInput, StyleSheet, Text } from 'react-native';
 import { useField } from '@unform/core';
 
@@ -7,6 +7,7 @@ import { colors } from '../styles'
 export default function Input({ name, label, ...rest }) {
   const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue = '', error } = useField(name);
+  const [keyboardType, setKeyboardType] = useState('default');
 
   useEffect(() => {
     registerField({
@@ -24,7 +25,19 @@ export default function Input({ name, label, ...rest }) {
         ref.setNativeProps({ text: '' });
         ref._lastNativeText = '';
       }
-    })
+    });
+
+    switch (fieldName) {
+      case 'email':
+        setKeyboardType('email-address');
+        break;
+      case 'phone':
+        setKeyboardType('phone-pad');
+        break;
+      default:
+        setKeyboardType('default');
+        break;
+    }
   }, [fieldName, registerField]);
 
   return (
@@ -37,6 +50,10 @@ export default function Input({ name, label, ...rest }) {
         secureTextEntry={fieldName === 'password' ? true : false}
         passwordRules={fieldName === 'password' ? true : false}
         defaultValue={defaultValue}
+        autoCapitalize='none'
+        autoCompleteType={fieldName === 'password' ? 'password' : 'off'}
+        autoCorrect={false}
+        keyboardType={keyboardType}
         {...rest}
       />
     </>
