@@ -21,7 +21,7 @@ export default styles = StyleSheet.create({
   },
 
   dropDown: {
-    marginTop: -18,
+    marginTop: -20,
     paddingHorizontal: 32,
     color: colors.lightGray,
   },
@@ -30,7 +30,7 @@ export default styles = StyleSheet.create({
     flex: 6,
     marginTop: -18,
     paddingHorizontal: 15,
-    height: '90%',
+    paddingBottom: 15,
   },
 
   buttonSignIn: {
