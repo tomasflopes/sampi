@@ -10,8 +10,12 @@ export const AuthProvider = ({ children }) => {
     setSigned(true);
   }
 
+  function signOut() {
+    setSigned(false);
+  }
+
   return (
-    <AuthContext.Provider value={{ signed: signed, SignIn }}>
+    <AuthContext.Provider value={{ signed: signed, SignIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

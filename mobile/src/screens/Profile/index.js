@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { View, Text, TouchableOpacity, Image, AsyncStorage, Alert } from 'react-native'
 import styles from './styles';
 
 import api from '../../services/api';
+
+import AuthContext from '../../contexts/auth';
 
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
@@ -14,6 +16,8 @@ export default function Profile({ navigation }) {
   const [position, setPosition] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
   const [age, setAge] = useState('');
+
+  const { signOut } = useContext(AuthContext);
 
   async function getData() {
     const token = await AsyncStorage.getItem('jwt');
@@ -40,6 +44,13 @@ export default function Profile({ navigation }) {
     setAge(response.data.age);
   }
 
+  async function handleLogout() {
+    Alert.alert('Signed Out!', 'You have been signed out.');
+
+    await AsyncStorage.removeItem('jwt');
+    signOut();
+  }
+
   function sanitizeDate(date) {
     const month = date.getUTCMonth() + 1;
     const day = date.getUTCDate();
@@ -50,15 +61,18 @@ export default function Profile({ navigation }) {
 
   useEffect(() => {
     getData();
-  }, [])
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.firstRow}>
-        <View style={styles.logoutContainer}>
+        <TouchableOpacity
+          style={styles.logoutContainer}
+          onPress={handleLogout}
+        >
           <Icon style={styles.logoutIcon} name='logout'></Icon>
           <Text style={styles.logoutText}>Logout</Text>
-        </View>
+        </TouchableOpacity>
         <Image
           style={styles.logo}
           source={require('../../../assets/logoEscuro.png')}
