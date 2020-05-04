@@ -23,10 +23,16 @@ export default createHomeStack = () =>
     <Stack.Screen
       name="Invite"
       component={InviteScreen}
-      options={{ headerShown: false }}
+      options={{
+        headerShown: false,
+        tabBarVisible: false
+      }}
     />
     <Stack.Screen
       name="EditInfo"
       component={EditInfoScreen}
-      options={{ headerShown: false }} />
+      options={{
+        headerShown: false,
+        tabBarVisible: false
+      }} />
   </Stack.Navigator>

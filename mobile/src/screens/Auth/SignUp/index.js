@@ -38,15 +38,16 @@ export default function SignUp({ navigation }) {
       position
     })
       .catch((error) => {
-        //? Catch error with invalid data
+        Alert.alert("Error", error.response.data.message);
       });
 
     if (response) {
-      //? go to login page with valid credentials
+      navigation.navigate('SignIn');
     }
   }
 
   function populateYears() {
+    //! Change this function to update by scroll event
     let years = []
     for (let i = 0; i < 120; i++) {
       years[i] = { value: new Date().getFullYear() - i };

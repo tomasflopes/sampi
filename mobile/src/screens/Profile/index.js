@@ -35,8 +35,8 @@ export default function Profile({ navigation }) {
 
     const birthdayDate = new Date(response.data.user.birth);
 
-    setBirth(sanitizeDate(birthdayDate));
     setName(response.data.user.name);
+    setBirth(sanitizeDate(birthdayDate));
     setGender(response.data.user.gender);
     setPosition(response.data.user.position);
     setPhone(response.data.user.phone);
@@ -88,9 +88,12 @@ export default function Profile({ navigation }) {
 
       <View style={styles.playerPhotoName}>
         <Image
+          defaultSource={require('../../../assets/user-skeleton.jpeg')}
           source={{
             uri: avatarUrl
-          }} style={styles.playerPhoto} />
+          }}
+          style={styles.playerPhoto}
+        />
         < Text style={styles.playerName} >{name}</Text>
       </View>
 

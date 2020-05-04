@@ -25,6 +25,8 @@ export default function BottomNavbar() {
         justifyContent: 'flex-start',
         height: 60,
       }}
+      backBehavior='history'
+      tabBarVisible={false}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color }) => {
           let iconName;
