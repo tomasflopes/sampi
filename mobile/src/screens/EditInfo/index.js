@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Image, Text, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
+import { View, Image, Text, TouchableOpacity, AsyncStorage, ScrollView, Alert } from 'react-native';
 import { Form } from '@unform/mobile';
 import { Dropdown } from 'react-native-material-dropdown';
+
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 
 import styles from './styles';
 
@@ -9,16 +13,14 @@ import api from '../../services/api';
 
 import Input from '../../components/Input';
 
-
 export default function EditInfo() {
   const formRef = useRef(null);
 
   const [avatarUrl, setAvatarUrl] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [gender, setGender] = useState('');
-  const [birth, setBirth] = useState('');
   const [position, setPosition] = useState('');
+  const [file, setFile] = useState({});
 
   const positions = [{
     value: 'Goalkeeper',
@@ -35,7 +37,7 @@ export default function EditInfo() {
 
     const headers = {
       headers: {
-        Authorization: `Bearer: ${token}`
+        Authorization: `Bearer: ${token}`,
       }
     }
 
@@ -46,18 +48,80 @@ export default function EditInfo() {
 
     setAvatarUrl(response.data.user.avatar_url);
     setName(response.data.user.name);
-    setGender(response.data.user.gender);
     setPosition(response.data.user.position);
     setPhone(response.data.user.phone);
   }
 
-  async function handleSubmit() {
+  async function handleSubmit({ name, phone }) {
+    const token = await AsyncStorage.getItem('jwt');
 
+    const headers = {
+      headers: {
+        Authorization: `Bearer: ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+
+    let formData = new FormData();
+
+    console.log(file);
+    if (name) formData.append('name', name);
+    if (phone) formData.append('phone', phone);
+    if (position) formData.append('position', position);
+    if (file) formData.append('file', file);
+
+    console.log(file);
+
+    const response = await api.put('/user', formData, headers)
+      .catch(error => {
+        console.log(error);
+        Alert.alert("Error", error.response.data.details[0].message);
+      })
+      .then(res => {
+        console.log(res.data)
+      });
   }
 
   useEffect(() => {
+
     getData();
-  }, [])
+  }, []);
+
+  async function selectImage() {
+    getPermissionAsync();
+
+    try {
+      const tempFile = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!tempFile.cancelled) {
+        const splicedArray = tempFile.uri.split('.');
+        const extension = splicedArray[splicedArray.length - 1];
+
+        const type = `${tempFile.type}/${extension}`;
+
+        setFile({
+          uri: tempFile.uri,
+          name: tempFile.uri.split('/')[11],
+          type
+        });
+      }
+    } catch (error) {
+      Alert.alert("Error", error.response.data);
+    }
+  }
+
+  async function getPermissionAsync() {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
+      }
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -68,11 +132,11 @@ export default function EditInfo() {
         <Image
           defaultSource={require('../../../assets/user-skeleton.jpeg')}
           source={{
-            uri: avatarUrl
+            uri: avatarUrl || file.uri
           }}
           style={styles.playerPhoto}
         />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={selectImage}>
           <Text style={styles.photoLabel}>Change Profile Picture</Text>
         </TouchableOpacity>
       </View>
@@ -80,8 +144,8 @@ export default function EditInfo() {
       <View style={styles.formContainer}>
         <ScrollView>
           <Form ref={formRef} onSubmit={handleSubmit} >
-            <Input name="name" label="NAME" type="name" value={name} />
-            <Input name="phone" label="PHONE" type="phone" value={phone} />
+            <Input name="name" label="NAME" type="name" />
+            <Input name="phone" label="PHONE" type="phone" />
 
             <Dropdown
               label='POSITION'
@@ -93,15 +157,17 @@ export default function EditInfo() {
               }}
               value={position}
             />
-
-            <Input name="gender" label="GENDER" type="gender" value={gender} />
           </Form>
         </ScrollView>
       </View>
 
-      <TouchableOpacity style={styles.buttonConfirm}>
+      <TouchableOpacity
+        style={styles.buttonConfirm}
+        onPress={() => formRef.current.submitForm()}
+      >
         <Text style={styles.buttonText}>CONFIRM</Text>
       </TouchableOpacity>
+
     </View>
   );
 }

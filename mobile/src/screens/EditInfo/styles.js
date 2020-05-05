@@ -18,7 +18,7 @@ export default styles = StyleSheet.create({
   },
 
   playerPhotoAndLabel: {
-    flex: 2.5,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
   },

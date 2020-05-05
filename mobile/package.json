@@ -17,6 +17,7 @@
     "axios": "^0.19.2",
     "expo": "~36.0.2",
     "expo-cli": "^3.20.1",
+    "expo-image-picker": "~8.0.1",
     "month-days": "^3.0.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",

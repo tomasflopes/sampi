@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { Form } from '@unform/mobile';
 import { Dropdown } from 'react-native-material-dropdown';
 
@@ -33,12 +33,13 @@ export default function SignUp({ navigation }) {
       email,
       password,
       birth,
-      sex: gender,
+      gender,
       phone,
       position
     })
       .catch((error) => {
-        Alert.alert("Error", error.response.data.message);
+        console.log(error.response);
+        Alert.alert("Error", error.response.details[0].message);
       });
 
     if (response) {
