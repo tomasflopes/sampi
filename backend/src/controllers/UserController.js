@@ -53,7 +53,7 @@ module.exports = {
 
   async update(request, response) {
     const _id = await DecodeJWTToken(request);
-    const { name, phone } = request.body;
+    const { name, phone, position } = request.body;
 
     const { path: location, filename } = request.file || { location: undefined, filename: undefined };
 
@@ -79,6 +79,7 @@ module.exports = {
         name: name || oldUser.name,
         avatar_url: avatar_url || oldUser.avatar_url,
         phone: phone || oldUser.phone,
+        position: position || oldUser.position,
       });
 
       return response.status(200).json(updatedUser);
@@ -95,6 +96,7 @@ module.exports = {
         name: name || oldUser.name,
         avatar_url: oldUser.avatar_url,
         phone: phone || oldUser.phone,
+        position: position || oldUser.position,
       });
       return response.status(200).json(updatedUser);
     }
