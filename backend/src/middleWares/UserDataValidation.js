@@ -28,6 +28,7 @@ module.exports = {
     const schema = Joi.object({
       name: Joi.string().min(2),
       phone: Joi.string(),
+      position: Joi.string(),
     });
 
     return schema.validate(data);

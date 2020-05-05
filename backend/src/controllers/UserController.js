@@ -54,8 +54,8 @@ module.exports = {
   async update(request, response) {
     const _id = await DecodeJWTToken(request);
     const { name, phone, position } = request.body;
-
-    const { path: location, filename } = request.file || { location: undefined, filename: undefined };
+    console.log(request.file);
+    const { location, filename } = request.file || { location: undefined, filename: undefined };
 
     if (!(location == undefined && filename == undefined)) {
       const avatar_url = location || `${process.env.APP_URL}/files/${filename}`;
@@ -77,7 +77,7 @@ module.exports = {
         _id
       }, {
         name: name || oldUser.name,
-        avatar_url: avatar_url || oldUser.avatar_url,
+        avatar_url: location || oldUser.avatar_url,
         phone: phone || oldUser.phone,
         position: position || oldUser.position,
       });
