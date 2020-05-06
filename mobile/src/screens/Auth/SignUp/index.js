@@ -39,7 +39,7 @@ export default function SignUp({ navigation }) {
     })
       .catch((error) => {
         console.log(error.response);
-        Alert.alert("Error", error.response.details[0].message);
+        Alert.alert("Error", error.response.data.details[0].message);
       });
 
     if (response) {

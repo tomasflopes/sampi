@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { View, Image, Text, TouchableOpacity, AsyncStorage, ScrollView, Alert } from 'react-native';
 import { Form } from '@unform/mobile';
 import { Dropdown } from 'react-native-material-dropdown';
+
+import UpdateContext from '../../contexts/update';
 
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -13,8 +15,10 @@ import api from '../../services/api';
 
 import Input from '../../components/Input';
 
-export default function EditInfo() {
+export default function EditInfo({ navigation }) {
   const formRef = useRef(null);
+
+  const { updateState } = useContext(UpdateContext);
 
   const [avatarUrl, setAvatarUrl] = useState('');
   const [name, setName] = useState('');
@@ -70,20 +74,17 @@ export default function EditInfo() {
     if (position) formData.append('position', position);
     if (file) formData.append('file', file);
 
-    console.log(file);
-
-    const response = await api.put('/user', formData, headers)
+    api.put('/user', formData, headers)
       .catch(error => {
-        console.log(error);
         Alert.alert("Error", error.response.data.details[0].message);
       })
-      .then(res => {
-        console.log(res.data)
+      .then(() => {
+        updateState();
+        navigation.pop();
       });
   }
 
   useEffect(() => {
-
     getData();
   }, []);
 
@@ -130,9 +131,8 @@ export default function EditInfo() {
       </View>
       <View style={styles.playerPhotoAndLabel}>
         <Image
-          defaultSource={require('../../../assets/user-skeleton.jpeg')}
           source={{
-            uri: avatarUrl || file.uri
+            uri: file.uri || avatarUrl
           }}
           style={styles.playerPhoto}
         />

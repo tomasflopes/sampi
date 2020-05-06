@@ -5,6 +5,7 @@ import styles from './styles';
 import api from '../../services/api';
 
 import AuthContext from '../../contexts/auth';
+import UpdateContext from '../../contexts/update';
 
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
@@ -18,6 +19,7 @@ export default function Profile({ navigation }) {
   const [age, setAge] = useState('');
 
   const { signOut } = useContext(AuthContext);
+  const { update } = useContext(UpdateContext);
 
   async function getData() {
     const token = await AsyncStorage.getItem('jwt');
@@ -61,7 +63,7 @@ export default function Profile({ navigation }) {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [update]);
 
   return (
     <View style={styles.container}>

@@ -26,11 +26,12 @@ export default styles = StyleSheet.create({
   playerPhoto: {
     flex: 1,
     width: 110,
-    resizeMode: 'contain',
-    borderRadius: 100,
+    height: 110,
+    borderRadius: 110 / 2,
   },
 
   photoLabel: {
+    marginTop: 5,
     fontSize: 14,
     color: colors.highlightYellow
   },
