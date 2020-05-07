@@ -15,7 +15,7 @@ export default function Profile({ navigation }) {
   const [gender, setGender] = useState('');
   const [birth, setBirth] = useState('');
   const [position, setPosition] = useState('');
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('https://upload-sampi.s3.amazonaws.com/default-user.jpeg');
   const [age, setAge] = useState('');
 
   const { signOut } = useContext(AuthContext);

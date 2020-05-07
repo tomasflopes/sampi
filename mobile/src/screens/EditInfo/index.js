@@ -20,7 +20,7 @@ export default function EditInfo({ navigation }) {
 
   const { updateState } = useContext(UpdateContext);
 
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('https://upload-sampi.s3.amazonaws.com/default-user.jpeg');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [position, setPosition] = useState('');
@@ -79,8 +79,8 @@ export default function EditInfo({ navigation }) {
         Alert.alert("Error", error.response.data.details[0].message);
       })
       .then(() => {
+        Alert.alert("Success", "Your profile information is now updated you can navigate back to the main screen!");
         updateState();
-        navigation.pop();
       });
   }
 
