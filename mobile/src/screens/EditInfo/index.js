@@ -150,8 +150,9 @@ export default function EditInfo({ navigation }) {
             <Picker
               selectedValue={position}
               style={styles.formPicker}
-              onValueChange={itemValue => setPosition(itemValue)}
+              onValueChange={itemValue => itemValue !== 'POSITIONS' ? setPosition(itemValue) : null}
             >
+              <Picker.Item label="POSITIONS" value="POSITIONS" />
               <Picker.Item label="Goalkeeper" value="Goalkeeper" />
               <Picker.Item label="Defender" value="Defender" />
               <Picker.Item label="Midfielder" value="Midfielder" />
