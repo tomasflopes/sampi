@@ -59,4 +59,11 @@ export default styles = StyleSheet.create({
     fontSize: 25,
     color: colors.mainBlue,
   },
+
+  formPicker: {
+    flex: 1,
+    color: '#333',
+    paddingHorizontal: 20,
+    textAlign: 'center',
+  },
 });

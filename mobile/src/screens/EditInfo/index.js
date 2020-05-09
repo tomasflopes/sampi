@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { View, Image, Text, TouchableOpacity, AsyncStorage, ScrollView, Alert } from 'react-native';
+import { View, Image, Text, TouchableOpacity, AsyncStorage, ScrollView, Alert, Picker } from 'react-native';
 import { Form } from '@unform/mobile';
 import { Dropdown } from 'react-native-material-dropdown';
 
@@ -147,16 +147,17 @@ export default function EditInfo({ navigation }) {
             <Input name="name" label="NAME" type="name" />
             <Input name="phone" label="PHONE" type="phone" />
 
-            <Dropdown
-              label='POSITION'
-              baseColor={colors.darkGray}
-              style={styles.dropDown}
-              data={positions}
-              onChangeText={(value) => {
-                setPosition(value);
-              }}
-              value={position}
-            />
+            <Picker
+              selectedValue={position}
+              style={styles.formPicker}
+              onValueChange={itemValue => setPosition(itemValue)}
+            >
+              <Picker.Item label="Goalkeeper" value="Goalkeeper" />
+              <Picker.Item label="Defender" value="Defender" />
+              <Picker.Item label="Midfielder" value="Midfielder" />
+              <Picker.Item label="Forward" value="Forward" />
+            </Picker>
+
           </Form>
         </ScrollView>
       </View>

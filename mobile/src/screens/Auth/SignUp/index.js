@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { Form } from '@unform/mobile';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Picker } from '@react-native-community/picker';
 
 import monthDays from 'month-days';
 
@@ -21,9 +21,9 @@ export default function SignUp({ navigation }) {
 
   const [daysOfMonth, setDaysOfMonth] = useState([]);
 
-  const [birthdayDay, setBirthdayDay] = useState(0);
-  const [birthdayMonth, setBirthdayMonth] = useState(0);
-  const [birthdayYear, setBirthdayYear] = useState(0);
+  const [birthdayDay, setBirthdayDay] = useState('');
+  const [birthdayMonth, setBirthdayMonth] = useState('');
+  const [birthdayYear, setBirthdayYear] = useState('');
 
   async function handleSubmit({ email, name, password, phone }) {
     const birth = `${birthdayMonth}-${birthdayDay}-${birthdayYear}`;
@@ -48,10 +48,10 @@ export default function SignUp({ navigation }) {
   }
 
   function populateYears() {
-    //! Change this function to update by scroll event
-    let years = []
-    for (let i = 0; i < 120; i++) {
-      years[i] = { value: new Date().getFullYear() - i };
+    const years = ['YEAR'];
+
+    for (let i = 1; i < 120; i++) {
+      years.push(new Date().getFullYear() - i);
     }
 
     return years;
@@ -63,58 +63,46 @@ export default function SignUp({ navigation }) {
       year: parseInt(birthdayYear) || new Date().getFullYear(),
     });
 
-    let daysArray = [];
+    let daysArray = ['DAY'];
 
-    for (let i = 0; i < days; i++) {
-      daysArray[i] = { value: i + 1 };
+    for (let i = 1; i <= days; i++) {
+      daysArray.push(i);
     }
 
     setDaysOfMonth(daysArray);
   }, [birthdayMonth, birthdayYear]);
 
-  const genders = [{
-    value: 'Male',
-  }, {
-    value: 'Female',
-  }];
+  const genders = [
+    'GENDER',
+    'Male',
+    'Female',
+  ];
 
-  const months = [{
-    value: 1,
-  }, {
-    value: 2,
-  }, {
-    value: 3,
-  }, {
-    value: 4,
-  }, {
-    value: 5,
-  }, {
-    value: 6,
-  }, {
-    value: 7,
-  }, {
-    value: 8,
-  }, {
-    value: 9,
-  }, {
-    value: 10,
-  }, {
-    value: 11,
-  }, {
-    value: 12,
-  }];
-
-  const positions = [{
-    value: 'Goalkeeper',
-  }, {
-    value: 'Defender',
-  }, {
-    value: 'Midfielder',
-  }, {
-    value: 'Forward',
-  }];
+  const months = [
+    'MONTH',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+  ];
 
   const years = populateYears();
+
+  const positions = [
+    'POSITIONS',
+    'Goalkeeper',
+    'Defender',
+    'Midfielder',
+    'Forward',
+  ];
 
   return (
     <View style={styles.container}>
@@ -130,60 +118,95 @@ export default function SignUp({ navigation }) {
           <Form ref={formRef} onSubmit={handleSubmit} >
             <Input name="name" label="NAME" type="name" />
             <Input name="email" label="EMAIL" type="email" />
-            <Dropdown
-              label='GENDER'
-              containerStyle={[styles.dropDown, { paddingHorizontal: 0 }]}
-              baseColor={colors.darkGray}
-              textColor={'#000'}
-              data={genders}
-              onChangeText={(value) => {
-                setGender(value);
-              }}
-            />
-            <View style={styles.birthdayRow}>
-              <Dropdown
-                label='MONTH'
-                baseColor={colors.darkGray}
-                style={styles.dropDown}
-                data={months}
-                onChangeText={(value) => {
-                  setBirthdayMonth(value);
-                }}
-              />
 
-              <Dropdown
-                label='DAY'
-                baseColor={colors.darkGray}
-                style={styles.dropDown}
-                data={daysOfMonth}
-                onChangeText={(value) => {
-                  setBirthdayDay(value);
-                }}
-              />
-
-              <Dropdown
-                label='YEAR'
-                baseColor={colors.darkGray}
-                textColor={'#000'}
-                style={styles.dropDown}
-                data={years}
-                onChangeText={(value) => {
-                  setBirthdayYear(value);
-                }}
-              />
+            <View style={styles.formPickerContainer}>
+              <Picker
+                selectedValue={gender}
+                style={styles.formPicker}
+                onValueChange={itemValue => itemValue !== 'GENDER' ? setGender(itemValue) : null}
+              >
+                {
+                  genders.map(item => {
+                    return (
+                      <Picker.Item label={item} value={item} />
+                    );
+                  })
+                }
+              </Picker>
             </View>
+
+            <View style={styles.birthdayRow}>
+              <View style={[styles.formPickerContainer, { flex: 1.25 }]}>
+                <Picker
+                  selectedValue={birthdayMonth}
+                  onValueChange={itemValue => itemValue != 'MONTH' ? setBirthdayMonth(itemValue) : null}
+                >
+                  {
+                    months.map(item => {
+                      return (
+                        <Picker.Item label={item} value={item} />
+                      );
+                    })
+                  }
+                </Picker>
+              </View>
+
+              <View style={styles.spacer} />
+
+              <View style={styles.formPickerContainer}>
+                <Picker
+                  selectedValue={birthdayDay}
+                  onValueChange={itemValue => itemValue != 'DAY' ? setBirthdayDay(itemValue) : null}
+                >
+                  {
+                    daysOfMonth.map(item => {
+                      return (
+                        <Picker.Item label={item.toString()} value={item} />
+                      );
+                    })
+                  }
+                </Picker>
+              </View>
+
+              <View style={styles.spacer} />
+
+              <View style={styles.formPickerContainer}>
+                <Picker
+                  selectedValue={birthdayYear}
+                  onValueChange={itemValue => itemValue != 'YEAR' ? setbirthdayYear(itemValue) : null}
+                >
+                  {
+                    years.map(item => {
+                      return (
+                        <Picker.Item label={item.toString()} value={item} />
+                      );
+                    })
+                  }
+                </Picker>
+              </View>
+            </View>
+
             <Input name="phone" label="PHONE" type="text" />
-            <Dropdown
-              label='POSITION'
-              containerStyle={[styles.dropDown, { paddingHorizontal: 0 }]}
-              baseColor={colors.darkGray}
-              textColor={'#000'}
-              data={positions}
-              onChangeText={(value) => {
-                setPosition(value);
-              }}
-            />
+
+            <View style={styles.formPickerContainer}>
+              <Picker
+                selectedValue={position}
+                style={styles.formPicker}
+                onValueChange={itemValue => setPosition(itemValue)}
+                mode="dialog"
+              >
+                {
+                  positions.map(item => {
+                    return (
+                      <Picker.Item label={item} value={item} />
+                    );
+                  })
+                }
+              </Picker>
+            </View>
+
             <Input name="password" label="PASSWORD" type="password" />
+
           </Form>
         </ScrollView>
       </View>

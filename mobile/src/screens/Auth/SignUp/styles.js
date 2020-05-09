@@ -18,12 +18,11 @@ export default styles = StyleSheet.create({
   birthdayRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    flex: 1,
   },
 
-  dropDown: {
-    marginTop: -20,
-    paddingHorizontal: 32,
-    color: colors.lightGray,
+  spacer: {
+    flex: .1
   },
 
   formContainer: {
@@ -31,6 +30,13 @@ export default styles = StyleSheet.create({
     marginTop: -18,
     paddingHorizontal: 15,
     paddingBottom: 15,
+  },
+
+  formPickerContainer: {
+    flex: 1,
+    marginBottom: 5,
+    borderBottomWidth: 2,
+    borderColor: colors.lightGray,
   },
 
   buttonSignIn: {
@@ -64,5 +70,5 @@ export default styles = StyleSheet.create({
   clickableSignUpText: {
     color: colors.highlightYellow,
     fontSize: 17,
-  },
+  }
 });
