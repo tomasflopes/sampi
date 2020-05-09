@@ -36,7 +36,7 @@ export default function SignIn({ navigation }) {
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}
-          source={require('../../../../assets/logoEscuro.png')}
+          source={require('../../../../assets/logoDark.png')}
         />
       </View>
 

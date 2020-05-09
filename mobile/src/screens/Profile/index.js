@@ -77,7 +77,7 @@ export default function Profile({ navigation }) {
         </TouchableOpacity>
         <Image
           style={styles.logo}
-          source={require('../../../assets/logoEscuro.png')}
+          source={require('../../../assets/logoDark.png')}
         />
         <View style={styles.firstRowSpacer} />
       </View>

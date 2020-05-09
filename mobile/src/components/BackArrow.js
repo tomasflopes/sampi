@@ -3,6 +3,8 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
+import { colors } from '../styles';
+
 export default function BackArrow({ navigation }) {
   return (
     <TouchableOpacity onPress={() => {
@@ -15,7 +17,7 @@ export default function BackArrow({ navigation }) {
 
 const styles = StyleSheet.create({
   backArrowIcon: {
-    color: '#ff0',
+    color: colors.lightGray,
     fontSize: 42,
   }
 })

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 
 export default function Home({ navigation }) {
@@ -8,7 +8,7 @@ export default function Home({ navigation }) {
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}
-          source={require('../../../assets/logoEscuro.png')}
+          source={require('../../../assets/logoDark.png')}
         />
       </View>
       <View style={styles.divider}>

@@ -6,20 +6,28 @@ export default styles = StyleSheet.create({
   container: general.container,
 
   topBar: {
-    flex: 1.2,
-    backgroundColor: colors.mainBlue,
+    flex: 1,
+    backgroundColor: colors.activeDarkBlue,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
 
   backArrowHolder: {
-    top: 5,
-    left: 8,
+    flex: .5,
+    marginLeft: 5,
   },
 
   textHolder: {
     flex: 2,
     alignItems: 'center',
+  },
+
+  logoContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginTop: 30,
   },
 
   headerText: {
@@ -84,11 +92,11 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    width: 280,
+    width: 250,
   },
 
   socialMediaLogo: {
-    fontSize: 45,
+    fontSize: 35,
     flex: .8,
     textAlign: 'center',
     borderRadius: 50,
@@ -107,6 +115,6 @@ export default styles = StyleSheet.create({
   },
 
   bottomSpacer: {
-    flex: 2,
+    flex: 1.5,
   }
 });
