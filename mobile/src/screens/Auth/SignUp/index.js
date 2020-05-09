@@ -9,8 +9,6 @@ import api from '../../../services/api';
 
 import Input from '../../../components/Input';
 
-import { colors } from '../../../styles';
-
 import styles from './styles';
 
 export default function SignUp({ navigation }) {

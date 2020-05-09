@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { View, Image, Text, TouchableOpacity, AsyncStorage, ScrollView, Alert, Picker } from 'react-native';
 import { Form } from '@unform/mobile';
-import { Dropdown } from 'react-native-material-dropdown';
+
+import { Picker } from '@react-native-community/picker';
 
 import UpdateContext from '../../contexts/update';
 
