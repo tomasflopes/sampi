@@ -32,9 +32,14 @@ export default styles = StyleSheet.create({
     paddingBottom: 15,
   },
 
+  formPicker: {
+    color: colors.darkGray,
+    flex: 1,
+  },
+
   formPickerContainer: {
     flex: 1,
-    marginBottom: 5,
+    marginBottom: 12,
     borderBottomWidth: 2,
     borderColor: colors.lightGray,
   },

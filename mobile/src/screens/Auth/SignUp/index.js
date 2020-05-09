@@ -137,6 +137,7 @@ export default function SignUp({ navigation }) {
               <View style={[styles.formPickerContainer, { flex: 1.25 }]}>
                 <Picker
                   selectedValue={birthdayMonth}
+                  style={[styles.formPicker, { paddingHorizontal: 65 }]}
                   onValueChange={itemValue => itemValue != 'MONTH' ? setBirthdayMonth(itemValue) : null}
                 >
                   {
@@ -153,6 +154,7 @@ export default function SignUp({ navigation }) {
 
               <View style={styles.formPickerContainer}>
                 <Picker
+                  style={styles.formPicker}
                   selectedValue={birthdayDay}
                   onValueChange={itemValue => itemValue != 'DAY' ? setBirthdayDay(itemValue) : null}
                 >
@@ -171,6 +173,7 @@ export default function SignUp({ navigation }) {
               <View style={styles.formPickerContainer}>
                 <Picker
                   selectedValue={birthdayYear}
+                  style={[styles.formPicker, { paddingHorizontal: 52 }]}
                   onValueChange={itemValue => itemValue != 'YEAR' ? setbirthdayYear(itemValue) : null}
                 >
                   {
