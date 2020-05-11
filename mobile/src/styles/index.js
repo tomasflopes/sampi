@@ -1,4 +1,5 @@
-import colors from './colors'
-import general from './general'
+import colors from './colors';
+import general from './general';
+import metrics from './metrics';
 
-export { colors, general };  
+export { colors, general, metrics };  

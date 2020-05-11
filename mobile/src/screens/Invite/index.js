@@ -10,7 +10,7 @@ export default function Invite({ navigation }) {
   async function handleShare() {
     try {
       const result = await Share.share({
-        message: 'Join my group on Sampi!',
+        message: `Join my group on Sampi! ${invite.url}`,
       });
 
       if (result.action === Share.sharedAction) {
@@ -43,21 +43,19 @@ export default function Invite({ navigation }) {
       <View style={styles.textHolder}>
         <Text style={styles.headerText}>Invite new people to your group!</Text>
       </View>
+      <View style={styles.socialsSpacer} />
       <View style={styles.urlPiece}>
         <Text style={styles.headerUrl}>Share this link with your friends!</Text>
         <View style={styles.urlHolder}>
           <Text style={styles.url}>http://sampi.invite/h53j8kj</Text>
           <Icon style={styles.clipboardIcon} name="clipboard"></Icon>
         </View>
-        <View style={styles.socialsHolder}>
-          <TouchableOpacity onPress={handleShare}>
-            <Text>
-              Share
-            </Text>
-          </TouchableOpacity>
-          <Text style={styles.shareText}>Share it on your socials!</Text>
-        </View>
       </View>
+      <View style={styles.socialsSpacer} />
+      <TouchableOpacity onPress={handleShare} style={styles.shareButton}>
+        <Icon style={styles.shareIcon} name="share" />
+        <Text style={styles.shareText}>Share</Text>
+      </TouchableOpacity>
       <View style={styles.bottomSpacer} />
     </View >
   );

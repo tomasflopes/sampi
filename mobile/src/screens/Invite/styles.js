@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-import { general, colors } from '../../styles';
+import { general, colors, metrics } from '../../styles';
 
 export default styles = StyleSheet.create({
   container: general.container,
 
   topBar: {
-    flex: 1,
+    height: metrics.topBarHeight,
     backgroundColor: colors.activeDarkBlue,
     flexDirection: 'row',
     alignItems: 'center',
@@ -19,8 +19,9 @@ export default styles = StyleSheet.create({
   },
 
   textHolder: {
-    flex: 2,
+    flex: 3,
     alignItems: 'center',
+    justifyContent: 'flex-end',
   },
 
   logoContainer: {
@@ -31,14 +32,12 @@ export default styles = StyleSheet.create({
   },
 
   headerText: {
-    marginTop: 40,
+    marginTop: 30,
     width: 320,
     flex: 1,
     fontSize: 25,
-    lineHeight: 29,
-    alignItems: 'center',
-    justifyContent: 'center',
     textAlign: 'center',
+    alignItems: 'center',
   },
 
   urlPiece: {
@@ -82,39 +81,27 @@ export default styles = StyleSheet.create({
     fontSize: 29,
   },
 
-  socialsHolder: {
-    flex: 3,
-    justifyContent: 'space-evenly',
-  },
-
-  socials: {
-    flex: .5,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    width: 250,
-  },
-
-  socialMediaLogo: {
-    fontSize: 35,
-    flex: .8,
-    textAlign: 'center',
-    borderRadius: 50,
-    backgroundColor: colors.mainBlue,
-    color: colors.background,
-    padding: 15,
-  },
-
   socialsSpacer: {
-    flex: .5,
+    flex: 1,
+  },
+
+  shareButton: {
+    flex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+
+  shareIcon: {
+    fontSize: 20,
   },
 
   shareText: {
-    fontSize: 16,
-    textAlign: 'center',
+    left: 2,
+    fontSize: 15,
   },
 
   bottomSpacer: {
-    flex: 1.5,
-  }
+    flex: 1,
+  },
 });
