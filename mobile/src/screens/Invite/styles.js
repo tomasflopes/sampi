@@ -89,17 +89,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  shareButton: {
-    flex: 1,
-    width: 120,
-    marginTop: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 2,
-    borderColor: colors.mainBlue,
-    borderRadius: 10,
-  },
+  shareButton: general.smallButton,
 
   shareIcon: {
     fontSize: 30,

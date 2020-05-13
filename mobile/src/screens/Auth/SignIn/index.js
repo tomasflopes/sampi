@@ -12,7 +12,7 @@ import styles from './styles';
 
 export default function SignIn({ navigation }) {
   const formRef = useRef(null);
-  const { signed, SignIn } = useContext(AuthContext);
+  const { SignIn } = useContext(AuthContext);
 
   async function handleSubmit({ email, password }) {
     const response = await api.post('/api/user/login', {

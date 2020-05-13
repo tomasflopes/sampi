@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Share, TouchableOpacity, Image, Alert, AsyncStorage, Clipboard } from 'react-native';
 import styles from './styles';
 
 import { baseUrl } from '../../../config';
 
 import api from '../../services/api';
+import UpdateContext from '../../contexts/update';
 
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 import BackArrow from '../../components/BackArrow'
 
 export default function Invite({ navigation }) {
+  const { updateState } = useContext(UpdateContext);
+
   const [inviteUrl, setInviteUrl] = useState('');
   const [groupName, setGroupName] = useState('');
 
@@ -39,20 +42,9 @@ export default function Invite({ navigation }) {
 
   async function handleShare() {
     try {
-      const result = await Share.share({
+      await Share.share({
         message: `Join my group on Sampi! ${baseUrl}/invite/${inviteUrl}`,
       });
-
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          Alert.alert('Shared');
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
     } catch (error) {
       Alert.alert('Error', error.message);
     }
@@ -72,6 +64,8 @@ export default function Invite({ navigation }) {
         Alert.alert("Error", error.response.data.message);
       });
 
+    updateState();
+    navigation.goBack();
     Alert.alert('Success', 'You have leaved the group');
   }
 

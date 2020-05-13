@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import styles from './styles';
+
+import UpdateContext from '../../contexts/update';
 
 import api from '../../services/api';
 
 export default function Home({ navigation }) {
+  const { update } = useContext(UpdateContext);
   const [hasGroup, setHasGroup] = useState(false);
 
   async function setUserGroupState() {
@@ -28,7 +31,7 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     setUserGroupState();
-  }, [])
+  }, [update])
 
   return (
     <View style={styles.container}>

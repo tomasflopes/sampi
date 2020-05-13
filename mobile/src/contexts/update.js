@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createContext } from 'react';
 
-const UpdateContext = createContext({ signed: false });
+const UpdateContext = createContext({ update: false });
 
 export const UpdateProvider = ({ children }) => {
   const [update, setUpdate] = useState(false);

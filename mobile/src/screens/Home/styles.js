@@ -49,22 +49,7 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.buttonsLightBlue,
   },
 
-  buttonCreate: {
-    flex: 1,
-    marginTop: 25,
-    marginBottom: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.buttonsLightBlue,
-  },
+  buttonCreate: general.fullWidthButton,
 
-  buttonText: {
-    flex: 1,
-    alignItems: 'center',
-    lineHeight: 29,
-    fontWeight: "normal",
-    textAlign: 'center',
-    fontSize: 25,
-    color: colors.mainBlue,
-  },
+  buttonText: general.fullWidthButtonText,
 });

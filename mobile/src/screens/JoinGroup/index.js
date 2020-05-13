@@ -1,8 +1,69 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useRef, useContext } from 'react';
+import { View, Image, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
+
+import { Form } from '@unform/mobile';
+import Input from '../../components/Input';
+import api from '../../services/api';
+
+import generateHeaders from '../../utils/generateHeaders';
+
+import BackArrow from '../../components/BackArrow';
+import UpdateContext from '../../contexts/update';
 
 import styles from './styles';
 
-export default function JoinGroup() {
-  return <View />;
+export default function JoinGroup({ navigation }) {
+  const formRef = useRef(null);
+
+  const { updateState } = useContext(UpdateContext);
+
+  async function handleSubmit({ inviteUrl }) {
+    const [, url] = inviteUrl.split('/invite/');
+
+    const headers = await generateHeaders();
+
+    const response = await api.post(`/invite/${url}`, {}, headers)
+      .catch(error => {
+        Alert.alert('Error', error.response.data);
+      });
+
+    Alert.alert('Success', `You are now in the group ${response.data.name}`);
+    updateState();
+    navigation.goBack();
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.topBar} >
+        <View style={styles.backArrowHolder}>
+          <BackArrow navigation={navigation} navigateTo={'Home'} />
+        </View>
+        <View style={styles.logoContainer}>
+          <Image
+            source={require('../../../assets/logoBright.png')}
+          />
+        </View>
+      </View>
+
+      <View style={styles.textHolder}>
+        <Text style={styles.headerText}>Enter your invite Url and join the competition!</Text>
+      </View>
+
+      <ScrollView style={styles.formContainer}>
+        <Form ref={formRef} onSubmit={handleSubmit} >
+          <Input name="inviteUrl" label="Invite Url" type="text" />
+        </Form>
+      </ScrollView>
+
+      <TouchableOpacity
+        style={styles.buttonSignIn}
+        onPress={() => formRef.current.submitForm()}
+      >
+        <Text style={styles.buttonText}>
+          Enter Group
+        </Text>
+      </TouchableOpacity>
+      <View style={styles.spacer} />
+    </View>
+  );
 }
