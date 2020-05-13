@@ -20,6 +20,8 @@ module.exports = {
       }
     });
 
-    return response.status(204).send();
+    const { name } = await Group.findById(groupId);
+
+    return response.status(200).json({ name: name });
   }
 }
