@@ -1,3 +1,3 @@
 export default metrics = {
-  topBarHeight: 40,
+  topBarHeight: 70,
 }

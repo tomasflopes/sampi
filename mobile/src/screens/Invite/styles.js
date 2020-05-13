@@ -19,9 +19,9 @@ export default styles = StyleSheet.create({
   },
 
   textHolder: {
-    flex: 3,
+    flex: 2.5,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    marginBottom: 10,
   },
 
   logoContainer: {
@@ -32,24 +32,27 @@ export default styles = StyleSheet.create({
   },
 
   headerText: {
-    marginTop: 30,
+    marginTop: 0,
     width: 320,
     flex: 1,
-    fontSize: 25,
+    fontSize: 22,
     textAlign: 'center',
-    alignItems: 'center',
+  },
+
+  firstText: {
+    marginTop: 10,
+    fontSize: 25
   },
 
   urlPiece: {
-    flex: 4,
+    flex: 2,
     flexDirection: "column",
     alignItems: "center",
   },
 
   headerUrl: {
     flex: 1,
-    fontSize: 16,
-    lineHeight: 19,
+    fontSize: 18,
     left: -30,
   },
 
@@ -60,11 +63,11 @@ export default styles = StyleSheet.create({
     borderColor: colors.mainBlue,
     borderRadius: 10,
     width: 300,
-    height: 50,
     alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row',
     borderStyle: 'dashed',
+    top: -20,
   },
 
   url: {
@@ -81,27 +84,58 @@ export default styles = StyleSheet.create({
     fontSize: 29,
   },
 
-  socialsSpacer: {
-    flex: 1,
+  shareSpace: {
+    flex: 2,
+    alignItems: 'center',
   },
 
   shareButton: {
-    flex: 2,
+    flex: 1,
+    width: 120,
+    marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: colors.mainBlue,
+    borderRadius: 10,
   },
 
   shareIcon: {
-    fontSize: 20,
+    fontSize: 30,
+    color: colors.mainBlue,
   },
 
   shareText: {
     left: 2,
+    color: colors.mainBlue,
     fontSize: 15,
   },
 
-  bottomSpacer: {
-    flex: 1,
+  spacer: {
+    flexGrow: 1,
   },
+
+  leaveGroupSpace: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+
+  leaveButton: {
+    flex: 1,
+    width: 120,
+    marginBottom: 10,
+    marginRight: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: colors.logoutRed,
+    borderRadius: 10,
+  },
+
+  leaveText: {
+    color: colors.logoutRed
+  }
 });
