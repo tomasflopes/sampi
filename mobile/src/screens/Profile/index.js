@@ -18,7 +18,7 @@ export default function Profile({ navigation }) {
   const [avatarUrl, setAvatarUrl] = useState('https://upload-sampi.s3.amazonaws.com/default-user.jpeg');
   const [age, setAge] = useState('');
 
-  const { signOut } = useContext(AuthContext);
+  const { SignOut } = useContext(AuthContext);
   const { update } = useContext(UpdateContext);
 
   async function getData() {
@@ -50,7 +50,7 @@ export default function Profile({ navigation }) {
     Alert.alert('Signed Out!', 'You have been signed out.');
 
     await AsyncStorage.removeItem('jwt');
-    signOut();
+    SignOut();
   }
 
   function sanitizeDate(date) {
