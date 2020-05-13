@@ -1,5 +1,6 @@
 const Group = require('../models/Group');
-const User = require('../models/User');
+
+const faker = require('faker');
 
 const { GetUserGroup, DecodeJWTToken } = require('../utils');
 
@@ -13,57 +14,33 @@ module.exports = {
   },
 
   async store(request, response) {
-    const { name, players } = request.body;
+    const player = await DecodeJWTToken(request);
+
+    const name = await generateUniqueName();
+
+    console.log(name);
 
     await Group
       .create({
         name,
-        players
+        players: player
       })
       .then(group => response.status(201).json(group))
       .catch(error => response.status(400).json(error));
   },
 
   async update(request, response) {
-    const { id } = request.params;
-    const { name = null, newPlayer: _id } = request.body;
+    const playerId = await DecodeJWTToken(request);
+    const groupId = await GetUserGroup(playerId);
+    const { name } = request.body;
 
-    try {
-      await User.countDocuments({ _id });
-    }
-    catch (error) {
-      return response.status(400).json(error)
-    }
-
-    const oldGroup = await Group.findById(id);
-
-    const oldName = oldGroup.name;
-    const playersArray = oldGroup.players;
-
-    const existsPlayer = playersArray.filter(player => player == _id); //? Cannot be strict operator because it's Mongoose Id
-
-    if (existsPlayer[0]) return response.status(400).json({ Error: 'Duplicate Player' });
-
-    if (!_id) {
-      const updateInfo = await Group.updateOne({
-        _id: id
-      }, {
-        name: name || oldName,
-      });
-
-      return response.status(200).json(updateInfo);
-    }
-
-    const updateInfo = await Group.updateOne({
-      _id: id
+    const info = await Group.updateOne({
+      _id: groupId
     }, {
       name: name || oldName,
-      $push: {
-        players: _id,
-      }
     });
 
-    return response.status(200).json(updateInfo);
+    return response.status(200).send(info);
   },
 
   async destroy(request, response) {
@@ -76,5 +53,38 @@ module.exports = {
     });
 
     return response.status(202).json(deleteInfo);
+  },
+
+  async removeUser(request, response) {
+    const userId = await DecodeJWTToken(request);
+    const groupId = await GetUserGroup(userId);
+
+    await Group.updateOne({ _id: groupId }, {
+      $pull: {
+        players: userId,
+      }
+    })
+      .catch(error => {
+        return response.status(400).json(error);
+      });
+
+    return response.status(204).send();
   }
+}
+
+async function generateUniqueName() {
+  const groups = await Group.find();
+
+  let unique = false;
+  let name;
+
+  while (!unique) {
+    name = `${faker.hacker.noun()} ${faker.hacker.adjective()}`;
+
+    groups.forEach(group => {
+      unique = group.name === name ? false : true;
+    });
+  }
+
+  return name;
 }

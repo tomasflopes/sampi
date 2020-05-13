@@ -4,6 +4,7 @@ const GameController = require('../controllers/GameController');
 const GroupController = require('../controllers/GroupController');
 const CardController = require('../controllers/CardController');
 const UserController = require('../controllers/UserController');
+const InviteController = require('../controllers/InviteController');
 
 const multer = require('multer');
 const multerConfig = require('../config/multer');
@@ -17,7 +18,8 @@ routes.delete('/game/:id', GameController.destroy);
 
 routes.get('/group', GroupController.index);
 routes.post('/group', GroupController.store);
-routes.put('/group/:id', GroupController.update);
+routes.put('/group', GroupController.update);
+routes.patch('/group', GroupController.removeUser);
 routes.delete('/group', GroupController.destroy);
 
 routes.get('/card', CardController.index);
@@ -25,5 +27,7 @@ routes.get('/card', CardController.index);
 routes.get('/user', UserController.index);
 routes.put('/user', multer(multerConfig).single("file"), UserController.update);
 routes.delete('/user', UserController.delete);
+
+routes.post('/invite/:groupId', InviteController.add);
 
 module.exports = routes;
