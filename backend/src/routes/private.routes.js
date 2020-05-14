@@ -20,6 +20,7 @@ routes.delete('/game/:id', GameController.destroy);
 routes.get('/group', GroupController.index);
 routes.post('/group', GroupController.store);
 routes.put('/group', GroupController.update);
+routes.patch('/group', GroupController.removeUser);
 routes.delete('/group', GroupController.destroy);
 
 routes.get('/card', CardController.index);
@@ -30,6 +31,5 @@ routes.delete('/user', UserController.delete);
 
 routes.post('/invite/:groupId', InviteController.add);
 
-routes.post('/leave', LeaveController.removeUser);
 
 module.exports = routes;
