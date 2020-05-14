@@ -4,6 +4,8 @@ import styles from './styles';
 
 import UpdateContext from '../../contexts/update';
 
+import { generateHeaders } from '../../utils'
+
 import api from '../../services/api';
 
 export default function Home({ navigation }) {
@@ -11,13 +13,7 @@ export default function Home({ navigation }) {
   const [hasGroup, setHasGroup] = useState(false);
 
   async function setUserGroupState() {
-    const token = await AsyncStorage.getItem('jwt');
-
-    const headers = {
-      headers: {
-        Authorization: `Bearer: ${token}`
-      }
-    }
+    const headers = await generateHeaders()
 
     const response = await api.get('/group', headers)
       .catch((error) => {

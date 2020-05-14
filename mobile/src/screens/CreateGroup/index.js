@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { View, Alert } from 'react-native';
 
-import generateHeaders from '../../utils/generateHeaders';
+import { generateHeaders } from '../../utils';
 import api from '../../services/api';
 
 import UpdateContext from '../../contexts/update';

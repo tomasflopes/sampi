@@ -3,8 +3,8 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 
 import HomeStack from '../routes/home.routes'
+import ProfileStack from '../routes/profile.routes'
 
-import ProfileScreen from '../screens/Profile';
 import LeaderBoardScreen from '../screens/LeaderBoard';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -45,7 +45,7 @@ export default function BottomNavbar() {
     >
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        children={ProfileStack}
         options={{
           tabBarLabel: '',
         }}

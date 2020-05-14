@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 
+import CreateGameStack from '../routes/createGame.routes';
+
 import HomeScreen from '../screens/Home';
-import CreateGameScreen from '../screens/CreateGame';
 import InviteScreen from '../screens/Invite';
-import EditInfoScreen from '../screens/EditInfo';
 import CreateGroupScreen from '../screens/CreateGroup';
 import JoinGroupScreen from '../screens/JoinGroup';
 
@@ -19,7 +19,7 @@ export default createHomeStack = () =>
     />
     <Stack.Screen
       name="CreateGame"
-      component={CreateGameScreen}
+      children={CreateGameStack}
       options={{ headerShown: false }}
     />
     <Stack.Screen
@@ -30,13 +30,6 @@ export default createHomeStack = () =>
         tabBarVisible: false
       }}
     />
-    <Stack.Screen
-      name="EditInfo"
-      component={EditInfoScreen}
-      options={{
-        headerShown: false,
-        tabBarVisible: false
-      }} />
     <Stack.Screen
       name="CreateGroup"
       component={CreateGroupScreen}

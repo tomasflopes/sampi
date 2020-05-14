@@ -13,6 +13,7 @@ import * as Permissions from 'expo-permissions';
 import styles from './styles';
 
 import api from '../../services/api';
+import { generateHeaders } from '../../utils';
 
 import Input from '../../components/Input';
 
@@ -27,24 +28,8 @@ export default function EditInfo({ navigation }) {
   const [position, setPosition] = useState('');
   const [file, setFile] = useState({});
 
-  const positions = [{
-    value: 'Goalkeeper',
-  }, {
-    value: 'Defender',
-  }, {
-    value: 'Midfielder',
-  }, {
-    value: 'Forward',
-  }];
-
   async function getData() {
-    const token = await AsyncStorage.getItem('jwt');
-
-    const headers = {
-      headers: {
-        Authorization: `Bearer: ${token}`,
-      }
-    }
+    const headers = await generateHeaders();
 
     const response = await api.get('/user', headers)
       .catch((error) => {
@@ -69,7 +54,6 @@ export default function EditInfo({ navigation }) {
 
     let formData = new FormData();
 
-    console.log(file);
     if (name) formData.append('name', name);
     if (phone) formData.append('phone', phone);
     if (position) formData.append('position', position);

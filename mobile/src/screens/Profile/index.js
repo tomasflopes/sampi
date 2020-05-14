@@ -7,6 +7,8 @@ import api from '../../services/api';
 import AuthContext from '../../contexts/auth';
 import UpdateContext from '../../contexts/update';
 
+import { generateHeaders } from '../../utils';
+
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 export default function Profile({ navigation }) {
@@ -22,13 +24,7 @@ export default function Profile({ navigation }) {
   const { update } = useContext(UpdateContext);
 
   async function getData() {
-    const token = await AsyncStorage.getItem('jwt');
-
-    const headers = {
-      headers: {
-        Authorization: `Bearer: ${token}`
-      }
-    }
+    const headers = await generateHeaders();
 
     const response = await api.get('/user', headers)
       .catch((error) => {

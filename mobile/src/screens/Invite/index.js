@@ -7,6 +7,8 @@ import { baseUrl } from '../../../config';
 import api from '../../services/api';
 import UpdateContext from '../../contexts/update';
 
+import { generateHeaders } from '../../utils';
+
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 import BackArrow from '../../components/BackArrow'
@@ -18,13 +20,7 @@ export default function Invite({ navigation }) {
   const [groupName, setGroupName] = useState('');
 
   async function getGroupData() {
-    const token = await AsyncStorage.getItem('jwt');
-
-    const headers = {
-      headers: {
-        Authorization: `Bearer: ${token}`
-      }
-    }
+    const headers = await generateHeaders();
 
     const response = await api.get('/group', headers)
       .catch((error) => {
