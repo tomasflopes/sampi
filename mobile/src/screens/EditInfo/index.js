@@ -43,25 +43,19 @@ export default function EditInfo({ navigation }) {
   }
 
   async function handleSubmit({ name, phone }) {
-    const token = await AsyncStorage.getItem('jwt');
-
-    const headers = {
-      headers: {
-        Authorization: `Bearer: ${token}`,
-        'Content-Type': 'multipart/form-data'
-      }
-    }
+    const headers = await generateHeaders();
 
     let formData = new FormData();
 
     if (name) formData.append('name', name);
     if (phone) formData.append('phone', phone);
     if (position) formData.append('position', position);
-    if (file) formData.append('file', file);
+    if (Object.keys(file).length > 0) formData.append('file', file);
 
     api.put('/user', formData, headers)
       .catch(error => {
-        Alert.alert("Error", error.response.data.details[0].message);
+        console.log(error);
+        Alert.alert("Error", error.response.data.details.message);
       })
       .then(() => {
         Alert.alert("Success", "Your profile information is now updated you can navigate back to the main screen!");

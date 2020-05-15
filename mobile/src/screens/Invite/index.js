@@ -55,7 +55,7 @@ export default function Invite({ navigation }) {
       }
     }
 
-    await api.post('/leave', {}, headers)
+    await api.patch('/group', {}, headers)
       .catch(error => {
         Alert.alert("Error", error.response.data.message);
       });
