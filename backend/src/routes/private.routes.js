@@ -5,7 +5,6 @@ const GroupController = require('../controllers/GroupController');
 const CardController = require('../controllers/CardController');
 const UserController = require('../controllers/UserController');
 const InviteController = require('../controllers/InviteController');
-const LeaveController = require('../controllers/LeaveController');
 
 const multer = require('multer');
 const multerConfig = require('../config/multer');
