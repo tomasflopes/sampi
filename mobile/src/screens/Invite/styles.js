@@ -21,7 +21,6 @@ export default styles = StyleSheet.create({
   textHolder: {
     flex: 2.5,
     alignItems: 'center',
-    marginBottom: 10,
   },
 
   logoContainer: {
@@ -29,6 +28,17 @@ export default styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     marginTop: 30,
+  },
+
+  groupName: {
+    flex: 1,
+    alignItems: 'center',
+  },
+
+  firstText: {
+    flex: 1.5,
+    marginTop: 10,
+    fontSize: 22,
   },
 
   headerText: {
@@ -39,9 +49,14 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  firstText: {
-    marginTop: 10,
-    fontSize: 25
+  changeButton: {
+    flex: 2,
+  },
+
+  changeButtonText: {
+    textDecorationLine: 'underline',
+    color: colors.highlightYellow,
+    fontSize: 18,
   },
 
   urlPiece: {

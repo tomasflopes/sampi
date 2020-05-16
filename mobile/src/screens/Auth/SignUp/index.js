@@ -36,13 +36,11 @@ export default function SignUp({ navigation }) {
       position
     })
       .catch((error) => {
-        console.log(error.response);
         Alert.alert("Error", error.response.data.details[0].message);
       });
 
-    if (response) {
-      navigation.navigate('SignIn');
-    }
+    Alert.alert('Success', 'Navigate you can now sign up with your new account! Have fun!')
+    navigation.goBack();
   }
 
   function populateYears() {
@@ -174,7 +172,7 @@ export default function SignUp({ navigation }) {
                 <Picker
                   selectedValue={birthdayYear}
                   style={[styles.formPicker, { paddingHorizontal: 52 }]}
-                  onValueChange={itemValue => itemValue != 'YEAR' ? setbirthdayYear(itemValue) : null}
+                  onValueChange={itemValue => itemValue != 'YEAR' ? setBirthdayYear(itemValue) : null}
                 >
                   {
                     years.map(item => {

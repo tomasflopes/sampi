@@ -65,6 +65,10 @@ export default function Invite({ navigation }) {
     Alert.alert('Success', 'You have leaved the group');
   }
 
+  function handleChangeClick() {
+    navigation.navigate('EditGroupName');
+  }
+
   useEffect(() => {
     getGroupData();
   }, []);
@@ -73,7 +77,7 @@ export default function Invite({ navigation }) {
     <View style={styles.container}>
       <View style={styles.topBar} >
         <View style={styles.backArrowHolder}>
-          <BackArrow navigation={navigation} navigateTo={'Home'} />
+          <BackArrow navigation={navigation} />
         </View>
         <View style={styles.logoContainer}>
           <Image
@@ -82,7 +86,12 @@ export default function Invite({ navigation }) {
         </View>
       </View>
       <View style={styles.textHolder}>
-        <Text style={[styles.headerText, styles.firstText]}>Group Name: {groupName}</Text>
+        <View style={styles.groupName}>
+          <Text style={[styles.headerText, styles.firstText]}>Group Name: {groupName}</Text>
+          <TouchableOpacity style={styles.changeButton} onPress={handleChangeClick}>
+            <Text style={styles.changeButtonText}>Change</Text>
+          </TouchableOpacity>
+        </View>
         <Text style={styles.headerText}>Invite new people to your group!</Text>
       </View>
       <View style={styles.urlPiece}>

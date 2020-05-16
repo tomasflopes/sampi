@@ -58,8 +58,9 @@ export default function EditInfo({ navigation }) {
         Alert.alert("Error", error.response.data.details.message);
       })
       .then(() => {
-        Alert.alert("Success", "Your profile information is now updated you can navigate back to the main screen!");
+        Alert.alert("Success", "Your profile information is now updated!");
         updateState();
+        navigation.goBack();
       });
   }
 
