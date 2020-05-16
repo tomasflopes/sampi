@@ -1,4 +1,5 @@
 const Group = require('../models/Group');
+const User = require('../models/User');
 
 const faker = require('faker');
 
@@ -10,7 +11,26 @@ module.exports = {
 
     const group = await GetUserGroup(id);
 
-    return response.status(200).json(group);
+    const players = group[0].players;
+
+    const playerInfo = [];
+
+    for (let i = 0; i < players.length; i++) {
+      const { name, email, phone, avatar_url } = await User.findById(players[i]);
+      playerInfo.push({
+        name,
+        email,
+        phone,
+        avatar_url
+      });
+    }
+
+    const responseInfo = {
+      id: group._id,
+      players: playerInfo
+    }
+
+    return response.status(200).json(responseInfo);
   },
 
   async store(request, response) {
