@@ -26,18 +26,26 @@ export default function SignUp({ navigation }) {
   async function handleSubmit({ email, name, password, phone }) {
     const birth = `${birthdayMonth}-${birthdayDay}-${birthdayYear}`;
 
-    const response = await api.post('/api/user/register', {
-      name,
-      email,
-      password,
-      birth,
-      gender,
-      phone,
-      position
-    })
-      .catch((error) => {
+    try {
+      await api.post('/api/user/register', {
+        name,
+        email,
+        password,
+        birth,
+        gender,
+        phone,
+        position
+      })
+    } catch (error) {
+      if (error.response.data.message) {
+        Alert.alert('Error', error.response.data.message);
+
+      }
+      if (error.response.data.details[0].message) {
         Alert.alert("Error", error.response.data.details[0].message);
-      });
+      }
+      throw error;
+    }
 
     Alert.alert('Success', 'Navigate you can now sign up with your new account! Have fun!')
     navigation.goBack();

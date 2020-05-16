@@ -7,7 +7,8 @@ import HomeScreen from '../screens/Home';
 import InviteScreen from '../screens/Invite';
 import CreateGroupScreen from '../screens/CreateGroup';
 import JoinGroupScreen from '../screens/JoinGroup';
-import EditGroupNameScreen from '../screens/EditGroupName';
+import ManageGroupScreen from '../screens/ManageGroup';
+import OtherGroupMembersScreen from '../screens/OtherGroupMembers';
 
 const Stack = createStackNavigator();
 
@@ -32,8 +33,16 @@ export default createHomeStack = () =>
       }}
     />
     <Stack.Screen
-      name="EditGroupName"
-      component={EditGroupNameScreen}
+      name="ManageGroup"
+      component={ManageGroupScreen}
+      options={{
+        headerShown: false,
+        tabBarVisible: false
+      }}
+    />
+    <Stack.Screen
+      name="OtherGroupMembers"
+      component={OtherGroupMembersScreen}
       options={{
         headerShown: false,
         tabBarVisible: false

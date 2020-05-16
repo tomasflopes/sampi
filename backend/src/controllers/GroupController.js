@@ -16,8 +16,9 @@ module.exports = {
     const playerInfo = [];
 
     for (let i = 0; i < players.length; i++) {
-      const { name, email, phone, avatar_url } = await User.findById(players[i]);
+      const { _id, name, email, phone, avatar_url } = await User.findById(players[i]);
       playerInfo.push({
+        _id,
         name,
         email,
         phone,
@@ -26,7 +27,8 @@ module.exports = {
     }
 
     const responseInfo = {
-      id: group._id,
+      id: group[0]._id,
+      name: group[0].name,
       players: playerInfo
     }
 
