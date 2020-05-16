@@ -11,10 +11,16 @@ import { generateHeaders } from '../../utils';
 
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
-import BackArrow from '../../components/BackArrow'
+import TopBar from '../../components/TopBar'
 
 export default function Invite({ navigation }) {
-  const { updateState } = useContext(UpdateContext);
+  const { update } = useContext(UpdateContext);
+
+  const inviteMessage = `Join my group on Sampi! ${baseUrl}/invite/${inviteUrl}
+To join:
+1. Install the Sampi app;
+2. In the main screen go to Join Group and paste this URL
+3. Have fun!`;
 
   const [inviteUrl, setInviteUrl] = useState('');
   const [groupName, setGroupName] = useState('');
@@ -27,8 +33,8 @@ export default function Invite({ navigation }) {
         Alert.alert("Error", error.response.data.message);
       })
 
-    setInviteUrl(response.data[0]._id);
-    setGroupName(response.data[0].name);
+    setInviteUrl(response.data.id);
+    setGroupName(response.data.name);
   }
 
   async function handleClipboardCopy() {
@@ -39,11 +45,7 @@ export default function Invite({ navigation }) {
   async function handleShare() {
     try {
       await Share.share({
-        message: `Join my group on Sampi! ${baseUrl}/invite/${inviteUrl}
-        To join:
-        1. Install the Sampi app;
-        2. In the main screen go to Join Group and paste this URL
-        3. Have fun!`,
+        message: inviteMessage,
       });
     } catch (error) {
       Alert.alert('Error', error.message);
@@ -51,13 +53,7 @@ export default function Invite({ navigation }) {
   }
 
   async function handleLeaveGroup() {
-    const token = await AsyncStorage.getItem('jwt');
-
-    const headers = {
-      headers: {
-        Authorization: `Bearer: ${token}`
-      }
-    }
+    const headers = await generateHeaders();
 
     await api.patch('/group', {}, headers)
       .catch(error => {
@@ -70,30 +66,21 @@ export default function Invite({ navigation }) {
   }
 
   function handleChangeClick() {
-    navigation.navigate('EditGroupName');
+    navigation.navigate('ManageGroup');
   }
 
   useEffect(() => {
     getGroupData();
-  }, []);
+  }, [update]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.topBar} >
-        <View style={styles.backArrowHolder}>
-          <BackArrow navigation={navigation} />
-        </View>
-        <View style={styles.logoContainer}>
-          <Image
-            source={require('../../../assets/logoBright.png')}
-          />
-        </View>
-      </View>
+      <TopBar navigation={navigation} />
       <View style={styles.textHolder}>
         <View style={styles.groupName}>
           <Text style={[styles.headerText, styles.firstText]}>Group Name: {groupName}</Text>
           <TouchableOpacity style={styles.changeButton} onPress={handleChangeClick}>
-            <Text style={styles.changeButtonText}>Change</Text>
+            <Text style={styles.changeButtonText}>Manage</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.headerText}>Invite new people to your group!</Text>

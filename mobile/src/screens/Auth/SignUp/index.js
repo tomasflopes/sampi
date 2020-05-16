@@ -132,7 +132,7 @@ export default function SignUp({ navigation }) {
                 {
                   genders.map(item => {
                     return (
-                      <Picker.Item label={item} value={item} />
+                      <Picker.Item key={item} label={item} value={item} />
                     );
                   })
                 }

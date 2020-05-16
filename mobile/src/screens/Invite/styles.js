@@ -5,29 +5,9 @@ import { general, colors, metrics } from '../../styles';
 export default styles = StyleSheet.create({
   container: general.container,
 
-  topBar: {
-    height: metrics.topBarHeight,
-    backgroundColor: colors.activeDarkBlue,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  backArrowHolder: {
-    flex: .5,
-    marginLeft: 5,
-  },
-
   textHolder: {
     flex: 2.5,
     alignItems: 'center',
-  },
-
-  logoContainer: {
-    flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    marginTop: 30,
   },
 
   groupName: {

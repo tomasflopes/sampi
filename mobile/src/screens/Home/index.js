@@ -20,7 +20,7 @@ export default function Home({ navigation }) {
         Alert.alert("Error", error.response.data.message);
       })
 
-    const flag = response.data[0] ? true : false;
+    const flag = response.data ? true : false;
 
     setHasGroup(flag);
   }
