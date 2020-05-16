@@ -39,7 +39,11 @@ export default function Invite({ navigation }) {
   async function handleShare() {
     try {
       await Share.share({
-        message: `Join my group on Sampi! ${baseUrl}/invite/${inviteUrl}`,
+        message: `Join my group on Sampi! ${baseUrl}/invite/${inviteUrl}
+        To join:
+        1. Install the Sampi app;
+        2. In the main screen go to Join Group and paste this URL
+        3. Have fun!`,
       });
     } catch (error) {
       Alert.alert('Error', error.message);
