@@ -1,11 +1,17 @@
 const Game = require('../models/Game');
-const { GetUserGroup } = require('../utils');
+const { GetUserGroup, DecodeJWTToken } = require('../utils');
 
 module.exports = {
   async index(request, response) {
-    const games = await Game.find();
+    const userId = await DecodeJWTToken(request);
 
-    return response.status(200).json(games);
+    const games = await Game
+      .find()
+      .sort({ _id: -1 });
+
+    const [game] = games.filter(game => game.players.includes(userId))
+
+    return response.status(200).json(game);
   },
 
   async store(request, response) {
