@@ -15,16 +15,8 @@ export const AuthProvider = ({ children }) => {
     setSigned(false);
   }
 
-  function UserHasGroup() {
-    setHasGroup(true);
-  }
-
-  function UserDoesNotHaveGroup() {
-    setHasGroup(false);
-  }
-
   return (
-    <AuthContext.Provider value={{ signed, SignIn, SignOut, hasGroup, UserHasGroup, UserDoesNotHaveGroup }}>
+    <AuthContext.Provider value={{ signed, SignIn, SignOut }}>
       {children}
     </AuthContext.Provider>
   );

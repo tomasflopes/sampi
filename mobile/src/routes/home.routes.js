@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
+import { createStackNavigator, HeaderTitle, } from '@react-navigation/stack';
 
 import CreateGameStack from '../routes/createGame.routes';
 

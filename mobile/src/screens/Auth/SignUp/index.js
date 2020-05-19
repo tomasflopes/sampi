@@ -199,7 +199,7 @@ export default function SignUp({ navigation }) {
               <Picker
                 selectedValue={position}
                 style={styles.formPicker}
-                onValueChange={itemValue => setPosition(itemValue)}
+                onValueChange={itemValue => itemValue != 'POSITIONS' ? setPosition(itemValue) : null}
                 mode="dialog"
               >
                 {
