@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Alert } from 'react-native';
 
 import { Form } from '@unform/mobile';
 import Input from '../../components/Input';
+
 import TopBar from '../../components/TopBar';
 
 import UpdateContext from '../../contexts/update';
@@ -39,6 +40,7 @@ export default function ManageGroup({ navigation }) {
   return (
     <View style={styles.container}>
       <TopBar navigation={navigation} />
+
       <Text style={styles.headerText}>Manage Your Group</Text>
       <View style={styles.formContainer}>
         <Form ref={formRef} onSubmit={handleSubmit} >

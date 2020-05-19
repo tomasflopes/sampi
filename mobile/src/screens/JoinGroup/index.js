@@ -7,7 +7,7 @@ import api from '../../services/api';
 
 import generateHeaders from '../../utils/generateHeaders';
 
-import BackArrow from '../../components/BackArrow';
+import TopBar from '../../components/TopBar';
 import UpdateContext from '../../contexts/update';
 
 import styles from './styles';
@@ -34,16 +34,7 @@ export default function JoinGroup({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.topBar} >
-        <View style={styles.backArrowHolder}>
-          <BackArrow navigation={navigation} navigateTo={'Home'} />
-        </View>
-        <View style={styles.logoContainer}>
-          <Image
-            source={require('../../../assets/logoBright.png')}
-          />
-        </View>
-      </View>
+      <TopBar />
 
       <View style={styles.textHolder}>
         <Text style={styles.headerText}>Enter your invite Url and join the competition!</Text>

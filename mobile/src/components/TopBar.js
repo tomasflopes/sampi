@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-import BackArrow from './BackArrow';
+import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 import { metrics, colors } from '../styles';
 
@@ -9,7 +9,11 @@ export default function TopBar({ navigation }) {
   return (
     <View style={styles.topBar} >
       <View style={styles.backArrowHolder}>
-        <BackArrow navigation={navigation} />
+        <TouchableOpacity onPress={() => {
+          navigation.goBack();
+        }}>
+          <Icon style={styles.backArrowIcon} name="arrow-left"></Icon>
+        </TouchableOpacity>
       </View>
       <View style={styles.logoContainer}>
         <Image
@@ -40,4 +44,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 30,
   },
+
+  backArrowIcon: {
+    color: colors.lightGray,
+    fontSize: 42,
+  }
 })

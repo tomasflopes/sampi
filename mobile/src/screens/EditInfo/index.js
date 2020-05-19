@@ -16,6 +16,7 @@ import api from '../../services/api';
 import { generateHeaders } from '../../utils';
 
 import Input from '../../components/Input';
+import TopBar from '../../components/TopBar';
 
 export default function EditInfo({ navigation }) {
   const formRef = useRef(null);
@@ -106,6 +107,7 @@ export default function EditInfo({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <TopBar navigation={navigation} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>EDIT PROFILE INFO</Text>
       </View>
