@@ -22,6 +22,11 @@ export default function FirstStep({ navigation }) {
     '7 x 7',
   ];
 
+  function handleTeamModeChange(mode) {
+    setSelected(mode);
+    setSelectionMode(mode);
+  }
+
   function handleNextClick() {
     moveForward();
     navigation.navigate('SecondStep');
@@ -54,11 +59,7 @@ export default function FirstStep({ navigation }) {
       <View style={styles.teamFormationMode}>
         <TouchableOpacity
           style={styles.teamFormationModeButton}
-          onPress={() => {
-            setSelected(0);
-            setSelectionMode(0);
-            console.log(teamSelectionMode)
-          }}
+          onPress={() => handleTeamModeChange(0)}
         >
           <View style={selected === 0 ? styles.teamFormationModeTextContainerActive : styles.teamFormationModeTextContainer}>
             <Text style={styles.teamFormationModeHeaderText}>RANDOM</Text>
@@ -68,11 +69,7 @@ export default function FirstStep({ navigation }) {
 
         <TouchableOpacity
           style={styles.teamFormationModeButton}
-          onPress={() => {
-            setSelected(1);
-            setSelectionMode(1);
-            console.log(teamSelectionMode)
-          }}
+          onPress={() => handleTeamModeChange(1)}
         >
           <View style={selected === 1 ? styles.teamFormationModeTextContainerActive : styles.teamFormationModeTextContainer}>
             <Text style={styles.teamFormationModeHeaderText}>DRAFT</Text>
