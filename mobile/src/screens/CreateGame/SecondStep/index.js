@@ -10,7 +10,7 @@ import ProgressStatus from '../../../components/ProgressStatus';
 import { generateHeaders } from '../../../utils';
 
 export default function SecondStep({ navigation }) {
-  const { setActiveStep, nPlayers, setPlayersArrayState } = useContext(CreateGameContext);
+  const { nPlayers, setPlayersArrayState } = useContext(CreateGameContext);
   const [players, setPlayers] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
@@ -122,7 +122,6 @@ export default function SecondStep({ navigation }) {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.backButton} onPress={() => {
-        setActiveStep(0);
         navigation.goBack();
       }}>
         <Text style={styles.nextStepButtonText}>Back</Text>

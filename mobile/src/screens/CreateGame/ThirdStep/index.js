@@ -6,8 +6,13 @@ import CreateGameContext from '../../../contexts/createGame';
 
 import ProgressStatus from '../../../components/ProgressStatus';
 
+import api from '../../../services/api';
+import { generateHeaders } from '../../../utils';
+
 export default function ThirdStep({ navigation }) {
-  const { playersArray } = useContext(CreateGameContext);
+  function handleNextStep() {
+    navigation.navigate('FinishCreateGame');
+  }
 
   return (
     <View style={styles.container}>
@@ -32,6 +37,16 @@ export default function ThirdStep({ navigation }) {
           <ProgressStatus step={2} />
         </View>
       </View>
+
+      <TouchableOpacity style={styles.nextStepButton} onPress={handleNextStep}>
+        <Text style={styles.nextStepButtonText}>Next Step</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.backButton} onPress={() => {
+        navigation.goBack();
+      }}>
+        <Text style={styles.nextStepButtonText}>Back</Text>
+      </TouchableOpacity>
     </View>
   );
 }

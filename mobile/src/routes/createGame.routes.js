@@ -6,6 +6,7 @@ import { CreateGameProvider } from '../contexts/createGame';
 import FirstStepScreen from '../screens/CreateGame/FirstStep';
 import SecondStepScreen from '../screens/CreateGame/SecondStep';
 import ThirdStepScreen from '../screens/CreateGame/ThirdStep';
+import FinishCreateGameScreen from '../screens/CreateGame/FinishCreateGame';
 
 const Stack = createStackNavigator();
 
@@ -27,5 +28,11 @@ export default createHomeStack = () =>
         component={ThirdStepScreen}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="FinishCreateGame"
+        component={FinishCreateGameScreen}
+        options={{ headerShown: false }}
+      />
+
     </Stack.Navigator>
   </CreateGameProvider>

@@ -18,4 +18,18 @@ export default styles = StyleSheet.create({
   helpTextHeader: general.helpTextHeader,
 
   helpText: general.helpText,
+
+  nextStepButton: {
+    ...general.fullWidthButton,
+    flex: 2,
+  },
+
+  backButton: {
+    ...general.fullWidthButton,
+    backgroundColor: colors.background,
+    marginTop: 10,
+    marginBottom: 15,
+  },
+
+  nextStepButtonText: general.fullWidthButtonText,
 });
