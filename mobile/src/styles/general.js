@@ -49,4 +49,38 @@ export default container = {
     color: colors.activeDarkBlue,
     fontWeight: 'normal',
   },
+
+  helpTextContainer: {
+    marginTop: 15,
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  helpTextHeader: {
+    color: colors.black,
+    fontSize: 22,
+    textAlign: 'center',
+  },
+
+  helpText: {
+    color: colors.midGray,
+    fontSize: 18,
+    marginTop: 5,
+    textAlign: 'center',
+  },
+
+  progressStatusContainer: {
+    flex: .8,
+    alignItems: 'center',
+  },
+
+  progressStatus: {
+    flex: 1,
+    marginTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    width: 70,
+  },
 }

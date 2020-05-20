@@ -10,7 +10,7 @@ import ProgressStatus from '../../../components/ProgressStatus';
 import { generateHeaders } from '../../../utils';
 
 export default function SecondStep({ navigation }) {
-  const { setActiveStep, step, nPlayers, setPlayersArrayState } = useContext(CreateGameContext);
+  const { setActiveStep, nPlayers, setPlayersArrayState } = useContext(CreateGameContext);
   const [players, setPlayers] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
@@ -85,8 +85,7 @@ export default function SecondStep({ navigation }) {
 
   useEffect(() => {
     loadPlayersAvatar();
-    setActiveStep(1);
-  });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -114,7 +113,7 @@ export default function SecondStep({ navigation }) {
 
       <View style={styles.progressStatusContainer}>
         <View style={styles.progressStatus}>
-          <ProgressStatus step={step} />
+          <ProgressStatus step={1} />
         </View>
       </View>
 

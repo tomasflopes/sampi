@@ -65,39 +65,15 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  progressStatusContainer: {
-    flex: .8,
-    alignItems: 'center',
-  },
+  progressStatusContainer: general.progressStatusContainer,
 
-  progressStatus: {
-    flex: 1,
-    marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: 70,
-  },
+  progressStatus: general.progressStatus,
 
-  helpTextContainer: {
-    marginTop: 15,
-    flex: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  helpTextContainer: general.helpTextContainer,
 
-  helpTextHeader: {
-    color: colors.black,
-    fontSize: 22,
-    textAlign: 'center',
-  },
+  helpTextHeader: general.helpTextHeader,
 
-  helpText: {
-    color: colors.midGray,
-    fontSize: 18,
-    marginTop: 5,
-    textAlign: 'center',
-  },
+  helpText: general.helpText,
 
   nextStepButton: {
     ...general.fullWidthButton,

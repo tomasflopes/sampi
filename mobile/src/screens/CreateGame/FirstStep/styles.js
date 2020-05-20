@@ -77,12 +77,11 @@ export default styles = StyleSheet.create({
     marginTop: 12,
   },
 
-  helpTextContainer: {
-    marginTop: 15,
-    flex: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  helpTextContainer: general.helpTextContainer,
+
+  helpTextHeader: general.helpTextHeader,
+
+  helpText: general.helpText,
 
   comingSoonText: {
     fontSize: 15,
@@ -91,32 +90,9 @@ export default styles = StyleSheet.create({
     marginTop: 5,
   },
 
-  helpTextHeader: {
-    color: colors.black,
-    fontSize: 22,
-    textAlign: 'center',
-  },
+  progressStatusContainer: general.progressStatusContainer,
 
-  helpText: {
-    color: colors.midGray,
-    fontSize: 18,
-    marginTop: 5,
-    textAlign: 'center',
-  },
-
-  progressStatusContainer: {
-    flex: .8,
-    alignItems: 'center',
-  },
-
-  progressStatus: {
-    flex: 1,
-    marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: 70,
-  },
+  progressStatus: general.progressStatus,
 
   nextStepButton: {
     ...general.fullWidthButton,

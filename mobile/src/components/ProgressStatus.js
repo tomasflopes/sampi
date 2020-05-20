@@ -1,12 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { colors } from '../styles';
 
-import CreateGameContext from '../contexts/createGame';
-
-export default function ProgressStatus() {
-  const { step } = useContext(CreateGameContext);
-
+export default function ProgressStatus({ step }) {
   const progressStatusArray = [];
 
   for (let i = step; i > 0; i--) {

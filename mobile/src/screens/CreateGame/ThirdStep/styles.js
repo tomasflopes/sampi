@@ -9,5 +9,13 @@ export default styles = StyleSheet.create({
 
   title: general.screenTitle,
 
+  progressStatusContainer: general.progressStatusContainer,
 
+  progressStatus: general.progressStatus,
+
+  helpTextContainer: general.helpTextContainer,
+
+  helpTextHeader: general.helpTextHeader,
+
+  helpText: general.helpText,
 });

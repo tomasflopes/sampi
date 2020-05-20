@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import styles from './styles';
 
@@ -12,7 +12,7 @@ export default function FirstStep({ navigation }) {
   const [nPlayers, setNPlayers] = useState(3);
   const [selected, setSelected] = useState(null);
 
-  const { setActiveStep, step, setSelectionMode, setNPlayersState } = useContext(CreateGameContext);
+  const { setSelectionMode, setNPlayersState } = useContext(CreateGameContext);
 
   const nPlayersArray = [
     '3 x 3',
@@ -35,10 +35,6 @@ export default function FirstStep({ navigation }) {
       Alert.alert('Error', 'You must select a team selection method!');
     }
   }
-
-  useEffect(() => {
-    setActiveStep(0);
-  });
 
   return (
     <View style={styles.container}>
@@ -93,7 +89,7 @@ export default function FirstStep({ navigation }) {
 
       <View style={styles.progressStatusContainer}>
         <View style={styles.progressStatus}>
-          <ProgressStatus />
+          <ProgressStatus step={0} />
         </View>
       </View>
       <TouchableOpacity
