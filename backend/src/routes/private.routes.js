@@ -13,8 +13,7 @@ const routes = Router();
 
 routes.get('/game', GameController.index);
 routes.post('/game', GameController.store);
-routes.put('/game/:id', GameController.update);
-routes.delete('/game/:id', GameController.destroy);
+routes.put('/game', GameController.update);
 
 routes.get('/group', GroupController.index);
 routes.post('/group', GroupController.store);

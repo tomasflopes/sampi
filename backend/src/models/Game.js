@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
 const GameSchema = new mongoose.Schema({
-  players: [{
+  teamA: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  }],
+  teamB: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
