@@ -12,7 +12,7 @@ export default function FirstStep({ navigation }) {
   const [nPlayers, setNPlayers] = useState('');
   const [selected, setSelected] = useState(null);
 
-  const { moveForward, step, setSelectionMode, setNPlayersState } = useContext(CreateGameContext);
+  const { setActiveStep, step, setSelectionMode, setNPlayersState } = useContext(CreateGameContext);
 
   const nPlayersArray = [
     '3 x 3',
@@ -30,12 +30,15 @@ export default function FirstStep({ navigation }) {
     if (selected != null) {
       setSelectionMode(selected);
       setNPlayersState(nPlayers);
-      moveForward();
       navigation.navigate('SecondStep');
     } else {
       Alert.alert('Error', 'You must select a team selection method!');
     }
   }
+
+  useEffect(() => {
+    setActiveStep(0);
+  }, [selected, step, nPlayers]);
 
   return (
     <View style={styles.container}>

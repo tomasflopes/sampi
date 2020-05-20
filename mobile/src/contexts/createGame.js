@@ -12,12 +12,8 @@ export const CreateGameProvider = ({ children }) => {
     setTeamSelectionMode(method);
   }
 
-  function moveForward() {
-    setStep(step + 1);
-  }
-
-  function moveBackwards() {
-    setStep(step - 1);
+  function setActiveStep(activeStep) {
+    setStep(activeStep);
   }
 
   function setNPlayersState(nPlayersState) {
@@ -25,7 +21,7 @@ export const CreateGameProvider = ({ children }) => {
   }
 
   return (
-    <CreateGameContext.Provider value={{ teamSelectionMode, setSelectionMode, moveBackwards, moveForward, step, setNPlayersState, nPlayers }}>
+    <CreateGameContext.Provider value={{ teamSelectionMode, setSelectionMode, setActiveStep, step, setNPlayersState, nPlayers }}>
       {children}
     </CreateGameContext.Provider>
   );

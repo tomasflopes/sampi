@@ -100,7 +100,7 @@ export default styles = StyleSheet.create({
   },
 
   helpText: {
-    color: colors.darkGray,
+    color: colors.midGray,
     fontSize: 18,
     marginTop: 5,
     textAlign: 'center',

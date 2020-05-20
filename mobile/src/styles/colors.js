@@ -7,6 +7,7 @@ export default colors = {
   mainBlue: '#23354c',
   highlightYellow: '#bfa25b',
   lightGray: '#ccc',
+  midGray: '#888',
   darkGray: '#444',
   selectedGreen: '#04943d',
   black: '#111',
