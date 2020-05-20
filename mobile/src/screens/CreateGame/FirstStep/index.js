@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import styles from './styles';
 
 import { Picker } from '@react-native-community/picker';
@@ -12,7 +12,7 @@ export default function FirstStep({ navigation }) {
   const [nPlayers, setNPlayers] = useState('');
   const [selected, setSelected] = useState(null);
 
-  const { moveForward, step, setSelectionMode } = useContext(CreateGameContext);
+  const { moveForward, step, setSelectionMode, setNPlayersState } = useContext(CreateGameContext);
 
   const nPlayersArray = [
     '3 x 3',
@@ -24,12 +24,17 @@ export default function FirstStep({ navigation }) {
 
   function handleTeamModeChange(mode) {
     setSelected(mode);
-    setSelectionMode(mode);
   }
 
   function handleNextClick() {
-    moveForward();
-    navigation.navigate('SecondStep');
+    if (selected != null) {
+      setSelectionMode(selected);
+      setNPlayersState(nPlayers);
+      moveForward();
+      navigation.navigate('SecondStep');
+    } else {
+      Alert.alert('Error', 'You must select a team selection method!');
+    }
   }
 
   return (
@@ -47,9 +52,9 @@ export default function FirstStep({ navigation }) {
           mode="dialog"
         >
           {
-            nPlayersArray.map(item => {
+            nPlayersArray.map((item, index) => {
               return (
-                <Picker.Item label={item} value={item.split('')[0]} />
+                <Picker.Item key={index} label={item} value={item.split('')[0]} />
               );
             })
           }
@@ -84,7 +89,9 @@ export default function FirstStep({ navigation }) {
       </View>
 
       <View style={styles.progressStatusContainer}>
-        <ProgressStatus step={step} />
+        <View style={styles.progressStatus}>
+          <ProgressStatus step={step} />
+        </View>
       </View>
       <TouchableOpacity
         style={styles.nextStepButton}

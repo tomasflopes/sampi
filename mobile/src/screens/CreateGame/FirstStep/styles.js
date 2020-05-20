@@ -108,6 +108,16 @@ export default styles = StyleSheet.create({
 
   progressStatusContainer: {
     flex: .8,
+    alignItems: 'center',
+  },
+
+  progressStatus: {
+    flex: 1,
+    marginTop: 30,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-around',
+    width: 70,
   },
 
   nextStepButton: {

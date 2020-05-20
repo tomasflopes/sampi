@@ -5,21 +5,23 @@ import { colors } from '../styles';
 export default function ProgressStatus({ step }) {
   const progressStatusArray = [];
 
-  for (let j = 3; j < step; j--) {
+  console.log(step);
+  for (let i = step; i > 0; i--) {
     progressStatusArray.push(
-      <View style={styles.progressInactive} />
+      <View key={i} style={styles.progressActive} />
     );
   }
 
   progressStatusArray.push(
-    <View style={styles.progressLast} />
+    < View style={styles.progressLast} />
   );
 
-  for (let i = step; i < 0; i--) {
+  for (let j = 2; j > step; j--) {
     progressStatusArray.push(
-      <View style={styles.progressActive} />
+      <View key={j} style={styles.progressInactive} />
     );
   }
+
 
 
   return progressStatusArray;
@@ -28,19 +30,22 @@ export default function ProgressStatus({ step }) {
 const styles = StyleSheet.create({
   progressActive: {
     height: 12,
-    color: colors.selectedGreen,
+    width: 12,
+    backgroundColor: colors.selectedGreen,
     borderRadius: 12 / 2,
   },
 
   progressLast: {
     height: 12,
-    color: colors.selectedGreen,
+    width: 12,
+    backgroundColor: colors.selectedGreen,
     borderRadius: 15 / 2,
   },
 
   progressInactive: {
     height: 12,
-    color: colors.lightGray,
+    width: 12,
+    backgroundColor: colors.lightGray,
     borderRadius: 12 / 2,
   }
 });
