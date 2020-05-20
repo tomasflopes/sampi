@@ -64,6 +64,7 @@ export default container = {
   },
 
   helpText: {
+    paddingHorizontal: 15,
     color: colors.midGray,
     fontSize: 18,
     marginTop: 5,
