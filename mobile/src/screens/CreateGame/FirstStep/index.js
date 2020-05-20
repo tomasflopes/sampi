@@ -9,7 +9,7 @@ import CreateGameContext from '../../../contexts/createGame';
 import ProgressStatus from '../../../components/ProgressStatus';
 
 export default function FirstStep({ navigation }) {
-  const [nPlayers, setNPlayers] = useState('');
+  const [nPlayers, setNPlayers] = useState(3);
   const [selected, setSelected] = useState(null);
 
   const { setActiveStep, step, setSelectionMode, setNPlayersState } = useContext(CreateGameContext);
@@ -38,12 +38,12 @@ export default function FirstStep({ navigation }) {
 
   useEffect(() => {
     setActiveStep(0);
-  }, [selected, step, nPlayers]);
+  });
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>EDIT PROFILE INFO</Text>
+        <Text style={styles.title}>CREATE GAME</Text>
       </View>
 
       <View style={styles.nPlayerPickerContainer}>
@@ -76,13 +76,13 @@ export default function FirstStep({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.teamFormationModeButton}
-          onPress={() => handleTeamModeChange(1)}
+          style={[styles.teamFormationModeButton, { opacity: .4, backgroundColor: '#ccc' }]}
         >
           <View style={selected === 1 ? styles.teamFormationModeTextContainerActive : styles.teamFormationModeTextContainer}>
             <Text style={styles.teamFormationModeHeaderText}>DRAFT</Text>
           </View>
-          <Text style={styles.teamFormationModeText}>On this mode the teams will be picked by two captains, randomly picked by the app.</Text>
+          <Text style={styles.comingSoonText}>COMING SOON</Text>
+          <Text style={[styles.teamFormationModeText, { marginTop: 2 }]}>On this mode the teams will be picked by two captains, randomly picked by the app.</Text>
         </TouchableOpacity>
       </View>
 
@@ -93,7 +93,7 @@ export default function FirstStep({ navigation }) {
 
       <View style={styles.progressStatusContainer}>
         <View style={styles.progressStatus}>
-          <ProgressStatus step={step} />
+          <ProgressStatus />
         </View>
       </View>
       <TouchableOpacity

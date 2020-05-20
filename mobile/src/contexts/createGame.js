@@ -7,6 +7,7 @@ export const CreateGameProvider = ({ children }) => {
   const [teamSelectionMode, setTeamSelectionMode] = useState(0);
   const [nPlayers, setNPlayers] = useState(0);
   const [step, setStep] = useState(0);
+  const [playersArray, setPlayersArray] = useState([]);
 
   function setSelectionMode(method) {
     setTeamSelectionMode(method);
@@ -20,8 +21,12 @@ export const CreateGameProvider = ({ children }) => {
     setNPlayers(nPlayersState);
   }
 
+  function setPlayersArrayState(players) {
+    setPlayersArray(players);
+  }
+
   return (
-    <CreateGameContext.Provider value={{ teamSelectionMode, setSelectionMode, setActiveStep, step, setNPlayersState, nPlayers }}>
+    <CreateGameContext.Provider value={{ teamSelectionMode, setSelectionMode, setActiveStep, step, setNPlayersState, nPlayers, playersArray, setPlayersArrayState }}>
       {children}
     </CreateGameContext.Provider>
   );

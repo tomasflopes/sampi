@@ -5,18 +5,9 @@ import { general, colors } from '../../../styles';
 export default styles = StyleSheet.create({
   container: general.container,
 
-  titleContainer: {
-    flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    marginLeft: 30,
-  },
+  titleContainer: general.screenTitleContainer,
 
-  title: {
-    fontSize: 15,
-    color: colors.activeDarkBlue,
-    fontWeight: 'normal',
-  },
+  title: general.screenTitle,
 
   nPlayerPickerContainer: {
     flex: 3,
@@ -93,6 +84,13 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
+  comingSoonText: {
+    fontSize: 15,
+    color: colors.logoutRed,
+    textAlign: 'center',
+    marginTop: 5,
+  },
+
   helpTextHeader: {
     color: colors.black,
     fontSize: 22,
@@ -113,9 +111,9 @@ export default styles = StyleSheet.create({
 
   progressStatus: {
     flex: 1,
-    marginTop: 30,
+    marginTop: 20,
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     justifyContent: 'space-around',
     width: 70,
   },

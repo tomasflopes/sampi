@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { colors } from '../styles';
 
-export default function ProgressStatus({ step }) {
+import CreateGameContext from '../contexts/createGame';
+
+export default function ProgressStatus() {
+  const { step } = useContext(CreateGameContext);
+
   const progressStatusArray = [];
 
-  console.log(step);
   for (let i = step; i > 0; i--) {
     progressStatusArray.push(
       <View key={i} style={styles.progressActive} />
@@ -13,7 +16,7 @@ export default function ProgressStatus({ step }) {
   }
 
   progressStatusArray.push(
-    < View style={styles.progressLast} />
+    <View key={3} style={styles.progressLast} />
   );
 
   for (let j = 2; j > step; j--) {
@@ -21,8 +24,6 @@ export default function ProgressStatus({ step }) {
       <View key={j} style={styles.progressInactive} />
     );
   }
-
-
 
   return progressStatusArray;
 }
@@ -36,8 +37,8 @@ const styles = StyleSheet.create({
   },
 
   progressLast: {
-    height: 12,
-    width: 12,
+    height: 15,
+    width: 15,
     backgroundColor: colors.selectedGreen,
     borderRadius: 15 / 2,
   },

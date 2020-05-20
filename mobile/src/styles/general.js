@@ -35,5 +35,18 @@ export default container = {
     textAlign: 'center',
     fontSize: 25,
     color: colors.mainBlue,
-  }
+  },
+
+  screenTitleContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginLeft: 30,
+  },
+
+  screenTitle: {
+    fontSize: 15,
+    color: colors.activeDarkBlue,
+    fontWeight: 'normal',
+  },
 }
