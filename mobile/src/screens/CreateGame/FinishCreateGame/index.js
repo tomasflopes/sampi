@@ -1,10 +1,12 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Alert, Share } from 'react-native';
+import React, { useEffect, useState, useContext } from 'react';
+import { View, Text, TouchableOpacity, Alert, Share, TextInput } from 'react-native';
 
 import { Picker } from '@react-native-community/picker';
 
-import { Form } from '@unform/mobile';
-import Input from '../../../components/Input';
+import * as SMS from 'expo-sms';
+
+import CreateGameContext from '../../../contexts/createGame';
+
 import ProgressStatus from '../../../components/ProgressStatus';
 
 import api from '../../../services/api';
@@ -17,6 +19,7 @@ import monthDays from 'month-days';
 import styles from './styles';
 
 export default function FinishCreateGame({ navigation }) {
+  const { playersArray, teams } = useContext(CreateGameContext);
   const [location, setLocation] = useState('');
 
   const [daysOfMonth, setDaysOfMonth] = useState([]);
@@ -30,7 +33,7 @@ export default function FinishCreateGame({ navigation }) {
   function populateYears() {
     const years = ['YEAR'];
 
-    for (let i = 1; i < 120; i++) {
+    for (let i = -2; i < 3; i++) {
       years.push(new Date().getFullYear() - i);
     }
 
@@ -55,34 +58,58 @@ export default function FinishCreateGame({ navigation }) {
 
   const years = populateYears();
 
-  const formRef = useRef(null);
+  async function handleSubmit() {
+    const date = `${eventMonth}-${eventDay}-${eventYear}`;
 
-  async function handleSubmit({ location }) {
     const headers = await generateHeaders();
 
-    const response = await api.post('/game', {
+    const teamA = teams.teamA.map(player => player._id);
+    const teamB = teams.teamB.map(player => player._id);
 
-    }, headers);
-
-    console.log(response);
-  }
-
-  function handleNextStepClick() {
-
+    await api.post('/game', {
+      teamA,
+      teamB,
+      date,
+      location
+    }, headers)
+      .catch(error => {
+        console.log(error.response.data);
+        Alert.alert('Error', error.response.data.message);
+      })
+      .then(res => {
+        console.log(res);
+      });
   }
 
   async function handleShare() {
-    try {
-      await Share.share({
-        message: shareMessage,
-      });
-    } catch (error) {
-      Alert.alert('Error', error.message);
+    if (eventDay && eventMonth && eventYear) {
+      try {
+        await Share.share({
+          message: shareMessage,
+        });
+      } catch (error) {
+        Alert.alert('Error', error.message);
+      }
+    } else {
+      Alert.alert('Error', "You need to set a date of the event before sharing!");
     }
   }
 
-  function handleSMS() {
+  async function handleSMS() {
+    if (eventDay && eventMonth && eventYear) {
+      const recipients = playersArray.map(player => player.phone);
 
+      const { result } = await SMS.sendSMSAsync(
+        [...recipients],
+        shareMessage
+      );
+
+      if (!result) {
+        Alert.alert('Error', "Your message couldn't be sent");
+      }
+    } else {
+      Alert.alert('Error', "You need to set a date of the event before sharing!");
+    }
   }
 
   useEffect(() => {
@@ -103,9 +130,19 @@ export default function FinishCreateGame({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
-        <Form ref={formRef} onSubmit={handleSubmit} >
-          <Input name="location" label="Location" type="location" />
-        </Form>
+        <TextInput
+          style={styles.textInput}
+          name="location"
+          placeholder="Location"
+          placeholderTextColor="#444"
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoCompleteType="street-address"
+          onChangeText={value => {
+            setLocation(value)
+          }}
+        />
+
         <Text style={styles.dateHeader}>Date</Text>
         <View style={styles.pickerRow}>
           <View style={[styles.formPickerContainer, { flex: 1.25 }]}>
@@ -174,8 +211,8 @@ export default function FinishCreateGame({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={handleSMS} style={styles.shareButton}>
-          <Icon style={styles.shareIcon} name="share" />
-          <Text style={styles.shareText}>Message everyone</Text>
+          <Icon style={styles.shareIcon} name="forum" />
+          <Text style={styles.shareText}>Notify everyone</Text>
         </TouchableOpacity>
       </View>
 
@@ -185,7 +222,7 @@ export default function FinishCreateGame({ navigation }) {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.nextStepButton} onPress={handleNextStepClick}>
+      <TouchableOpacity style={styles.nextStepButton} onPress={handleSubmit}>
         <Text style={styles.nextStepButtonText}>Create</Text>
       </TouchableOpacity>
 
@@ -194,6 +231,6 @@ export default function FinishCreateGame({ navigation }) {
       }}>
         <Text style={styles.nextStepButtonText}>Back</Text>
       </TouchableOpacity>
-    </View>
+    </View >
   );
 }

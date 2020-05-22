@@ -16,7 +16,7 @@ export default function ThirdStep({ navigation }) {
   }
 
   useEffect(() => {
-    if (!teams.teamA[0]) {
+    if (!teams.teamA[1]) {
       navigation.goBack();
     } else {
       setTeamA(teams.teamA);

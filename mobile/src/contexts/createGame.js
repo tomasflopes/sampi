@@ -18,7 +18,7 @@ export const CreateGameProvider = ({ children }) => {
   }
 
   function setPlayersArrayState(players) {
-    setPlayersArray(players);
+    setPlayersArray([...players]);
     shuffleTeams();
   }
 

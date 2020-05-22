@@ -16,10 +16,17 @@ export default styles = StyleSheet.create({
   },
 
   formContainer: {
-    flex: 5,
+    flex: 4,
     marginTop: 15,
     paddingHorizontal: 15,
     paddingBottom: 15,
+  },
+
+  textInput: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.lightGray,
+    flex: 1,
+    marginBottom: 5,
   },
 
   formPicker: {
@@ -42,7 +49,7 @@ export default styles = StyleSheet.create({
 
   shareSpace: {
     flex: 1,
-    marginTop: 10,
+    marginTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
   },
