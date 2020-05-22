@@ -12,10 +12,10 @@ export default function ProgressStatus({ step }) {
   }
 
   progressStatusArray.push(
-    <View key={3} style={styles.progressLast} />
+    <View key={5} style={styles.progressLast} />
   );
 
-  for (let j = 2; j > step; j--) {
+  for (let j = 3; j > step; j--) {
     progressStatusArray.push(
       <View key={j} style={styles.progressInactive} />
     );

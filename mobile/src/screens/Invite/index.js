@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, Share, TouchableOpacity, Image, Alert, AsyncStorage, Clipboard } from 'react-native';
+import { View, Text, Share, TouchableOpacity, Alert, Clipboard } from 'react-native';
 import styles from './styles';
 
 import { baseUrl } from '../../../config';

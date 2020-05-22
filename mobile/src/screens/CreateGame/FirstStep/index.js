@@ -92,6 +92,7 @@ export default function FirstStep({ navigation }) {
           <ProgressStatus step={0} />
         </View>
       </View>
+
       <TouchableOpacity
         style={styles.nextStepButton}
         onPress={handleNextClick}
