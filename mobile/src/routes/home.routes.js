@@ -6,6 +6,7 @@ import CreateGameStack from '../routes/createGame.routes';
 import HomeScreen from '../screens/Home';
 import InviteScreen from '../screens/Invite';
 import CreateGroupScreen from '../screens/CreateGroup';
+import FinishGameScreen from '../screens/FinishGame';
 import JoinGroupScreen from '../screens/JoinGroup';
 import ManageGroupScreen from '../screens/ManageGroup';
 import OtherGroupMembersScreen from '../screens/OtherGroupMembers';
@@ -22,6 +23,11 @@ export default createHomeStack = () =>
     <Stack.Screen
       name="CreateGame"
       children={CreateGameStack}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="FinishGame"
+      component={FinishGameScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen

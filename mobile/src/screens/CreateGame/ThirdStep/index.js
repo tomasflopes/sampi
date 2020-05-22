@@ -63,7 +63,7 @@ export default function ThirdStep({ navigation }) {
                   }}
                   style={styles.userAvatar}
                 />
-                <Text style={styles.userName}>{player.name}</Text>
+                <Text style={styles.userName}>{player.name.split(' ')[0]}</Text>
               </View>
             ))
           }

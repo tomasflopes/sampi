@@ -11,6 +11,7 @@ import api from '../../services/api';
 export default function Home({ navigation }) {
   const { update } = useContext(UpdateContext);
   const [hasGroup, setHasGroup] = useState(false);
+  const [hasActiveGame, setHasActiveGame] = useState(false);
 
   async function setUserGroupState() {
     const headers = await generateHeaders()
@@ -25,7 +26,20 @@ export default function Home({ navigation }) {
     setHasGroup(flag);
   }
 
+  async function checkForActiveGame() {
+    const headers = await generateHeaders();
+
+    const response = await api.get('/game', headers);
+
+    if (response.data != []) {
+      setHasActiveGame(true);
+    } else {
+      setHasActiveGame(false);
+    }
+  }
+
   useEffect(() => {
+    checkForActiveGame();
     setUserGroupState();
   }, [update])
 
@@ -51,14 +65,26 @@ export default function Home({ navigation }) {
               Invite Friends
           </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttonCreate}
-            onPress={() => { navigation.navigate('CreateGame') }}
-          >
-            <Text style={styles.buttonText}>
-              Create Game
+          {hasActiveGame ? (
+            <TouchableOpacity
+              style={styles.buttonCreate}
+              onPress={() => { navigation.navigate('FinishGame') }}
+            >
+              <Text style={styles.buttonText}>
+                Finish Game
+              </Text>
+            </TouchableOpacity>
+          ) : (
+              <TouchableOpacity
+                style={styles.buttonCreate}
+                onPress={() => { navigation.navigate('CreateGame') }}
+              >
+                <Text style={styles.buttonText}>
+                  Create Game
           </Text>
-          </TouchableOpacity>
+              </TouchableOpacity>
+            )
+          }
         </View>
 
       ) : ( //? Doesn't have group

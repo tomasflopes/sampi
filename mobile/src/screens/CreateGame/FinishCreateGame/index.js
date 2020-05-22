@@ -6,6 +6,7 @@ import { Picker } from '@react-native-community/picker';
 import * as SMS from 'expo-sms';
 
 import CreateGameContext from '../../../contexts/createGame';
+import UpdateContext from '../../../contexts/update';
 
 import ProgressStatus from '../../../components/ProgressStatus';
 
@@ -20,6 +21,7 @@ import styles from './styles';
 
 export default function FinishCreateGame({ navigation }) {
   const { playersArray, teams } = useContext(CreateGameContext);
+  const { updateState } = useContext(UpdateContext);
   const [location, setLocation] = useState('');
 
   const [daysOfMonth, setDaysOfMonth] = useState([]);
@@ -73,11 +75,12 @@ export default function FinishCreateGame({ navigation }) {
       location
     }, headers)
       .catch(error => {
-        console.log(error.response.data);
         Alert.alert('Error', error.response.data.message);
       })
-      .then(res => {
-        console.log(res);
+      .then(() => {
+        updateState();
+        Alert.alert('Success', 'You created the game!');
+        navigation.navigate('Home');
       });
   }
 
