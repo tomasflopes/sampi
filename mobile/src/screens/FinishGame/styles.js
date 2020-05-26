@@ -9,22 +9,21 @@ export default styles = StyleSheet.create({
     flex: 2,
     fontSize: 18,
     color: colors.mainBlue,
-    paddingHorizontal: 10,
+    paddingHorizontal: 18,
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: 15,
   },
 
   resultContainer: {
-    flex: 4,
+    flex: 3,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    paddingHorizontal: 20,
   },
 
   teamContainer: {
-    flex: 1,
+    flex: 5,
     alignItems: 'center',
-    justifyContent: 'center',
   },
 
   teamNameContainer: {
@@ -49,7 +48,6 @@ export default styles = StyleSheet.create({
 
   teamResultText: {
     fontSize: 25,
-    flex: 1,
     textAlign: 'center',
     color: colors.lightGray,
   },
@@ -61,33 +59,46 @@ export default styles = StyleSheet.create({
   },
 
   hintText: {
-    fontSize: 13,
-    paddingHorizontal: 5,
+    fontSize: 14,
+    paddingHorizontal: 12,
     color: colors.midGray,
     flex: 1,
     textAlign: 'center',
-    marginTop: 5,
+    marginVertical: 25,
   },
 
   mvpPickerContainer: {
-    flex: 4,
+    flex: 3,
     alignItems: 'center',
-    justifyContent: 'center',
   },
 
   mvpPicker: {
-    flex: 3,
+    flex: 1,
     width: 180,
     borderWidth: 1,
     borderColor: colors.mainBlue,
     borderRadius: 5,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
 
   mvpPickerText: {
     fontSize: 18,
     color: colors.activeDarkBlue,
-  }
+  },
+
+  noteText: {
+    marginTop: 10,
+    color: colors.midGray,
+    fontSize: 14,
+    textAlign: 'center',
+  },
+
+  confirmButton: {
+    ...general.fullWidthButton,
+    flex: 2,
+  },
+
+  confirmButtonText: general.fullWidthButtonText,
 });

@@ -20,7 +20,8 @@ export default function SignIn({ navigation }) {
       password
     })
       .catch((error) => {
-        Alert.alert("Error", error.response.data.message);
+        if (error.request._response) Alert.alert('Error', 'Fatal error connecting to server');
+        if (error.response.data) Alert.alert("Error", error.response.data.message);
       });
 
     if (response) {

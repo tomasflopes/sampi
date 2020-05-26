@@ -21,7 +21,7 @@ export default function FinishGame({ navigation }) {
 
       </Modal>
 
-      <Text style={styles.headerText}>So bla bla</Text>
+      <Text style={styles.headerText}>So... Your game has finished. Please, tell me how did it went?..</Text>
 
       <View style={styles.resultContainer}>
         <View style={styles.teamContainer}>
@@ -45,7 +45,7 @@ export default function FinishGame({ navigation }) {
         </View>
       </View>
 
-      <Text style={styles.hintText}>Hint</Text>
+      <Text style={styles.hintText}>Hint: You can tap the team name to show the players list</Text>
 
       <View style={styles.mvpPickerContainer}>
         <TouchableOpacity style={styles.mvpPicker}>
@@ -59,11 +59,11 @@ export default function FinishGame({ navigation }) {
             source={require('../../../assets/mvpStar.png')}
           />
         </TouchableOpacity>
-        <Text>Note</Text>
+        <Text style={styles.noteText}>Note: This step is optional</Text>
       </View>
 
-      <TouchableOpacity>
-        <Text>Confirm</Text>
+      <TouchableOpacity style={styles.confirmButton}>
+        <Text style={styles.confirmButtonText}>Confirm</Text>
       </TouchableOpacity>
     </View>
   );
