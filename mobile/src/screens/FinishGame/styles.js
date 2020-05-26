@@ -11,7 +11,7 @@ export default styles = StyleSheet.create({
     color: colors.mainBlue,
     paddingHorizontal: 18,
     textAlign: 'center',
-    marginTop: 15,
+    paddingVertical: 15,
   },
 
   resultContainer: {
@@ -29,6 +29,7 @@ export default styles = StyleSheet.create({
   teamNameContainer: {
     flex: 1,
     textAlign: 'center',
+    marginBottom: 5,
   },
 
   teamNameText: {
@@ -101,4 +102,46 @@ export default styles = StyleSheet.create({
   },
 
   confirmButtonText: general.fullWidthButtonText,
+
+  modalContainer: {
+    flex: 1,
+  },
+
+  modalHeader: {
+    textAlign: 'center',
+    fontSize: 22,
+    color: colors.mainBlue,
+    marginTop: 10,
+    flex: 1,
+  },
+
+  playersContainer: {
+    flex: 4,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 10,
+  },
+
+  playerContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+
+  playerPhoto: {
+    height: 50,
+    width: 50,
+    borderRadius: 50 / 2,
+  },
+
+  playerName: {
+    flex: 1,
+    marginLeft: 10,
+    fontSize: 15,
+  },
+
+  closeButton: general.fullWidthButton,
+
+  closeButtonText: general.fullWidthButtonText,
 });

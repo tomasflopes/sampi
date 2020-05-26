@@ -65,12 +65,9 @@ export default function FinishCreateGame({ navigation }) {
 
     const headers = await generateHeaders();
 
-    const teamA = teams.teamA.map(player => player._id);
-    const teamB = teams.teamB.map(player => player._id);
-
     await api.post('/game', {
-      teamA,
-      teamB,
+      teamA: teams.teamA,
+      teamB: teams.teamB,
       date,
       location
     }, headers)
