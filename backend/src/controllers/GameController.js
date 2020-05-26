@@ -1,4 +1,6 @@
 const Game = require('../models/Game');
+const User = require('../models/User');
+
 const { GetUserGroup, DecodeJWTToken } = require('../utils');
 
 module.exports = {
@@ -13,7 +15,10 @@ module.exports = {
   async store(request, response) {
     const { teamA, teamB, date, location } = request.body;
 
-    const playersArray = [...teamA, ...teamB];
+    const teamAIds = teamA.map(player => player._id);
+    const teamBIds = teamB.map(player => player._id);
+
+    const playersArray = [...teamAIds, ...teamBIds];
     const group = await GetUserGroup(playersArray);
 
     if (!group) return response.status(400).json({ Message: 'Not all players are from the same group' });
