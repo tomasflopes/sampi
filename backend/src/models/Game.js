@@ -3,12 +3,10 @@ const mongoose = require('mongoose');
 const GameSchema = new mongoose.Schema({
   teamA: [{
     type: Object,
-    ref: 'User',
     required: true,
   }],
   teamB: [{
     type: Object,
-    ref: 'User',
     required: true,
   }],
   date: {
@@ -22,8 +20,7 @@ const GameSchema = new mongoose.Schema({
     type: String,
   },
   mvp: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: Object,
   },
   idGroup: {
     type: mongoose.Schema.Types.ObjectId,
