@@ -19,15 +19,13 @@ export default styles = StyleSheet.create({
   },
 
   divider: {
+    flex: 2,
     marginTop: 30,
-    marginLeft: 20,
+    marginHorizontal: 20,
     borderBottomWidth: 2,
     borderTopWidth: 2,
     borderBottomColor: colors.mainBlue,
     borderTopColor: colors.mainBlue,
-    flex: 2,
-    width: 320,
-    flexDirection: 'row',
     alignItems: 'center',
   },
 
@@ -52,4 +50,26 @@ export default styles = StyleSheet.create({
   buttonCreate: general.fullWidthButton,
 
   buttonText: general.fullWidthButtonText,
+
+  cardsHeader: {
+    flex: 1,
+    fontSize: 20,
+    color: colors.mainBlue,
+    marginTop: 5,
+  },
+
+  teamsContainer: {
+    flex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenlyTom',
+  },
+
+  teamContainer: {
+    flex: 1,
+  },
+
+  resultContainer: {
+    flex: 1,
+  },
 });

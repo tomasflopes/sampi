@@ -52,7 +52,26 @@ export default function Home({ navigation }) {
         />
       </View>
       <View style={styles.divider}>
-        <Text style={styles.cards}>cards</Text>
+        <Text style={styles.cardsHeader}>LAST RESULT</Text>
+        <View style={styles.teamsContainer}>
+          <View style={styles.teamContainer}>
+            <Image
+              style={styles.teamLogo}
+              source={require('../../../assets/teamABadge.png')}
+            />
+            <Text>TEAM A</Text>
+          </View>
+          <View style={styles.resultContainer}>
+            <Text style={styles.resultText}>7 x 5</Text>
+            <View style={styles.teamContainer}>
+              <Image
+                style={styles.teamLogo}
+                source={require('../../../assets/teamBBadge.png')}
+              />
+              <Text>TEAM B</Text>
+            </View>
+          </View>
+        </View>
       </View>
       <View style={styles.spacer} />
       {hasGroup ? (
