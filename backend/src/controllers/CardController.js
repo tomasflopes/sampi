@@ -13,7 +13,7 @@ module.exports = {
       .find()
       .sort({ _id: -1 });
 
-    const userGames = games.filter(game => game.idGroup == userGroup);
+    const userGames = games.filter(game => userGroup[0].equals(game.idGroup));
 
     return response.status(200).json(userGames[0]);
   }
