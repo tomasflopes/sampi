@@ -27,6 +27,7 @@ export default styles = StyleSheet.create({
     borderBottomColor: colors.mainBlue,
     borderTopColor: colors.mainBlue,
     alignItems: 'center',
+    justifyContent: 'center',
   },
 
   cards: {
@@ -60,16 +61,36 @@ export default styles = StyleSheet.create({
 
   teamsContainer: {
     flex: 2,
+    marginBottom: 30,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenlyTom',
+    justifyContent: 'space-between',
+  },
+
+  teamName: {
+    fontSize: 18,
+    textAlign: 'center',
   },
 
   teamContainer: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   resultContainer: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+
+  teamLogo: {
+    height: 85,
+    width: 85,
+  },
+
+  resultText: {
+    textAlign: 'center',
+    fontSize: 32,
+  }
 });

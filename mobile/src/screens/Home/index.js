@@ -12,6 +12,7 @@ export default function Home({ navigation }) {
   const { update } = useContext(UpdateContext);
   const [hasGroup, setHasGroup] = useState(false);
   const [hasActiveGame, setHasActiveGame] = useState(false);
+  const [lastResult, setLastResult] = useState('');
 
   async function setUserGroupState() {
     const headers = await generateHeaders()
@@ -38,7 +39,20 @@ export default function Home({ navigation }) {
     }
   }
 
+  async function getLastResult() {
+    const headers = await generateHeaders();
+
+    const response = await api.get('/card', headers);
+
+    const resultArray = response.data.result.split('');
+
+    const result = `${resultArray[0]} - ${resultArray[2]}`;
+
+    setLastResult(result);
+  }
+
   useEffect(() => {
+    getLastResult();
     checkForActiveGame();
     setUserGroupState();
   }, [update])
@@ -59,17 +73,17 @@ export default function Home({ navigation }) {
               style={styles.teamLogo}
               source={require('../../../assets/teamABadge.png')}
             />
-            <Text>TEAM A</Text>
+            <Text style={styles.teamName}>TEAM A</Text>
           </View>
           <View style={styles.resultContainer}>
-            <Text style={styles.resultText}>7 x 5</Text>
-            <View style={styles.teamContainer}>
-              <Image
-                style={styles.teamLogo}
-                source={require('../../../assets/teamBBadge.png')}
-              />
-              <Text>TEAM B</Text>
-            </View>
+            <Text style={styles.resultText}>{lastResult}</Text>
+          </View>
+          <View style={styles.teamContainer}>
+            <Image
+              style={[styles.teamLogo, { marginBottom: -8, marginTop: 8 }]}
+              source={require('../../../assets/teamBBadge.png')}
+            />
+            <Text style={styles.teamName}>TEAM B</Text>
           </View>
         </View>
       </View>
