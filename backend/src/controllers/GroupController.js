@@ -17,6 +17,7 @@ module.exports = {
 
     for (let i = 0; i < players.length; i++) {
       const { _id, name, email, phone, avatar_url } = await User.findById(players[i]);
+
       playerInfo.push({
         _id,
         name,
@@ -41,8 +42,7 @@ module.exports = {
     const name = await generateUniqueName();
 
     console.log(name);
-
-    await Group
+    Group
       .create({
         name,
         players: player
@@ -96,6 +96,8 @@ module.exports = {
 
 async function generateUniqueName() {
   const groups = await Group.find();
+
+  if (groups.length === 0) return true;
 
   let unique = false;
   let name;
