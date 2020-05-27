@@ -23,7 +23,7 @@ export default function SecondStep({ navigation }) {
   }
 
   function handleNextStepClick() {
-    if (selectedPlayers.length === nPlayers) { //! TEST VALUE CHANGE TO nPlayers * 2
+    if (selectedPlayers.length === nPlayers * 2) { //! TEST VALUE CHANGE TO nPlayers * 2
       setPlayersArrayState(selectedPlayers);
       navigation.navigate('ThirdStep');
     } else {

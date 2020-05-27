@@ -92,5 +92,18 @@ export default styles = StyleSheet.create({
   resultText: {
     textAlign: 'center',
     fontSize: 32,
-  }
+  },
+
+  cardMessageHeader: {
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: '700',
+    color: colors.mainBlue,
+  },
+
+  cardMessage: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 10,
+  },
 });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native';
+import { View, Text, TouchableOpacity, Image, AsyncStorage, Alert } from 'react-native';
 import styles from './styles';
 
 import UpdateContext from '../../contexts/update';
@@ -42,7 +42,10 @@ export default function Home({ navigation }) {
   async function getLastResult() {
     const headers = await generateHeaders();
 
-    const response = await api.get('/card', headers);
+    const response = await api.get('/card', headers)
+      .catch(error => {
+        if (error.response.status === 400) setLastResult(0); return;
+      })
 
     const resultArray = response.data.result.split('');
 
@@ -66,26 +69,37 @@ export default function Home({ navigation }) {
         />
       </View>
       <View style={styles.divider}>
-        <Text style={styles.cardsHeader}>LAST RESULT</Text>
-        <View style={styles.teamsContainer}>
-          <View style={styles.teamContainer}>
-            <Image
-              style={styles.teamLogo}
-              source={require('../../../assets/teamABadge.png')}
-            />
-            <Text style={styles.teamName}>TEAM A</Text>
-          </View>
-          <View style={styles.resultContainer}>
-            <Text style={styles.resultText}>{lastResult}</Text>
-          </View>
-          <View style={styles.teamContainer}>
-            <Image
-              style={[styles.teamLogo, { marginBottom: -8, marginTop: 8 }]}
-              source={require('../../../assets/teamBBadge.png')}
-            />
-            <Text style={styles.teamName}>TEAM B</Text>
-          </View>
-        </View>
+        {
+          lastResult === 0 ? (
+            <>
+              <Text style={styles.cardMessageHeader}>You don't have stats to display yet</Text>
+              <Text style={styles.cardMessage}>Join a group and play some games to watch this filled</Text>
+            </>
+          ) : (
+              <>
+                <Text style={styles.cardsHeader}>LAST RESULT</Text>
+                <View style={styles.teamsContainer}>
+                  <View style={styles.teamContainer}>
+                    <Image
+                      style={styles.teamLogo}
+                      source={require('../../../assets/teamABadge.png')}
+                    />
+                    <Text style={styles.teamName}>TEAM A</Text>
+                  </View>
+                  <View style={styles.resultContainer}>
+                    <Text style={styles.resultText}>{lastResult}</Text>
+                  </View>
+                  <View style={styles.teamContainer}>
+                    <Image
+                      style={[styles.teamLogo, { marginBottom: -8, marginTop: 8 }]}
+                      source={require('../../../assets/teamBBadge.png')}
+                    />
+                    <Text style={styles.teamName}>TEAM B</Text>
+                  </View>
+                </View>
+              </>
+            )
+        }
       </View>
       <View style={styles.spacer} />
       {hasGroup ? (
