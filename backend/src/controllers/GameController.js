@@ -51,8 +51,25 @@ module.exports = {
     });
 
     return response.json(updateInfo);
+  },
+
+  async getGames(request, response) {
+    const userId = await DecodeJWTToken(request);
+
+    const games = await Game
+      .find()
+      .sort({ _id: -1 });
+
+    const [userGroup] = await GetUserGroup(userId);
+
+    const userGames = games.filter(game => game.idGroup.equals(userGroup._id));
+
+    const openGames = userGames.filter(game => typeof (game.result) !== 'undefined');
+
+    return response.status(200).json(openGames);
   }
 }
+
 
 async function getLastNotFinishedGameFromUser(userId) {
   const games = await Game

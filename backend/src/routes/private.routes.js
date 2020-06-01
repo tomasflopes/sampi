@@ -15,6 +15,8 @@ routes.get('/game', GameController.index);
 routes.post('/game', GameController.store);
 routes.put('/game', GameController.update);
 
+routes.get('/games', GameController.getGames);
+
 routes.get('/group', GroupController.index);
 routes.post('/group', GroupController.store);
 routes.put('/group', GroupController.update);
