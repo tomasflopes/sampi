@@ -2,12 +2,7 @@ const mongoose = require('mongoose');
 
 const LeaderBoardSchema = new mongoose.Schema({
   orderedPlayers: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  }],
-  playersPoints: [{
-    type: Number,
+    type: Object,
     required: true,
   }],
   createdAt: {
