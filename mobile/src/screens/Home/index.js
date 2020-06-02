@@ -22,9 +22,12 @@ export default function Home({ navigation }) {
         Alert.alert("Error", error.response.data.message);
       })
 
-    const flag = response.data ? true : false;
+    if (response.data) {
+      setHasGroup(true);
+      return;
+    }
 
-    setHasGroup(flag);
+    setHasGroup(false);
   }
 
   async function checkForActiveGame() {
@@ -32,10 +35,14 @@ export default function Home({ navigation }) {
 
     const response = await api.get('/game', headers);
 
-    if (response.data != []) {
-      setHasActiveGame(true);
-    } else {
-      setHasActiveGame(false);
+    try {
+      if (response.data != []) {
+        setHasActiveGame(true);
+      } else {
+        setHasActiveGame(false);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -45,7 +52,17 @@ export default function Home({ navigation }) {
     const response = await api.get('/card', headers)
       .catch(error => {
         if (error.response.status === 400) setLastResult(0); return;
-      })
+      });
+
+    if (response.data._id && !response.data.result) {
+      setLastResult(1);
+      return;
+    }
+
+    if (!response.data.result) {
+      setLastResult(0);
+      return;
+    }
 
     const resultArray = response.data.result.split('');
 
@@ -75,30 +92,35 @@ export default function Home({ navigation }) {
               <Text style={styles.cardMessageHeader}>You don't have stats to display yet</Text>
               <Text style={styles.cardMessage}>Join a group and play some games to watch this filled</Text>
             </>
+          ) : lastResult === 1 ? (
+            <>
+              <Text style={styles.cardMessageHeader}>You have a game in progress</Text>
+              <Text style={styles.cardMessage}>When you finish it just hit Finish Game and share the results!</Text>
+            </>
           ) : (
-              <>
-                <Text style={styles.cardsHeader}>LAST RESULT</Text>
-                <View style={styles.teamsContainer}>
-                  <View style={styles.teamContainer}>
-                    <Image
-                      style={styles.teamLogo}
-                      source={require('../../../assets/teamABadge.png')}
-                    />
-                    <Text style={styles.teamName}>TEAM A</Text>
+                <>
+                  <Text style={styles.cardsHeader}>LAST RESULT</Text>
+                  <View style={styles.teamsContainer}>
+                    <View style={styles.teamContainer}>
+                      <Image
+                        style={styles.teamLogo}
+                        source={require('../../../assets/teamABadge.png')}
+                      />
+                      <Text style={styles.teamName}>TEAM A</Text>
+                    </View>
+                    <View style={styles.resultContainer}>
+                      <Text style={styles.resultText}>{lastResult}</Text>
+                    </View>
+                    <View style={styles.teamContainer}>
+                      <Image
+                        style={[styles.teamLogo, { marginBottom: -8, marginTop: 8 }]}
+                        source={require('../../../assets/teamBBadge.png')}
+                      />
+                      <Text style={styles.teamName}>TEAM B</Text>
+                    </View>
                   </View>
-                  <View style={styles.resultContainer}>
-                    <Text style={styles.resultText}>{lastResult}</Text>
-                  </View>
-                  <View style={styles.teamContainer}>
-                    <Image
-                      style={[styles.teamLogo, { marginBottom: -8, marginTop: 8 }]}
-                      source={require('../../../assets/teamBBadge.png')}
-                    />
-                    <Text style={styles.teamName}>TEAM B</Text>
-                  </View>
-                </View>
-              </>
-            )
+                </>
+              )
         }
       </View>
       <View style={styles.spacer} />

@@ -24,7 +24,9 @@ export default function JoinGroup({ navigation }) {
 
     const response = await api.post(`/invite/${url}`, {}, headers)
       .catch(error => {
-        Alert.alert('Error', error.response.data);
+        if (error.response.data) Alert.alert('Error', error.response.data);
+        if (error.data.Error) Alert.alert('Error', error.data.Error);
+
       });
 
     Alert.alert('Success', `You are now in the group ${response.data.name}`);
