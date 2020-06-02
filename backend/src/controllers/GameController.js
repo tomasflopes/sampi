@@ -66,7 +66,23 @@ module.exports = {
 
     const openGames = userGames.filter(game => typeof (game.result) !== 'undefined');
 
-    return response.status(200).json(openGames);
+    const gameInfo = openGames.map(game => {
+      const userTeam = game.teamA.includes(userId) ? 'a' : 'b';
+
+      console.log(game.result);
+      const results = game.result.split('-');
+
+      console.log(results);
+      const teamAWins = results[0] > results[1] ? true : false;
+
+      if (userTeam === 'a' && teamAWins) return 'W';
+
+      if (userTeam === 'b' && !teamAWins) return 'W';
+
+      return 'L';
+    });
+
+    return response.status(200).json({ openGames, gameInfo });
   }
 }
 
