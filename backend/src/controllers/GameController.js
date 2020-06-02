@@ -69,10 +69,8 @@ module.exports = {
     const gameInfo = openGames.map(game => {
       const userTeam = game.teamA.includes(userId) ? 'a' : 'b';
 
-      console.log(game.result);
       const results = game.result.split('-');
 
-      console.log(results);
       const teamAWins = results[0] > results[1] ? true : false;
 
       if (userTeam === 'a' && teamAWins) return 'W';
@@ -82,7 +80,12 @@ module.exports = {
       return 'L';
     });
 
-    return response.status(200).json({ openGames, gameInfo });
+    const gameValues = openGames.map((object, index) => {
+      const gameResult = gameInfo[index];
+      return { ...object._doc, gameResult };
+    })
+
+    return response.status(200).json(gameValues);
   }
 }
 
