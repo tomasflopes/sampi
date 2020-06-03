@@ -86,15 +86,15 @@ describe('CRUD Game', () => {
 
     const users = await User.find();
 
-    const usersIds = users.map(user => user._id);
-
     request(server)
       .post('/game')
       .send({
-        playersArray: [
-          usersIds[0],
-          usersIds[1],
-          usersIds[2]
+        teamA: [
+          users[0],
+          users[1],
+        ],
+        teamB: [
+          users[2],
         ],
         date: faker.date.future(),
         location: faker.address.city()
@@ -117,10 +117,12 @@ describe('CRUD Game', () => {
     request(server)
       .post('/game')
       .send({
-        playersArray: [
-          usersIds[0],
-          usersIds[1],
-          usersIds[2]
+        teamA: [
+          users[0],
+          users[1],
+        ],
+        teamB: [
+          users[2],
         ],
         date: faker.date.future(),
         location: faker.address.city()
@@ -142,44 +144,17 @@ describe('CRUD Game', () => {
     request(server)
       .post('/game')
       .send({
-        playersArray: [
-          usersIds[0],
-          usersIds[1],
-          usersIds[2]
+        teamA: [
+          users[0],
+          users[1],
+        ],
+        teamB: [
+          users[2],
         ],
         date: faker.date.future(),
         location: faker.address.city()
       })
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
-      .expect(400)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
-  it('expect to not store new game when provided with invalid id', async (done) => {
-    const token = await generateToken();
-
-    const users = await User.find();
-
-    const usersIds = users.map(user => user._id);
-
-    request(server)
-      .post('/game')
-      .send({
-        playersArray: [
-          usersIds[0],
-          usersIds[1],
-          usersIds[2],
-          faker.internet.password
-        ],
-        date: faker.date.future(),
-        location: faker.address.city()
-      })
-      .set('Authorization', `Bearer: ${token}`)
       .expect(400)
       .end((error) => {
         if (error) {
@@ -199,10 +174,12 @@ describe('CRUD Game', () => {
     request(server)
       .post('/game')
       .send({
-        playersArray: [
-          usersIds[0],
-          usersIds[1],
-          usersIds[2]
+        teamA: [
+          users[0],
+          users[1],
+        ],
+        teamB: [
+          users[2],
         ],
         date: faker.date.future()
       })
@@ -219,15 +196,13 @@ describe('CRUD Game', () => {
   it('expect to update game info with mvp', async (done) => {
     const token = await generateToken();
 
-    const lastElement = await getLastElement(Game);
-
     const mvp = await getLastElement(User);
 
     request(server)
-      .put('/game/' + lastElement._id.toString())
+      .put('/game')
       .send({
         result: "08-05",
-        mvp: mvp._id.toString()
+        mvp
       })
       .set('Authorization', `Bearer: ${token}`)
       .expect(200)
@@ -240,15 +215,13 @@ describe('CRUD Game', () => {
   });
 
   it('expect to not update game info with mvp when token is not provided', async (done) => {
-    const lastElement = await getLastElement(Game);
-
     const mvp = await getLastElement(User);
 
     request(server)
-      .put('/game/' + lastElement._id.toString())
+      .put('/game')
       .send({
         result: "08-05",
-        mvp: mvp._id.toString()
+        mvp
       })
       .expect(401)
       .end((error) => {
@@ -260,15 +233,13 @@ describe('CRUD Game', () => {
   });
 
   it('expect to not update game info with mvp when provided token is invalid', async (done) => {
-    const lastElement = await getLastElement(Game);
-
     const mvp = await getLastElement(User);
 
     request(server)
-      .put('/game/' + lastElement._id.toString())
+      .put('/game')
       .send({
         result: "08-05",
-        mvp: mvp._id.toString()
+        mvp
       })
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
       .expect(400)
@@ -282,61 +253,14 @@ describe('CRUD Game', () => {
 
   it('expect to update game info without mvp', async (done) => {
     const token = await generateToken();
-    const lastElement = await getLastElement(Game);
 
     request(server)
-      .put('/game/' + lastElement._id.toString())
+      .put('/game')
       .send({
-        result: "08-05",
+        result: '08-05',
       })
       .set('Authorization', `Bearer: ${token}`)
       .expect(200)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
-  it('expect to not delete game when token is not provided', async (done) => {
-    const lastElement = await getLastElement(Game);
-
-    request(server)
-      .delete('/game/' + lastElement._id.toString())
-      .expect(401)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
-  it('expect to not delete game when provided token is invalid', async (done) => {
-    const lastElement = await getLastElement(Game);
-
-    request(server)
-      .delete('/game/' + lastElement._id.toString())
-      .set('Authorization', `Bearer: ${faker.internet.password()}`)
-      .expect(400)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
-  it('expect to delete game', async (done) => {
-    const token = await generateToken();
-
-    const lastElement = await getLastElement(Game);
-
-    request(server)
-      .delete('/game/' + lastElement._id.toString())
-      .set('Authorization', `Bearer: ${token}`)
-      .expect(202)
       .end((error) => {
         if (error) {
           return done(error);

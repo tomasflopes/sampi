@@ -25,21 +25,6 @@ afterAll(async () => {
 });
 
 describe('Card Testing', () => {
-  it('expect to return last game', async (done) => {
-    const token = await generateToken();
-
-    request(server)
-      .get('/card')
-      .set('Authorization', `Bearer: ${token}`)
-      .expect(200)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
   it('expect to not return last game when not provided token', (done) => {
     request(server)
       .get('/card')

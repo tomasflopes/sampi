@@ -58,7 +58,7 @@ module.exports = {
 
     const games = await Game
       .find()
-      .sort({ _id: -1 });
+      .sort({ _id: 1 });
 
     const [userGroup] = await GetUserGroup(userId);
 
@@ -70,6 +70,10 @@ module.exports = {
       const userTeam = game.teamA.includes(userId) ? 'a' : 'b';
 
       const results = game.result.split('-');
+
+      if (results[0] === results[1]) {
+        return 'T';
+      }
 
       const teamAWins = results[0] > results[1] ? true : false;
 

@@ -32,21 +32,6 @@ afterAll(async () => {
 });
 
 describe('CRUD Group', () => {
-  it('expect to return all groups', async (done) => {
-    const token = await generateToken();
-
-    request(server)
-      .get('/group')
-      .set('Authorization', `Bearer: ${token}`)
-      .expect(200)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
   it('expect to not return all groups when not provided with token', (done) => {
     request(server)
       .get('/group')
@@ -75,19 +60,8 @@ describe('CRUD Group', () => {
   it('expect to store new group', async (done) => {
     const token = await generateToken();
 
-    const users = await User.find();
-
-    const usersIds = users.map(user => user._id);
-
     request(server)
       .post('/group')
-      .send({
-        name: faker.hacker.adjective(),
-        players: [
-          usersIds[0],
-          usersIds[1]
-        ]
-      })
       .set('Authorization', `Bearer: ${token}`)
       .expect(201)
       .end((error) => {
@@ -98,115 +72,11 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not store new group when not providing name', async (done) => {
+  it('expect to return user group', async (done) => {
     const token = await generateToken();
 
-    const users = await User.find();
-
-    const usersIds = users.map(user => user._id);
-
     request(server)
-      .post('/group')
-      .send({
-        players: [
-          usersIds[0],
-          usersIds[1]
-        ]
-      })
-      .set('Authorization', `Bearer: ${token}`)
-      .expect(400)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
-  it('expect to not store new group when not provided token', async (done) => {
-    const users = await User.find();
-
-    const usersIds = users.map(user => user._id);
-
-    request(server)
-      .post('/group')
-      .send({
-        players: [
-          usersIds[0],
-          usersIds[1]
-        ]
-      })
-      .expect(401)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
-  it('expect to not store new group when provided with invalid token', async (done) => {
-    const users = await User.find();
-
-    const usersIds = users.map(user => user._id);
-
-    request(server)
-      .post('/group')
-      .send({
-        players: [
-          usersIds[0],
-          usersIds[1]
-        ]
-      })
-      .set('Authorization', `Bearer: ${faker.internet.password()}`)
-      .expect(400)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
-  it('expect to not store a new group when provided with invalid id', async (done) => {
-    const token = await generateToken();
-    const users = await User.find();
-
-    const usersIds = users.map(user => user._id);
-
-    request(server)
-      .post('/group')
-      .send({
-        players: [
-          usersIds[0],
-          usersIds[1],
-          faker.internet.password()
-        ]
-      })
-      .set('Authorization', `Bearer: ${token}`)
-      .expect(400)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
-  it('expect to add player to group', async (done) => {
-    const token = await generateToken();
-
-    await createUser();
-    const lastElement = await getLastElement(Group);
-    const lastUser = await getLastElement(User);
-
-    const _id = lastUser._id;
-
-    request(server)
-      .put('/group/' + lastElement._id.toString())
-      .send({
-        newPLayer: _id
-      })
+      .get('/group')
       .set('Authorization', `Bearer: ${token}`)
       .expect(200)
       .end((error) => {
@@ -217,18 +87,9 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not add player to group when not provided token', async (done) => {
-    await createUser();
-    const lastElement = await getLastElement(Group);
-    const lastUser = await getLastElement(User);
-
-    const _id = lastUser._id;
-
+  it('expect to not store new group when not provided token', async (done) => {
     request(server)
-      .put('/group/' + lastElement._id.toString())
-      .send({
-        _id
-      })
+      .post('/group')
       .expect(401)
       .end((error) => {
         if (error) {
@@ -238,41 +99,10 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not add player to group when provided invalid token', async (done) => {
-    await createUser();
-    const lastElement = await getLastElement(Group);
-    const lastUser = await getLastElement(User);
-
-    const _id = lastUser._id;
-
+  it('expect to not store new group when provided with invalid token', async (done) => {
     request(server)
-      .put('/group/' + lastElement._id.toString())
-      .send({
-        _id
-      })
+      .post('/group')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
-      .expect(400)
-      .end((error) => {
-        if (error) {
-          return done(error);
-        }
-        done();
-      });
-  });
-
-  it('expect to throw error when inserting existing player', async (done) => {
-    const token = await generateToken();
-
-    const lastElement = await getLastElement(Group);
-
-    const existingPlayer = lastElement.players[0];
-
-    request(server)
-      .put('/group/' + lastElement._id.toString())
-      .send({
-        newPlayer: existingPlayer._id
-      })
-      .set('Authorization', `Bearer: ${token}`)
       .expect(400)
       .end((error) => {
         if (error) {

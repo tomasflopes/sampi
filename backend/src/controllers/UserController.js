@@ -54,7 +54,6 @@ module.exports = {
   async update(request, response) {
     const _id = await DecodeJWTToken(request);
     const { name, phone, position } = request.body;
-    console.log(request.file);
     const { location, filename } = request.file || { location: undefined, filename: undefined };
 
     if (!(location == undefined && filename == undefined)) {

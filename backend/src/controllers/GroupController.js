@@ -41,7 +41,6 @@ module.exports = {
 
     const name = await generateUniqueName();
 
-    console.log(name);
     Group
       .create({
         name,
