@@ -83,4 +83,8 @@ export default styles = StyleSheet.create({
     marginLeft: 10,
     color: colors.selectedGreen,
   },
+
+  tie: {
+    color: colors.midGray,
+  },
 });

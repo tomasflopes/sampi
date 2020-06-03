@@ -35,7 +35,10 @@ export default function LeaderBoard({ navigation }) {
         {
           games.map(game => (
             <View style={styles.teamsContainer}>
-              <Text style={game.gameResult === 'L' ? styles.loose : styles.win}>{game.gameResult}</Text>
+              <Text style={[
+                game.gameResult === 'L' ? styles.loose : styles.win,
+                game.gameResult === 'T' ? styles.tie : null
+              ]}>{game.gameResult}</Text>
               <View style={styles.teamContainer}>
                 <Image
                   style={styles.teamLogo}
@@ -57,6 +60,6 @@ export default function LeaderBoard({ navigation }) {
           ))
         }
       </ScrollView>
-    </View>
+    </View >
   )
 }
