@@ -64,9 +64,9 @@ export default function Home({ navigation }) {
       return;
     }
 
-    const resultArray = response.data.result.split('');
+    const resultArray = response.data.result.split('-');
 
-    const result = `${resultArray[0]} - ${resultArray[2]}`;
+    const result = `${resultArray[0]} - ${resultArray[1]}`;
 
     setLastResult(result);
   }

@@ -14,7 +14,6 @@ export default styles = StyleSheet.create({
 
   comingSoon: {
     marginTop: 5,
-    flex: .8,
     justifyContent: 'center',
   },
 
@@ -22,6 +21,10 @@ export default styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     color: colors.midGray,
+  },
+
+  gamesHolder: {
+    flex: 2,
   },
 
   teamsContainer: {

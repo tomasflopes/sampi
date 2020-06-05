@@ -33,31 +33,36 @@ export default function LeaderBoard({ navigation }) {
       <Text style={styles.header}>You Last Results</Text>
       <ScrollView style={styles.gamesHolder}>
         {
-          games.map(game => (
-            <View style={styles.teamsContainer}>
-              <Text style={[
-                game.gameResult === 'L' ? styles.loose : styles.win,
-                game.gameResult === 'T' ? styles.tie : null
-              ]}>{game.gameResult}</Text>
-              <View style={styles.teamContainer}>
-                <Image
-                  style={styles.teamLogo}
-                  source={require('../../../assets/teamABadge.png')}
-                />
-                <Text style={styles.teamName}>TEAM A</Text>
+          games.map(game => {
+            const results = game.result.split('-');
+            const result = `${results[0]} - ${results[1]}`;
+
+            return (
+              <View style={styles.teamsContainer}>
+                <Text style={[
+                  game.gameResult === 'L' ? styles.loose : styles.win,
+                  game.gameResult === 'T' ? styles.tie : null
+                ]}>{game.gameResult}</Text>
+                <View style={styles.teamContainer}>
+                  <Image
+                    style={styles.teamLogo}
+                    source={require('../../../assets/teamABadge.png')}
+                  />
+                  <Text style={styles.teamName}>TEAM A</Text>
+                </View>
+                <View style={styles.resultContainer}>
+                  <Text style={styles.resultText}>{result}</Text>
+                </View>
+                <View style={styles.teamContainer}>
+                  <Image
+                    style={[styles.teamLogo, { marginBottom: -8, marginTop: 8 }]}
+                    source={require('../../../assets/teamBBadge.png')}
+                  />
+                  <Text style={styles.teamName}>TEAM B</Text>
+                </View>
               </View>
-              <View style={styles.resultContainer}>
-                <Text style={styles.resultText}>{game.result}</Text>
-              </View>
-              <View style={styles.teamContainer}>
-                <Image
-                  style={[styles.teamLogo, { marginBottom: -8, marginTop: 8 }]}
-                  source={require('../../../assets/teamBBadge.png')}
-                />
-                <Text style={styles.teamName}>TEAM B</Text>
-              </View>
-            </View>
-          ))
+            )
+          })
         }
       </ScrollView>
     </View >
