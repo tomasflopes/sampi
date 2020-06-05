@@ -58,7 +58,7 @@ module.exports = {
 
     const games = await Game
       .find()
-      .sort({ _id: 1 });
+      .sort({ _id: -1 });
 
     const [userGroup] = await GetUserGroup(userId);
 
