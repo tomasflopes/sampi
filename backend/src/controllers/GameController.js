@@ -75,7 +75,10 @@ module.exports = {
         return 'T';
       }
 
-      const teamAWins = results[0] > results[1] ? true : false;
+      const teamAResult = parseInt(results[0]);
+      const teamBResult = parseInt(results[1]);
+
+      const teamAWins = teamAResult > teamBResult ? true : false;
 
       if (userTeam === 'a' && teamAWins) return 'W';
 
