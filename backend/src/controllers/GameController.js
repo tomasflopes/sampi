@@ -7,6 +7,10 @@ module.exports = {
   async index(request, response) {
     const userId = await DecodeJWTToken(request);
 
+    const userGroup = await GetUserGroup(userId);
+
+    if (!userGroup[0]) return response.status(400).json({ Message: 'User has no group' });
+
     const lastGame = await getLastNotFinishedGameFromUser(userId);
 
     return response.status(200).json(lastGame);
@@ -62,6 +66,8 @@ module.exports = {
 
     const [userGroup] = await GetUserGroup(userId);
 
+    if (!userGroup) return response.status(400).json({ Message: 'User has no group' });
+
     const userGames = games.filter(game => game.idGroup.equals(userGroup._id));
 
     const openGames = userGames.filter(game => typeof (game.result) !== 'undefined');
@@ -95,7 +101,6 @@ module.exports = {
     return response.status(200).json(gameValues);
   }
 }
-
 
 async function getLastNotFinishedGameFromUser(userId) {
   const games = await Game

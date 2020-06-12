@@ -31,5 +31,4 @@ routes.delete('/user', UserController.delete);
 
 routes.post('/invite/:groupId', InviteController.add);
 
-
 module.exports = routes;

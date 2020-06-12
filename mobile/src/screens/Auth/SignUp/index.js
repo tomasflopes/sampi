@@ -130,9 +130,9 @@ export default function SignUp({ navigation }) {
                 onValueChange={itemValue => itemValue !== 'GENDER' ? setGender(itemValue) : null}
               >
                 {
-                  genders.map(item => {
+                  genders.map((item, index) => {
                     return (
-                      <Picker.Item key={item} label={item} value={item} />
+                      <Picker.Item key={index} label={item} value={item} />
                     );
                   })
                 }
@@ -147,9 +147,9 @@ export default function SignUp({ navigation }) {
                   onValueChange={itemValue => itemValue != 'MONTH' ? setBirthdayMonth(itemValue) : null}
                 >
                   {
-                    months.map(item => {
+                    months.map((item, index) => {
                       return (
-                        <Picker.Item label={item} value={item} />
+                        <Picker.Item key={index} label={item} value={item} />
                       );
                     })
                   }
@@ -165,9 +165,9 @@ export default function SignUp({ navigation }) {
                   onValueChange={itemValue => itemValue != 'DAY' ? setBirthdayDay(itemValue) : null}
                 >
                   {
-                    daysOfMonth.map(item => {
+                    daysOfMonth.map((item, index) => {
                       return (
-                        <Picker.Item label={item.toString()} value={item} />
+                        <Picker.Item key={index} label={item.toString()} value={item} />
                       );
                     })
                   }
@@ -183,9 +183,9 @@ export default function SignUp({ navigation }) {
                   onValueChange={itemValue => itemValue != 'YEAR' ? setBirthdayYear(itemValue) : null}
                 >
                   {
-                    years.map(item => {
+                    years.map((item, index) => {
                       return (
-                        <Picker.Item label={item.toString()} value={item} />
+                        <Picker.Item key={index} label={item.toString()} value={item} />
                       );
                     })
                   }
@@ -203,9 +203,9 @@ export default function SignUp({ navigation }) {
                 mode="dialog"
               >
                 {
-                  positions.map(item => {
+                  positions.map((item, index) => {
                     return (
-                      <Picker.Item label={item} value={item} />
+                      <Picker.Item key={index} label={item} value={item} />
                     );
                   })
                 }

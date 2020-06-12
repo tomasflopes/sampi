@@ -13,7 +13,10 @@ export default styles = StyleSheet.create({
   },
 
   playersContainer: {
-    flex: 6,
+    flexGrow: .1,
+  },
+
+  playersContainerContent: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',

@@ -9,6 +9,8 @@ YellowBox.ignoreWarnings([
   'RootErrorBoundary'
 ]);
 
+console.disableYellowBox = true;
+
 export default function App() {
   return (
     <>

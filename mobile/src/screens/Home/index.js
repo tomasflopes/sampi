@@ -51,7 +51,10 @@ export default function Home({ navigation }) {
 
     const response = await api.get('/card', headers)
       .catch(error => {
-        if (error.response.status === 400) setLastResult(0); return;
+        if (error.response) {
+          setLastResult(0);
+          return;
+        }
       });
 
     if (response.data._id && !response.data.result) {

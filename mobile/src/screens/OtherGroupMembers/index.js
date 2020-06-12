@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, ScrollView } from 'react-native';
 
 import TopBar from '../../components/TopBar';
 
@@ -28,7 +28,7 @@ export default function OtherGroupMembers({ navigation }) {
     <View style={styles.container}>
       <TopBar navigation={navigation} />
       <Text style={styles.header}>Group Members</Text>
-      <View style={styles.playersContainer}>
+      <ScrollView style={styles.playersContainer} contentContainerStyle={styles.playersContainerContent}>
         {players.map(player => (
           <View key={player._id} style={styles.playerContainer}>
             <Image
@@ -40,7 +40,7 @@ export default function OtherGroupMembers({ navigation }) {
             <Text style={styles.playerName}>{player.name}</Text>
           </View>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 }
