@@ -7,9 +7,9 @@ import api from '../../services/api';
 import { generateHeaders } from '../../utils';
 import UpdateContext from '../../contexts/update';
 
-import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
+import HelpButton from '../../components/HelpButton';
 
-export default function LeaderBoard({ navigation }) {
+export default function LeaderBoard() {
   const [games, setGames] = useState([]);
   const { update } = useContext(UpdateContext);
 
@@ -65,6 +65,10 @@ export default function LeaderBoard({ navigation }) {
           })
         }
       </ScrollView>
+      <HelpButton
+        text="In this screen you can see all the recent games you've been part of. This way you
+        can see who won and lost in order to know how you're performing in the recent times."
+      />
     </View >
   )
 }

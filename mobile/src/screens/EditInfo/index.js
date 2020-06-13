@@ -17,6 +17,7 @@ import { generateHeaders } from '../../utils';
 
 import Input from '../../components/Input';
 import TopBar from '../../components/TopBar';
+import HelpButton from '../../components/HelpButton';
 
 export default function EditInfo({ navigation }) {
   const formRef = useRef(null);
@@ -151,7 +152,12 @@ export default function EditInfo({ navigation }) {
       >
         <Text style={styles.buttonText}>CONFIRM</Text>
       </TouchableOpacity>
-
+      <HelpButton
+        text="Here you can edit your personal inaccurate information. If you haven't one yet, you
+        can set your own profile picture to distinguish you from all the other players of the group!
+        Just tap the fields, correct the information, and click confirm. All the information
+        will be automatically updated."
+      />
     </View>
   );
 }

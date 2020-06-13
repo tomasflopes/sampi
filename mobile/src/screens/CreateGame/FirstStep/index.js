@@ -4,6 +4,8 @@ import styles from './styles';
 
 import { Picker } from '@react-native-community/picker';
 
+import HelpButton from '../../../components/HelpButton';
+
 import CreateGameContext from '../../../contexts/createGame';
 
 import ProgressStatus from '../../../components/ProgressStatus';
@@ -99,6 +101,11 @@ export default function FirstStep({ navigation }) {
       >
         <Text style={styles.nextStepButtonText}>Next Step</Text>
       </TouchableOpacity>
+      <HelpButton
+        text="Here you will be able to setup your next game. We will be walking through a set of
+        steps that will help you configure every aspect of the game. In the end you can share the
+        details with everyone in the group in order to facilitate the communication!"
+      />
     </View >
   );
 }

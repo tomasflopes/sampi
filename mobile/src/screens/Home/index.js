@@ -184,7 +184,11 @@ export default function Home({ navigation }) {
         )}
       <View style={styles.spacer} />
       <HelpButton
-        text="Sup"
+        text="This is the home screen. You can say this is the main component of the app,
+        here you have access to the most relevant information about your latest games
+        as well as being able to interact with the app. Firstly, you must join, or create, a group
+        to be able to enjoy the app to it's fullest. Then, you will be able to invite your friends to join
+        and create games to play with them."
       />
     </View>
   )

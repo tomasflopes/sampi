@@ -9,6 +9,8 @@ import UpdateContext from '../../contexts/update';
 
 import { generateHeaders } from '../../utils';
 
+import HelpButton from '../../components/HelpButton';
+
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 export default function Profile({ navigation }) {
@@ -120,6 +122,11 @@ export default function Profile({ navigation }) {
       <View style={styles.spacer} />
       <TouchableOpacity style={styles.editInfo} onPress={() => navigation.navigate('EditInfo')}><Text style={styles.editInfoText}>Edit Info</Text></TouchableOpacity>
       <View style={styles.spacer} />
+      <HelpButton
+        text="This is your profile! Here you can see all your personal information
+        and change them if there are no longer accurate. For that, just click the Edit Profile
+        Button in the bottom of the screen."
+      />
     </View >
   )
 }
