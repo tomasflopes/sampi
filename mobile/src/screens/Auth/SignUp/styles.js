@@ -75,5 +75,5 @@ export default styles = StyleSheet.create({
   clickableSignUpText: {
     color: colors.highlightYellow,
     fontSize: 17,
-  }
+  },
 });

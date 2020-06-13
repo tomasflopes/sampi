@@ -4,6 +4,8 @@ import styles from './styles';
 
 import UpdateContext from '../../contexts/update';
 
+import HelpButton from '../../components/HelpButton';
+
 import { generateHeaders } from '../../utils'
 
 import api from '../../services/api';
@@ -181,6 +183,9 @@ export default function Home({ navigation }) {
           </View>
         )}
       <View style={styles.spacer} />
+      <HelpButton
+        text="Sup"
+      />
     </View>
   )
 }

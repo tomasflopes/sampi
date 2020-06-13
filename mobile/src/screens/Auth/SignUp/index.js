@@ -8,6 +8,7 @@ import monthDays from 'month-days';
 import api from '../../../services/api';
 
 import Input from '../../../components/Input';
+import HelpButton from '../../../components/HelpButton';
 
 import styles from './styles';
 
@@ -238,6 +239,14 @@ export default function SignUp({ navigation }) {
           <Text style={styles.clickableSignUpText}>Sign In!</Text>
         </TouchableOpacity>
       </View>
+      <HelpButton
+        text="These are the authentication screens,
+          here you will be able to provide your credentials in order to be identified in the app.
+          When you create a profile you need to correctly provide some information that we will use
+          in order to make your profile more suitable for you! Later you will be able to change some of it
+          as well as add a picture to your profile to customize it even more! For now, just provide your
+          e-mail and password and tap the button LOGIN to start!"
+      />
     </View >
   );
 }

@@ -55,30 +55,4 @@ export default styles = StyleSheet.create({
     color: colors.highlightYellow,
     fontSize: 17,
   },
-
-  helpButton: {
-    height: 40,
-    width: 40,
-    borderRadius: 40 / 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  modalContainer: {
-    flex: 1,
-  },
-
-  modalCloseButton: general.fullWidthButton,
-
-  modalCloseButtonText: general.fullWidthButtonText,
-
-  modalHeader: {
-    fontSize: 22,
-    color: colors.mainBlue,
-  },
-
-  modalText: {
-    fontSize: 18,
-    color: colors.mainBlue,
-  },
 });

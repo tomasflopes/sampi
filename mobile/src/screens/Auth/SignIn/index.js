@@ -8,18 +8,14 @@ import api from '../../../services/api';
 
 import Input from '../../../components/Input';
 
-import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
+import HelpButton from '../../../components/HelpButton';
 
 import styles from './styles';
 
 export default function SignIn({ navigation }) {
+
   const formRef = useRef(null);
   const { SignIn } = useContext(AuthContext);
-  const [visible, setVisible] = useState(false);
-
-  function toggleVisibility() {
-    setVisible(!visible);
-  }
 
   async function handleSubmit({ email, password }) {
     const response = await api.post('/api/user/login', {
@@ -42,14 +38,6 @@ export default function SignIn({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Modal style={styles.modalContainer}>
-        <Text style={styles.modalHeader}>Title</Text>
-        <Text style={styles.modalText}>Cenas</Text>
-        <TouchableOpacity style={styles.modalCloseButton} onPress={toggleVisibility}>
-          <Text style={styles.modalCloseButtonText}>Close</Text>
-        </TouchableOpacity>
-      </Modal>
-
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}
@@ -92,9 +80,14 @@ export default function SignIn({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.helpButton} onPress={toggleVisibility}>
-        <Icon name="help" size={20} />
-      </TouchableOpacity>
+      <HelpButton
+        text="These are the authentication screens,
+          here you will be able to provide your credentials in order to be identified in the app.
+          When you create a profile you need to correctly provide some information that we will use
+          in order to make your profile more suitable for you! Later you will be able to change some of it
+          as well as add a picture to your profile to customize it even more! For now, just provide your
+          e-mail and password and tap the button LOGIN to start!"
+      />
     </View>
   );
 }
