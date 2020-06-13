@@ -1,5 +1,5 @@
-import React, { useRef, useContext } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, AsyncStorage, Alert } from 'react-native';
+import React, { useRef, useContext, useState } from 'react';
+import { View, Text, TouchableOpacity, Image, ScrollView, AsyncStorage, Alert, Modal } from 'react-native';
 import { Form } from '@unform/mobile';
 
 import AuthContext from '../../../contexts/auth';
@@ -8,11 +8,18 @@ import api from '../../../services/api';
 
 import Input from '../../../components/Input';
 
+import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
+
 import styles from './styles';
 
 export default function SignIn({ navigation }) {
   const formRef = useRef(null);
   const { SignIn } = useContext(AuthContext);
+  const [visible, setVisible] = useState(false);
+
+  function toggleVisibility() {
+    setVisible(!visible);
+  }
 
   async function handleSubmit({ email, password }) {
     const response = await api.post('/api/user/login', {
@@ -35,6 +42,14 @@ export default function SignIn({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Modal style={styles.modalContainer}>
+        <Text style={styles.modalHeader}>Title</Text>
+        <Text style={styles.modalText}>Cenas</Text>
+        <TouchableOpacity style={styles.modalCloseButton} onPress={toggleVisibility}>
+          <Text style={styles.modalCloseButtonText}>Close</Text>
+        </TouchableOpacity>
+      </Modal>
+
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}
@@ -76,6 +91,10 @@ export default function SignIn({ navigation }) {
           <Text style={styles.clickableSignUpText}>Sign up!</Text>
         </TouchableOpacity>
       </View>
+
+      <TouchableOpacity style={styles.helpButton} onPress={toggleVisibility}>
+        <Icon name="help" size={20} />
+      </TouchableOpacity>
     </View>
   );
 }
