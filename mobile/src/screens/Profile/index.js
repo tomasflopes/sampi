@@ -123,6 +123,7 @@ export default function Profile({ navigation }) {
       <TouchableOpacity style={styles.editInfo} onPress={() => navigation.navigate('EditInfo')}><Text style={styles.editInfoText}>Edit Info</Text></TouchableOpacity>
       <View style={styles.spacer} />
       <HelpButton
+        flex={1}
         text="This is your profile! Here you can see all your personal information
         and change them if there are no longer accurate. For that, just click the Edit Profile
         Button in the bottom of the screen."

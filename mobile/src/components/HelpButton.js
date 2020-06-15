@@ -5,7 +5,7 @@ import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 import { general } from '../styles';
 
-export default function HelpButton({ text }) {
+export default function HelpButton({ text, flex }) {
   const [visible, setVisible] = useState(false);
 
   function toggleVisibility() {
@@ -26,7 +26,7 @@ export default function HelpButton({ text }) {
         </TouchableOpacity>
       </Modal>
 
-      <View style={styles.helpButtonContainer}>
+      <View style={[styles.helpButtonContainer, { flex: flex || .8 }]}>
         <TouchableOpacity style={styles.helpButton} onPress={toggleVisibility}>
           <Icon style={styles.helpIcon} name="question-mark" />
         </TouchableOpacity>
@@ -37,7 +37,6 @@ export default function HelpButton({ text }) {
 
 const styles = StyleSheet.create({
   helpButtonContainer: {
-    flex: .8,
     alignItems: 'flex-end',
   },
 

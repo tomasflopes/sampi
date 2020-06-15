@@ -153,6 +153,7 @@ export default function EditInfo({ navigation }) {
         <Text style={styles.buttonText}>CONFIRM</Text>
       </TouchableOpacity>
       <HelpButton
+        flex={1.2}
         text="Here you can edit your personal inaccurate information. If you haven't one yet, you
         can set your own profile picture to distinguish you from all the other players of the group!
         Just tap the fields, correct the information, and click confirm. All the information
