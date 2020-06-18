@@ -47,7 +47,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 8,
+    paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.buttonsBlue,
@@ -66,7 +66,7 @@ export default styles = StyleSheet.create({
   teamFormationModeHeaderText: {
     flex: 1,
     textAlign: 'center',
-    fontSize: 19,
+    fontSize: 18,
     color: colors.mainBlue
   },
 

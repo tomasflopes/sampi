@@ -38,6 +38,8 @@ export default function HelpButton({ text, flex }) {
 const styles = StyleSheet.create({
   helpButtonContainer: {
     alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    marginBottom: 10,
   },
 
   helpButton: {

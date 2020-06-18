@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Image, ImageBackground, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ImageBackground, Alert, ScrollView } from 'react-native';
 import styles from './styles';
 
 import api from '../../../services/api';
@@ -93,7 +93,7 @@ export default function SecondStep({ navigation }) {
         <Text style={styles.title}>CREATE GAME</Text>
       </View>
 
-      <View style={styles.playerPhotos}>
+      <ScrollView style={styles.playerPhotos} contentContainerStyle={styles.playerPhotosContainer}>
         {players.map(player =>
           (
             <Player
@@ -104,7 +104,7 @@ export default function SecondStep({ navigation }) {
             />
           )
         )}
-      </View>
+      </ScrollView>
 
       <View style={styles.helpTextContainer}>
         <Text style={styles.helpTextHeader}>Pick the players</Text>

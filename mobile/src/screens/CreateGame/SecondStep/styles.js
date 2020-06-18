@@ -10,12 +10,15 @@ export default styles = StyleSheet.create({
   title: general.screenTitle,
 
   playerPhotos: {
-    flex: 8,
-    flexDirection: 'row',
+    height: '50%',
     marginHorizontal: 10,
+  },
+
+  playerPhotosContainer: {
     flexWrap: 'wrap',
-    alignItems: 'center',
+    flexDirection: 'row',
     justifyContent: 'flex-start',
+    alignItems: 'center',
   },
 
   userAvatarContainer: {

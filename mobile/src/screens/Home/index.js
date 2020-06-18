@@ -182,7 +182,6 @@ export default function Home({ navigation }) {
             </TouchableOpacity>
           </View>
         )}
-      <View style={styles.spacer} />
       <HelpButton
         text="This is the home screen. You can say this is the main component of the app,
         here you have access to the most relevant information about your latest games

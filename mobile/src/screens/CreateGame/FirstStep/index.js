@@ -80,7 +80,7 @@ export default function FirstStep({ navigation }) {
             <Text style={styles.teamFormationModeHeaderText}>DRAFT</Text>
           </View>
           <Text style={styles.comingSoonText}>COMING SOON</Text>
-          <Text style={[styles.teamFormationModeText, { marginTop: 2 }]}>On this mode the teams will be picked by two captains, randomly picked by the app.</Text>
+          <Text style={[styles.teamFormationModeText, { marginTop: 1 }]}>On this mode the teams will be picked by two captains, randomly picked by the app.</Text>
         </TouchableOpacity>
       </View>
 
@@ -102,6 +102,7 @@ export default function FirstStep({ navigation }) {
         <Text style={styles.nextStepButtonText}>Next Step</Text>
       </TouchableOpacity>
       <HelpButton
+        flex={.2}
         text="Here you will be able to setup your next game. We will be walking through a set of
         steps that will help you configure every aspect of the game. In the end you can share the
         details with everyone in the group in order to facilitate the communication!"
