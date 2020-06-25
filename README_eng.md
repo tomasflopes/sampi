@@ -30,7 +30,7 @@
 
 Give a ⭐️ if this project helped you!
 
-Also a [Buy me a Coffee ☕](https://www.buymeacoffee.com/) page coming soon!
+Also a [Buy me a Coffee ☕](https://www.buymeacoffee.com/tomas050302) page coming soon!
 
 ***
 
