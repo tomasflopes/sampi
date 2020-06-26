@@ -121,12 +121,6 @@ Para iniciar o projeto é apenas necessário clonar o projeto diretamente do Git
 
 De seguida é importante instalar todas as dependências
 
-#### `yarn`
-
-Para correr o programa no emulador ou num dispositivo físico previamente configurado só é necessário
-
-#### `yarn start`
-
 ### .Env
 
 Este ficheiro tem de ser ignorado nos commits devido a conter nele informação sensível que poderia ser explorada por pessoas mal intencionadas, com isto em mente, é ignorada em todos os commits. Tomei, no entanto, a liberdade de deixar um .env_temp para servir de template a quem quiser testar a aplicação no seu próprio ambiente de desenvolvimento com todas as indicações necessárias a seguir para ser possível preencher com os dados pessoais.
