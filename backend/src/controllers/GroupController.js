@@ -53,12 +53,15 @@ module.exports = {
   async update(request, response) {
     const playerId = await DecodeJWTToken(request);
     const groupId = await GetUserGroup(playerId);
+
+    if (!groupId[0]) return response.status(400).json({ Message: 'User has no group' });
+
     const { name } = request.body;
 
     const info = await Group.updateOne({
       _id: groupId
     }, {
-      name: name || oldName,
+      name
     });
 
     return response.status(200).send(info);

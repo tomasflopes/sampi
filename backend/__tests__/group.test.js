@@ -1,6 +1,8 @@
-const { createUser, generateToken, getLastElement, purgeMockUsers } = require('./utils')
+const { createUser, generateToken, purgeMockUsers } = require('./utils')
 
 require('dotenv').config();
+
+const User = require('../src/models/User');
 
 const request = require('supertest');
 
@@ -101,6 +103,67 @@ describe('CRUD Group', () => {
       .post('/group')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
       .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to update group name', async (done) => {
+    const token = await generateToken();
+
+    request(server)
+      .put('/group')
+      .send({
+        name: 'test'
+      })
+      .set('Authorization', `Bearer: ${token}`)
+      .expect(200)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to not update group name if user is not in a group', async (done) => {
+    const { _id } = await createUser();
+    const token = await generateToken();
+
+    request(server)
+      .put('/group')
+      .set('Authorization', `Bearer: ${token}`)
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+
+    await User.deleteOne({ _id });
+  });
+
+  it('expect to not update group name when is provided invalid token', async (done) => {
+    request(server)
+      .put('/group')
+      .set('Authorization', `Bearer: ${faker.internet.password()}`)
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to not update group name when no token is provided', async (done) => {
+    request(server)
+      .put('/group')
+      .expect(401)
       .end((error) => {
         if (error) {
           return done(error);
