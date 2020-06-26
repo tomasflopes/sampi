@@ -10,9 +10,6 @@ require('dotenv').config();
 
 const server = require('../src/server');
 
-const User = require('../src/models/User');
-const Group = require('../src/models/Group');
-
 const mongoose = require('mongoose');
 
 beforeAll(async () => {

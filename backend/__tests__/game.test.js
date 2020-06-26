@@ -41,6 +41,23 @@ afterAll(async () => {
 });
 
 describe('CRUD Game', () => {
+  it('expect not to return all games when user has no group', async (done) => {
+    const { _id } = await createUser();
+    const token = await generateToken();
+    await User.deleteOne({ _id });
+
+    request(server)
+      .get('/game')
+      .set('Authorization', `Bearer: ${token}`)
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
   it('expect to return all games', async (done) => {
     const token = await generateToken();
 
@@ -96,7 +113,7 @@ describe('CRUD Game', () => {
         teamB: [
           users[2],
         ],
-        date: faker.date.future(),
+        date: faker.date.recent(2),
         location: faker.address.city()
       })
       .set('Authorization', `Bearer: ${token}`)
@@ -107,6 +124,41 @@ describe('CRUD Game', () => {
         }
         done();
       });
+  });
+
+  it('expect not to store new game when players are from different groups', async (done) => {
+    const token = await generateToken();
+
+    const { _id } = await createUser();
+    const { _id: groupId } = await createGroup({ players: [_id] });
+
+    const users = await User.find();
+
+    request(server)
+      .post('/game')
+      .send({
+        teamA: [
+          users[0],
+          users[1],
+        ],
+        teamB: [
+          users[2],
+          users[3]
+        ],
+        date: faker.date.recent(2),
+        location: faker.address.city()
+      })
+      .set('Authorization', `Bearer: ${token}`)
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+
+    await User.deleteOne({ _id });
+    await Group.deleteOne({ _id: groupId });
   });
 
   it('expect to not store new game when not provided token', async (done) => {
@@ -139,8 +191,6 @@ describe('CRUD Game', () => {
   it('expect to not store new game when provided with invalid token', async (done) => {
     const users = await User.find();
 
-    const usersIds = users.map(user => user._id);
-
     request(server)
       .post('/game')
       .send({
@@ -169,8 +219,6 @@ describe('CRUD Game', () => {
 
     const users = await User.find();
 
-    const usersIds = users.map(user => user._id);
-
     request(server)
       .post('/game')
       .send({
@@ -185,6 +233,64 @@ describe('CRUD Game', () => {
       })
       .set('Authorization', `Bearer: ${token}`)
       .expect(201)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to return last game from user group', async (done) => {
+    const token = await generateToken();
+
+    request(server)
+      .get('/games')
+      .set('Authorization', `Bearer: ${token}`)
+      .expect(200)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to not return last game when provided invalid token', async (done) => {
+    request(server)
+      .get('/games')
+      .set('Authorization', `Bearer: ${faker.internet.password()}`)
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to not return last game when user has no group', async (done) => {
+    const { _id } = await createUser();
+    const token = await generateToken();
+
+    request(server)
+      .get('/games')
+      .set('Authorization', `Bearer: ${token}`)
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+
+    await User.deleteOne({ _id });
+  });
+
+  it('expect to not return last game when not provided token', async (done) => {
+    request(server)
+      .get('/games')
+      .expect(401)
       .end((error) => {
         if (error) {
           return done(error);
