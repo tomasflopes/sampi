@@ -114,7 +114,7 @@ describe('CRUD Game', () => {
           users[2],
         ],
         date: faker.date.recent(2),
-        location: faker.address.city()
+        location: faker.address.country()
       })
       .set('Authorization', `Bearer: ${token}`)
       .expect(201)
