@@ -6,7 +6,6 @@ module.exports = {
     const userId = await DecodeJWTToken(request);
     const userGroup = await GetUserGroup(userId);
 
-    console.log(userGroup);
     if (userGroup.length === 0) return response.status(400).json({ Message: 'User is not in a group' });
 
     const games = await Game
