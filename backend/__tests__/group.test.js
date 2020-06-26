@@ -3,6 +3,7 @@ const { createUser, generateToken, purgeMockUsers } = require('./utils')
 require('dotenv').config();
 
 const User = require('../src/models/User');
+const Group = require('../src/models/Group');
 
 const request = require('supertest');
 
@@ -22,16 +23,16 @@ beforeAll(async () => {
   });
 
   await createUser();
-  await createUser();
 });
 
 afterAll(async () => {
+  await Group.remove({});
   await purgeMockUsers();
   await mongoose.disconnect();
 });
 
 describe('CRUD Group', () => {
-  it('expect to not return all groups when not provided with token', (done) => {
+  it('expect to not return user group when not provided with token', (done) => {
     request(server)
       .get('/group')
       .expect(401)
@@ -43,7 +44,7 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not return all groups when provided with invalid token', (done) => {
+  it('expect to not return user group when provided with invalid token', (done) => {
     request(server)
       .get('/group')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
@@ -204,6 +205,49 @@ describe('CRUD Group', () => {
       .delete('/group')
       .set('Authorization', `Bearer: ${token}`)
       .expect(202)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to not remove user from group when not provided with token', async (done) => {
+    request(server)
+      .patch('/group')
+      .expect(401)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to not remove user from group when provided with invalid token', async (done) => {
+    request(server)
+      .patch('/group')
+      .set('Authorization', `Bearer: ${faker.internet.password()}`)
+      .expect(400)
+      .end((error) => {
+        if (error) {
+          return done(error);
+        }
+        done();
+      });
+  });
+
+  it('expect to remove user from group', async (done) => {
+    const { _id } = await createUser();
+    await createGroup({ players: [_id] });
+
+    const token = await generateToken();
+
+    request(server)
+      .patch('/group')
+      .set('Authorization', `Bearer: ${token}`)
+      .expect(204)
       .end((error) => {
         if (error) {
           return done(error);

@@ -30,12 +30,8 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  const { _id } = getLastElement(Game);
-  await Game.deleteOne(_id);
-
-  const { _id: groupId } = getLastElement(Group);
-  await Group.deleteOne(groupId);
-
+  await Game.remove({});
+  await Group.remove({});
   await purgeMockUsers();
   await mongoose.disconnect();
 });
@@ -163,8 +159,6 @@ describe('CRUD Game', () => {
 
   it('expect to not store new game when not provided token', async (done) => {
     const users = await User.find();
-
-    const usersIds = users.map(user => user._id);
 
     request(server)
       .post('/game')
@@ -311,7 +305,7 @@ describe('CRUD Game', () => {
         mvp
       })
       .set('Authorization', `Bearer: ${token}`)
-      .expect(200)
+      .expect(202)
       .end((error) => {
         if (error) {
           return done(error);
@@ -366,7 +360,7 @@ describe('CRUD Game', () => {
         result: '08-05',
       })
       .set('Authorization', `Bearer: ${token}`)
-      .expect(200)
+      .expect(202)
       .end((error) => {
         if (error) {
           return done(error);

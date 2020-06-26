@@ -54,7 +54,7 @@ module.exports = {
       }
     });
 
-    return response.json(updateInfo);
+    return response.status(202).json(updateInfo);
   },
 
   async getGames(request, response) {
