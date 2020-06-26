@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to sampi 👋</h1>
+<h1 align="center">Welcome to Sampi 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
@@ -11,34 +11,25 @@
 
 > Sampi - MERN Project - Prova de Aptidão Tecnológica - 2020 
 
-## Install
+###### If you want you can access the full english version by clicking [here](README_eng.md)
 
-```sh
-yarn
-```
+## Author 👥
 
-## Usage
-
-```sh
-yarn start
-```
-
-## Run tests
-
-```sh
-yarn test
-```
-
-## Author
-
-👤 **Tomás Lopes <tomas050302@gmail.com>**
+**Tomás Lopes > <tomas050302@gmail.com>**
 
 * Twitter: [@tomas050302](https://twitter.com/tomas050302)
 * Github: [@tomas050302](https://github.com/tomas050302)
 
+## Contribuidores 👥
+
+<img src="./contributors/tomas.jfif" target="_blank" href="https://github.com/tomas050302" alt="Tomás" width="80" style="border-radius: 200px;"/>
+<img src="./contributors/miguel.jpg" target="_blank" href="https://github.com/esfoliante" alt="Miguel" width="80" style="border-radius: 200px;"/>
+
 ## Show your support
 
 Give a ⭐️ if this project helped you!
+
+Also a [Buy me a Coffee ☕](https://www.buymeacoffee.com/tomas050302)
 
 ***
 
@@ -62,68 +53,50 @@ Todo o design foi concebido por mim e foi utilizada a ferramenta [**Figma**](htt
 
 O projeto é baseado numa _stack_, ou seja, um conjunto de tecnologias, muito popular entre as empresas de tecnologia hoje em dia, **MERN**.
 
-**M**ongoDB
-**E**xpress
-**R**eact
-**N**odeJS
-
-#### MongoDB
-
-Em termos de base de dados decidi utilizar a plataforma [MongoDB](https://www.mongodb.com/), uma base de dados _noSQL_ orientada a documento que tem muitas vantagens em relação a bases de dados relacionais a nível de performance.
-
-#### Express
-
-Para _web framework_ decidi usar o **Express**, uma framework que dá uma base muito robusta para operações com o protocolo **http**.
-
-#### React-Native
-
-Para realizar este projeto decidi utilizar a framework [React Native](https://facebook.github.io/react-native/), que é a mesma framework utilizada pelo Facebook em todas as suas apps, visto que é uma framework que utiliza **_JavaScript_** que é, de momento, a linguagem com mais procura no mercado de trabalho.
-
-#### NodeJS
-
-E por fim o **NodeJS** que é o _runtime_ Javascript que torna possível executar código Javascript fora do browser.
-
-Todas estas tecnologias previligiam uma *API* **RESTFULL**. Que é uma aplicação que obedece aos padrões **REST**, **RE**presentational **S**tate **T**ransfer, padrões que podem ser encontrados [aqui](https://restfulapi.net/).
-
-## Tecnologia utilizada
-
-### Planeamento e _versioning_
-
-Além de muito papel e quadros cheios de ideias e tarefas foi também utilizada a ferramenta online [Trello](https://trello.com/b/NzGBlb8O/sampi) e para o controlo de versões o [GitLab](https://gitlab.com/tomas050302/sampi).
+**M**ongoDB → databases
+**E**xpress → web APIs
+**R**eact   → para criar a mobile app
+**N**odeJS  → para ter tudo a funcionar direitinho
 
 ### _For developers_
 
-### Yarn
+#### Yarn
 
 Uma ferramenta importante para trabalhar neste projeto é o _package manager_ [yarn](https://yarnpkg.com/en/) que serve para gerir todas as dependências do projeto. Para o instalar na máquina local só é necessário correr os seguintes comandos na CL
 
-#### `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
+##### `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
 
-#### `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
+##### `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 
-#### `sudo apt update && sudo apt install yarn`
+##### `sudo apt update && sudo apt install yarn`
 
-### Node
+#### Node
 
 Para instalar o [Node JS](https://nodejs.org/en/) na máquina só é necessário correr o comando:
 
-#### `pkg install node`
+##### `pkg install node`
 
 Para ter a certeza que a versão instalada é pelo menos a exigída pelas dependências (neste projeto está a ser usada a versão estável a 13/01/2020 (_*12.14.1*_) utilizamos os seguintes comandos
 
-#### `sudo npm install -g n`
+##### `sudo npm install -g n`
 
-#### `sudo n stable`
+##### `sudo n stable`
 
-Para iniciar o projeto é apenas necessário clonar o projeto diretamente do GitLab para a máquina local
-
-#### `git clone git@gitlab.com:tomas050302/sampi.git`
-
+Para iniciar o projeto é apenas necessário clonar o projeto para a máquina local
 De seguida é importante instalar todas as dependências
 
+<<<<<<< HEAD
+=======
+##### `yarn`
+
+Para correr o programa no emulador ou num dispositivo físico previamente configurado só é necessário
+
+##### `yarn start`
+
+>>>>>>> 9eb7f00fe5bdfee36a6e3b10ff931a978b7bafa0
 ### .Env
 
-Este ficheiro tem de ser ignorado nos commits devido a conter nele informação sensível que poderia ser explorada por pessoas mal intencionadas, com isto em mente, é ignorada em todos os commits. Tomei, no entanto, a liberdade de deixar um .env_temp para servir de template a quem quiser testar a aplicação no seu próprio ambiente de desenvolvimento com todas as indicações necessárias a seguir para ser possível preencher com os dados pessoais.
+Existe um ficheiro cujo nome é .env.example que contem dummy data. Renomeia o ficheiro para .env e edita com os dados do teu servidor.
 
 ### Dependências do projeto
 
@@ -134,7 +107,7 @@ Em conjunto com o [**CommitLint**](https://github.com/conventional-changelog/com
 
 #### [_Jest_](https://jestjs.io/)
 
-Esta library de _JavaScrip_ serve para ser possível criar testes automatizados de todos os módulos implementados no código. Desta forma podemos assegurar que nada do que já está implementado se danifica com a implementação de uma nova _feature_.
+Esta library de _JavaScript_ serve para ser possível criar testes automatizados de todos os módulos implementados no código. Desta forma podemos assegurar que nada do que já está implementado se danifica com a implementação de uma nova _feature_.
 Com o Jest é também usada a library [**Supertest**](https://github.com/visionmedia/supertest) que serve para simular requests http nos testes do Jest. Também optei por incluir a dependência [**Faker**](https://github.com/marak/Faker.js/) que serve para gerar dados falsos para propósito de teste.
 
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
