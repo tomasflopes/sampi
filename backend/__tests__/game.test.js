@@ -109,8 +109,8 @@ describe('CRUD Game', () => {
         teamB: [
           users[2],
         ],
-        date: faker.date.recent(2),
-        location: faker.address.country()
+        date: faker.date.future(),
+        location: faker.address.county()
       })
       .set('Authorization', `Bearer: ${token}`)
       .expect(201)
