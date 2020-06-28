@@ -13,9 +13,10 @@
   <a href="#" target="_blank">
     <img alt="Issues" src="https://img.shields.io/github/issues/tomas050302/sampi" />
   </a>
+  <a href="https://app.codacy.com/manual/tomas050302/sampi?utm_source=github.com&utm_medium=referral&utm_content=tomas050302/sampi&utm_campaign=Badge_Grade_Dashboard" target="_blank"
+     <img alt="Code Quality Codacy" src="https://api.codacy.com/project/badge/Grade/15fe9c27079141b6aabcc93af057c15d" />
+ </a>
 </p>
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/15fe9c27079141b6aabcc93af057c15d)](https://app.codacy.com/manual/tomas050302/sampi?utm_source=github.com&utm_medium=referral&utm_content=tomas050302/sampi&utm_campaign=Badge_Grade_Dashboard)
 
 > Sampi - MERN Project - Prova de Aptidão Tecnológica - 2020 
 
