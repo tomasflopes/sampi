@@ -7,6 +7,12 @@
   <a href="https://twitter.com/tomas050302" target="_blank">
     <img alt="Twitter: tomas050302" src="https://img.shields.io/twitter/follow/tomas050302.svg?style=social" />
   </a>
+  <a href="#" target="_blank">
+    <img alt="Last Commit" src="https://img.shields.io/github/last-commit/tomas050302/sampi" />
+  </a>
+  <a href="#" target="_blank">
+    <img alt="Issues" src="https://img.shields.io/github/issues/tomas050302/sampi" />
+  </a>
 </p>
 
 > Sampi - MERN Project - Prova de Aptidão Tecnológica - 2020 
