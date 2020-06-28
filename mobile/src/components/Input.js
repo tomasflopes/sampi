@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { TextInput, StyleSheet, Text } from 'react-native';
 import { useField } from '@unform/core';
 
-import { colors } from '../styles'
+import { colors } from '../styles';
 
 export default function Input({ name, label, ...rest }) {
   const inputRef = useRef(null);
@@ -24,7 +24,7 @@ export default function Input({ name, label, ...rest }) {
       clearValue(ref) {
         ref.setNativeProps({ text: '' });
         ref._lastNativeText = '';
-      }
+      },
     });
 
     switch (fieldName) {
@@ -58,7 +58,7 @@ export default function Input({ name, label, ...rest }) {
       />
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   label: {

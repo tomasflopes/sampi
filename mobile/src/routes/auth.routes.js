@@ -11,12 +11,12 @@ export default function AuthRoutes() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="SignIn"
+        name='SignIn'
         component={SignInScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="SignUp"
+        name='SignUp'
         component={SignUpScreen}
         options={{ headerShown: false }}
       />

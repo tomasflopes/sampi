@@ -15,5 +15,5 @@ export const UpdateProvider = ({ children }) => {
       {children}
     </UpdateContext.Provider>
   );
-}
+};
 export default UpdateContext;

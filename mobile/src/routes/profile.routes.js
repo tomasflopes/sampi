@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 
 import ProfileScreen from '../screens/Profile';
@@ -6,18 +6,20 @@ import EditInfoScreen from '../screens/EditInfo';
 
 const Stack = createStackNavigator();
 
-export default createProfileStack = () =>
+export default createProfileStack = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Profile"
+      name='Profile'
       component={ProfileScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="EditInfo"
+      name='EditInfo'
       component={EditInfoScreen}
       options={{
         headerShown: false,
-        tabBarVisible: false
-      }} />
+        tabBarVisible: false,
+      }}
+    />
   </Stack.Navigator>
+);

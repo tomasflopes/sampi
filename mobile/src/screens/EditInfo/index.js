@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { View, Image, Text, TouchableOpacity, AsyncStorage, ScrollView, Alert } from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  AsyncStorage,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import { Form } from '@unform/mobile';
 
 import { Picker } from '@react-native-community/picker';
@@ -24,7 +32,9 @@ export default function EditInfo({ navigation }) {
 
   const { updateState } = useContext(UpdateContext);
 
-  const [avatarUrl, setAvatarUrl] = useState('https://upload-sampi.s3.amazonaws.com/default-user.jpeg');
+  const [avatarUrl, setAvatarUrl] = useState(
+    'https://upload-sampi.s3.amazonaws.com/default-user.jpeg'
+  );
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [position, setPosition] = useState('');
@@ -33,10 +43,9 @@ export default function EditInfo({ navigation }) {
   async function getData() {
     const headers = await generateHeaders();
 
-    const response = await api.get('/user', headers)
-      .catch((error) => {
-        Alert.alert("Error", error.response.data.message);
-      });
+    const response = await api.get('/user', headers).catch(error => {
+      Alert.alert('Error', error.response.data.message);
+    });
 
     setAvatarUrl(response.data.user.avatar_url);
     setName(response.data.user.name);
@@ -54,13 +63,14 @@ export default function EditInfo({ navigation }) {
     if (position) formData.append('position', position);
     if (Object.keys(file).length > 0) formData.append('file', file);
 
-    api.put('/user', formData, headers)
+    api
+      .put('/user', formData, headers)
       .catch(error => {
         console.log(error);
-        Alert.alert("Error", error.response.data.details.message);
+        Alert.alert('Error', error.response.data.details.message);
       })
       .then(() => {
-        Alert.alert("Success", "Your profile information is now updated!");
+        Alert.alert('Success', 'Your profile information is now updated!');
         updateState();
         navigation.goBack();
       });
@@ -89,11 +99,11 @@ export default function EditInfo({ navigation }) {
         setFile({
           uri: tempFile.uri,
           name: tempFile.uri.split('/')[11],
-          type
+          type,
         });
       }
     } catch (error) {
-      Alert.alert("Error", error.response.data);
+      Alert.alert('Error', error.response.data);
     }
   }
 
@@ -115,7 +125,7 @@ export default function EditInfo({ navigation }) {
       <View style={styles.playerPhotoAndLabel}>
         <Image
           source={{
-            uri: file.uri || avatarUrl
+            uri: file.uri || avatarUrl,
           }}
           style={styles.playerPhoto}
         />
@@ -126,22 +136,23 @@ export default function EditInfo({ navigation }) {
 
       <View style={styles.formContainer}>
         <ScrollView>
-          <Form ref={formRef} onSubmit={handleSubmit} >
-            <Input name="name" label="NAME" type="name" />
-            <Input name="phone" label="PHONE" type="phone" />
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <Input name='name' label='NAME' type='name' />
+            <Input name='phone' label='PHONE' type='phone' />
 
             <Picker
               selectedValue={position}
               style={styles.formPicker}
-              onValueChange={itemValue => itemValue !== 'POSITIONS' ? setPosition(itemValue) : null}
+              onValueChange={itemValue =>
+                itemValue !== 'POSITIONS' ? setPosition(itemValue) : null
+              }
             >
-              <Picker.Item label="POSITIONS" value="POSITIONS" />
-              <Picker.Item label="Goalkeeper" value="Goalkeeper" />
-              <Picker.Item label="Defender" value="Defender" />
-              <Picker.Item label="Midfielder" value="Midfielder" />
-              <Picker.Item label="Forward" value="Forward" />
+              <Picker.Item label='POSITIONS' value='POSITIONS' />
+              <Picker.Item label='Goalkeeper' value='Goalkeeper' />
+              <Picker.Item label='Defender' value='Defender' />
+              <Picker.Item label='Midfielder' value='Midfielder' />
+              <Picker.Item label='Forward' value='Forward' />
             </Picker>
-
           </Form>
         </ScrollView>
       </View>

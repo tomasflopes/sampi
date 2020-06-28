@@ -31,7 +31,7 @@ export default container = {
     flex: 1,
     alignItems: 'center',
     lineHeight: 29,
-    fontWeight: "normal",
+    fontWeight: 'normal',
     textAlign: 'center',
     fontSize: 25,
     color: colors.mainBlue,
@@ -72,7 +72,7 @@ export default container = {
   },
 
   progressStatusContainer: {
-    flex: .8,
+    flex: 0.8,
     alignItems: 'center',
   },
 
@@ -84,4 +84,4 @@ export default container = {
     justifyContent: 'space-around',
     width: 70,
   },
-}
+};

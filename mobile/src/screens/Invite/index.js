@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, Share, TouchableOpacity, Alert, Clipboard } from 'react-native';
+import {
+  View,
+  Text,
+  Share,
+  TouchableOpacity,
+  Alert,
+  Clipboard,
+} from 'react-native';
 import styles from './styles';
 
 import { baseUrl } from '../../../config';
@@ -11,7 +18,7 @@ import { generateHeaders } from '../../utils';
 
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
-import TopBar from '../../components/TopBar'
+import TopBar from '../../components/TopBar';
 
 export default function Invite({ navigation }) {
   const { update } = useContext(UpdateContext);
@@ -28,17 +35,16 @@ To join:
   async function getGroupData() {
     const headers = await generateHeaders();
 
-    const response = await api.get('/group', headers)
-      .catch((error) => {
-        Alert.alert("Error", error.response.data.message);
-      })
+    const response = await api.get('/group', headers).catch(error => {
+      Alert.alert('Error', error.response.data.message);
+    });
 
     setInviteUrl(response.data.id);
     setGroupName(response.data.name);
   }
 
   async function handleClipboardCopy() {
-    Alert.alert('Copied', 'Content copied to your clipboard!')
+    Alert.alert('Copied', 'Content copied to your clipboard!');
     Clipboard.setString(`${baseUrl}/invite/${inviteUrl}`);
   }
 
@@ -55,10 +61,9 @@ To join:
   async function handleLeaveGroup() {
     const headers = await generateHeaders();
 
-    await api.patch('/group', {}, headers)
-      .catch(error => {
-        Alert.alert("Error", error.response.data.message);
-      });
+    await api.patch('/group', {}, headers).catch(error => {
+      Alert.alert('Error', error.response.data.message);
+    });
 
     updateState();
     navigation.goBack();
@@ -78,8 +83,13 @@ To join:
       <TopBar navigation={navigation} />
       <View style={styles.textHolder}>
         <View style={styles.groupName}>
-          <Text style={[styles.headerText, styles.firstText]}>Group Name: {groupName}</Text>
-          <TouchableOpacity style={styles.changeButton} onPress={handleChangeClick}>
+          <Text style={[styles.headerText, styles.firstText]}>
+            Group Name: {groupName}
+          </Text>
+          <TouchableOpacity
+            style={styles.changeButton}
+            onPress={handleChangeClick}
+          >
             <Text style={styles.changeButtonText}>Manage</Text>
           </TouchableOpacity>
         </View>
@@ -90,13 +100,13 @@ To join:
         <View style={styles.urlHolder}>
           <Text style={styles.url}>{`${baseUrl}/invite/${inviteUrl}`}</Text>
           <TouchableOpacity onPress={handleClipboardCopy}>
-            <Icon style={styles.clipboardIcon} name="clipboard"></Icon>
+            <Icon style={styles.clipboardIcon} name='clipboard'></Icon>
           </TouchableOpacity>
         </View>
       </View>
       <View style={styles.shareSpace}>
         <TouchableOpacity onPress={handleShare} style={styles.shareButton}>
-          <Icon style={styles.shareIcon} name="share" />
+          <Icon style={styles.shareIcon} name='share' />
           <Text style={styles.shareText}>Share it</Text>
         </TouchableOpacity>
         <View style={styles.spacer} />
@@ -107,6 +117,6 @@ To join:
           <Text style={styles.leaveText}>Leave Group</Text>
         </TouchableOpacity>
       </View>
-    </View >
+    </View>
   );
 }

@@ -6,19 +6,13 @@ export default function ProgressStatus({ step }) {
   const progressStatusArray = [];
 
   for (let i = step; i > 0; i--) {
-    progressStatusArray.push(
-      <View key={i} style={styles.progressActive} />
-    );
+    progressStatusArray.push(<View key={i} style={styles.progressActive} />);
   }
 
-  progressStatusArray.push(
-    <View key={5} style={styles.progressLast} />
-  );
+  progressStatusArray.push(<View key={5} style={styles.progressLast} />);
 
   for (let j = 3; j > step; j--) {
-    progressStatusArray.push(
-      <View key={j} style={styles.progressInactive} />
-    );
+    progressStatusArray.push(<View key={j} style={styles.progressInactive} />);
   }
 
   return progressStatusArray;
@@ -44,5 +38,5 @@ const styles = StyleSheet.create({
     width: 12,
     backgroundColor: colors.lightGray,
     borderRadius: 12 / 2,
-  }
+  },
 });

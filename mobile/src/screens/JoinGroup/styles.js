@@ -15,7 +15,7 @@ export default styles = StyleSheet.create({
   },
 
   backArrowHolder: {
-    flex: .5,
+    flex: 0.5,
     marginLeft: 5,
   },
 

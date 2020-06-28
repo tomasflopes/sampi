@@ -21,11 +21,16 @@ export default function ManageGroup({ navigation }) {
   async function handleSubmit({ name }) {
     const headers = await generateHeaders();
 
-    await api.put('/group', {
-      name
-    }, headers)
-      .catch((error) => {
-        Alert.alert("Error", error.response.data.message);
+    await api
+      .put(
+        '/group',
+        {
+          name,
+        },
+        headers
+      )
+      .catch(error => {
+        Alert.alert('Error', error.response.data.message);
       });
 
     Alert.alert('Success', 'Name updated with success!');
@@ -34,7 +39,7 @@ export default function ManageGroup({ navigation }) {
   }
 
   function handleOtherMembersClick() {
-    navigation.navigate('OtherGroupMembers')
+    navigation.navigate('OtherGroupMembers');
   }
 
   return (
@@ -43,15 +48,23 @@ export default function ManageGroup({ navigation }) {
 
       <Text style={styles.headerText}>Manage Your Group</Text>
       <View style={styles.formContainer}>
-        <Form ref={formRef} onSubmit={handleSubmit} >
-          <Input name="name" label="Name" type="name" />
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <Input name='name' label='Name' type='name' />
         </Form>
       </View>
-      <TouchableOpacity style={styles.submitButton} onPress={() => formRef.current.submitForm()}>
+      <TouchableOpacity
+        style={styles.submitButton}
+        onPress={() => formRef.current.submitForm()}
+      >
         <Text style={styles.submitButtonText}>Update</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.otherMembersButton} onPress={handleOtherMembersClick}>
-        <Text style={styles.otherMembersButtonText}>See the other group members</Text>
+      <TouchableOpacity
+        style={styles.otherMembersButton}
+        onPress={handleOtherMembersClick}
+      >
+        <Text style={styles.otherMembersButtonText}>
+          See the other group members
+        </Text>
       </TouchableOpacity>
     </View>
   );

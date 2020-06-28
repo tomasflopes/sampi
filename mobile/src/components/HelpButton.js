@@ -14,21 +14,29 @@ export default function HelpButton({ text, flex }) {
 
   return (
     <>
-      <Modal visible={visible} animated={true} animationType="slide" style={styles.modalContainer}>
+      <Modal
+        visible={visible}
+        animated={true}
+        animationType='slide'
+        style={styles.modalContainer}
+      >
         <View style={styles.modalHeaderContainer}>
           <Text style={styles.modalHeader}>HELP</Text>
         </View>
         <View style={styles.modalTextContainer}>
           <Text style={styles.modalText}>{text}</Text>
         </View>
-        <TouchableOpacity style={styles.modalCloseButton} onPress={toggleVisibility}>
+        <TouchableOpacity
+          style={styles.modalCloseButton}
+          onPress={toggleVisibility}
+        >
           <Text style={styles.modalCloseButtonText}>Close</Text>
         </TouchableOpacity>
       </Modal>
 
-      <View style={[styles.helpButtonContainer, { flex: flex || .8 }]}>
+      <View style={[styles.helpButtonContainer, { flex: flex || 0.8 }]}>
         <TouchableOpacity style={styles.helpButton} onPress={toggleVisibility}>
-          <Icon style={styles.helpIcon} name="question-mark" />
+          <Icon style={styles.helpIcon} name='question-mark' />
         </TouchableOpacity>
       </View>
     </>

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 
 import { CreateGameProvider } from '../contexts/createGame';
@@ -10,29 +10,29 @@ import FinishCreateGameScreen from '../screens/CreateGame/FinishCreateGame';
 
 const Stack = createStackNavigator();
 
-export default createHomeStack = () =>
+export default createHomeStack = () => (
   <CreateGameProvider>
     <Stack.Navigator>
       <Stack.Screen
-        name="FirstStep"
+        name='FirstStep'
         component={FirstStepScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="SecondStep"
+        name='SecondStep'
         component={SecondStepScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="ThirdStep"
+        name='ThirdStep'
         component={ThirdStepScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="FinishCreateGame"
+        name='FinishCreateGame'
         component={FinishCreateGameScreen}
         options={{ headerShown: false }}
       />
-
     </Stack.Navigator>
   </CreateGameProvider>
+);

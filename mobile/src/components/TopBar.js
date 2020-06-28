@@ -7,18 +7,18 @@ import { metrics, colors } from '../styles';
 
 export default function TopBar({ navigation }) {
   return (
-    <View style={styles.topBar} >
+    <View style={styles.topBar}>
       <View style={styles.backArrowHolder}>
-        <TouchableOpacity onPress={() => {
-          navigation.goBack();
-        }}>
-          <Icon style={styles.backArrowIcon} name="arrow-left"></Icon>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Icon style={styles.backArrowIcon} name='arrow-left'></Icon>
         </TouchableOpacity>
       </View>
       <View style={styles.logoContainer}>
-        <Image
-          source={require('../../assets/logoBright.png')}
-        />
+        <Image source={require('../../assets/logoBright.png')} />
       </View>
     </View>
   );
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 
   backArrowHolder: {
-    flex: .5,
+    flex: 0.5,
     marginLeft: 5,
   },
 
@@ -48,5 +48,5 @@ const styles = StyleSheet.create({
   backArrowIcon: {
     color: colors.lightGray,
     fontSize: 42,
-  }
-})
+  },
+});

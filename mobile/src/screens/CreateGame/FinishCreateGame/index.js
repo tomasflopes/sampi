@@ -1,5 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { View, Text, TouchableOpacity, Alert, Share, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  Share,
+  TextInput,
+} from 'react-native';
 
 import { Picker } from '@react-native-community/picker';
 
@@ -30,7 +37,10 @@ export default function FinishCreateGame({ navigation }) {
   const [eventMonth, setEventMonth] = useState('');
   const [eventYear, setEventYear] = useState('');
 
-  const shareMessage = location === '' ? `Hello, we're having an event day ${eventDay}/${eventMonth}/${eventYear}, make sure you attend this one!` : `Hello, we're having an event in ${location}, day ${eventDay}/${eventMonth}/${eventYear}, make sure you attend this one!`;
+  const shareMessage =
+    location === ''
+      ? `Hello, we're having an event day ${eventDay}/${eventMonth}/${eventYear}, make sure you attend this one!`
+      : `Hello, we're having an event in ${location}, day ${eventDay}/${eventMonth}/${eventYear}, make sure you attend this one!`;
 
   function populateYears() {
     const years = ['YEAR'];
@@ -65,12 +75,17 @@ export default function FinishCreateGame({ navigation }) {
 
     const headers = await generateHeaders();
 
-    await api.post('/game', {
-      teamA: teams.teamA,
-      teamB: teams.teamB,
-      date,
-      location
-    }, headers)
+    await api
+      .post(
+        '/game',
+        {
+          teamA: teams.teamA,
+          teamB: teams.teamB,
+          date,
+          location,
+        },
+        headers
+      )
       .catch(error => {
         Alert.alert('Error', error.response.data.message);
       })
@@ -91,7 +106,10 @@ export default function FinishCreateGame({ navigation }) {
         Alert.alert('Error', error.message);
       }
     } else {
-      Alert.alert('Error', "You need to set a date of the event before sharing!");
+      Alert.alert(
+        'Error',
+        'You need to set a date of the event before sharing!'
+      );
     }
   }
 
@@ -99,16 +117,16 @@ export default function FinishCreateGame({ navigation }) {
     if (eventDay && eventMonth && eventYear) {
       const recipients = playersArray.map(player => player.phone);
 
-      const { result } = await SMS.sendSMSAsync(
-        [...recipients],
-        shareMessage
-      );
+      const { result } = await SMS.sendSMSAsync([...recipients], shareMessage);
 
       if (!result) {
         Alert.alert('Error', "Your message couldn't be sent");
       }
     } else {
-      Alert.alert('Error', "You need to set a date of the event before sharing!");
+      Alert.alert(
+        'Error',
+        'You need to set a date of the event before sharing!'
+      );
     }
   }
 
@@ -132,14 +150,14 @@ export default function FinishCreateGame({ navigation }) {
       <View style={styles.formContainer}>
         <TextInput
           style={styles.textInput}
-          name="location"
-          placeholder="Location"
-          placeholderTextColor="#444"
-          autoCapitalize="none"
+          name='location'
+          placeholder='Location'
+          placeholderTextColor='#444'
+          autoCapitalize='none'
           autoCorrect={false}
-          autoCompleteType="street-address"
+          autoCompleteType='street-address'
           onChangeText={value => {
-            setLocation(value)
+            setLocation(value);
           }}
         />
 
@@ -149,15 +167,13 @@ export default function FinishCreateGame({ navigation }) {
             <Picker
               selectedValue={eventMonth}
               style={[styles.formPicker, { paddingHorizontal: 65 }]}
-              onValueChange={itemValue => itemValue != 'MONTH' ? setEventMonth(itemValue) : null}
-            >
-              {
-                months.map((item, index) => {
-                  return (
-                    <Picker.Item key={index} label={item} value={item} />
-                  );
-                })
+              onValueChange={itemValue =>
+                itemValue != 'MONTH' ? setEventMonth(itemValue) : null
               }
+            >
+              {months.map((item, index) => {
+                return <Picker.Item key={index} label={item} value={item} />;
+              })}
             </Picker>
           </View>
 
@@ -167,15 +183,19 @@ export default function FinishCreateGame({ navigation }) {
             <Picker
               style={styles.formPicker}
               selectedValue={eventDay}
-              onValueChange={itemValue => itemValue != 'DAY' ? setEventDay(itemValue) : null}
-            >
-              {
-                daysOfMonth.map((item, index) => {
-                  return (
-                    <Picker.Item key={index} label={item.toString()} value={item} />
-                  );
-                })
+              onValueChange={itemValue =>
+                itemValue != 'DAY' ? setEventDay(itemValue) : null
               }
+            >
+              {daysOfMonth.map((item, index) => {
+                return (
+                  <Picker.Item
+                    key={index}
+                    label={item.toString()}
+                    value={item}
+                  />
+                );
+              })}
             </Picker>
           </View>
 
@@ -185,15 +205,19 @@ export default function FinishCreateGame({ navigation }) {
             <Picker
               selectedValue={eventYear}
               style={[styles.formPicker, { paddingHorizontal: 52 }]}
-              onValueChange={itemValue => itemValue != 'YEAR' ? setEventYear(itemValue) : null}
-            >
-              {
-                years.map((item, index) => {
-                  return (
-                    <Picker.Item key={index} label={item.toString()} value={item} />
-                  );
-                })
+              onValueChange={itemValue =>
+                itemValue != 'YEAR' ? setEventYear(itemValue) : null
               }
+            >
+              {years.map((item, index) => {
+                return (
+                  <Picker.Item
+                    key={index}
+                    label={item.toString()}
+                    value={item}
+                  />
+                );
+              })}
             </Picker>
           </View>
         </View>
@@ -201,17 +225,20 @@ export default function FinishCreateGame({ navigation }) {
 
       <View style={styles.helpTextContainer}>
         <Text style={styles.helpTextHeader}>It's all set</Text>
-        <Text style={styles.helpText}>You finished your game configuration, just make sure you notify all players, let me help with that.</Text>
+        <Text style={styles.helpText}>
+          You finished your game configuration, just make sure you notify all
+          players, let me help with that.
+        </Text>
       </View>
 
       <View style={styles.shareSpace}>
         <TouchableOpacity onPress={handleShare} style={styles.shareButton}>
-          <Icon style={styles.shareIcon} name="share" />
+          <Icon style={styles.shareIcon} name='share' />
           <Text style={styles.shareText}>Share it</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={handleSMS} style={styles.shareButton}>
-          <Icon style={styles.shareIcon} name="forum" />
+          <Icon style={styles.shareIcon} name='forum' />
           <Text style={styles.shareText}>Notify everyone</Text>
         </TouchableOpacity>
       </View>
@@ -226,11 +253,14 @@ export default function FinishCreateGame({ navigation }) {
         <Text style={styles.nextStepButtonText}>Create</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.backButton} onPress={() => {
-        navigation.goBack();
-      }}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
         <Text style={styles.nextStepButtonText}>Back</Text>
       </TouchableOpacity>
-    </View >
+    </View>
   );
 }

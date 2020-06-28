@@ -1,5 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Image, ImageBackground, Alert, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+  Alert,
+  ScrollView,
+} from 'react-native';
 import styles from './styles';
 
 import api from '../../../services/api';
@@ -23,23 +31,26 @@ export default function SecondStep({ navigation }) {
   }
 
   function handleNextStepClick() {
-    if (selectedPlayers.length === nPlayers * 2) { //! TEST VALUE CHANGE TO nPlayers * 2
+    if (selectedPlayers.length === nPlayers * 2) {
+      //! TEST VALUE CHANGE TO nPlayers * 2
       setPlayersArrayState(selectedPlayers);
       navigation.navigate('ThirdStep');
     } else {
-      Alert.alert('Error', "You haven't selected the same amount of players that you indicated earlier!");
+      Alert.alert(
+        'Error',
+        "You haven't selected the same amount of players that you indicated earlier!"
+      );
     }
   }
 
-  const handlePlayerAvatarClick = React.useCallback(
-    player => () => {
-      setSelectedPlayers(selectedPlayers =>
-        selectedPlayers.includes(player)
-          ? selectedPlayers.filter(p => p !== player)
-          : [...selectedPlayers, player]
-      ), []
-    }
-  );
+  const handlePlayerAvatarClick = React.useCallback(player => () => {
+    setSelectedPlayers(selectedPlayers =>
+      selectedPlayers.includes(player)
+        ? selectedPlayers.filter(p => p !== player)
+        : [...selectedPlayers, player]
+    ),
+      [];
+  });
 
   const Player = React.memo(function Player({
     player,
@@ -57,7 +68,7 @@ export default function SecondStep({ navigation }) {
         {isSelected ? (
           <ImageBackground
             source={{
-              uri: player.avatar_url
+              uri: player.avatar_url,
             }}
             style={styles.userAvatar}
             imageStyle={{ borderRadius: 55 / 2 }}
@@ -68,18 +79,17 @@ export default function SecondStep({ navigation }) {
             />
           </ImageBackground>
         ) : (
-            <>
-              <Image
-                source={{
-                  uri: player.avatar_url
-                }}
-                style={styles.userAvatar}
-              />
-              <Text style={styles.playerName}>{player.name.split(' ')[0]}</Text>
-            </>
-          )
-        }
-      </TouchableOpacity >
+          <>
+            <Image
+              source={{
+                uri: player.avatar_url,
+              }}
+              style={styles.userAvatar}
+            />
+            <Text style={styles.playerName}>{player.name.split(' ')[0]}</Text>
+          </>
+        )}
+      </TouchableOpacity>
     );
   });
 
@@ -93,22 +103,25 @@ export default function SecondStep({ navigation }) {
         <Text style={styles.title}>CREATE GAME</Text>
       </View>
 
-      <ScrollView style={styles.playerPhotos} contentContainerStyle={styles.playerPhotosContainer}>
-        {players.map(player =>
-          (
-            <Player
-              key={player._id}
-              player={player}
-              isSelected={selectedPlayers.includes(player)}
-              handlePlayerAvatarClick={handlePlayerAvatarClick}
-            />
-          )
-        )}
+      <ScrollView
+        style={styles.playerPhotos}
+        contentContainerStyle={styles.playerPhotosContainer}
+      >
+        {players.map(player => (
+          <Player
+            key={player._id}
+            player={player}
+            isSelected={selectedPlayers.includes(player)}
+            handlePlayerAvatarClick={handlePlayerAvatarClick}
+          />
+        ))}
       </ScrollView>
 
       <View style={styles.helpTextContainer}>
         <Text style={styles.helpTextHeader}>Pick the players</Text>
-        <Text style={styles.helpText}>Select the players that will play the game to get the random teams</Text>
+        <Text style={styles.helpText}>
+          Select the players that will play the game to get the random teams
+        </Text>
       </View>
 
       <View style={styles.progressStatusContainer}>
@@ -117,13 +130,19 @@ export default function SecondStep({ navigation }) {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.nextStepButton} onPress={handleNextStepClick}>
+      <TouchableOpacity
+        style={styles.nextStepButton}
+        onPress={handleNextStepClick}
+      >
         <Text style={styles.nextStepButtonText}>Next Step</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.backButton} onPress={() => {
-        navigation.goBack();
-      }}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
         <Text style={styles.nextStepButtonText}>Back</Text>
       </TouchableOpacity>
     </View>

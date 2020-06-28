@@ -20,17 +20,17 @@ export default function Routes() {
         <Stack.Navigator>
           {signed ? (
             <Stack.Screen
-              name="Root"
+              name='Root'
               children={NavbarRoutes}
               options={{ headerShown: false }}
             />
           ) : (
-              <Stack.Screen
-                name="Auth"
-                children={AuthRoutes}
-                options={{ headerShown: false }}
-              />
-            )}
+            <Stack.Screen
+              name='Auth'
+              children={AuthRoutes}
+              options={{ headerShown: false }}
+            />
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     </UpdateProvider>

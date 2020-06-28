@@ -11,4 +11,4 @@ export default colors = {
   darkGray: '#444',
   selectedGreen: '#04943d',
   black: '#111',
-}
+};

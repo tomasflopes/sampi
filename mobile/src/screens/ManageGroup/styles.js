@@ -22,7 +22,7 @@ export default styles = StyleSheet.create({
   submitButtonText: general.fullWidthButtonText,
 
   otherMembersButton: {
-    flex: .5,
+    flex: 0.5,
     alignItems: 'center',
   },
 

@@ -2,8 +2,8 @@ import * as React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 
-import HomeStack from '../routes/home.routes'
-import ProfileStack from '../routes/profile.routes'
+import HomeStack from '../routes/home.routes';
+import ProfileStack from '../routes/profile.routes';
 
 import LeaderBoardScreen from '../screens/LeaderBoard';
 
@@ -19,7 +19,7 @@ export default function BottomNavbar() {
   return (
     <Tab.Navigator
       activeColor={colors.activeDarkBlue}
-      initialRouteName="Home"
+      initialRouteName='Home'
       barStyle={{
         backgroundColor: colors.buttonsLightBlue,
         justifyContent: 'flex-start',
@@ -36,29 +36,37 @@ export default function BottomNavbar() {
           } else if (route.name === 'Profile') {
             iconName = focused ? 'account' : 'account-outline';
           } else if (route.name === 'LeaderBoard') {
-            iconName = focused ? 'format-list-bulleted' : 'format-list-checkbox'
+            iconName = focused
+              ? 'format-list-bulleted'
+              : 'format-list-checkbox';
           }
 
-          return <Icon style={{ fontSize: 45, height: 50, width: 50 }} name={iconName} color={color} />;
+          return (
+            <Icon
+              style={{ fontSize: 45, height: 50, width: 50 }}
+              name={iconName}
+              color={color}
+            />
+          );
         },
       })}
     >
       <Tab.Screen
-        name="Profile"
+        name='Profile'
         children={ProfileStack}
         options={{
           tabBarLabel: '',
         }}
       />
       <Tab.Screen
-        name="Home"
+        name='Home'
         children={HomeStack}
         options={{
           tabBarLabel: '',
         }}
       />
       <Tab.Screen
-        name="LeaderBoard"
+        name='LeaderBoard'
         component={LeaderBoardScreen}
         options={{
           tabBarLabel: '',
@@ -67,4 +75,3 @@ export default function BottomNavbar() {
     </Tab.Navigator>
   );
 }
-

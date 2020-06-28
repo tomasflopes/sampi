@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
   container: general.container,
 
   spacer: {
-    flex: .1
+    flex: 0.1,
   },
 
   pickerRow: {
@@ -99,5 +99,5 @@ export default styles = StyleSheet.create({
 
   backButtonText: {
     ...general.fullWidthButtonText,
-  }
-})
+  },
+});

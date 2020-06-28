@@ -13,7 +13,7 @@ export default styles = StyleSheet.create({
   },
 
   playersContainer: {
-    flexGrow: .1,
+    flexGrow: 0.1,
   },
 
   playersContainerContent: {
@@ -40,6 +40,6 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 15,
     marginTop: 5,
-    color: colors.mainBlue
-  }
+    color: colors.mainBlue,
+  },
 });

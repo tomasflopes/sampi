@@ -31,9 +31,9 @@ export default styles = StyleSheet.create({
   activeOverlay: {
     width: 55,
     height: 55,
-    opacity: .8,
+    opacity: 0.8,
     borderRadius: 55 / 2,
-    backgroundColor: colors.buttonsLightBlue
+    backgroundColor: colors.buttonsLightBlue,
   },
 
   userAvatar: {
@@ -91,5 +91,5 @@ export default styles = StyleSheet.create({
     marginBottom: 15,
   },
 
-  nextStepButtonText: general.fullWidthButtonText
+  nextStepButtonText: general.fullWidthButtonText,
 });

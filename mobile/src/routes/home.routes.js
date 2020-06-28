@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { createStackNavigator, HeaderTitle, } from '@react-navigation/stack';
+import * as React from 'react';
+import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 
 import CreateGameStack from '../routes/createGame.routes';
 
@@ -13,59 +13,62 @@ import OtherGroupMembersScreen from '../screens/OtherGroupMembers';
 
 const Stack = createStackNavigator();
 
-export default createHomeStack = () =>
+export default createHomeStack = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Home"
+      name='Home'
       component={HomeScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="CreateGame"
+      name='CreateGame'
       children={CreateGameStack}
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="FinishGame"
+      name='FinishGame'
       component={FinishGameScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="Invite"
+      name='Invite'
       component={InviteScreen}
       options={{
         headerShown: false,
-        tabBarVisible: false
+        tabBarVisible: false,
       }}
     />
     <Stack.Screen
-      name="ManageGroup"
+      name='ManageGroup'
       component={ManageGroupScreen}
       options={{
         headerShown: false,
-        tabBarVisible: false
+        tabBarVisible: false,
       }}
     />
     <Stack.Screen
-      name="OtherGroupMembers"
+      name='OtherGroupMembers'
       component={OtherGroupMembersScreen}
       options={{
         headerShown: false,
-        tabBarVisible: false
+        tabBarVisible: false,
       }}
     />
     <Stack.Screen
-      name="CreateGroup"
+      name='CreateGroup'
       component={CreateGroupScreen}
       options={{
         headerShown: false,
-        tabBarVisible: false
-      }} />
+        tabBarVisible: false,
+      }}
+    />
     <Stack.Screen
-      name="JoinGroup"
+      name='JoinGroup'
       component={JoinGroupScreen}
       options={{
         headerShown: false,
-        tabBarVisible: false
-      }} />
+        tabBarVisible: false,
+      }}
+    />
   </Stack.Navigator>
+);

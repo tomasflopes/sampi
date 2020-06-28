@@ -1,3 +1,3 @@
 import generateHeaders from './generateHeaders';
 
-export { generateHeaders }
+export { generateHeaders };

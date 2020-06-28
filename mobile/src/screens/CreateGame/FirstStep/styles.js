@@ -23,7 +23,7 @@ export default styles = StyleSheet.create({
 
   nPlayerPicker: {
     width: 100,
-    left: 20
+    left: 20,
   },
 
   teamFormationMode: {
@@ -60,14 +60,14 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 8,
     paddingHorizontal: 20,
-    backgroundColor: colors.selectedGreen
+    backgroundColor: colors.selectedGreen,
   },
 
   teamFormationModeHeaderText: {
     flex: 1,
     textAlign: 'center',
     fontSize: 18,
-    color: colors.mainBlue
+    color: colors.mainBlue,
   },
 
   teamFormationModeText: {
@@ -99,5 +99,5 @@ export default styles = StyleSheet.create({
     flex: 2,
   },
 
-  nextStepButtonText: general.fullWidthButtonText
+  nextStepButtonText: general.fullWidthButtonText,
 });

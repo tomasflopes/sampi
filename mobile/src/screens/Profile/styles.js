@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
   container: general.container,
 
   firstRow: {
-    flex: .8,
+    flex: 0.8,
     flexDirection: 'row',
     marginTop: 20,
     alignItems: 'center',
@@ -41,14 +41,14 @@ export default styles = StyleSheet.create({
   },
 
   basicInformationRow: {
-    flex: .5,
+    flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
 
   basicInformation: {
-    fontSize: 14
+    fontSize: 14,
   },
 
   playerPhotoName: {
@@ -98,7 +98,7 @@ export default styles = StyleSheet.create({
   },
 
   spacer: {
-    flex: .3,
+    flex: 0.3,
   },
 
   editInfo: {
@@ -109,7 +109,7 @@ export default styles = StyleSheet.create({
   },
 
   editInfoText: {
-    fontSize: 25
+    fontSize: 25,
   },
 
   bottomNavbar: {

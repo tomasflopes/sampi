@@ -28,13 +28,16 @@ export default function OtherGroupMembers({ navigation }) {
     <View style={styles.container}>
       <TopBar navigation={navigation} />
       <Text style={styles.header}>Group Members</Text>
-      <ScrollView style={styles.playersContainer} contentContainerStyle={styles.playersContainerContent}>
+      <ScrollView
+        style={styles.playersContainer}
+        contentContainerStyle={styles.playersContainerContent}
+      >
         {players.map(player => (
           <View key={player._id} style={styles.playerContainer}>
             <Image
               style={styles.playerPhoto}
               source={{
-                uri: player.avatar_url
+                uri: player.avatar_url,
               }}
             />
             <Text style={styles.playerName}>{player.name}</Text>

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { general, colors } from '../../../styles'
+import { general, colors } from '../../../styles';
 
 export default styles = StyleSheet.create({
   container: general.container,
@@ -27,12 +27,12 @@ export default styles = StyleSheet.create({
 
   formContainer: {
     flex: 2,
-    width: "100%",
+    width: '100%',
     padding: 20,
   },
 
   buttonSignIn: {
-    flex: .8,
+    flex: 0.8,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.buttonsLightBlue,
@@ -41,7 +41,7 @@ export default styles = StyleSheet.create({
   buttonText: general.fullWidthButtonText,
 
   signUpTextContainer: {
-    flex: .8,
+    flex: 0.8,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

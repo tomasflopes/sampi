@@ -1,5 +1,12 @@
 import React, { useRef, useContext } from 'react';
-import { View, Image, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+} from 'react-native';
 
 import { Form } from '@unform/mobile';
 import Input from '../../components/Input';
@@ -22,11 +29,11 @@ export default function JoinGroup({ navigation }) {
 
     const headers = await generateHeaders();
 
-    const response = await api.post(`/invite/${url}`, {}, headers)
+    const response = await api
+      .post(`/invite/${url}`, {}, headers)
       .catch(error => {
         if (error.response.data) Alert.alert('Error', error.response.data);
         if (error.data.Error) Alert.alert('Error', error.data.Error);
-
       });
 
     Alert.alert('Success', `You are now in the group ${response.data.name}`);
@@ -39,12 +46,14 @@ export default function JoinGroup({ navigation }) {
       <TopBar />
 
       <View style={styles.textHolder}>
-        <Text style={styles.headerText}>Enter your invite Url and join the competition!</Text>
+        <Text style={styles.headerText}>
+          Enter your invite Url and join the competition!
+        </Text>
       </View>
 
       <ScrollView style={styles.formContainer}>
-        <Form ref={formRef} onSubmit={handleSubmit} >
-          <Input name="inviteUrl" label="Invite Url" type="text" />
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <Input name='inviteUrl' label='Invite Url' type='text' />
         </Form>
       </ScrollView>
 
@@ -52,9 +61,7 @@ export default function JoinGroup({ navigation }) {
         style={styles.buttonSignIn}
         onPress={() => formRef.current.submitForm()}
       >
-        <Text style={styles.buttonText}>
-          Enter Group
-        </Text>
+        <Text style={styles.buttonText}>Enter Group</Text>
       </TouchableOpacity>
       <View style={styles.spacer} />
     </View>

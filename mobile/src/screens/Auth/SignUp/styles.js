@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { general, colors } from '../../../styles'
+import { general, colors } from '../../../styles';
 
 export default styles = StyleSheet.create({
   container: general.container,
@@ -22,7 +22,7 @@ export default styles = StyleSheet.create({
   },
 
   spacer: {
-    flex: .1
+    flex: 0.1,
   },
 
   formContainer: {
@@ -55,7 +55,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     lineHeight: 29,
-    fontWeight: "normal",
+    fontWeight: 'normal',
     textAlign: 'center',
     fontSize: 25,
     color: colors.mainBlue,

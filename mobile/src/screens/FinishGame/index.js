@@ -1,5 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, Modal, TouchableOpacity, Image, Alert, TextInput, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  Image,
+  Alert,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 
 import styles from './styles';
 
@@ -42,16 +51,24 @@ export default function FinishGame({ navigation }) {
 
     const result = `${resultTeamA}-${resultTeamB}`;
 
-    api.put('/game', {
-      mvp,
-      result,
-    }, headers)
+    api
+      .put(
+        '/game',
+        {
+          mvp,
+          result,
+        },
+        headers
+      )
       .catch(error => {
-        console.log(error)
+        console.log(error);
         Alert.alert('Error', error.response.data[0].message);
       })
       .then(() => {
-        Alert.alert('Success', `You have finished the game with the result of ${result}`);
+        Alert.alert(
+          'Success',
+          `You have finished the game with the result of ${result}`
+        );
         updateState();
         navigation.goBack();
       });
@@ -68,97 +85,123 @@ export default function FinishGame({ navigation }) {
 
   useEffect(() => {
     getData();
-  }, [])
+  }, []);
 
   return (
     <View style={styles.container}>
       <TopBar navigation={navigation} />
 
-      <Modal visible={isVisibleTeamA} onDismiss={toggleIsVisibleTeamA} animationType="slide">
+      <Modal
+        visible={isVisibleTeamA}
+        onDismiss={toggleIsVisibleTeamA}
+        animationType='slide'
+      >
         <View style={styles.modalContainer}>
           <Text style={styles.modalHeader}>Team A</Text>
           <View style={styles.playersContainer}>
-            {
-              teamA.map(player => (
-                <View style={styles.playerContainer}>
-                  <Image
-                    source={{
-                      uri: player.avatar_url
-                    }}
-                    style={styles.playerPhoto} />
-                  <Text style={styles.playerName}>{player.name}</Text>
-                </View>
-              ))
-            }
+            {teamA.map(player => (
+              <View style={styles.playerContainer}>
+                <Image
+                  source={{
+                    uri: player.avatar_url,
+                  }}
+                  style={styles.playerPhoto}
+                />
+                <Text style={styles.playerName}>{player.name}</Text>
+              </View>
+            ))}
           </View>
-          <TouchableOpacity onPress={toggleIsVisibleTeamA} style={styles.closeButton}>
+          <TouchableOpacity
+            onPress={toggleIsVisibleTeamA}
+            style={styles.closeButton}
+          >
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
         </View>
       </Modal>
 
-      <Modal visible={isVisibleTeamB} onDismiss={toggleIsVisibleTeamB} animationType="slide">
+      <Modal
+        visible={isVisibleTeamB}
+        onDismiss={toggleIsVisibleTeamB}
+        animationType='slide'
+      >
         <View style={styles.modalContainer}>
           <Text style={styles.modalHeader}>Team B</Text>
           <View style={styles.playersContainer}>
-            {
-              teamB.map(player => (
-                <View style={styles.playerContainer}>
-                  <Image
-                    source={{
-                      uri: player.avatar_url
-                    }}
-                    style={styles.playerPhoto} />
-                  <Text style={styles.playerName}>{player.name}</Text>
-                </View>
-              ))
-            }
+            {teamB.map(player => (
+              <View style={styles.playerContainer}>
+                <Image
+                  source={{
+                    uri: player.avatar_url,
+                  }}
+                  style={styles.playerPhoto}
+                />
+                <Text style={styles.playerName}>{player.name}</Text>
+              </View>
+            ))}
           </View>
-          <TouchableOpacity onPress={toggleIsVisibleTeamB} style={styles.closeButton}>
+          <TouchableOpacity
+            onPress={toggleIsVisibleTeamB}
+            style={styles.closeButton}
+          >
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
         </View>
       </Modal>
 
-      <Modal visible={isVisibleMvp} onDismiss={toggleIsVisibleTeamA} animationType="slide">
+      <Modal
+        visible={isVisibleMvp}
+        onDismiss={toggleIsVisibleTeamA}
+        animationType='slide'
+      >
         <View style={styles.modalContainer}>
           <Text style={styles.modalHeader}>MVP</Text>
           <View style={styles.playersContainer}>
-            {
-              [...teamA, ...teamB].map(player => (
-                <TouchableOpacity style={styles.playerContainer} onPress={() => {
+            {[...teamA, ...teamB].map(player => (
+              <TouchableOpacity
+                style={styles.playerContainer}
+                onPress={() => {
                   setMvp(player);
                   toggleIsVisibleMvp();
-                }}>
-                  <Image
-                    source={{
-                      uri: player.avatar_url
-                    }}
-                    style={styles.playerPhoto} />
-                  <Text style={styles.playerName}>{player.name}</Text>
-                </TouchableOpacity>
-              ))
-            }
+                }}
+              >
+                <Image
+                  source={{
+                    uri: player.avatar_url,
+                  }}
+                  style={styles.playerPhoto}
+                />
+                <Text style={styles.playerName}>{player.name}</Text>
+              </TouchableOpacity>
+            ))}
           </View>
-          <TouchableOpacity onPress={toggleIsVisibleMvp} style={styles.closeButton}>
+          <TouchableOpacity
+            onPress={toggleIsVisibleMvp}
+            style={styles.closeButton}
+          >
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
         </View>
       </Modal>
 
-      <Text style={styles.headerText}>So... Your game has finished. Please, tell me how did it went?..</Text>
+      <Text style={styles.headerText}>
+        So... Your game has finished. Please, tell me how did it went?..
+      </Text>
 
       <View style={styles.resultContainer}>
         <View style={styles.teamContainer}>
-          <TouchableOpacity style={styles.teamNameContainer} onPress={toggleIsVisibleTeamA}>
+          <TouchableOpacity
+            style={styles.teamNameContainer}
+            onPress={toggleIsVisibleTeamA}
+          >
             <Text style={styles.teamNameText}>Team A</Text>
           </TouchableOpacity>
           <View style={styles.teamResultContainer}>
             <TextInput
               style={styles.teamResultText}
-              placeholder="0"
+              placeholder='0'
               onChangeText={value => setResultTeamA(value)}
-              keyboardType="number-pad"
+              keyboardType='number-pad'
             />
           </View>
         </View>
@@ -166,48 +209,52 @@ export default function FinishGame({ navigation }) {
         <Text style={styles.resultDivider}>x</Text>
 
         <View style={styles.teamContainer}>
-          <TouchableOpacity style={styles.teamNameContainer} onPress={toggleIsVisibleTeamB}>
+          <TouchableOpacity
+            style={styles.teamNameContainer}
+            onPress={toggleIsVisibleTeamB}
+          >
             <Text style={styles.teamNameText}>Team B</Text>
           </TouchableOpacity>
           <View style={styles.teamResultContainer}>
             <TextInput
               style={styles.teamResultText}
-              placeholder="0"
+              placeholder='0'
               onChangeText={value => setResultTeamB(value)}
-              keyboardType="number-pad"
+              keyboardType='number-pad'
             />
           </View>
         </View>
       </View>
 
-      <Text style={styles.hintText}>Hint: You can tap the team name to show the players list</Text>
+      <Text style={styles.hintText}>
+        Hint: You can tap the team name to show the players list
+      </Text>
 
       <View style={styles.mvpPickerContainer}>
         <TouchableOpacity style={styles.mvpPicker} onPress={toggleIsVisibleMvp}>
-          {
-            Object.keys(mvp).length > 0 ? (
-              <>
-                <Image
-                  source={{
-                    uri: mvp.avatar_url
-                  }}
-                  style={[styles.playerPhoto, { height: 40, width: 40 }]} />
-                <Text style={styles.mvpPickerText}>{mvp.name.split(' ')[0]}</Text>
-              </>
-            ) : (
-                <>
-                  <Image
-                    style={styles.mvpStart}
-                    source={require('../../../assets/mvpStar.png')}
-                  />
-                  <Text style={styles.mvpPickerText}>Pick MVP</Text>
-                  <Image
-                    style={styles.mvpStart}
-                    source={require('../../../assets/mvpStar.png')}
-                  />
-                </>
-              )
-          }
+          {Object.keys(mvp).length > 0 ? (
+            <>
+              <Image
+                source={{
+                  uri: mvp.avatar_url,
+                }}
+                style={[styles.playerPhoto, { height: 40, width: 40 }]}
+              />
+              <Text style={styles.mvpPickerText}>{mvp.name.split(' ')[0]}</Text>
+            </>
+          ) : (
+            <>
+              <Image
+                style={styles.mvpStart}
+                source={require('../../../assets/mvpStar.png')}
+              />
+              <Text style={styles.mvpPickerText}>Pick MVP</Text>
+              <Image
+                style={styles.mvpStart}
+                source={require('../../../assets/mvpStar.png')}
+              />
+            </>
+          )}
         </TouchableOpacity>
         <Text style={styles.noteText}>Note: This step is optional</Text>
       </View>

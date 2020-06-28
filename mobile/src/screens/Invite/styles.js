@@ -41,8 +41,8 @@ export default styles = StyleSheet.create({
 
   urlPiece: {
     flex: 2,
-    flexDirection: "column",
-    alignItems: "center",
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 
   headerUrl: {
@@ -69,7 +69,7 @@ export default styles = StyleSheet.create({
     fontSize: 14,
     flex: 1,
     color: colors.mainBlue,
-    alignItems: "center",
+    alignItems: 'center',
     left: 10,
   },
 
@@ -121,6 +121,6 @@ export default styles = StyleSheet.create({
   },
 
   leaveText: {
-    color: colors.logoutRed
-  }
+    color: colors.logoutRed,
+  },
 });

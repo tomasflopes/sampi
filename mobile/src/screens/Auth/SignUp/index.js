@@ -1,5 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import { Form } from '@unform/mobile';
 import { Picker } from '@react-native-community/picker';
 
@@ -35,20 +42,22 @@ export default function SignUp({ navigation }) {
         birth,
         gender,
         phone,
-        position
-      })
+        position,
+      });
     } catch (error) {
       if (error.response.data.message) {
         Alert.alert('Error', error.response.data.message);
-
       }
       if (error.response.data.details[0].message) {
-        Alert.alert("Error", error.response.data.details[0].message);
+        Alert.alert('Error', error.response.data.details[0].message);
       }
       throw error;
     }
 
-    Alert.alert('Success', 'Navigate you can now sign up with your new account! Have fun!')
+    Alert.alert(
+      'Success',
+      'Navigate you can now sign up with your new account! Have fun!'
+    );
     navigation.goBack();
   }
 
@@ -77,11 +86,7 @@ export default function SignUp({ navigation }) {
     setDaysOfMonth(daysArray);
   }, [birthdayMonth, birthdayYear]);
 
-  const genders = [
-    'GENDER',
-    'Male',
-    'Female',
-  ];
+  const genders = ['GENDER', 'Male', 'Female'];
 
   const months = [
     'MONTH',
@@ -120,23 +125,21 @@ export default function SignUp({ navigation }) {
 
       <View style={styles.formContainer}>
         <ScrollView>
-          <Form ref={formRef} onSubmit={handleSubmit} >
-            <Input name="name" label="NAME" type="name" />
-            <Input name="email" label="EMAIL" type="email" />
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <Input name='name' label='NAME' type='name' />
+            <Input name='email' label='EMAIL' type='email' />
 
             <View style={styles.formPickerContainer}>
               <Picker
                 selectedValue={gender}
                 style={styles.formPicker}
-                onValueChange={itemValue => itemValue !== 'GENDER' ? setGender(itemValue) : null}
-              >
-                {
-                  genders.map((item, index) => {
-                    return (
-                      <Picker.Item key={index} label={item} value={item} />
-                    );
-                  })
+                onValueChange={itemValue =>
+                  itemValue !== 'GENDER' ? setGender(itemValue) : null
                 }
+              >
+                {genders.map((item, index) => {
+                  return <Picker.Item key={index} label={item} value={item} />;
+                })}
               </Picker>
             </View>
 
@@ -145,15 +148,15 @@ export default function SignUp({ navigation }) {
                 <Picker
                   selectedValue={birthdayMonth}
                   style={[styles.formPicker, { paddingHorizontal: 65 }]}
-                  onValueChange={itemValue => itemValue != 'MONTH' ? setBirthdayMonth(itemValue) : null}
-                >
-                  {
-                    months.map((item, index) => {
-                      return (
-                        <Picker.Item key={index} label={item} value={item} />
-                      );
-                    })
+                  onValueChange={itemValue =>
+                    itemValue != 'MONTH' ? setBirthdayMonth(itemValue) : null
                   }
+                >
+                  {months.map((item, index) => {
+                    return (
+                      <Picker.Item key={index} label={item} value={item} />
+                    );
+                  })}
                 </Picker>
               </View>
 
@@ -163,15 +166,19 @@ export default function SignUp({ navigation }) {
                 <Picker
                   style={styles.formPicker}
                   selectedValue={birthdayDay}
-                  onValueChange={itemValue => itemValue != 'DAY' ? setBirthdayDay(itemValue) : null}
-                >
-                  {
-                    daysOfMonth.map((item, index) => {
-                      return (
-                        <Picker.Item key={index} label={item.toString()} value={item} />
-                      );
-                    })
+                  onValueChange={itemValue =>
+                    itemValue != 'DAY' ? setBirthdayDay(itemValue) : null
                   }
+                >
+                  {daysOfMonth.map((item, index) => {
+                    return (
+                      <Picker.Item
+                        key={index}
+                        label={item.toString()}
+                        value={item}
+                      />
+                    );
+                  })}
                 </Picker>
               </View>
 
@@ -181,40 +188,41 @@ export default function SignUp({ navigation }) {
                 <Picker
                   selectedValue={birthdayYear}
                   style={[styles.formPicker, { paddingHorizontal: 52 }]}
-                  onValueChange={itemValue => itemValue != 'YEAR' ? setBirthdayYear(itemValue) : null}
-                >
-                  {
-                    years.map((item, index) => {
-                      return (
-                        <Picker.Item key={index} label={item.toString()} value={item} />
-                      );
-                    })
+                  onValueChange={itemValue =>
+                    itemValue != 'YEAR' ? setBirthdayYear(itemValue) : null
                   }
+                >
+                  {years.map((item, index) => {
+                    return (
+                      <Picker.Item
+                        key={index}
+                        label={item.toString()}
+                        value={item}
+                      />
+                    );
+                  })}
                 </Picker>
               </View>
             </View>
 
-            <Input name="phone" label="PHONE" type="text" />
+            <Input name='phone' label='PHONE' type='text' />
 
             <View style={styles.formPickerContainer}>
               <Picker
                 selectedValue={position}
                 style={styles.formPicker}
-                onValueChange={itemValue => itemValue != 'POSITIONS' ? setPosition(itemValue) : null}
-                mode="dialog"
-              >
-                {
-                  positions.map((item, index) => {
-                    return (
-                      <Picker.Item key={index} label={item} value={item} />
-                    );
-                  })
+                onValueChange={itemValue =>
+                  itemValue != 'POSITIONS' ? setPosition(itemValue) : null
                 }
+                mode='dialog'
+              >
+                {positions.map((item, index) => {
+                  return <Picker.Item key={index} label={item} value={item} />;
+                })}
               </Picker>
             </View>
 
-            <Input name="password" label="PASSWORD" type="password" />
-
+            <Input name='password' label='PASSWORD' type='password' />
           </Form>
         </ScrollView>
       </View>
@@ -223,9 +231,7 @@ export default function SignUp({ navigation }) {
         style={styles.buttonSignIn}
         onPress={() => formRef.current.submitForm()}
       >
-        <Text style={styles.buttonText} >
-          Sign Up!
-        </Text>
+        <Text style={styles.buttonText}>Sign Up!</Text>
       </TouchableOpacity>
 
       <View style={styles.signUpTextContainer}>
@@ -240,13 +246,13 @@ export default function SignUp({ navigation }) {
         </TouchableOpacity>
       </View>
       <HelpButton
-        text="These are the authentication screens,
+        text='These are the authentication screens,
           here you will be able to provide your credentials in order to be identified in the app.
           When you create a profile you need to correctly provide some information that we will use
           in order to make your profile more suitable for you! Later you will be able to change some of it
           as well as add a picture to your profile to customize it even more! For now, just provide your
-          e-mail and password and tap the button LOGIN to start!"
+          e-mail and password and tap the button LOGIN to start!'
       />
-    </View >
+    </View>
   );
 }

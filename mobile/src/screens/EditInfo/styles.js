@@ -33,7 +33,7 @@ export default styles = StyleSheet.create({
   photoLabel: {
     marginTop: 5,
     fontSize: 14,
-    color: colors.highlightYellow
+    color: colors.highlightYellow,
   },
 
   formContainer: {
@@ -54,7 +54,7 @@ export default styles = StyleSheet.create({
   buttonText: {
     flex: 1,
     lineHeight: 29,
-    fontWeight: "normal",
+    fontWeight: 'normal',
     textAlign: 'center',
     fontSize: 25,
     color: colors.mainBlue,

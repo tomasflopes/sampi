@@ -32,7 +32,7 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     textDecorationLine: 'underline',
-    textDecorationColor: colors.darkGray
+    textDecorationColor: colors.darkGray,
   },
 
   playerContainer: {
