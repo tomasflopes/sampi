@@ -13,13 +13,13 @@
   <a href="#" target="_blank">
     <img alt="Issues" src="https://img.shields.io/github/issues/tomas050302/sampi" />
   </a>
+  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/15fe9c27079141b6aabcc93af057c15d)](https://app.codacy.com/manual/tomas050302/sampi?utm_source=github.com&utm_medium=referral&utm_content=tomas050302/sampi&utm_campaign=Badge_Grade_Dashboard)
 </p>
 
 > Sampi - MERN Project - Prova de Aptidão Tecnológica - 2020 
 
 ###### If you want you can access the full english version by clicking [here](README_eng.md)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/15fe9c27079141b6aabcc93af057c15d)](https://app.codacy.com/manual/tomas050302/sampi?utm_source=github.com&utm_medium=referral&utm_content=tomas050302/sampi&utm_campaign=Badge_Grade_Dashboard)
 
 ## Author 👥
 
