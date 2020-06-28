@@ -30,8 +30,8 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await Game.remove({});
-  await Group.remove({});
+  await Game.deleteMany({});
+  await Group.deleteMany({});
   await purgeMockUsers();
   await mongoose.disconnect();
 });
@@ -98,6 +98,10 @@ describe('CRUD Game', () => {
     const token = await generateToken();
 
     const users = await User.find();
+    const groups = await Group.find();
+
+    console.log(users);
+    console.log(groups);
 
     request(server)
       .post('/game')

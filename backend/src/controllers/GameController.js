@@ -27,6 +27,8 @@ module.exports = {
 
     if (!group) return response.status(400).json({ Message: 'Not all players are from the same group' });
 
+    console.log('all same group', date, location);
+
     await Game
       .create({
         teamA,

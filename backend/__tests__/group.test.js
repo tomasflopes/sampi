@@ -26,7 +26,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await Group.remove({});
+  await Group.deleteMany({});
   await purgeMockUsers();
   await mongoose.disconnect();
 });
