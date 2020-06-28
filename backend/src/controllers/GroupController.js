@@ -16,22 +16,24 @@ module.exports = {
     const playerInfo = [];
 
     for (let i = 0; i < players.length; i++) {
-      const { _id, name, email, phone, avatar_url } = await User.findById(players[i]);
+      const { _id, name, email, phone, avatar_url } = await User.findById(
+        players[i]
+      );
 
       playerInfo.push({
         _id,
         name,
         email,
         phone,
-        avatar_url
+        avatar_url,
       });
     }
 
     const responseInfo = {
       id: group[0]._id,
       name: group[0].name,
-      players: playerInfo
-    }
+      players: playerInfo,
+    };
 
     return response.status(200).json(responseInfo);
   },
@@ -41,11 +43,10 @@ module.exports = {
 
     const name = await generateUniqueName();
 
-    Group
-      .create({
-        name,
-        players: player
-      })
+    Group.create({
+      name,
+      players: player,
+    })
       .then(group => response.status(201).json(group))
       .catch(error => response.status(400).json(error));
   },
@@ -54,15 +55,19 @@ module.exports = {
     const playerId = await DecodeJWTToken(request);
     const groupId = await GetUserGroup(playerId);
 
-    if (!groupId[0]) return response.status(400).json({ Message: 'User has no group' });
+    if (!groupId[0])
+      return response.status(400).json({ Message: 'User has no group' });
 
     const { name } = request.body;
 
-    const info = await Group.updateOne({
-      _id: groupId
-    }, {
-      name
-    });
+    const info = await Group.updateOne(
+      {
+        _id: groupId,
+      },
+      {
+        name,
+      }
+    );
 
     return response.status(200).send(info);
   },
@@ -73,7 +78,7 @@ module.exports = {
     const groupId = await GetUserGroup(userId);
 
     const deleteInfo = await Group.deleteOne({
-      _id: groupId
+      _id: groupId,
     });
 
     return response.status(202).json(deleteInfo);
@@ -83,18 +88,20 @@ module.exports = {
     const userId = await DecodeJWTToken(request);
     const groupId = await GetUserGroup(userId);
 
-    await Group.updateOne({ _id: groupId }, {
-      $pull: {
-        players: userId,
+    await Group.updateOne(
+      { _id: groupId },
+      {
+        $pull: {
+          players: userId,
+        },
       }
-    })
-      .catch(error => {
-        return response.status(400).json(error);
-      });
+    ).catch(error => {
+      return response.status(400).json(error);
+    });
 
     return response.status(204).send();
-  }
-}
+  },
+};
 
 async function generateUniqueName() {
   const groups = await Group.find();

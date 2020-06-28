@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.DB_CONNECT, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 });
 
 app.listen(process.env.PORT || 3333);

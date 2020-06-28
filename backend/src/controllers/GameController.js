@@ -9,7 +9,8 @@ module.exports = {
 
     const userGroup = await GetUserGroup(userId);
 
-    if (!userGroup[0]) return response.status(400).json({ Message: 'User has no group' });
+    if (!userGroup[0])
+      return response.status(400).json({ Message: 'User has no group' });
 
     const lastGame = await getLastNotFinishedGameFromUser(userId);
 
@@ -25,18 +26,20 @@ module.exports = {
     const playersArray = [...teamAIds, ...teamBIds];
     const group = await GetUserGroup(playersArray);
 
-    if (!group) return response.status(400).json({ Message: 'Not all players are from the same group' });
+    if (!group)
+      return response
+        .status(400)
+        .json({ Message: 'Not all players are from the same group' });
 
     console.log('all same group', date, location);
 
-    await Game
-      .create({
-        teamA,
-        teamB,
-        idGroup: group._id,
-        date: date,
-        location: location || "Not specified"
-      })
+    await Game.create({
+      teamA,
+      teamB,
+      idGroup: group._id,
+      date: date,
+      location: location || 'Not specified',
+    })
       .then(game => response.status(201).json(game))
       .catch(error => response.status(400).json(error));
   },
@@ -47,14 +50,17 @@ module.exports = {
     const userId = await DecodeJWTToken(request);
     const { _id } = await getLastNotFinishedGameFromUser(userId);
 
-    const updateInfo = await Game.updateOne({
-      _id
-    }, {
-      $set: {
-        mvp,
-        result
+    const updateInfo = await Game.updateOne(
+      {
+        _id,
+      },
+      {
+        $set: {
+          mvp,
+          result,
+        },
       }
-    });
+    );
 
     return response.status(202).json(updateInfo);
   },
@@ -62,17 +68,18 @@ module.exports = {
   async getGames(request, response) {
     const userId = await DecodeJWTToken(request);
 
-    const games = await Game
-      .find()
-      .sort({ _id: -1 });
+    const games = await Game.find().sort({ _id: -1 });
 
     const [userGroup] = await GetUserGroup(userId);
 
-    if (!userGroup) return response.status(400).json({ Message: 'User has no group' });
+    if (!userGroup)
+      return response.status(400).json({ Message: 'User has no group' });
 
     const userGames = games.filter(game => game.idGroup.equals(userGroup._id));
 
-    const openGames = userGames.filter(game => typeof (game.result) !== 'undefined');
+    const openGames = userGames.filter(
+      game => typeof game.result !== 'undefined'
+    );
 
     const gameInfo = openGames.map(game => {
       const userTeam = game.teamA.includes(userId) ? 'a' : 'b';
@@ -98,22 +105,22 @@ module.exports = {
     const gameValues = openGames.map((object, index) => {
       const gameResult = gameInfo[index];
       return { ...object._doc, gameResult };
-    })
+    });
 
     return response.status(200).json(gameValues);
-  }
-}
+  },
+};
 
 async function getLastNotFinishedGameFromUser(userId) {
-  const games = await Game
-    .find()
-    .sort({ _id: -1 });
+  const games = await Game.find().sort({ _id: -1 });
 
   const [userGroup] = await GetUserGroup(userId);
 
   const userGames = games.filter(game => game.idGroup.equals(userGroup._id));
 
-  const [lastGame] = userGames.filter(game => typeof (game.result) === 'undefined');
+  const [lastGame] = userGames.filter(
+    game => typeof game.result === 'undefined'
+  );
 
   return lastGame;
 }

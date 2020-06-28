@@ -9,5 +9,5 @@ module.exports = {
   createGroup,
   getLastElement,
   purgeMockUsers,
-  generateToken
-}
+  generateToken,
+};

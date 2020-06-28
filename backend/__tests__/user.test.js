@@ -18,7 +18,7 @@ beforeAll(async () => {
   await mongoose.connect(process.env.DB_CONNECT_TEST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   });
 
   await createUser();
@@ -35,31 +35,28 @@ describe('User Test', () => {
     await request(server)
       .get('/user')
       .set('Authorization', `Bearer: ${token}`)
-      .expect(200)
+      .expect(200);
   });
 
   it('should not list user info without jwt token', async () => {
-    await request(server)
-      .get('/user')
-      .expect(401)
+    await request(server).get('/user').expect(401);
   });
 
   it('should not list user info with invalid jwt token', async () => {
     await request(server)
       .get('/user')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
-      .expect(400)
+      .expect(400);
   });
 
-
-  it('should create new user', (done) => {
+  it('should create new user', done => {
     request(server)
       .post('/api/user/register')
       .send({
         name: faker.name.findName(),
         email: faker.internet.email(),
         password: faker.internet.password(),
-        gender: "Male",
+        gender: 'Male',
         birth: faker.date.past().toString(),
         phone: faker.phone.phoneNumber(),
         position: 'Defender',
@@ -70,7 +67,7 @@ describe('User Test', () => {
       });
   });
 
-  it('should not create new user because the name already exists', async (done) => {
+  it('should not create new user because the name already exists', async done => {
     const mockUser = await getLastElement(User);
 
     request(server)
@@ -79,13 +76,13 @@ describe('User Test', () => {
         name: mockUser.name,
         email: faker.internet.email(),
         password: faker.internet.password(),
-        gender: "Male",
+        gender: 'Male',
         birth: faker.date.past().toString(),
         phone: faker.phone.phoneNumber(),
         position: 'Defender',
       })
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -93,7 +90,7 @@ describe('User Test', () => {
       });
   });
 
-  it('should not create new user because the email already exists', async (done) => {
+  it('should not create new user because the email already exists', async done => {
     const mockUser = await getLastElement(User);
 
     request(server)
@@ -102,13 +99,13 @@ describe('User Test', () => {
         name: faker.name.findName(),
         email: mockUser.email,
         password: faker.internet.password(),
-        gender: "Male",
+        gender: 'Male',
         birth: faker.date.past().toString(),
         phone: faker.phone.phoneNumber(),
         position: 'Defender',
       })
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -116,20 +113,20 @@ describe('User Test', () => {
       });
   });
 
-  it('should not create new user because the name is not allowed', (done) => {
+  it('should not create new user because the name is not allowed', done => {
     request(server)
       .post('/api/user/register')
       .send({
         name: 'A',
         email: faker.internet.email(),
         password: faker.internet.password(),
-        gender: "Male",
+        gender: 'Male',
         birth: faker.date.past().toString(),
         phone: faker.phone.phoneNumber(),
         position: 'Defender',
       })
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -137,20 +134,20 @@ describe('User Test', () => {
       });
   });
 
-  it('should not create new user because the password is not allowed', (done) => {
+  it('should not create new user because the password is not allowed', done => {
     request(server)
       .post('/api/user/register')
       .send({
         name: faker.name.findName(),
         email: faker.internet.email(),
         password: '123',
-        gender: "Male",
+        gender: 'Male',
         birth: faker.date.past().toString(),
         phone: faker.phone.phoneNumber(),
         position: 'Defender',
       })
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -158,17 +155,20 @@ describe('User Test', () => {
       });
   });
 
-  it('should edit all editable user information', async (done) => {
+  it('should edit all editable user information', async done => {
     const token = await generateToken();
 
     request(server)
       .put('/user')
       .field('name', faker.name.findName())
       .field('phone', faker.phone.phoneNumber())
-      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg'))
+      .attach(
+        'file',
+        path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg')
+      )
       .set('Authorization', `Bearer: ${token}`)
       .expect(200)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -176,15 +176,18 @@ describe('User Test', () => {
       });
   });
 
-  it('should not edit user information when invalid token is provided', async (done) => {
+  it('should not edit user information when invalid token is provided', async done => {
     request(server)
       .put('/user')
       .field('name', faker.name.findName())
       .field('phone', faker.phone.phoneNumber())
-      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg'))
+      .attach(
+        'file',
+        path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg')
+      )
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -192,14 +195,17 @@ describe('User Test', () => {
       });
   });
 
-  it('should not edit user information when token is not provided', async (done) => {
+  it('should not edit user information when token is not provided', async done => {
     request(server)
       .put('/user')
       .field('name', faker.name.findName())
       .field('phone', faker.phone.phoneNumber())
-      .attach('file', path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg'))
+      .attach(
+        'file',
+        path.resolve(__dirname, 'utils', 'img', 'test_avatar_2.jpeg')
+      )
       .expect(401)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -207,7 +213,7 @@ describe('User Test', () => {
       });
   });
 
-  it('should edit only user name (without file)', async (done) => {
+  it('should edit only user name (without file)', async done => {
     const token = await generateToken();
 
     request(server)
@@ -215,7 +221,7 @@ describe('User Test', () => {
       .field('name', faker.name.findName())
       .set('Authorization', `Bearer: ${token}`)
       .expect(200)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -223,7 +229,7 @@ describe('User Test', () => {
       });
   });
 
-  it('should not edit user information when provided with not valid data', async (done) => {
+  it('should not edit user information when provided with not valid data', async done => {
     const token = await generateToken();
 
     request(server)
@@ -233,7 +239,7 @@ describe('User Test', () => {
       })
       .set('Authorization', `Bearer: ${token}`)
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -241,14 +247,14 @@ describe('User Test', () => {
       });
   });
 
-  it('should delete user', async (done) => {
+  it('should delete user', async done => {
     const token = await generateToken();
 
     request(server)
       .delete('/user')
       .set('Authorization', `Bearer: ${token}`)
       .expect(202)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }

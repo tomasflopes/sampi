@@ -14,15 +14,15 @@ module.exports = createUser = async (specs = {}) => {
     email: specs.email || faker.internet.email(),
     password_hash: password_hash || faker.hacker.adjective(),
     avatar_url: specs.avatar_url || faker.internet.avatar(),
-    gender: "Male",
+    gender: 'Male',
     birth: specs.birth || faker.date.past(),
     phone: specs.phone || faker.phone.phoneNumber(),
-    position: "Defender"
+    position: 'Defender',
   });
-}
+};
 
-const generatePassword = (password) => {
+const generatePassword = password => {
   if (password) {
-    return password_hash = bckrypt.hashSync(password, 10);
+    return (password_hash = bckrypt.hashSync(password, 10));
   }
-}
+};

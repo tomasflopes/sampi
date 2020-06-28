@@ -7,4 +7,4 @@ module.exports = createGroup = async ({ players }) => {
     name: faker.hacker.adjective(),
     players,
   });
-}
+};

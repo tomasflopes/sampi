@@ -5,4 +5,4 @@ module.exports = purgeMockUsers = async () => {
   await User.deleteMany({ position: 'Defender' });
 
   await mongoose.disconnect();
-}
+};

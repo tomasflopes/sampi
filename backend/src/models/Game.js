@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 
 const GameSchema = new mongoose.Schema({
-  teamA: [{
-    type: Object,
-    required: true,
-  }],
-  teamB: [{
-    type: Object,
-    required: true,
-  }],
+  teamA: [
+    {
+      type: Object,
+      required: true,
+    },
+  ],
+  teamB: [
+    {
+      type: Object,
+      required: true,
+    },
+  ],
   date: {
     type: Date,
     required: true,
@@ -26,7 +30,7 @@ const GameSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Group',
     required: true,
-  }
+  },
 });
 
 module.exports = mongoose.model('Game', GameSchema);

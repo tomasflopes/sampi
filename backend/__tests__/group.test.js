@@ -1,4 +1,4 @@
-const { createUser, generateToken, purgeMockUsers } = require('./utils')
+const { createUser, generateToken, purgeMockUsers } = require('./utils');
 
 require('dotenv').config();
 
@@ -19,7 +19,7 @@ beforeAll(async () => {
   mongoose.connect(process.env.DB_CONNECT_TEST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   });
 
   await createUser();
@@ -32,11 +32,11 @@ afterAll(async () => {
 });
 
 describe('CRUD Group', () => {
-  it('expect to not return user group when not provided with token', (done) => {
+  it('expect to not return user group when not provided with token', done => {
     request(server)
       .get('/group')
       .expect(401)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -44,12 +44,12 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not return user group when provided with invalid token', (done) => {
+  it('expect to not return user group when provided with invalid token', done => {
     request(server)
       .get('/group')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -57,14 +57,14 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to store new group', async (done) => {
+  it('expect to store new group', async done => {
     const token = await generateToken();
 
     request(server)
       .post('/group')
       .set('Authorization', `Bearer: ${token}`)
       .expect(201)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -72,14 +72,14 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to return user group', async (done) => {
+  it('expect to return user group', async done => {
     const token = await generateToken();
 
     request(server)
       .get('/group')
       .set('Authorization', `Bearer: ${token}`)
       .expect(200)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -87,11 +87,11 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not store new group when not provided token', async (done) => {
+  it('expect to not store new group when not provided token', async done => {
     request(server)
       .post('/group')
       .expect(401)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -99,12 +99,12 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not store new group when provided with invalid token', async (done) => {
+  it('expect to not store new group when provided with invalid token', async done => {
     request(server)
       .post('/group')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -112,17 +112,17 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to update group name', async (done) => {
+  it('expect to update group name', async done => {
     const token = await generateToken();
 
     request(server)
       .put('/group')
       .send({
-        name: 'test'
+        name: 'test',
       })
       .set('Authorization', `Bearer: ${token}`)
       .expect(200)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -130,7 +130,7 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not update group name if user is not in a group', async (done) => {
+  it('expect to not update group name if user is not in a group', async done => {
     const { _id } = await createUser();
     const token = await generateToken();
 
@@ -138,7 +138,7 @@ describe('CRUD Group', () => {
       .put('/group')
       .set('Authorization', `Bearer: ${token}`)
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -148,12 +148,12 @@ describe('CRUD Group', () => {
     await User.deleteOne({ _id });
   });
 
-  it('expect to not update group name when is provided invalid token', async (done) => {
+  it('expect to not update group name when is provided invalid token', async done => {
     request(server)
       .put('/group')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -161,11 +161,11 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not update group name when no token is provided', async (done) => {
+  it('expect to not update group name when no token is provided', async done => {
     request(server)
       .put('/group')
       .expect(401)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -173,11 +173,11 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not delete group when not provided token', async (done) => {
+  it('expect to not delete group when not provided token', async done => {
     request(server)
       .delete('/group')
       .expect(401)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -185,12 +185,12 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not delete group when provided invalid token', async (done) => {
+  it('expect to not delete group when provided invalid token', async done => {
     request(server)
       .delete('/group')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -198,14 +198,14 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to delete group', async (done) => {
+  it('expect to delete group', async done => {
     const token = await generateToken();
 
     request(server)
       .delete('/group')
       .set('Authorization', `Bearer: ${token}`)
       .expect(202)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -213,11 +213,11 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not remove user from group when not provided with token', async (done) => {
+  it('expect to not remove user from group when not provided with token', async done => {
     request(server)
       .patch('/group')
       .expect(401)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -225,12 +225,12 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to not remove user from group when provided with invalid token', async (done) => {
+  it('expect to not remove user from group when provided with invalid token', async done => {
     request(server)
       .patch('/group')
       .set('Authorization', `Bearer: ${faker.internet.password()}`)
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -238,7 +238,7 @@ describe('CRUD Group', () => {
       });
   });
 
-  it('expect to remove user from group', async (done) => {
+  it('expect to remove user from group', async done => {
     const { _id } = await createUser();
     await createGroup({ players: [_id] });
 
@@ -248,7 +248,7 @@ describe('CRUD Group', () => {
       .patch('/group')
       .set('Authorization', `Bearer: ${token}`)
       .expect(204)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -256,5 +256,3 @@ describe('CRUD Group', () => {
       });
   });
 });
-
-

@@ -14,7 +14,7 @@ beforeAll(async () => {
   mongoose.connect(process.env.DB_CONNECT_TEST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   });
 });
 
@@ -24,17 +24,17 @@ afterAll(async () => {
 });
 
 describe('Utils Unit Testing', () => {
-  it('Should create a new user', async (done) => {
+  it('Should create a new user', async done => {
     expect(await createUser()).toBeDefined();
     done();
   });
 
-  it('Should create a new user with given params', async (done) => {
+  it('Should create a new user with given params', async done => {
     expect(await createUser({ name: 'Lodo' })).toBeDefined();
     done();
   });
 
-  it('Should return last element of collection to a given Model', async (done) => {
+  it('Should return last element of collection to a given Model', async done => {
     await createUser(); //? Mock User just to assure that it is the last element
 
     const lastUser = await User.create({

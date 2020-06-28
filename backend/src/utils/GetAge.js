@@ -1,4 +1,4 @@
-module.exports = (dateString) => {
+module.exports = dateString => {
   const today = new Date();
   const birthDate = new Date(dateString);
   let age = today.getFullYear() - birthDate.getFullYear();
@@ -7,4 +7,4 @@ module.exports = (dateString) => {
     age--;
   }
   return age;
-}
+};

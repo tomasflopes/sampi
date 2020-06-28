@@ -6,4 +6,4 @@ module.exports = {
   GetUserGroup,
   DecodeJWTToken,
   GetAge,
-}
+};

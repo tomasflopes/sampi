@@ -26,7 +26,7 @@ routes.delete('/group', GroupController.destroy);
 routes.get('/card', CardController.index);
 
 routes.get('/user', UserController.index);
-routes.put('/user', multer(multerConfig).single("file"), UserController.update);
+routes.put('/user', multer(multerConfig).single('file'), UserController.update);
 routes.delete('/user', UserController.delete);
 
 routes.post('/invite/:groupId', InviteController.add);

@@ -1,6 +1,10 @@
 const User = require('../models/User');
 
-const { registerValidation, loginValidation, editValidation } = require('../middleWares/UserDataValidation');
+const {
+  registerValidation,
+  loginValidation,
+  editValidation,
+} = require('../middleWares/UserDataValidation');
 
 const { DecodeJWTToken, GetAge } = require('../utils');
 
@@ -26,7 +30,15 @@ module.exports = {
   },
 
   async store(request, response) {
-    const { name, email, password, gender, birth, phone, position } = request.body;
+    const {
+      name,
+      email,
+      password,
+      gender,
+      birth,
+      phone,
+      position,
+    } = request.body;
 
     const avatar_url = process.env.DEFAULT_AVATAR_IMG_URL;
 
@@ -54,7 +66,10 @@ module.exports = {
   async update(request, response) {
     const _id = await DecodeJWTToken(request);
     const { name, phone, position } = request.body;
-    const { location, filename } = request.file || { location: undefined, filename: undefined };
+    const { location, filename } = request.file || {
+      location: undefined,
+      filename: undefined,
+    };
 
     if (!(location == undefined && filename == undefined)) {
       const avatar_url = location || `${process.env.APP_URL}/files/${filename}`;
@@ -72,14 +87,17 @@ module.exports = {
         await deleteUserPhoto(oldUser.avatar_url);
       }
 
-      const updatedUser = await User.findByIdAndUpdate({
-        _id
-      }, {
-        name: name || oldUser.name,
-        avatar_url: location || oldUser.avatar_url,
-        phone: phone || oldUser.phone,
-        position: position || oldUser.position,
-      });
+      const updatedUser = await User.findByIdAndUpdate(
+        {
+          _id,
+        },
+        {
+          name: name || oldUser.name,
+          avatar_url: location || oldUser.avatar_url,
+          phone: phone || oldUser.phone,
+          position: position || oldUser.position,
+        }
+      );
 
       return response.status(200).json(updatedUser);
     } else {
@@ -89,14 +107,17 @@ module.exports = {
 
       if (error) return response.status(400).json(error);
 
-      const updatedUser = await User.findByIdAndUpdate({
-        _id
-      }, {
-        name: name || oldUser.name,
-        avatar_url: oldUser.avatar_url,
-        phone: phone || oldUser.phone,
-        position: position || oldUser.position,
-      });
+      const updatedUser = await User.findByIdAndUpdate(
+        {
+          _id,
+        },
+        {
+          name: name || oldUser.name,
+          avatar_url: oldUser.avatar_url,
+          phone: phone || oldUser.phone,
+          position: position || oldUser.position,
+        }
+      );
       return response.status(200).json(updatedUser);
     }
   },
@@ -106,7 +127,8 @@ module.exports = {
 
     const deleteInfo = await User.findByIdAndDelete(_id);
 
-    if (!deleteInfo) return response.status(400).json({ Error: 'No user found' });
+    if (!deleteInfo)
+      return response.status(400).json({ Error: 'No user found' });
 
     const { avatar_url } = deleteInfo;
 
@@ -127,19 +149,23 @@ module.exports = {
     const user = await User.findOne({ email });
     if (!user) return response.status(400).json({ message: 'Email is wrong' });
 
-    const validPassword = await bckrypt.compareSync(password, user.password_hash);
-    if (!validPassword) return response.status(400).json({ message: 'Password is wrong' });
+    const validPassword = await bckrypt.compareSync(
+      password,
+      user.password_hash
+    );
+    if (!validPassword)
+      return response.status(400).json({ message: 'Password is wrong' });
 
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 
     response.status(200).json({
       user,
-      token
+      token,
     });
-  }
-}
+  },
+};
 
-const userVerification = async (body) => {
+const userVerification = async body => {
   const { email, name } = body;
 
   const { error } = registerValidation(body);
@@ -151,24 +177,31 @@ const userVerification = async (body) => {
 
   const nameExists = await User.findOne({ name });
   if (nameExists) return { message: 'Name already exists' };
-}
+};
 
 async function deleteUserPhoto(avatar_url) {
   if (avatar_url === process.env.DEFAULT_AVATAR_IMG_URL) {
     const [, , , , key] = avatar_url.split('/');
-    promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key));
+    promisify(fs.unlink)(
+      path.resolve(__dirname, '..', '..', 'temp', 'uploads', key)
+    );
 
     return;
   }
 
   if (process.env.STORAGE_TYPE === 's3') {
     const [, , , key] = avatar_url.split('/');
-    await s3.deleteObject({
-      Bucket: 'upload-sampi',
-      Key: key,
-    }).promise().finally();
+    await s3
+      .deleteObject({
+        Bucket: 'upload-sampi',
+        Key: key,
+      })
+      .promise()
+      .finally();
   } else {
     const [, , , , , , , , key] = avatar_url.split('/');
-    promisify(fs.unlink)(path.resolve(__dirname, '..', '..', 'temp', 'uploads', key));
+    promisify(fs.unlink)(
+      path.resolve(__dirname, '..', '..', 'temp', 'uploads', key)
+    );
   }
 }

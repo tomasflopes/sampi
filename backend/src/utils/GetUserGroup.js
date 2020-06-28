@@ -1,6 +1,6 @@
 const Group = require('../models/Group');
 
-module.exports = async (players) => {
+module.exports = async players => {
   const groups = await Group.find();
 
   if (Array.isArray(players)) {
@@ -12,12 +12,12 @@ module.exports = async (players) => {
 
     return groups.filter(group => {
       if (group.players.includes(player)) {
-        return group._id
+        return group._id;
       }
     });
   }
-}
+};
 
 function everyElementIsInArray(array1, array2) {
-  return array1.every(element => array2.includes(element))
+  return array1.every(element => array2.includes(element));
 }

@@ -5,11 +5,13 @@ const GroupSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  players: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  }],
+  players: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+  ],
 });
 
 module.exports = mongoose.model('Group', GroupSchema);

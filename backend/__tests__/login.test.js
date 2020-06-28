@@ -16,7 +16,7 @@ beforeAll(async () => {
   await mongoose.connect(process.env.DB_CONNECT_TEST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   });
 
   await createUser({ password: 'strongpassword' });
@@ -28,7 +28,7 @@ afterAll(async () => {
 });
 
 describe('User Login Test', () => {
-  it("should not authenticate user because the email doesn't exists", (done) => {
+  it("should not authenticate user because the email doesn't exists", done => {
     request(server)
       .post('/api/user/login')
       .send({
@@ -36,7 +36,7 @@ describe('User Login Test', () => {
         password: 'strongpassword',
       })
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -44,7 +44,7 @@ describe('User Login Test', () => {
       });
   });
 
-  it('should not authenticate user because password is incorrect', (done) => {
+  it('should not authenticate user because password is incorrect', done => {
     request(server)
       .post('/api/user/login')
       .send({
@@ -52,7 +52,7 @@ describe('User Login Test', () => {
         password: 'strongpassword',
       })
       .expect(400)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }
@@ -60,7 +60,7 @@ describe('User Login Test', () => {
       });
   });
 
-  it('should authenticate user with valid credentials', async (done) => {
+  it('should authenticate user with valid credentials', async done => {
     const lastUser = await getLastElement(User);
 
     request(server)
@@ -70,7 +70,7 @@ describe('User Login Test', () => {
         password: 'strongpassword',
       })
       .expect(200)
-      .end((error) => {
+      .end(error => {
         if (error) {
           return done(error);
         }

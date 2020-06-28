@@ -21,7 +21,7 @@ const storeTypes = {
 
         callback(null, fileName);
       });
-    }
+    },
   }),
 
   s3: multerS3({
@@ -39,22 +39,18 @@ const storeTypes = {
 
         callback(null, fileName);
       });
-    }
-  })
-}
+    },
+  }),
+};
 
 module.exports = {
   dest: path.resolve(__dirname, '..', '..', 'temp', 'uploads'),
   storage: storeTypes[process.env.STORAGE_TYPE],
   limits: {
-    fileSize: 2 * 1024 * 1024
+    fileSize: 2 * 1024 * 1024,
   },
   FileFilter: (request, file, callback) => {
-    const allowedMimes = [
-      'image/jpeg',
-      'image/jpg',
-      'image/png',
-    ];
+    const allowedMimes = ['image/jpeg', 'image/jpg', 'image/png'];
 
     if (allowedMimes.includes(file.mimetype)) {
       callback(null, true);
