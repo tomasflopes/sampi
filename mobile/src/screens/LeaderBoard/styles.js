@@ -24,7 +24,7 @@ export default styles = StyleSheet.create({
   },
 
   gamesHolder: {
-    flex: 2,
+    flex: 4,
   },
 
   teamsContainer: {

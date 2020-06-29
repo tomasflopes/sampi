@@ -21,7 +21,7 @@ import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 import TopBar from '../../components/TopBar';
 
 export default function Invite({ navigation }) {
-  const { update } = useContext(UpdateContext);
+  const { update, updateState } = useContext(UpdateContext);
 
   const inviteMessage = `Join my group on Sampi! ${baseUrl}/invite/${inviteUrl}
 To join:
@@ -62,6 +62,7 @@ To join:
     const headers = await generateHeaders();
 
     await api.patch('/group', {}, headers).catch(error => {
+      console.log(error);
       Alert.alert('Error', error.response.data.message);
     });
 

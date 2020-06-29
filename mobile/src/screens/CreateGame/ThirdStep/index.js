@@ -47,14 +47,13 @@ export default function ThirdStep({ navigation }) {
             </View>
           ))}
         </View>
-
+        <View style={{ flex: 1 }} />
         <View
           style={[
             styles.teamContainer,
             {
-              borderLeftWidth: 1,
-              borderLeftColor: '#444',
-              alignItems: 'flex-end',
+              alignItems: 'flex-start',
+              justifyContent: 'space-between',
             },
           ]}
         >

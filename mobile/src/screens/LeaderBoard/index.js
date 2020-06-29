@@ -68,6 +68,7 @@ export default function LeaderBoard() {
         })}
       </ScrollView>
       <HelpButton
+        flex={0.2}
         text="In this screen you can see all the recent games you've been part of. This way you
         can see who won and lost in order to know how you're performing in the recent times."
       />
