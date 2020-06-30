@@ -42,6 +42,7 @@ export default function LeaderBoard() {
                 style={[
                   game.gameResult === 'L' ? styles.loose : styles.win,
                   game.gameResult === 'T' ? styles.tie : null,
+                  game.gameResult === 'NA' ? styles.notAttendant : null,
                 ]}
               >
                 {game.gameResult}

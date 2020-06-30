@@ -90,4 +90,8 @@ export default styles = StyleSheet.create({
   tie: {
     color: colors.midGray,
   },
+
+  notAttendant: {
+    color: colors.darkGray,
+  },
 });
