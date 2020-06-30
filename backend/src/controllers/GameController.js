@@ -82,7 +82,12 @@ module.exports = {
     );
 
     const gameInfo = openGames.map(game => {
-      const userTeam = game.teamA.includes(userId) ? 'a' : 'b';
+      const isTeamA = game.teamA.filter(player => player._id == userId);
+      const isTeamB = game.teamB.filter(player => player._id == userId);
+
+      if (!isTeamA[0] && !isTeamB[0]) return 'NA';
+
+      const userTeam = isTeamA[0] ? 'a' : 'b';
 
       const results = game.result.split('-');
 
