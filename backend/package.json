@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --detectOpenHandles --runInBand"
+    "test": "cross-env NODE_ENV=test jest --testTimeout=15000 --detectOpenHandles --runInBand"
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
