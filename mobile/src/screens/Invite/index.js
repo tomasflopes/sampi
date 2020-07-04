@@ -67,8 +67,8 @@ To join:
     });
 
     updateState();
-    navigation.goBack();
     Alert.alert('Success', 'You have leaved the group');
+    navigation.goBack();
   }
 
   function handleChangeClick() {

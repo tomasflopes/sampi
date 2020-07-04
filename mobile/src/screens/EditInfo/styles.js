@@ -24,10 +24,9 @@ export default styles = StyleSheet.create({
   },
 
   playerPhoto: {
-    flex: 1,
-    width: 80,
-    height: 80,
-    borderRadius: 80 / 2,
+    width: 95,
+    height: 95,
+    borderRadius: 95 / 2,
   },
 
   photoLabel: {

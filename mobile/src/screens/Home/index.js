@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  AsyncStorage,
-  Alert,
-} from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 
 import UpdateContext from '../../contexts/update';
@@ -27,7 +20,7 @@ export default function Home({ navigation }) {
     const headers = await generateHeaders();
 
     const response = await api.get('/group', headers).catch(error => {
-      Alert.alert('Error', error.response.data.message);
+      if (error.response.data.message) setHasGroup(false);
     });
 
     if (response.data) {
