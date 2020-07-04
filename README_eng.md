@@ -7,9 +7,6 @@
   <a href="#" target="_blank">
     <img alt="License: AGPL--3.0 License" src="https://img.shields.io/badge/License-AGPL--3.0 License-yellow.svg" />
   </a>
-  <a href="https://twitter.com/tomas050302" target="_blank">
-    <img alt="Twitter: tomas050302" src="https://img.shields.io/twitter/follow/tomas050302.svg?style=social" />
-  </a>
   <a href="#" target="_blank">
     <img alt="Last Commit" src="https://img.shields.io/github/last-commit/tomas050302/sampi" />
   </a>
@@ -27,21 +24,7 @@
 
 **Tomás Lopes > <tomas050302@gmail.com>**
 
-* Twitter: [@tomas050302](https://twitter.com/tomas050302)
 * Github: [@tomas050302](https://github.com/tomas050302)
-
-## Contributors 👥
-
-<img src="./contributors/tomas.jfif" target="_blank" href="https://github.com/tomas050302" alt="Tomás" width="80" style="border-radius: 200px;"/>
-<img src="./contributors/miguel.jpg" target="_blank" href="https://github.com/esfoliante" alt="Miguel" width="80" style="border-radius: 200px;"/>
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-Also a [Buy me a Coffee ☕](https://www.buymeacoffee.com/tomas050302) page coming soon!
-
-***
 
 ## Objective
 
