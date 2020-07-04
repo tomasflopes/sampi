@@ -11,6 +11,9 @@ module.exports = {
 
     const group = await GetUserGroup(id);
 
+    if (!group[0])
+      return response.status(400).json({ message: 'User has no group' });
+
     const players = group[0].players;
 
     const playerInfo = [];
