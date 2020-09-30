@@ -27,71 +27,62 @@ export default styles = StyleSheet.create({
     flex: 4,
   },
 
-  teamsContainer: {
-    flex: 1,
-    marginBottom: 30,
+  gamesHolderContent: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  tableHeader: {
+    display: 'flex',
     flexDirection: 'row',
+
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+
+  playerContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+
+    height: 40,
+    width: '90%',
+
+    alignItems: 'center',
+    justifyContent: 'space-around',
+
+    borderBottomWidth: 1,
+    borderBottomColor: '#000',
+  },
+
+  playerPosition: {
+    flex: 1,
+    textAlign: 'center',
+    fontWeight: 'bold',
+
+    fontSize: 20,
+  },
+
+  playerInfo: {
+    display: 'flex',
+    flexDirection: 'row',
+    flex: 1,
+
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
 
-  teamName: {
+    textAlign: 'center',
+
     fontSize: 18,
-    textAlign: 'center',
   },
 
-  teamContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  playerName: {
+    fontSize: 15,
+    overflow: 'scroll',
   },
 
-  resultContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  teamLogo: {
-    height: 85,
-    width: 85,
-  },
-
-  resultText: {
-    textAlign: 'center',
-    fontSize: 32,
-  },
-
-  cardMessageHeader: {
-    fontSize: 20,
-    textAlign: 'center',
-    fontWeight: '700',
-    color: colors.mainBlue,
-  },
-
-  cardMessage: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginTop: 10,
-  },
-
-  loose: {
-    fontSize: 25,
-    marginLeft: 10,
-    color: colors.logoutRed,
-  },
-
-  win: {
-    fontSize: 25,
-    marginLeft: 10,
-    color: colors.selectedGreen,
-  },
-
-  tie: {
-    color: colors.midGray,
-  },
-
-  notAttendant: {
-    color: colors.darkGray,
+  playerPhoto: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
   },
 });

@@ -10,15 +10,15 @@ import UpdateContext from '../../contexts/update';
 import HelpButton from '../../components/HelpButton';
 
 export default function LeaderBoard() {
-  const [games, setGames] = useState([]);
+  const [leaderboard, setLeaderboard] = useState([]);
   const { update } = useContext(UpdateContext);
 
   async function getData() {
     const headers = await generateHeaders();
 
-    const response = await api.get('/games', headers);
+    const response = await api.get('/leaderboard', headers);
 
-    setGames(response.data);
+    setLeaderboard(response.data);
   }
 
   useEffect(() => {
@@ -31,42 +31,30 @@ export default function LeaderBoard() {
         <Text style={styles.comingSoonText}>LeaderBoard Coming Soon</Text>
       </View>
       <Text style={styles.header}>You Last Results</Text>
-      <ScrollView style={styles.gamesHolder}>
-        {games.map(game => {
-          const results = game.result.split('-');
-          const result = `${results[0]} - ${results[1]}`;
-
-          return (
-            <View style={styles.teamsContainer}>
-              <Text
-                style={[
-                  game.gameResult === 'L' ? styles.loose : styles.win,
-                  game.gameResult === 'T' ? styles.tie : null,
-                  game.gameResult === 'NA' ? styles.notAttendant : null,
-                ]}
-              >
-                {game.gameResult}
-              </Text>
-              <View style={styles.teamContainer}>
-                <Image
-                  style={styles.teamLogo}
-                  source={require('../../../assets/teamABadge.png')}
-                />
-                <Text style={styles.teamName}>TEAM A</Text>
-              </View>
-              <View style={styles.resultContainer}>
-                <Text style={styles.resultText}>{result}</Text>
-              </View>
-              <View style={styles.teamContainer}>
-                <Image
-                  style={[styles.teamLogo, { marginBottom: -8, marginTop: 8 }]}
-                  source={require('../../../assets/teamBBadge.png')}
-                />
-                <Text style={styles.teamName}>TEAM B</Text>
-              </View>
+      <View style={styles.tableHeader}>
+        <Text>POS</Text>
+        <Text>NAME</Text>
+        <Text>POINTS</Text>
+      </View>
+      <ScrollView
+        contentContainerStyle={styles.gamesHolderContent}
+        style={styles.gamesHolder}
+      >
+        {leaderboard.map(player => (
+          <View style={styles.playerContainer}>
+            <Text style={styles.playerPosition}>{player.position}</Text>
+            <View style={styles.playerInfo}>
+              <Text style={styles.playerName}>{player.player.name}</Text>
+              <Image
+                source={{
+                  uri: player.player.avatar_url,
+                }}
+                style={styles.playerPhoto}
+              />
             </View>
-          );
-        })}
+            <Text style={styles.playerInfo}>{player.points}</Text>
+          </View>
+        ))}
       </ScrollView>
       <HelpButton
         flex={0.2}
