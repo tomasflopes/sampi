@@ -4,7 +4,7 @@ const UserController = require('../controllers/UserController');
 
 const routes = Router();
 
-routes.post('/register', UserController.store);
 routes.post('/login', UserController.login);
+routes.post('/register', UserController.store);
 
 module.exports = routes;
