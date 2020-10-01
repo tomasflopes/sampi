@@ -1,8 +1,11 @@
 const User = require('../models/User');
 const Game = require('../models/Game');
 
-const { GetUserGroup, DecodeJWTToken } = require('../utils');
-const GetUserGamesResults = require('../utils/GetUserGamesResults');
+const {
+  GetUserGroup,
+  DecodeJWTToken,
+  GetUserGamesResults,
+} = require('../utils');
 
 module.exports = {
   async index(request, response) {
@@ -24,20 +27,32 @@ module.exports = {
       };
     });
 
-    const orderedLeaderBoard = groupLeaderBoard.sort(
-      (a, b) => b.userPoints - a.userPoints
+    const lastEventGroupLeaderBoard = groupPlayers.map(player => {
+      const userGames = GetUserGamesResults(games, group, player);
+
+      const lastEventGames = userGames.filter((game, index) => {
+        if (index > 0) return game;
+      });
+
+      const userPoints = getUserPoints(lastEventGames);
+
+      return {
+        player,
+        userPoints,
+      };
+    });
+
+    const orderedLeaderBoard = await orderGroupLeaderBoard(groupLeaderBoard);
+    const orderedLastEventLeaderBoard = await orderGroupLeaderBoard(
+      lastEventGroupLeaderBoard
     );
 
-    const data = [];
-    let i = 0;
-    for (const player of orderedLeaderBoard) {
-      i++;
-      const userData = await User.findById(player.player);
+    const completeData = getRelativePositionFromLeaderBoard(
+      orderedLeaderBoard,
+      orderedLastEventLeaderBoard
+    );
 
-      data.push({ player: userData, points: player.userPoints, position: i });
-    }
-
-    return response.json(data);
+    return response.json(completeData);
   },
 };
 
@@ -50,4 +65,52 @@ function getUserPoints(games) {
     if (userResult === 'L') return accumulator + 1;
     if (userResult === 'NA') return accumulator + 0;
   }, 0);
+}
+
+async function orderGroupLeaderBoard(groupLeaderBoard) {
+  const orderedLeaderBoard = groupLeaderBoard.sort(
+    (a, b) => b.userPoints - a.userPoints
+  );
+
+  const data = [];
+
+  let i = 0;
+  for (const player of orderedLeaderBoard) {
+    i++;
+    const userData = await User.findById(player.player);
+
+    data.push({
+      player: userData,
+      points: player.userPoints,
+      position: i,
+    });
+  }
+
+  return data;
+}
+
+function getRelativePositionFromLeaderBoard(
+  currentLeaderBoard,
+  pastLeaderBoard
+) {
+  return currentLeaderBoard.map(currentLeaderBoardPlayer => {
+    const relativePos = getPlayerRelativePos(
+      currentLeaderBoardPlayer,
+      pastLeaderBoard
+    );
+
+    return { ...currentLeaderBoardPlayer, relativePos };
+  });
+}
+
+function getPlayerRelativePos(player, pastLeaderBoard) {
+  for (const pastLeaderBoardPlayer of pastLeaderBoard) {
+    if (player.player._id.equals(pastLeaderBoardPlayer.player._id)) {
+      if (player.position === pastLeaderBoardPlayer.position) return 'Keep';
+
+      if (player.position > pastLeaderBoardPlayer.position) return 'Up';
+
+      return 'Down';
+    }
+  }
 }
