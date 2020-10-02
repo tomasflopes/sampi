@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
     color: colors.mainBlue,
-    marginTop: 10,
+    marginVertical: 15,
   },
 
   comingSoon: {
@@ -44,8 +44,8 @@ export default styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
 
-    height: 40,
-    width: '90%',
+    height: 45,
+    marginHorizontal: 10,
 
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -54,18 +54,36 @@ export default styles = StyleSheet.create({
     borderBottomColor: '#000',
   },
 
-  playerPosition: {
+  playerPositionContainer: {
     flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 10,
+  },
+
+  playerRelativePos: {
+    width: 12,
+    height: 14,
+
+    marginRight: 28,
+  },
+
+  playerPosition: {
     textAlign: 'center',
     fontWeight: 'bold',
 
     fontSize: 20,
+
+    right: 5,
   },
 
   playerInfo: {
     display: 'flex',
     flexDirection: 'row',
-    flex: 1,
+    flex: 1.2,
 
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -77,12 +95,14 @@ export default styles = StyleSheet.create({
 
   playerName: {
     fontSize: 15,
-    overflow: 'scroll',
+    flex: 1,
   },
 
   playerPhoto: {
     width: 30,
     height: 30,
     borderRadius: 15,
+
+    marginRight: 10,
   },
 });

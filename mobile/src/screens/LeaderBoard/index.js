@@ -27,10 +27,7 @@ export default function LeaderBoard() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.comingSoon}>
-        <Text style={styles.comingSoonText}>LeaderBoard Coming Soon</Text>
-      </View>
-      <Text style={styles.header}>You Last Results</Text>
+      <Text style={styles.header}>LeaderBoard</Text>
       <View style={styles.tableHeader}>
         <Text>POS</Text>
         <Text>NAME</Text>
@@ -42,15 +39,35 @@ export default function LeaderBoard() {
       >
         {leaderboard.map(player => (
           <View style={styles.playerContainer}>
-            <Text style={styles.playerPosition}>{player.position}</Text>
+            <View style={styles.playerPositionContainer}>
+              {player.relativePos === 'Keep' && (
+                <Image
+                  source={require('../../../assets/keep.png')}
+                  style={styles.playerRelativePos}
+                />
+              )}
+              {player.relativePos === 'Down' && (
+                <Image
+                  source={require('../../../assets/downArrow.png')}
+                  style={styles.playerRelativePos}
+                />
+              )}
+              {player.relativePos === 'Up' && (
+                <Image
+                  source={require('../../../assets/upArrow.png')}
+                  style={styles.playerRelativePos}
+                />
+              )}
+              <Text style={styles.playerPosition}>{player.position}</Text>
+            </View>
             <View style={styles.playerInfo}>
-              <Text style={styles.playerName}>{player.player.name}</Text>
               <Image
                 source={{
                   uri: player.player.avatar_url,
                 }}
                 style={styles.playerPhoto}
               />
+              <Text style={styles.playerName}>{player.player.name}</Text>
             </View>
             <Text style={styles.playerInfo}>{player.points}</Text>
           </View>
