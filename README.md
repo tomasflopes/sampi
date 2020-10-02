@@ -18,17 +18,16 @@
   </a>
 </p>
 
-> Sampi - MERN Project - Prova de Aptidão Tecnológica - 2020 
+> Sampi - MERN Project - Prova de Aptidão Tecnológica - 2020
 
 ###### If you want you can access the full english version by clicking [here](README_eng.md)
-
 
 ## Author 👥
 
 **Tomás Lopes > <tomas050302@gmail.com>**
 
-* Twitter: [@tomas050302](https://twitter.com/tomas050302)
-* Github: [@tomas050302](https://github.com/tomas050302)
+- Twitter: [@tomas050302](https://twitter.com/tomas050302)
+- Github: [@tomas050302](https://github.com/tomas050302)
 
 ## Objetivo
 
@@ -52,8 +51,8 @@ O projeto é baseado numa _stack_, ou seja, um conjunto de tecnologias, muito po
 
 **M**ongoDB → databases
 **E**xpress → web APIs
-**R**eact   → para criar a mobile app
-**N**odeJS  → para ter tudo a funcionar direitinho
+**R**eact → para criar a mobile app
+**N**odeJS → para ter tudo a funcionar direitinho
 
 ### _For developers_
 
@@ -82,15 +81,6 @@ Para ter a certeza que a versão instalada é pelo menos a exigída pelas depend
 Para iniciar o projeto é apenas necessário clonar o projeto para a máquina local
 De seguida é importante instalar todas as dependências
 
-<<<<<<< HEAD
-=======
-##### `yarn`
-
-Para correr o programa no emulador ou num dispositivo físico previamente configurado só é necessário
-
-##### `yarn start`
-
->>>>>>> 9eb7f00fe5bdfee36a6e3b10ff931a978b7bafa0
 ### .Env
 
 Existe um ficheiro cujo nome é .env.example que contem dummy data. Renomeia o ficheiro para .env e edita com os dados do teu servidor.
@@ -100,7 +90,7 @@ Existe um ficheiro cujo nome é .env.example que contem dummy data. Renomeia o f
 #### [_Commitizen_](https://github.com/commitizen/cz-cli)
 
 Esta dependência serve para dar uma interface gráfica ao programador na altura de formar a sua mensagem de _commit_.
-Em conjunto com o [**CommitLint**](https://github.com/conventional-changelog/commitlint) que serve para uniformizar todas as mensagens de commits realizadas para o repositório __Git__, de maneira a ser mais simples de saber o que cada alteração fez no código e seguir a evolução do projeto ao longo do tempo.
+Em conjunto com o [**CommitLint**](https://github.com/conventional-changelog/commitlint) que serve para uniformizar todas as mensagens de commits realizadas para o repositório **Git**, de maneira a ser mais simples de saber o que cada alteração fez no código e seguir a evolução do projeto ao longo do tempo.
 
 #### [_Jest_](https://jestjs.io/)
 
