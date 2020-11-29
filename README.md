@@ -3,8 +3,8 @@
   <a href="https://www.codacy.com/manual/tomas050302/sampi?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomas050302/sampi&amp;utm_campaign=Badge_Grade">
     <img src="https://app.codacy.com/project/badge/Grade/48f27d2f9be641cb8502e2f491c8a5f3"/>
   </a>
-  <a href="https://twitter.com/tomas050302" target="_blank">
-    <img alt="Twitter: tomas050302" src="https://img.shields.io/twitter/follow/tomas050302.svg?style=social" />
+  <a href="https://twitter.com/tomaslopes_dev" target="_blank">
+    <img alt="Twitter: tomaslopes_dev" src="https://img.shields.io/twitter/follow/tomaslopes_dev.svg?style=social" />
   </a>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
